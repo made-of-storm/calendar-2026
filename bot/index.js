@@ -21,7 +21,7 @@ const CONFIG = {
   BOT_TOKEN: process.env.BOT_TOKEN,
   CHANNEL_ID: process.env.CHANNEL_ID || '@secreetroommedia',
   SPREADSHEET_ID: process.env.SPREADSHEET_ID || '1kwiWTnsfaxy-iNA9rXTHeMKalRS4Q42mgsezzTQLZJY',
-  CALENDAR_URL: process.env.CALENDAR_URL || 'https://elenavsemogu.github.io/calendar-2026/',
+  CALENDAR_URL: process.env.CALENDAR_URL || 'https://made-of-storm.github.io/calendar-2026/',
   GAS_URL: process.env.GAS_URL || 'https://script.google.com/macros/s/AKfycbwGehuSOvyX3tWyq9oKGqMS4TkMb3h24zZuShJVjpPptee9E2w-qDbbGJ2J0tkmhZmi/exec',
   PORT: process.env.PORT || 3000,
   WEBHOOK_SECRET: process.env.WEBHOOK_SECRET || 'secretroom2026'
