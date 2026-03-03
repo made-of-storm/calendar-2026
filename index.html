@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="ru" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Secretroom I-Gaming Calendar 2026</title>
+  <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Telegram WebApp SDK -->
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        fontFamily: { sans: ['"Nunito"', 'sans-serif'] },
+        extend: {
+          colors: {
+            bg: '#1B1B1B',
+            surface: '#222222',
+            border: '#333333',
+            accent: '#F5DA0F',
+            accent2: '#C8E712',
+            darkbg: '#1B1B1B',
+            darksurface: '#222222',
+            srblue: '#2E39F7',
+            srpink: '#F6ADE5',
+            sryellow: '#F5DA0F',
+            srgreen: '#C8E712',
+          }
+        }
+      }
+    }
+  </script>
+
+  <link rel="stylesheet" href="./styles.css" />
+  <script defer src="./app.js"></script>
+</head>
+
+<body class="antialiased pb-20">
+
+<header class="sticky top-0 z-40 bg-[#1B1B1B]/92 backdrop-blur-md border-b border-[#333333]">
+  <div class="max-w-[1600px] mx-auto px-6 h-20 flex items-center justify-between">
+    <div class="flex items-center gap-4">
+      <img src="images/secretroomlogo.svg" alt="Secret Room" class="h-11 w-auto" />
+      <div>
+        <h1 class="font-extrabold text-lg leading-none tracking-tight text-[#F5DA0F]">SECRET ROOM</h1>
+        <p class="text-[10px] text-[#FBF2E8]/50 font-bold tracking-widest uppercase mt-1"><span class="whitespace-nowrap">I&#8209;Gaming</span> Calendar 2026</p>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-6">
+      <!-- Citizenship moved to controls panel -->
+    </div>
+  </div>
+</header>
+
+<div class="max-w-[1600px] mx-auto px-6 py-10">
+  <h2 class="text-[26px] sm:text-3xl md:text-4xl font-extrabold mb-4 leading-tight">
+    Календарь iGaming аффилейт&#8209;ивентов&nbsp;<span class="text-[#F5DA0F]">2026</span>
+  </h2>
+
+  <p style="color: #FBF2E8; opacity: 0.65; font-size: 14px; max-width: 600px; font-weight: 400;">
+    Мы собрали всё: от визовых требований и состава участников до лучших ресторанов для нетворкинга и закрытых сайд-ивентов.
+  </p>
+
+  <div class="controls-panel">
+    <div class="controls-row">
+      <div class="citizenship-wrapper">
+        <span class="text-[9px] uppercase font-bold text-gray-500 mb-1 block">Гражданство</span>
+        <div class="citizenship-select-box">
+          <select id="citizenshipSelect" class="citizenship-select">
+            <option value="" disabled selected>Выбрать страну</option>
+            <optgroup label="Европа">
+              <option value="EU">🇪🇺 Евросоюз</option>
+              <option value="TR">🇹🇷 Турция</option>
+            </optgroup>
+            <optgroup label="СНГ">
+              <option value="RU">🇷🇺 Россия</option>
+              <option value="UA">🇺🇦 Украина</option>
+              <option value="BY">🇧🇾 Беларусь</option>
+              <option value="KZ">🇰🇿 Казахстан</option>
+              <option value="UZ">🇺🇿 Узбекистан</option>
+              <option value="AZ">🇦🇿 Азербайджан</option>
+              <option value="AM">🇦🇲 Армения</option>
+              <option value="GE">🇬🇪 Грузия</option>
+              <option value="MD">🇲🇩 Молдова</option>
+              <option value="KG">🇰🇬 Кыргызстан</option>
+              <option value="TJ">🇹🇯 Таджикистан</option>
+            </optgroup>
+          </select>
+        </div>
+      </div>
+
+      <div class="filters-group">
+        <button id="filterSizeBtn" class="filter-btn" type="button">Размер: Все</button>
+        <div class="filter-divider"></div>
+        <button id="filterVisaBtn" class="filter-btn" type="button">Виза: Не важно</button>
+      </div>
+    </div>
+
+    <div class="calendar-action-group">
+      <button id="addToCalendarBtn" class="add-calendar-btn" type="button">
+        <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+        </svg>
+        <span class="font-bold">Добавить в календарь</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<main class="max-w-[1600px] mx-auto px-6">
+  <div class="calendar-grid">
+
+    <!-- 01 JAN -->
+    <div class="cell">
+      <div class="month-num">01</div>
+      <div class="month-name">Январь</div>
+
+      <div class="major-card elegant-dark event-card"
+           data-filterable="1"
+           data-event-id="igb_affiliate_barcelona_2026"
+           data-tier="mega"
+           data-attendees="8000"
+           data-country="ES"
+           data-start="2026-01-19"
+           data-end="2026-01-20">
+        <img src="images/heroes/igb_barcelona.jpg" class="event-img" alt="iGB Affiliate Barcelona" loading="lazy" decoding="async">
+        <div class="flex justify-between items-start mb-2">
+          <span class="tag bg-white/10 backdrop-blur">19–20 Янв</span>
+          <span class="tag tag-no-visa" data-visa-tag="ES">No Visa</span>
+        </div>
+        <h3 class="font-bold text-lg mb-1 text-white">iGB Affiliate Barcelona</h3>
+        <p class="text-xs text-white/60 mb-3">Spain, Barcelona</p>
+        <div class="flex items-center gap-2">
+          <span class="tag bg-[#F5DA0F] text-[#1B1B1B] font-extrabold">8k+</span>
+          <span class="tag border border-white/30 text-white/80">iGaming</span>
+        </div>
+      </div>
+
+
+    </div>
+
+    <!-- 02 FEB -->
+    <div class="cell">
+      <div class="month-num">02</div>
+      <div class="month-name">Февраль</div>
+
+      <div class="major-card elegant-green event-card"
+           data-filterable="1"
+           data-event-id="aibc_eurasia_dubai_2026"
+           data-tier="mega"
+           data-attendees="14500"
+           data-country="UAE"
+           data-start="2026-02-09"
+           data-end="2026-02-11">
+        <img src="images/heroes/aibc_dubai.jpg" class="event-img" alt="AIBC Eurasia" loading="lazy" decoding="async">
+        <div class="flex justify-between items-start mb-2">
+          <span class="tag bg-white/10 backdrop-blur">9–11 Фев</span>
+          <span class="tag tag-no-visa" data-visa-tag="UAE">No Visa</span>
+        </div>
+        <h3 class="font-bold text-lg mb-1 text-white">AIBC Eurasia</h3>
+        <p class="text-xs text-white/60 mb-3">UAE, Dubai</p>
+        <div class="flex items-center gap-2">
+          <span class="tag bg-[#C8E712] text-[#1B1B1B] font-extrabold">14k+</span>
+          <span class="tag border border-white/30 text-white/80">iGaming</span>
+        </div>
+      </div>
+
+
+    </div>
+
+    <!-- 03 MAR -->
+    <div class="cell">
+      <div class="month-num">03</div>
+      <div class="month-name">Март</div>
+
+      <div class="major-card elegant-dark event-card"
+           data-filterable="1"
+           data-event-id="sbc_rio_2026"
+           data-tier="large"
+           data-attendees="15000"
+           data-country="BR"
+           data-start="2026-03-03"
+           data-end="2026-03-05">
+        <img src="images/heroes/sbc_rio.jpg" class="event-img" alt="SBC Summit Rio" loading="lazy" decoding="async">
+        <div class="flex justify-between items-start mb-2">
+          <span class="tag bg-white/10 backdrop-blur">3–5 Мар</span>
+          <span class="tag tag-no-visa" data-visa-tag="BR">No Visa</span>
+        </div>
+        <h3 class="font-bold text-lg mb-1 text-white">SBC Summit Rio</h3>
+        <p class="text-xs text-white/60 mb-3">Brazil, Rio de Janeiro</p>
+        <div class="flex items-center gap-2">
+          <span class="tag bg-[#F5DA0F] text-[#1B1B1B] font-extrabold">15k+</span>
+          <span class="tag border border-white/30 text-white/80">iGaming</span>
+        </div>
+      </div>
+
+      <div class="pl-3 border-l-2 border-[#F6ADE5] hover:bg-[#333333] p-2 rounded-r transition cursor-pointer event-card"
+           data-filterable="1"
+           data-event-id="affiliate_world_dubai_2026"
+           data-tier="mid"
+           data-attendees="7000"
+           data-country="AE">
+        <div class="text-sm font-bold text-white">Affiliate World Dubai</div>
+        <div class="text-[11px] text-white/50 mt-1">UAE, Dubai • 4–5 Мар</div>
+        <div class="flex gap-2 mt-2">
+          <span class="text-[10px] text-[#F5DA0F] font-extrabold bg-[#333333] px-1.5 rounded">7k+</span>
+          <span class="text-[10px] text-white/70 font-bold border border-white/20 px-1.5 rounded">Affiliate</span>
+        </div>
+      </div>
+
+      <div class="pl-3 border-l-2 border-[#2E39F7] hover:bg-[#333333] p-2 rounded-r transition cursor-pointer event-card"
+           data-filterable="1"
+           data-event-id="sigma_euromed_malta_2026"
+           data-tier="mega"
+           data-attendees="12000"
+           data-country="MT"
+           data-start="2026-05-03"
+           data-end="2026-05-05">
+        <div class="text-sm font-bold text-white">SiGMA Euro-Med</div>
+        <div class="text-[11px] text-white/50 mt-1">Malta, Ta' Qali • 3–5 Май</div>
+        <div class="flex gap-2 mt-2">
+          <span class="text-[10px] text-[#F5DA0F] font-extrabold bg-[#333333] px-1.5 rounded">12k+</span>
+          <span class="text-[10px] text-white/70 font-bold border border-[#F5DA0F]/30 px-1.5 rounded">iGaming</span>
+        </div>
+      </div>
+
+      <div class="pl-3 border-l-2 border-[#C8E712] hover:bg-[#333333] p-2 rounded-r transition cursor-pointer event-card"
+           data-filterable="1"
+           data-event-id="sigma_africa_2026"
+           data-tier="large"
+           data-attendees="3000"
+           data-country="ZA"
+           data-start="2026-03-03"
+           data-end="2026-03-05">
+        <div class="text-sm font-bold text-white">SiGMA Africa</div>
+        <div class="text-[11px] text-white/50 mt-1">South Africa, Cape Town • 3–5 Мар</div>
+        <div class="flex gap-2 mt-2">
+          <span class="text-[10px] text-[#F5DA0F] font-extrabold bg-[#333333] px-1.5 rounded">3k+</span>
+          <span class="text-[10px] text-white/70 font-bold border border-[#F5DA0F]/30 px-1.5 rounded">iGaming</span>
+        </div>
+      </div>
+
+
+    </div>
+
+    <!-- 04 APR -->
+    <div class="cell">
+      <div class="month-num">04</div>
+      <div class="month-name">Апрель</div>
+
+      <div class="pl-3 border-l-2 border-[#2E39F7] hover:bg-[#333333] p-2 rounded-r transition cursor-pointer event-card"
+           data-filterable="1"
+           data-event-id="conversion_warsaw_2026"
+           data-tier="mid"
+           data-attendees="3000"
+           data-country="PL">
+        <div class="text-sm font-bold text-white">Conversion Conf Warsaw</div>
+        <div class="text-[11px] text-white/50 mt-1">Poland, Warsaw • 1–2 Апр</div>
+        <div class="flex gap-2 mt-2">
+          <span class="text-[10px] text-[#F5DA0F] font-extrabold bg-[#333333] px-1.5 rounded">3k+</span>
+          <span class="text-[10px] text-white/70 font-bold border border-[#F5DA0F]/30 px-1.5 rounded">Conversion</span>
+        </div>
+      </div>
+
+      <div class="major-card elegant-green event-card"
+           data-filterable="1"
+           data-event-id="broconf_sochi_2026"
+           data-tier="mid"
+           data-attendees="4000"
+           data-country="RU"
+           data-start="2026-04-25"
+           data-end="2026-04-26">
+        <img src="images/heroes/broconf_sochi.jpg" class="event-img" alt="Broconf" loading="lazy" decoding="async">
+        <div class="flex justify-between items-start mb-2">
+          <span class="tag bg-white/10 backdrop-blur">25–26 Апр</span>
+          <span class="tag tag-no-visa" data-visa-tag="RU">No Visa</span>
+        </div>
+        <h3 class="font-bold text-lg mb-1 text-white">Broconf</h3>
+        <p class="text-xs text-white/60 mb-3">Russia, Sochi</p>
+        <div class="flex items-center gap-2">
+          <span class="tag bg-[#C8E712] text-[#1B1B1B] font-extrabold">4k+</span>
+          <span class="tag border border-white/30 text-white/80">CIS</span>
+        </div>
+      </div>
+
+      <div class="major-card elegant-dark event-card"
+           data-filterable="1"
+           data-event-id="bis_sigma_sao_paulo_2026"
+           data-tier="mega"
+           data-attendees="8000"
+           data-country="BR"
+           data-start="2026-04-06"
+           data-end="2026-04-09">
+        <img src="images/heroes/sigma_sao_paulo.jpg" class="event-img" alt="BiS SiGMA South America" loading="lazy" decoding="async">
+        <div class="flex justify-between items-start mb-2">
+          <span class="tag bg-white/10 backdrop-blur">6–9 Апр</span>
+          <span class="tag tag-no-visa" data-visa-tag="BR">No Visa</span>
+        </div>
+        <h3 class="font-bold text-lg mb-1 text-white">BiS SiGMA South America</h3>
+        <p class="text-xs text-white/60 mb-3">Brazil, São Paulo</p>
+        <div class="flex items-center gap-2">
+          <span class="tag bg-[#F5DA0F] text-[#1B1B1B] font-extrabold">8k+</span>
+          <span class="tag border border-white/30 text-white/80">iGaming</span>
+        </div>
+      </div>
+
+
+
+      <div class="pl-3 border-l-2 border-[#2E39F7] hover:bg-[#333333] p-2 rounded-r transition cursor-pointer event-card"
+           data-filterable="1"
+           data-event-id="sbc_summit_malta_2026"
+           data-tier="large"
+           data-attendees="6000"
+           data-country="MT"
+           data-start="2026-04-28"
+           data-end="2026-04-30">
+        <div class="text-sm font-bold text-white">SBC Summit Malta</div>
+        <div class="text-[11px] text-white/50 mt-1">Malta, St. Julian's • 28–30 Апр</div>
+        <div class="flex gap-2 mt-2">
+          <span class="text-[10px] text-[#F5DA0F] font-extrabold bg-[#333333] px-1.5 rounded">6k+</span>
+          <span class="text-[10px] text-white/70 font-bold border border-[#F5DA0F]/30 px-1.5 rounded">iGaming</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 05 MAY -->
+    <div class="cell">
+      <div class="month-num">05</div>
+      <div class="month-name">Май</div>
+
+      <div class="pl-3 border-l-2 border-yellow-500 hover:bg-[#333333] p-2 rounded-r transition cursor-pointer event-card"
+           data-filterable="1"
+           data-event-id="affpapa_madrid_2026"
+           data-tier="small"
+           data-attendees="2300"
+           data-country="ES">
+        <div class="text-sm font-bold text-white">AffPapa Conference Madrid</div>
+        <div class="text-[11px] text-white/50 mt-1">Spain, Madrid • 18–20 Май</div>
+        <div class="flex gap-2 mt-2">
+          <span class="text-[10px] text-[#F5DA0F] font-extrabold bg-[#333333] px-1.5 rounded">2.3k+</span>
+          <span class="text-[10px] text-yellow-300 font-bold border border-yellow-900/50 px-1.5 rounded">B2B</span>
+        </div>
+      </div>
+
+      <div class="major-card elegant-green event-card"
+           data-filterable="1"
+           data-event-id="mac_yerevan_2026"
+           data-country="AM"
+           data-tier="mid"
+           data-attendees="5000"
+           data-start="2026-05-25"
+           data-end="2026-05-27">
+        <img src="images/heroes/mac_yerevan.jpg" class="event-img" alt="MAC Yerevan" loading="lazy" decoding="async">
+        <div class="flex justify-between items-start mb-2">
+          <span class="tag bg-white/10 backdrop-blur">25–27 Май</span>
+          <span class="tag tag-no-visa" data-visa-tag="AM">No Visa</span>
+        </div>
+        <h3 class="font-bold text-lg mb-1 text-white">MAC Yerevan</h3>
+        <p class="text-xs text-white/60 mb-3">Armenia, Yerevan</p>
+        <div class="flex items-center gap-2">
+          <span class="tag bg-[#C8E712] text-[#1B1B1B] font-extrabold">5k+</span>
+          <span class="tag border border-white/30 text-white/80">CIS</span>
+        </div>
+      </div>
+
+      <div class="pl-3 border-l-2 border-[#2E39F7] hover:bg-[#333333] p-2 rounded-r transition cursor-pointer event-card"
+           data-filterable="1"
+           data-event-id="g2e_asia_macau_2026"
+           data-tier="mega"
+           data-attendees="16000"
+           data-country="MO"
+           data-start="2026-05-12"
+           data-end="2026-05-14">
+        <div class="text-sm font-bold text-white">G2E Asia</div>
+        <div class="text-[11px] text-white/50 mt-1">Macau • 12–14 Май</div>
+        <div class="flex gap-2 mt-2">
+          <span class="text-[10px] text-[#F5DA0F] font-extrabold bg-[#333333] px-1.5 rounded">16k+</span>
+          <span class="text-[10px] text-[#F6ADE5] font-bold border border-[#F6ADE5]/30 px-1.5 rounded">Land-based</span>
+        </div>
+      </div>
+
+      <div class="pl-3 border-l-2 border-[#2E39F7] hover:bg-[#333333] p-2 rounded-r transition cursor-pointer event-card"
+           data-filterable="1"
+           data-event-id="sbc_summit_canada_2026"
+           data-tier="mid"
+           data-attendees="3000"
+           data-country="CA"
+           data-start="2026-05-19"
+           data-end="2026-05-21">
+        <div class="text-sm font-bold text-white">SBC Summit Canada</div>
+        <div class="text-[11px] text-white/50 mt-1">Canada, Toronto • 19–21 Май</div>
+        <div class="flex gap-2 mt-2">
+          <span class="text-[10px] text-[#F5DA0F] font-extrabold bg-[#333333] px-1.5 rounded">3k+</span>
+          <span class="text-[10px] text-white/70 font-bold border border-[#F5DA0F]/30 px-1.5 rounded">iGaming</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 06 JUN -->
+    <div class="cell">
+      <div class="month-num">06</div>
+      <div class="month-name">Июнь</div>
+
+      <div class="major-card elegant-dark event-card"
+           data-filterable="1"
+           data-event-id="ggate_tbilisi_2026"
+           data-tier="mid"
+           data-attendees="7000"
+           data-country="GE"
+           data-start="2026-06-26"
+           data-end="2026-06-27">
+        <img src="images/heroes/ggate_tbilisi.jpg" class="event-img" alt="G Gate Tbilisi" loading="lazy" decoding="async">
+        <div class="flex justify-between items-start mb-2">
+          <span class="tag bg-white/10 backdrop-blur">26–27 Июн</span>
+          <span class="tag tag-visa" data-visa-tag="GE">Visa</span>
+        </div>
+        <h3 class="font-bold text-lg mb-1 text-white">G Gate Tbilisi</h3>
+        <p class="text-xs text-white/60 mb-3">Georgia, Tbilisi</p>
+        <div class="flex items-center gap-2">
+          <span class="tag bg-[#F5DA0F] text-[#1B1B1B] font-extrabold">2.5k+</span>
+          <span class="tag border border-white/30 text-white/80">Eastern Europe</span>
+        </div>
+      </div>
+
+      <div class="pl-3 border-l-2 border-[#F5DA0F] hover:bg-[#333333] p-2 rounded-r transition cursor-pointer event-card"
+           data-filterable="1"
+           data-event-id="sbc_americas_2026"
+           data-tier="large"
+           data-attendees="10000"
+           data-country="US">
+        <div class="text-sm font-bold text-white">SBC Summit Americas</div>
+        <div class="text-[11px] text-white/50 mt-1">USA, Fort Lauderdale • 9–11 Июн</div>
+        <div class="flex gap-2 mt-2">
+          <span class="text-[10px] text-[#F5DA0F] font-extrabold bg-[#333333] px-1.5 rounded">6k+</span>
+          <span class="text-[10px] text-white/70 font-bold border border-white/20 px-1.5 rounded">North America</span>
+        </div>
+      </div>
+
+      <div class="pl-3 border-l-2 border-[#2E39F7] hover:bg-[#333333] p-2 rounded-r transition cursor-pointer event-card"
+           data-filterable="1"
+           data-event-id="sigma_asia_manila_2026"
+           data-tier="large"
+           data-attendees="5000"
+           data-country="PH"
+           data-start="2026-06-01"
+           data-end="2026-06-03">
+        <div class="text-sm font-bold text-white">SiGMA Asia</div>
+        <div class="text-[11px] text-white/50 mt-1">Philippines, Manila • 1–3 Июн</div>
+        <div class="flex gap-2 mt-2">
+          <span class="text-[10px] text-[#F5DA0F] font-extrabold bg-[#333333] px-1.5 rounded">5k+</span>
+          <span class="text-[10px] text-white/70 font-bold border border-[#F5DA0F]/30 px-1.5 rounded">iGaming</span>
+        </div>
+      </div>
+
+
+
+      <div class="pl-3 border-l-2 border-[#F6ADE5] hover:bg-[#333333] p-2 rounded-r transition cursor-pointer event-card"
+           data-filterable="1"
+           data-event-id="aibc_asia_manila_2026"
+           data-tier="large"
+           data-attendees="5000"
+           data-country="PH"
+           data-start="2026-06-01"
+           data-end="2026-06-03">
+        <div class="text-sm font-bold text-white">AIBC Asia</div>
+        <div class="text-[11px] text-white/50 mt-1">Philippines, Manila • 1–3 Июн</div>
+        <div class="flex gap-2 mt-2">
+          <span class="text-[10px] text-[#F5DA0F] font-extrabold bg-[#333333] px-1.5 rounded">5k+</span>
+          <span class="text-[10px] text-blue-300 font-bold border border-blue-900/50 px-1.5 rounded">Blockchain</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 07 JUL -->
+    <div class="cell">
+      <div class="month-num">07</div>
+      <div class="month-name">Июль</div>
+
+      <div class="major-card elegant-green event-card"
+           data-filterable="1"
+           data-tier="large"
+           data-attendees="15000"
+           data-country="GB"
+           data-event-id="igb_live_2026_london"
+           data-start="2026-07-01"
+           data-end="2026-07-02">
+        <img src="images/heroes/igb_london.jpg" class="event-img" alt="iGB L!VE" loading="lazy" decoding="async">
+        <div class="flex justify-between items-start mb-2">
+          <span class="tag bg-white/10 backdrop-blur">1–2 Июл</span>
+          <span class="tag tag-visa" data-visa-tag="GB">Visa</span>
+        </div>
+        <h3 class="font-bold text-lg mb-1 text-white">iGB L!VE</h3>
+        <p class="text-xs text-white/60 mb-3">UK, London</p>
+        <div class="flex items-center gap-2">
+          <span class="tag bg-[#C8E712] text-[#1B1B1B] font-extrabold">15k+</span>
+          <span class="tag border border-white/30 text-white/80">iGaming</span>
+        </div>
+      </div>
+
+      <div class="pl-3 border-l-2 border-[#F6ADE5] hover:bg-[#333333] p-2 rounded-r transition cursor-pointer event-card"
+           data-filterable="1"
+           data-event-id="conversion_cyprus_2026"
+           data-tier="small"
+           data-attendees="1500"
+           data-country="CY">
+        <div class="text-sm font-bold text-white">Conversion Conf Cyprus</div>
+        <div class="text-[11px] text-white/50 mt-1">Cyprus, Limassol • 23–24 Июл</div>
+        <div class="flex gap-2 mt-2">
+          <span class="text-[10px] text-[#F5DA0F] font-extrabold bg-[#333333] px-1.5 rounded">1.5k+</span>
+          <span class="text-[10px] text-blue-300 font-bold border border-blue-900/50 px-1.5 rounded">Conversion</span>
+        </div>
+      </div>
+
+
+      <div class="pl-3 border-l-2 border-[#F5DA0F] hover:bg-[#333333] p-2 rounded-r transition cursor-pointer event-card"
+           data-filterable="1"
+           data-event-id="affiliate_world_europe_2026"
+           data-tier="large"
+           data-attendees="7000"
+           data-country="HU"
+           data-start="2026-07-09"
+           data-end="2026-07-10">
+        <div class="text-sm font-bold text-white">Affiliate World Europe</div>
+        <div class="text-[11px] text-white/50 mt-1">Hungary, Budapest • 9–10 Июл</div>
+        <div class="flex gap-2 mt-2">
+          <span class="text-[10px] text-[#F5DA0F] font-extrabold bg-[#333333] px-1.5 rounded">7k+</span>
+          <span class="text-[10px] text-white/70 font-bold border border-white/20 px-1.5 rounded">Affiliate</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 08 AUG -->
+    <div class="cell">
+      <div class="month-num">08</div>
+      <div class="month-name">Август</div>
+
+      <div class="pl-3 border-l-2 border-[#C8E712] hover:bg-[#333333] p-2 rounded-r transition cursor-pointer event-card"
+           data-filterable="1"
+           data-event-id="gm_events_brazil_2026"
+           data-tier="small"
+           data-attendees="200"
+           data-country="BR"
+           data-start="2026-08-13"
+           data-end="2026-08-13">
+        <div class="text-sm font-bold text-white">G&M Events Brazil</div>
+        <div class="text-[11px] text-white/50 mt-1">Brazil, São Paulo • 13 Авг</div>
+        <div class="flex gap-2 mt-2">
+          <span class="text-[10px] text-[#F5DA0F] font-extrabold bg-[#333333] px-1.5 rounded">200+</span>
+          <span class="text-[10px] text-white/70 font-bold border border-white/20 px-1.5 rounded">iGaming</span>
+          <span class="tag tag-visa" data-visa-tag="BR">Visa</span>
+        </div>
+      </div>
+
+      <div class="pl-3 border-l-2 border-[#2E39F7] hover:bg-[#333333] p-2 rounded-r transition cursor-pointer event-card"
+           data-filterable="1"
+           data-event-id="spice_sea_2026"
+           data-tier="mid"
+           data-attendees="1500"
+           data-country="TH"
+           data-start="2026-08-12"
+           data-end="2026-08-14">
+        <div class="text-sm font-bold text-white">SPiCE Southeast Asia</div>
+        <div class="text-[11px] text-white/50 mt-1">Thailand, Bangkok • 12–14 Авг</div>
+        <div class="flex gap-2 mt-2">
+          <span class="text-[10px] text-[#F5DA0F] font-extrabold bg-[#333333] px-1.5 rounded">1.5k+</span>
+          <span class="text-[10px] text-white/70 font-bold border border-[#F5DA0F]/30 px-1.5 rounded">iGaming</span>
+          <span class="tag tag-visa" data-visa-tag="TH">Visa</span>
+        </div>
+      </div>
+
+      <div class="pl-3 border-l-2 border-[#F5DA0F] hover:bg-[#333333] p-2 rounded-r transition cursor-pointer event-card"
+           data-filterable="1"
+           data-event-id="conversion_forum_kyiv_2026"
+           data-tier="small"
+           data-attendees="1000"
+           data-country="UA"
+           data-start="2026-08-01"
+           data-end="2026-08-01">
+        <div class="text-sm font-bold text-white">Conversion Forum Kyiv</div>
+        <div class="text-[11px] text-white/50 mt-1">Ukraine, Kyiv • Авг 2026</div>
+        <div class="flex gap-2 mt-2">
+          <span class="text-[10px] text-[#F5DA0F] font-extrabold bg-[#333333] px-1.5 rounded">1k+</span>
+          <span class="text-[10px] text-white/70 font-bold border border-white/20 px-1.5 rounded">Affiliate</span>
+          <span class="tag tag-visa" data-visa-tag="UA">Visa</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 09 SEP -->
+    <div class="cell">
+      <div class="month-num">09</div>
+      <div class="month-name">Сентябрь</div>
+
+      <div class="major-card elegant-dark event-card"
+           data-filterable="1"
+           data-event-id="sbc_lisbon_2026"
+           data-tier="mega"
+           data-attendees="25000"
+           data-country="PT"
+           data-start="2026-09-29"
+           data-end="2026-10-01">
+        <img src="images/heroes/sbc_lisbon.jpg" class="event-img" alt="SBC Summit" loading="lazy" decoding="async">
+        <div class="flex justify-between items-start mb-2">
+          <span class="tag bg-white/10 backdrop-blur">29 Сен – 1 Окт</span>
+          <span class="tag tag-visa" data-visa-tag="PT">Visa</span>
+        </div>
+        <h3 class="font-bold text-lg mb-1 text-white">SBC Summit</h3>
+        <p class="text-xs text-white/60 mb-3">Portugal, Lisbon</p>
+        <div class="flex items-center gap-2">
+          <span class="tag bg-[#F5DA0F] text-[#1B1B1B] font-extrabold">25k+</span>
+          <span class="tag border border-white/30 text-white/80">Leaders</span>
+        </div>
+      </div>
+
+      <div class="pl-3 border-l-2 border-[#F6ADE5] hover:bg-[#333333] p-2 rounded-r transition cursor-pointer event-card"
+           data-filterable="1"
+           data-event-id="g2e_las_vegas_2026"
+           data-tier="mega"
+           data-attendees="25000"
+           data-country="US">
+        <div class="text-sm font-bold text-white">Global Gaming Expo</div>
+        <div class="text-[11px] text-white/50 mt-1">USA, Las Vegas • 28 Сен – 1 Окт</div>
+        <div class="flex gap-2 mt-2">
+          <span class="text-[10px] text-[#F5DA0F] font-extrabold bg-[#333333] px-1.5 rounded">25k+</span>
+          <span class="text-[10px] text-[#F6ADE5] font-bold border border-[#F6ADE5]/30 px-1.5 rounded">Land-based</span>
+        </div>
+      </div>
+
+      <div class="pl-3 border-l-2 border-[#2E39F7] hover:bg-[#333333] p-2 rounded-r transition cursor-pointer event-card"
+           data-filterable="1"
+           data-event-id="sigma_north_america_mexico_2026"
+           data-tier="large"
+           data-attendees="4000"
+           data-country="MX"
+           data-start="2026-09-01"
+           data-end="2026-09-03">
+        <div class="text-sm font-bold text-white">SiGMA North America</div>
+        <div class="text-[11px] text-white/50 mt-1">Mexico, Mexico City • 1–3 Сен</div>
+        <div class="flex gap-2 mt-2">
+          <span class="text-[10px] text-[#F5DA0F] font-extrabold bg-[#333333] px-1.5 rounded">4k+</span>
+          <span class="text-[10px] text-white/70 font-bold border border-[#F5DA0F]/30 px-1.5 rounded">iGaming</span>
+        </div>
+      </div>
+
+
+
+      <div class="pl-3 border-l-2 border-[#F5DA0F] hover:bg-[#333333] p-2 rounded-r transition cursor-pointer event-card"
+           data-filterable="1"
+           data-event-id="affiliate_world_americas_2026"
+           data-tier="large"
+           data-attendees="5000"
+           data-country="MX"
+           data-start="2026-09-07"
+           data-end="2026-09-08">
+        <div class="text-sm font-bold text-white">Affiliate World Americas</div>
+        <div class="text-[11px] text-white/50 mt-1">Mexico, Cancun • 7–8 Сен</div>
+        <div class="flex gap-2 mt-2">
+          <span class="text-[10px] text-[#F5DA0F] font-extrabold bg-[#333333] px-1.5 rounded">5k+</span>
+          <span class="text-[10px] text-white/70 font-bold border border-white/20 px-1.5 rounded">Affiliate</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 10 OCT -->
+    <div class="cell">
+      <div class="month-num">10</div>
+      <div class="month-name">Октябрь</div>
+
+      <div class="pl-3 border-l-2 border-[#C8E712] hover:bg-[#333333] p-2 rounded-r transition cursor-pointer event-card"
+           data-filterable="1"
+           data-event-id="sbwa_dakar_2026"
+           data-tier="mid"
+           data-attendees="1000"
+           data-country="SN"
+           data-start="2026-10-14"
+           data-end="2026-10-16">
+        <div class="text-sm font-bold text-white">SBWA+</div>
+        <div class="text-[11px] text-white/50 mt-1">Senegal, Dakar • 14–16 Окт</div>
+        <div class="flex gap-2 mt-2">
+          <span class="text-[10px] text-[#F5DA0F] font-extrabold bg-[#333333] px-1.5 rounded">1k+</span>
+          <span class="text-[10px] text-white/70 font-bold border border-white/20 px-1.5 rounded">Betting</span>
+          <span class="tag tag-visa" data-visa-tag="SN">Visa</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 11 NOV -->
+    <div class="cell">
+      <div class="month-num">11</div>
+      <div class="month-name">Ноябрь</div>
+
+      <div class="pl-3 border-l-2 border-[#F5DA0F] hover:bg-[#333333] p-2 rounded-r transition cursor-pointer event-card"
+           data-filterable="1"
+           data-event-id="affpapa_cancun_2026"
+           data-tier="small"
+           data-attendees="400"
+           data-country="MX">
+        <div class="text-sm font-bold text-white">AffPapa Conference Cancun</div>
+        <div class="text-[11px] text-white/50 mt-1">Mexico, Cancun • 23–25 Ноя</div>
+        <div class="flex gap-2 mt-2">
+          <span class="text-[10px] text-[#F5DA0F] font-extrabold bg-[#333333] px-1.5 rounded">400+</span>
+          <span class="text-[10px] text-white/70 font-bold border border-white/20 px-1.5 rounded">LATAM</span>
+        </div>
+      </div>
+
+      <div class="major-card elegant-green event-card"
+           data-filterable="1"
+           data-event-id="sigma_world_rome_2026"
+           data-tier="mega"
+           data-attendees="15000"
+           data-country="IT"
+           data-start="2026-11-02"
+           data-end="2026-11-05">
+        <img src="images/heroes/sigma_rome.jpg" class="event-img" alt="SiGMA World" loading="lazy" decoding="async">
+        <div class="flex justify-between items-start mb-2">
+          <span class="tag bg-white/10 backdrop-blur">2–5 Ноя</span>
+          <span class="tag tag-no-visa" data-visa-tag="IT">No Visa</span>
+        </div>
+        <h3 class="font-bold text-lg mb-1 text-white">SiGMA World</h3>
+        <p class="text-xs text-white/60 mb-3">Italy, Rome</p>
+        <div class="flex items-center gap-2">
+          <span class="tag bg-[#C8E712] text-[#1B1B1B] font-extrabold">15k+</span>
+          <span class="tag border border-white/30 text-white/80">iGaming</span>
+        </div>
+      </div>
+
+      <div class="pl-3 border-l-2 border-[#2E39F7] hover:bg-[#333333] p-2 rounded-r transition cursor-pointer event-card"
+           data-filterable="1"
+           data-event-id="sigma_south_asia_bangkok_2026"
+           data-tier="large"
+           data-attendees="5000"
+           data-country="TH"
+           data-start="2026-11-30"
+           data-end="2026-12-02">
+        <div class="text-sm font-bold text-white">SiGMA South Asia</div>
+        <div class="text-[11px] text-white/50 mt-1">Thailand, Bangkok • 30–2 Ноя</div>
+        <div class="flex gap-2 mt-2">
+          <span class="text-[10px] text-[#F5DA0F] font-extrabold bg-[#333333] px-1.5 rounded">5k+</span>
+          <span class="text-[10px] text-white/70 font-bold border border-[#F5DA0F]/30 px-1.5 rounded">iGaming</span>
+        </div>
+      </div>
+
+
+
+      <div class="pl-3 border-l-2 border-[#F6ADE5] hover:bg-[#333333] p-2 rounded-r transition cursor-pointer event-card"
+           data-filterable="1"
+           data-event-id="aibc_world_rome_2026"
+           data-tier="mega"
+           data-attendees="30000"
+           data-country="IT"
+           data-start="2026-11-02"
+           data-end="2026-11-05">
+        <div class="text-sm font-bold text-white">AIBC World</div>
+        <div class="text-[11px] text-white/50 mt-1">Italy, Rome • 2–5 Ноя</div>
+        <div class="flex gap-2 mt-2">
+          <span class="text-[10px] text-[#F5DA0F] font-extrabold bg-[#333333] px-1.5 rounded">30k+</span>
+          <span class="text-[10px] text-blue-300 font-bold border border-blue-900/50 px-1.5 rounded">Blockchain</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 12 DEC -->
+    <div class="cell">
+      <div class="month-num">12</div>
+      <div class="month-name text-gray-500">Декабрь</div>
+
+      <div class="pl-3 border-l-2 border-[#F5DA0F] hover:bg-[#333333] p-2 rounded-r transition cursor-pointer event-card"
+           data-filterable="1"
+           data-event-id="affiliate_world_asia_2026"
+           data-tier="mega"
+           data-attendees="7000"
+           data-country="TH"
+           data-start="2026-12-09"
+           data-end="2026-12-10">
+        <div class="text-sm font-bold text-white">Affiliate World Asia</div>
+        <div class="text-[11px] text-white/50 mt-1">Thailand, Bangkok • 9–10 Дек</div>
+        <div class="flex gap-2 mt-2">
+          <span class="text-[10px] text-[#F5DA0F] font-extrabold bg-[#333333] px-1.5 rounded">7k+</span>
+          <span class="text-[10px] text-white/70 font-bold border border-white/20 px-1.5 rounded">Affiliate</span>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</main>
+
+<!-- MODAL -->
+<div id="modalOverlay" class="fixed inset-0 z-50 hidden">
+  <div class="absolute inset-0 bg-black/80 backdrop-blur-sm transition-opacity opacity-0" id="modalBg"></div>
+  <div class="absolute inset-y-0 right-0 w-full md:w-[600px] bg-[#222222] shadow-2xl transform translate-x-full transition-transform duration-300 flex flex-col border-l border-[#333333]" id="modalPanel">
+
+    <!-- Hero с погодой -->
+    <div id="modalHero"></div>
+
+    <!-- Инфо: название, место, даты, описание -->
+    <div id="modalInfo" class="modal-info-section"></div>
+
+    <!-- Три карточки: участники, виза, промо -->
+    <div id="modalStats" class="modal-stats-grid"></div>
+
+    <!-- Табы -->
+    <div class="flex-1 overflow-y-auto">
+      <div class="modal-tabs">
+        <button data-tab-btn="guide" class="tab-btn active" type="button">Гид</button>
+        <button data-tab-btn="events" class="tab-btn" type="button">Сайд-ивенты</button>
+        <button data-tab-btn="brands" class="tab-btn" type="button">Бренды</button>
+      </div>
+
+      <div class="px-8">
+        <div id="guide" class="tab-content active space-y-4 pb-8"></div>
+        <div id="events" class="tab-content space-y-4 pb-8"></div>
+        <div id="brands" class="tab-content pb-8"></div>
+      </div>
+    </div>
+
+    <!-- Кнопки -->
+    <div class="modal-footer">
+      <button id="modalAddToCalendarBtn" class="btn-calendar">
+        Добавить в календарь
+      </button>
+      <button id="modalPromoBtn" class="btn-promo">Получить промокод</button>
+    </div>
+  </div>
+</div>
+
+<!-- Promo Toast -->
+<div id="promoToast" class="promo-toast">
+  <div class="promo-toast-header">
+    <span class="promo-toast-title">🎉 Ваш промокод</span>
+    <button class="promo-toast-close" onclick="hidePromoToast()">×</button>
+  </div>
+  <div class="promo-code-display">
+    <div class="promo-code-value" id="promoCodeValue">—</div>
+  </div>
+  <button class="promo-copy-btn" id="promoCopyBtn" onclick="copyPromoCode()">
+    📋 Скопировать
+  </button>
+</div>
+
+<!-- ACCESS MODAL (Lead Capture) -->
+<div id="accessModalOverlay" class="fixed inset-0 z-50 hidden">
+  <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" id="accessModalBg"></div>
+  <div class="absolute inset-0 flex items-center justify-center p-4">
+    <div id="accessModalPanel" class="access-modal-panel w-full max-w-md bg-white/10 backdrop-blur-xl rounded-3xl border border-white/20 shadow-2xl p-8 text-white">
+
+      <!-- Default Form View -->
+      <div id="accessFormView">
+        <div class="text-center mb-6">
+          <img src="images/secretroomlogo.svg" alt="Secret Room" class="w-16 h-16 mx-auto mb-4" />
+          <h2 class="text-2xl font-extrabold mb-2">Получить полный доступ</h2>
+          <p class="text-sm text-gray-300">Введите данные, чтобы открыть все функции календаря</p>
+        </div>
+
+        <form id="accessForm" action="https://script.google.com/macros/s/AKfycby_yjYFYP6Yphc_s1mb0l4leKZUUmt4h1gfrPEM8Ab8E4lytggfKkjfQlUTxC5sHaHJ/exec" method="POST" target="leads_sink" class="space-y-4">
+          <div>
+            <label class="block text-xs font-bold text-gray-300 mb-2">Ваше имя *</label>
+            <input
+              type="text"
+              name="name"
+              id="accessName"
+              required
+              class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#F5DA0F] transition"
+              placeholder="Иван Иванов">
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-gray-300 mb-2">Ник в Telegram *</label>
+            <input
+              type="text"
+              name="telegram"
+              id="accessTelegram"
+              required
+              class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#F5DA0F] transition"
+              placeholder="@username">
+            <p class="text-[10px] text-gray-400 mt-1">Если забудете, добавим @ автоматически</p>
+          </div>
+
+          <div>
+            <label for="accessProfession" class="block text-xs font-bold text-gray-300 mb-2">Профессия *</label>
+            <input
+              type="text"
+              id="accessProfession"
+              name="profession"
+              list="professionsList"
+              placeholder="Начните вводить..."
+              required
+              class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#F5DA0F] transition">
+            <datalist id="professionsList">
+              <option value="Affiliate Manager">
+              <option value="Медиабайер">
+              <option value="Тимлид (Affiliate)">
+              <option value="Арбитражник">
+              <option value="Вебмастер">
+              <option value="CEO / Основатель">
+              <option value="COO">
+              <option value="CMO">
+              <option value="Директор по партнёрским программам">
+              <option value="Директор по маркетингу">
+              <option value="Business Development Manager">
+              <option value="Partnership Manager">
+              <option value="Account Manager">
+              <option value="Sales Manager">
+              <option value="Product Manager">
+              <option value="Трафик-менеджер">
+              <option value="PPC-специалист">
+              <option value="SEO-специалист">
+              <option value="Контент-менеджер">
+              <option value="Разработчик">
+              <option value="Data Analyst">
+              <option value="Compliance Manager">
+              <option value="Юрист">
+              <option value="HR-менеджер">
+              <option value="Рекрутер">
+              <option value="Инвестор">
+              <option value="Журналист">
+              <option value="Фрилансер">
+              <option value="Студент">
+              <option value="Другое">
+            </datalist>
+          </div>
+
+          <input type="hidden" name="createdAtISO" id="accessCreatedAt">
+          <input type="hidden" name="source" value="calendar-2026">
+          <input type="hidden" name="userAgent" id="accessUserAgent">
+
+          <div class="flex items-start gap-3">
+            <input
+              type="checkbox"
+              id="accessConsent"
+              required
+              class="mt-1 w-4 h-4 accent-[#F5DA0F]">
+            <label for="accessConsent" class="text-xs text-gray-300">
+              Согласен(на) на обработку персональных данных для уведомлений о событиях и нетворкинга
+            </label>
+          </div>
+
+          <div id="accessError" class="hidden text-sm text-red-400 text-center p-3 bg-red-500/10 rounded-lg border border-[#F6ADE5]/20"></div>
+          <div id="accessSuccess" class="hidden text-sm text-green-400 text-center p-3 bg-green-500/10 rounded-lg border border-[#C8E712]/20">Отправлено!</div>
+
+          <button
+            type="submit"
+            id="accessSubmitBtn"
+            class="w-full py-4 rounded-xl bg-gradient-to-r from-[#F5DA0F] to-[#C8E712] text-[#1B1B1B] font-bold hover:opacity-90 transition flex items-center justify-center gap-2">
+            <span id="accessBtnText">Получить доступ</span>
+            <svg id="accessBtnSpinner" class="hidden animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+          </button>
+        </form>
+
+        <!-- Telegram Login Widget -->
+        <div class="mt-6 pt-6 border-t border-white/10">
+          <div class="text-center mb-3">
+            <p class="text-xs text-gray-400">Или войти через</p>
+          </div>
+          <div id="telegramLoginContainer" class="flex justify-center">
+            <div id="telegramWidgetPlaceholder" class="text-sm text-gray-400 text-center py-3">
+              Войти через Telegram скоро
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Multi-Event Calendar Modal (for mobile) -->
+<div id="multiEventModal">
+  <div class="modal-container">
+    <div class="modal-content">
+      <!-- Header -->
+      <div class="flex items-center justify-between p-5 border-b border-white/10">
+        <h3 class="text-lg font-bold text-white">Добавить в календарь</h3>
+        <button id="closeMultiEventModal" class="text-gray-400 hover:text-white text-2xl leading-none">&times;</button>
+      </div>
+
+      <!-- Select All -->
+      <div id="multiEventSelectAll" class="px-5 pt-3 pb-0">
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <span id="bulkAddCount" style="color:#666;font-size:12px;font-weight:600">Выберите события</span>
+          <button id="selectAllBtn" type="button" style="background:none;border:none;color:#F5DA0F;font-size:12px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;padding:4px 0">Выбрать все</button>
+        </div>
+      </div>
+
+      <!-- Event List -->
+      <div id="multiEventList" class="p-5" style="padding-top:12px">
+        <!-- Events will be populated here -->
+      </div>
+
+      <!-- Calendar Picker: Apple / Google -->
+      <div class="calendar-picker">
+        <button id="addAppleCalBtn" class="calendar-picker-btn btn-apple" type="button" disabled>
+          <svg width="16" height="16" viewBox="0 0 384 512" fill="currentColor"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+          Apple Calendar
+        </button>
+        <button id="addGoogleCalBtn" class="calendar-picker-btn btn-google" type="button" disabled>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/><path d="M16 2v4M8 2v4M3 10h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M8 14h2v2H8z" fill="currentColor"/></svg>
+          Google Calendar
+        </button>
+      </div>
+      <p class="calendar-picker-hint">Выберите события и нажмите куда добавить</p>
+    </div>
+  </div>
+</div>
+
+<!-- Hidden iframe for form submission -->
+<iframe name="leads_sink" style="display:none"></iframe>
+
+<!-- AUTH OVERLAY -->
+<div id="authOverlay" class="fixed inset-0 z-[9999] bg-[#1B1B1B]/95 backdrop-blur-lg flex items-center justify-center p-4" style="display: none;">
+  <div class="max-w-md w-full bg-[#222222] rounded-3xl border-2 border-[#F5DA0F] shadow-2xl p-8 text-center">
+    
+    <!-- Logo -->
+    <img src="images/secretroomlogo.svg" alt="Secret Room" class="w-20 h-20 mx-auto mb-4" />
+    
+    <!-- Title -->
+    <h2 class="text-2xl font-extrabold text-white mb-2">Добро пожаловать!</h2>
+    <p class="text-sm text-white/60 mb-6">Получите доступ к календарю через Telegram — это быстро и просто!</p>
+    
+    <!-- Auth Steps -->
+    <!-- Step 1: Go to Bot -->
+    <div id="authStep1" class="auth-step">
+      <div class="bg-[#1B1B1B] rounded-2xl p-6 mb-4">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-12 h-12 rounded-full bg-[#2E39F7] flex items-center justify-center">
+            <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
+            </svg>
+          </div>
+          <div class="text-left">
+            <h3 class="text-lg font-bold text-white">Всего 2 клика!</h3>
+            <p class="text-xs text-white/50">Откройте бота в Telegram</p>
+          </div>
+        </div>
+        
+        <a href="https://t.me/calendarreg_bot?start=calendar" target="_blank" class="block w-full py-4 rounded-xl bg-gradient-to-r from-[#2E39F7] to-[#5B6EF7] text-white font-bold text-center hover:opacity-90 transition shadow-lg">
+          🚀 Открыть в Telegram
+        </a>
+      </div>
+      
+      <div class="bg-[#333333]/50 rounded-xl p-4 text-left">
+        <p class="text-xs text-white/60 mb-2">✅ Бот проверит подписку на канал</p>
+        <p class="text-xs text-white/60 mb-2">✅ Вы получите персональную ссылку</p>
+        <p class="text-xs text-white/60">✅ Доступ откроется автоматически</p>
+      </div>
+    </div>
+
+
+  </div>
+</div>
+
+</body>
+</html>

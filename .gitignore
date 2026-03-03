@@ -1,0 +1,22 @@
+.DS_Store
+*.xlsx
+*.pdf
+*.zip
+node_modules/
+.env
+.context.md
+.playwright-mcp/
+static/
+telegram-bot.js
+telegram-bot-clean.js
+google-apps-script-auth.js
+TODO_*.md
+AUTH_SETUP_INSTRUCTIONS.md
+MINI_APP_SETUP.md
+QUICK_SETUP.md
+SETUP_BOT.md
+ТЗ*
+Деньги*
+Выписка*
+БЮДЖЕТ*
+новые картинки/

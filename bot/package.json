@@ -1,0 +1,17 @@
+{
+  "name": "secretroom-calendar-bot",
+  "version": "1.0.0",
+  "description": "Secret Room Calendar Telegram Bot",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^4.21.0",
+    "form-data": "^4.0.1",
+    "node-fetch": "^2.7.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

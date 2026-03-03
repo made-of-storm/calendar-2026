@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Добавляю...</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #1B1B1B;
+  color: #FBF2E8;
+}
+.wrap {
+  text-align: center;
+  padding: 32px;
+}
+.spinner {
+  width: 44px;
+  height: 44px;
+  border: 3px solid rgba(245,218,15,0.2);
+  border-top-color: #F5DA0F;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  margin: 0 auto 20px;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+h2 { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+p { font-size: 14px; color: #999; margin-bottom: 20px; }
+.retry-btn {
+  display: none;
+  background: #F5DA0F;
+  color: #1B1B1B;
+  border: none;
+  padding: 14px 28px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 16px;
+}
+.retry-btn:active { opacity: 0.8; }
+.back-link {
+  display: block;
+  margin-top: 20px;
+  color: #F5DA0F;
+  text-decoration: none;
+  font-size: 14px;
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="spinner" id="spinner"></div>
+  <h2 id="status">Открываю календарь...</h2>
+  <p id="eventName"></p>
+  <button class="retry-btn" id="retryBtn" onclick="addEvent()">Добавить в календарь</button>
+  <a class="back-link" href="javascript:window.close()">← Вернуться в Telegram</a>
+</div>
+
+<script>
+// Читаем параметры из URL
+var params = new URLSearchParams(window.location.search);
+var title = params.get('title') || 'Event';
+var location = params.get('location') || '';
+var description = params.get('description') || '';
+var start = params.get('start') || '';
+var end = params.get('end') || '';
+
+// Показываем название события
+document.getElementById('eventName').textContent = decodeURIComponent(title);
+
+function addEvent() {
+  // Генерируем ICS
+  var lines = [
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'PRODID:-//Secretroom//Calendar//EN',
+    'CALSCALE:GREGORIAN',
+    'METHOD:PUBLISH',
+    'BEGIN:VEVENT',
+    'UID:' + Date.now() + '-' + Math.random().toString(36).substr(2) + '@secretroom',
+    'DTSTAMP:' + new Date().toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z',
+    'DTSTART:' + start,
+    'DTEND:' + end,
+    'SUMMARY:' + decodeURIComponent(title),
+    'LOCATION:' + decodeURIComponent(location),
+    'DESCRIPTION:' + decodeURIComponent(description),
+    'STATUS:CONFIRMED',
+    'TRANSP:OPAQUE',
+    'END:VEVENT',
+    'END:VCALENDAR'
+  ];
+
+  var icsText = lines.join('\r\n');
+
+  // Создаем blob и переходим - Safari покажет диалог "Добавить в Календарь"
+  var blob = new Blob([icsText], { type: 'text/calendar;charset=utf-8' });
+  var url = URL.createObjectURL(blob);
+  window.location.href = url;
+
+  // Показываем кнопку повтора через 2 секунды (если пользователь нажал "Отмена")
+  setTimeout(function() {
+    document.getElementById('spinner').style.display = 'none';
+    document.getElementById('status').textContent = 'Готово! Событие добавлено?';
+    document.getElementById('retryBtn').style.display = 'inline-block';
+  }, 2000);
+}
+
+// Запускаем автоматически при загрузке
+addEvent();
+</script>
+</body>
+</html>
