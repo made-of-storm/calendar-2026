@@ -494,7 +494,7 @@ async function handleStart(message) {
   // Приветствие + сразу первый вопрос (для всех одинаково)
   await tg('sendMessage', {
     chat_id: chatId,
-    text: `Привет, ${user.first_name}! 👋\n\nКоманда *Secret Room* собрала в одном месте все главные iGaming конференции 2026 года — с датами, визовыми режимами, крутыми местами, сайд-ивентами и промокодами на билеты.\n\nОтветь на пару вопросов — и календарь твой навсегда.\n\n*Как тебя зовут?*`,
+    text: `Привет! 👋\n\nКоманда *Secret Room* собрала в одном месте все главные iGaming конференции 2026 года — с датами, визовыми режимами, крутыми местами, сайд-ивентами и промокодами на билеты.\n\nОтветь на пару вопросов — и календарь твой навсегда.\n\n*Как тебя зовут?*`,
     parse_mode: 'Markdown'
   });
   setUserState(chatId, { step: 'waiting_name', data: { telegram_id: userId, tg_username: user.username || '', utm_source: utmParam } });
