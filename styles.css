@@ -88,6 +88,28 @@ body { background-color: #1B1B1B; color: #FBF2E8; }
   border-color: #C8E712;
 }
 
+/* Прошедшие события */
+.past-event {
+  opacity: 0.35;
+  pointer-events: none;
+  filter: grayscale(0.6);
+  position: relative;
+}
+.past-event::after {
+  content: "Прошло";
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  font-size: 9px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #FBF2E8;
+  background: rgba(0,0,0,0.5);
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
 /* Картинка */
 .event-img {
   width: 100%;

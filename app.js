@@ -940,7 +940,7 @@ const EVENTS = {
   "conversion_warsaw_2026": {
     title: "Conversion Conf", description: "Конференция по лидогенерации и affiliate маркетингу",
     city: "Warsaw", country: "PL", countryName: "Польша",
-    dates: "1-2 апреля 2026", attendees: "3,000", promo: null,
+    dates: "1-2 апреля 2026", attendees: "3,000", promo: "SECRETROOM5",
     weather: { temp: "8-14°C", description: "Прохладная весна" },
     heroImage: "images/heroes/conversion_warsaw.jpg",
     startISO: "2026-04-01T09:00:00Z", endISO: "2026-04-02T18:00:00Z",
@@ -2065,8 +2065,22 @@ document.addEventListener("DOMContentLoaded", () => {
   updateFilterLabels();
   applyFilters();
 
-  // Modal open: bind all clickable event cards
+  // Mark past events (up to March 2026 inclusive) as inactive
+  const PAST_CUTOFF = new Date('2026-04-01T00:00:00Z');
   qsa(".event-card[data-event-id]").forEach((card) => {
+    const id = card.getAttribute("data-event-id");
+    const ev = EVENTS[id];
+    if (ev && ev.startISO) {
+      const start = new Date(ev.startISO);
+      if (start < PAST_CUTOFF) {
+        card.classList.add("past-event");
+        return;
+      }
+    }
+  });
+
+  // Modal open: bind all clickable event cards (skip past events)
+  qsa(".event-card[data-event-id]:not(.past-event)").forEach((card) => {
     card.addEventListener("click", () => {
       const id = card.getAttribute("data-event-id");
       if (!id) return;
