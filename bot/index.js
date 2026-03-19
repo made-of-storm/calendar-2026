@@ -81,31 +81,40 @@ function consumeOneTimeToken(token) {
   return entry.tgId;
 }
 
-// Server sessions: sessionId -> { tgId, createdAt }
-const sessions = new Map();
-const SESSION_TTL = 30 * 24 * 60 * 60 * 1000; // 30 days
+// JWT-based sessions (stateless, survive server restarts)
+const SESSION_TTL = 30 * 24 * 60 * 60; // 30 days in seconds
+const JWT_SECRET = CONFIG.BOT_TOKEN; // reuse bot token as HMAC key
 
 function createSession(tgId) {
-  const sessionId = crypto.randomBytes(32).toString('hex');
-  sessions.set(sessionId, { tgId: String(tgId), createdAt: Date.now() });
-  return sessionId;
+  const header = Buffer.from(JSON.stringify({ alg: 'HS256', typ: 'JWT' })).toString('base64url');
+  const payload = Buffer.from(JSON.stringify({
+    tgId: String(tgId),
+    iat: Math.floor(Date.now() / 1000),
+    exp: Math.floor(Date.now() / 1000) + SESSION_TTL
+  })).toString('base64url');
+  const signature = crypto.createHmac('sha256', JWT_SECRET).update(header + '.' + payload).digest('base64url');
+  return header + '.' + payload + '.' + signature;
 }
 
-function validateSession(sessionId) {
-  const entry = sessions.get(sessionId);
-  if (!entry) return null;
-  if (Date.now() - entry.createdAt > SESSION_TTL) {
-    sessions.delete(sessionId);
+function validateSession(token) {
+  try {
+    const parts = token.split('.');
+    if (parts.length !== 3) return null;
+    const [header, payload, signature] = parts;
+    const expected = crypto.createHmac('sha256', JWT_SECRET).update(header + '.' + payload).digest('base64url');
+    if (signature !== expected) return null;
+    const data = JSON.parse(Buffer.from(payload, 'base64url').toString());
+    if (data.exp < Math.floor(Date.now() / 1000)) return null;
+    return data.tgId;
+  } catch (e) {
     return null;
   }
-  return entry.tgId;
 }
 
-// Periodic cleanup of expired tokens/sessions (every hour)
+// Periodic cleanup of expired one-time tokens (every hour)
 setInterval(() => {
   const now = Date.now();
   for (const [k, v] of oneTimeTokens) { if (now - v.createdAt > TOKEN_TTL) oneTimeTokens.delete(k); }
-  for (const [k, v] of sessions) { if (now - v.createdAt > SESSION_TTL) sessions.delete(k); }
 }, 60 * 60 * 1000);
 
 // =====================================================
