@@ -82,7 +82,7 @@ function consumeOneTimeToken(token) {
 }
 
 // JWT-based sessions (stateless, survive server restarts)
-const SESSION_TTL = 30 * 24 * 60 * 60; // 30 days in seconds
+const SESSION_TTL = 180 * 24 * 60 * 60; // 180 days (6 months)
 const JWT_SECRET = CONFIG.BOT_TOKEN; // reuse bot token as HMAC key
 
 function createSession(tgId) {
