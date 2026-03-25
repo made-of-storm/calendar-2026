@@ -815,7 +815,7 @@ const EVENTS = {
   "ggate_tbilisi_2026": {
     title: "G Gate Tbilisi", description: "Восточноевропейский iGaming форум",
     city: "Tbilisi", country: "GE", countryName: "Грузия",
-    dates: "26-27 июня 2026", attendees: "7,000", promo: "SECRETROOM -20%",
+    dates: "26-27 июня 2026", attendees: "7,000", promo: "SECRETROOM",
     weather: { temp: "26-32°C", description: "Жаркое лето, сухо" },
     heroImage: "images/heroes/ggate_tbilisi.jpg",
     startISO: "2026-06-26T09:00:00Z", endISO: "2026-06-27T18:00:00Z",
