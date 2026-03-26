@@ -138,6 +138,8 @@ body { background-color: #1B1B1B; color: #FBF2E8; }
   display: flex;
   gap: 0;
   padding: 0;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
 }
 
 .tab-btn {
@@ -164,6 +166,13 @@ body { background-color: #1B1B1B; color: #FBF2E8; }
 
 .tab-content { display: none; }
 .tab-content.active { display: block; }
+
+/* Контент табов ниже sticky-табов по z-index */
+.modal-tabs + .px-8,
+.modal-tabs ~ div {
+  position: relative;
+  z-index: 1;
+}
 
 /* Uni-tag */
 .uni-tag {

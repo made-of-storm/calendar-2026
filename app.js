@@ -654,7 +654,7 @@ const EVENTS = {
   "igb_live_2026_london": {
     title: "iGB L!VE", description: "Крупнейшая iGaming выставка Европы",
     city: "London", country: "GB", countryName: "Великобритания",
-    dates: "1-2 июля 2026", attendees: "15,000", promo: "-15%",
+    dates: "1-2 июля 2026", attendees: "15,000", promo: null,
     weather: { temp: "18-22°C", description: "Тёплое лето, возможны дожди" },
     heroImage: "images/heroes/igb_london.jpg",
     startISO: "2026-07-01T09:00:00Z", endISO: "2026-07-02T18:00:00Z",
@@ -687,7 +687,7 @@ const EVENTS = {
   "sbc_rio_2026": {
     title: "SBC Summit Rio", description: "Крупнейшее событие в латиноамериканской индустрии iGaming",
     city: "Rio de Janeiro", country: "BR", countryName: "Бразилия",
-    dates: "3-5 марта 2026", attendees: "15,000", promo: "-15%",
+    dates: "3-5 марта 2026", attendees: "15,000", promo: null,
     weather: { temp: "28-32°C", description: "Жарко и влажно, сезон дождей заканчивается" },
     heroImage: "images/heroes/sbc_rio.jpg",
     startISO: "2026-03-03T09:00:00Z", endISO: "2026-03-05T18:00:00Z",
@@ -719,7 +719,7 @@ const EVENTS = {
   "sbc_lisbon_2026": {
     title: "SBC Summit", description: "Главный саммит беттинг и iGaming индустрии",
     city: "Lisbon", country: "PT", countryName: "Португалия",
-    dates: "29 сент - 1 окт 2026", attendees: "40,000", promo: "-15%",
+    dates: "29 сент - 1 окт 2026", attendees: "40,000", promo: null,
     weather: { temp: "20-25°C", description: "Тёплая осень, солнечно" },
     heroImage: "images/heroes/sbc_lisbon.jpg",
     startISO: "2026-09-29T09:00:00Z", endISO: "2026-10-01T18:00:00Z",
@@ -847,7 +847,7 @@ const EVENTS = {
   "broconf_sochi_2026": {
     title: "Broconf", description: "Главная конференция по арбитражу трафика в СНГ",
     city: "Sochi", country: "RU", countryName: "Россия",
-    dates: "25-26 апреля 2026", attendees: "3,500", promo: "-15%",
+    dates: "25-26 апреля 2026", attendees: "3,500", promo: null,
     weather: { temp: "16-22°C", description: "Тёплая весна, возможны дожди" },
     heroImage: "images/heroes/broconf_sochi.jpg",
     startISO: "2026-04-25T09:00:00Z", endISO: "2026-04-26T18:00:00Z",
@@ -911,7 +911,7 @@ const EVENTS = {
   "sbc_americas_2026": {
     title: "SBC Summit Americas", description: "Американский беттинг саммит",
     city: "Fort Lauderdale", country: "US", countryName: "США",
-    dates: "9-11 июня 2026", attendees: "10,000", promo: "-10%",
+    dates: "9-11 июня 2026", attendees: "10,000", promo: null,
     weather: { temp: "28-33°C", description: "Жарко и влажно" },
     heroImage: "images/heroes/sbc_americas.jpg",
     startISO: "2026-06-09T09:00:00Z", endISO: "2026-06-11T18:00:00Z",
