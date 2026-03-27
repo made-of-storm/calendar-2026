@@ -783,7 +783,7 @@ const EVENTS = {
   "mac_yerevan_2026": {
     title: "MAC Yerevan", description: "СНГ конференция по партнёрскому маркетингу",
     city: "Yerevan", country: "AM", countryName: "Армения",
-    dates: "26-27 мая 2026", attendees: "5,000", promo: null,
+    dates: "26-27 мая 2026", attendees: "5,000", promo: "SECRETROOM", promoNote: "−10% на GOLD и VIP",
     weather: { temp: "22-28°C", description: "Тёплая весна, солнечно" },
     heroImage: "images/heroes/mac_yerevan.jpg",
     startISO: "2026-05-26T09:00:00Z", endISO: "2026-05-27T18:00:00Z",
@@ -1810,6 +1810,7 @@ function populateModal(eventId) {
     // Промо
     const promoValue = event.promo || 'Скоро';
     const promoClass = event.promo ? 'promo' : 'no-promo';
+    const promoNote = event.promoNote ? `<div class="stat-note">${event.promoNote}</div>` : '';
 
     statsEl.innerHTML = `
       <div class="stat-card">
@@ -1823,6 +1824,7 @@ function populateModal(eventId) {
       <div class="stat-card">
         <div class="stat-value ${promoClass}">${promoValue}</div>
         <div class="stat-label">промо</div>
+        ${promoNote}
       </div>
     `;
   }
@@ -2181,7 +2183,7 @@ function initCalendarExport() {
     if (!ev) return;
 
     if (ev.promo) {
-      showPromoToast(ev.promo);
+      showPromoToast(ev.promo, ev.promoNote);
     } else {
       showPromoToast("СКОРО");
     }
@@ -2189,14 +2191,23 @@ function initCalendarExport() {
 }
 
 // Promo Toast Functions
-function showPromoToast(promoCode) {
+function showPromoToast(promoCode, note) {
   const toast = qs("#promoToast");
   const codeValue = qs("#promoCodeValue");
   const copyBtn = qs("#promoCopyBtn");
+  const noteEl = qs("#promoNoteDisplay");
 
   if (!toast || !codeValue) return;
 
   codeValue.textContent = promoCode;
+  if (noteEl) {
+    if (note) {
+      noteEl.textContent = note;
+      noteEl.style.display = "block";
+    } else {
+      noteEl.style.display = "none";
+    }
+  }
   copyBtn.classList.remove("copied");
   copyBtn.textContent = "📋 Скопировать";
 
