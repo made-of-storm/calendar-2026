@@ -1192,7 +1192,7 @@ const EVENTS = {
     heroImage: "images/heroes/aibc_dubai.jpg",
     startISO: "2026-02-09T00:00:00", endISO: "2026-02-11",
     website: "https://aibc.world/eurasia/",
-    telegramChannel: "https://t.me/sigmaconnect",
+    telegramChannel: "https://t.me/+iUgSeE1BID4yZTc0",
     awards: [
       { name: "AIBC Eurasia Awards 2026", date: "10 февраля 2026", categories: ["Best Crypto Operator", "Best Crypto Payment Provider", "Most Innovative Web3 Startup", "Best Centralized Exchange", "Entrepreneur of the Year"], website: "https://aibc.world/eurasia/awards/" },
       { name: "SiGMA Eurasia Awards 2026", date: "9 февраля 2026", categories: ["Best Operator", "Best Sports Operator", "Best Live Platform Provider", "Best Payment Provider", "Industry Rising Star", "Best AI Solution"], website: "https://sigma.world/eurasia/awards/" },
@@ -1235,7 +1235,7 @@ const EVENTS = {
     heroImage: "images/heroes/sigma_sao_paulo.jpg",
     startISO: "2026-04-06T00:00:00", endISO: "2026-04-09",
     website: "https://sigma.world/americas/",
-    telegramChannel: "https://t.me/sigmaconnect",
+    telegramChannel: "https://t.me/+iUgSeE1BID4yZTc0",
     awards: [
       { name: "SiGMA Americas Awards 2026", date: "6 апреля 2026", categories: ["Best Game Studio", "Most Played Game", "Best Operator", "Best Payment Provider", "Industry Rising Star"], website: "https://sigma.world/americas/awards/" },
     ],
@@ -1320,7 +1320,7 @@ const EVENTS = {
     heroImage: "images/heroes/sigma_africa.jpg",
     startISO: "2026-03-03T00:00:00", endISO: "2026-03-05",
     website: "https://sigma.world/africa/",
-    telegramChannel: "https://t.me/sigmaconnect",
+    telegramChannel: "https://t.me/+iUgSeE1BID4yZTc0",
     awards: [
       { name: "SiGMA Africa Awards 2026", date: "4 марта 2026", categories: ["Best Operator", "Best Sports Provider", "Best Payment Provider", "Industry Rising Star", "Best Affiliate"], website: "https://sigma.world/africa/awards/" },
     ],
@@ -1362,7 +1362,7 @@ const EVENTS = {
     heroImage: "images/heroes/sigma_manila.jpg",
     startISO: "2026-06-01T00:00:00", endISO: "2026-06-03",
     website: "https://sigma.world/asia/",
-    telegramChannel: "https://t.me/sigmaconnect",
+    telegramChannel: "https://t.me/+iUgSeE1BID4yZTc0",
     awards: [
       { name: "SiGMA Asia Awards 2026", date: "2 июня 2026", categories: ["Best Operator", "Best Sports Provider", "Best Live Platform Provider", "Best Payment Provider", "Industry Rising Star"], website: "https://sigma.world/asia/awards/" },
       { name: "Global Gaming Awards Asia-Pacific 2026", date: "2 июня 2026", categories: ["Casino Operator of the Year", "Digital Operator of the Year", "Casino Supplier of the Year", "Digital Sports Betting Supplier", "Executive of the Year"], website: "https://www.globalgamingawards.com/asia/2026/" },
@@ -1405,7 +1405,7 @@ const EVENTS = {
     heroImage: "images/heroes/sigma_malta.jpg",
     startISO: "2026-05-03T00:00:00", endISO: "2026-05-05",
     website: "https://sigma.world/euromed/",
-    telegramChannel: "https://t.me/sigmaconnect",
+    telegramChannel: "https://t.me/+iUgSeE1BID4yZTc0",
     awards: [
       { name: "SiGMA Euro-Med Awards 2026", date: "4 мая 2026", categories: ["Best Operator", "Best Sports Provider", "Best Payment Provider", "Best Affiliate", "Industry Rising Star", "Best AI Solution"], website: "https://sigma.world/euromed/awards/" },
     ],
@@ -1447,7 +1447,7 @@ const EVENTS = {
     heroImage: "images/heroes/sigma_mexico.jpg",
     startISO: "2026-09-01T00:00:00", endISO: "2026-09-03",
     website: "https://sigma.world/northamerica/",
-    telegramChannel: "https://t.me/sigmaconnect",
+    telegramChannel: "https://t.me/+iUgSeE1BID4yZTc0",
     awards: [
       { name: "SiGMA North America Awards 2026", date: "2 сентября 2026", categories: ["Best Operator", "Best Sports Provider", "Best Payment Provider", "Best Affiliate", "Industry Rising Star"], website: "https://sigma.world/northamerica/awards/" },
     ],
@@ -1489,7 +1489,7 @@ const EVENTS = {
     heroImage: "images/heroes/sigma_bangkok.jpg",
     startISO: "2026-11-30T00:00:00", endISO: "2026-12-02",
     website: "https://sigma.world/southasia/",
-    telegramChannel: "https://t.me/sigmaconnect",
+    telegramChannel: "https://t.me/+iUgSeE1BID4yZTc0",
     awards: [
       { name: "SiGMA South Asia Awards 2026", date: "1 декабря 2026", categories: ["Best Operator", "Best Sports Provider", "Best Payment Provider", "Industry Rising Star", "Best AI Solution"], website: "https://sigma.world/southasia/awards/" },
     ],
@@ -1531,7 +1531,7 @@ const EVENTS = {
     heroImage: "images/heroes/sigma_rome.jpg",
     startISO: "2026-11-02T00:00:00", endISO: "2026-11-05",
     website: "https://sigma.world/world/",
-    telegramChannel: "https://t.me/sigmaconnect",
+    telegramChannel: "https://t.me/+iUgSeE1BID4yZTc0",
     awards: [
       { name: "SiGMA World Awards 2026", date: "4 ноября 2026", categories: ["Best Operator", "Best Sports Operator", "Best Live Platform Provider", "Best Payment Provider", "Crypto Casino of the Year", "Industry Rising Star", "Best AI Solution"], website: "https://sigma.world/europe/awards/" },
       { name: "Affiliate Grand Slam Europe Awards 2026", date: "4 ноября 2026", categories: ["Best Affiliate Programme", "Best Affiliate Network", "Rising Star Affiliate", "Best Affiliate Manager"], website: "https://affiliategrandslam.com/europe/awards/" },
@@ -1691,7 +1691,7 @@ const EVENTS = {
     heroImage: "images/heroes/aibc_world_rome.jpg",
     startISO: "2026-11-02", endISO: "2026-11-05",
     website: "https://aibc.world/europe/",
-    telegramChannel: "https://t.me/sigmaconnect",
+    telegramChannel: "https://t.me/+iUgSeE1BID4yZTc0",
     awards: [
       { name: "AIBC Europe Awards 2026", date: "4 ноября 2026", categories: ["Best Crypto Operator", "Best Crypto Payment Provider", "Best Web3 Gaming Project", "Most Innovative Web3 Startup", "Best Centralized Exchange"], website: "https://aibc.world/europe/awards/" },
     ],
@@ -1720,7 +1720,7 @@ const EVENTS = {
     heroImage: "images/heroes/aibc_asia_manila.jpg",
     startISO: "2026-06-01", endISO: "2026-06-03",
     website: "https://aibc.world/asia/",
-    telegramChannel: "https://t.me/sigmaconnect",
+    telegramChannel: "https://t.me/+iUgSeE1BID4yZTc0",
     awards: [
       { name: "AIBC Asia Awards 2026", date: "2 июня 2026", categories: ["Best Live Betting Product", "Best Slot Game Provider", "Best Online Payment Services", "Best Live Casino Provider", "Industry Rising Star", "Outstanding Contribution to Gaming"], website: "https://aibc.world/asia/awards/" },
     ],
