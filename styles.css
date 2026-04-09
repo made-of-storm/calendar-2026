@@ -1443,3 +1443,148 @@ body.auth-required main {
 .auth-step {
   animation: fadeIn 0.3s ease-out;
 }
+
+/* =====================================================
+   AWARDS TAB
+   ===================================================== */
+
+.award-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  padding: 20px;
+  background: linear-gradient(135deg, rgba(120, 85, 0, 0.45) 0%, rgba(80, 55, 0, 0.3) 50%, rgba(50, 35, 0, 0.2) 100%);
+  border: 1px solid rgba(245, 218, 15, 0.2);
+  transition: border-color 0.2s;
+}
+
+.award-card:hover {
+  border-color: rgba(245, 218, 15, 0.4);
+}
+
+.award-card-icon {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  width: 80px;
+  height: 80px;
+  opacity: 0.07;
+}
+
+.award-card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.award-card-trophy {
+  width: 20px;
+  height: 20px;
+  color: #F5DA0F;
+  flex-shrink: 0;
+}
+
+.award-card-name {
+  font-size: 15px;
+  font-weight: 800;
+  color: #FBF2E8;
+  line-height: 1.3;
+}
+
+.award-card-date {
+  font-size: 11px;
+  color: rgba(251, 242, 232, 0.5);
+  font-weight: 500;
+  margin-top: 2px;
+}
+
+.award-categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.award-category-pill {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(245, 218, 15, 0.12);
+  color: #F5DA0F;
+  border: 1px solid rgba(245, 218, 15, 0.2);
+  line-height: 1;
+}
+
+.award-card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #F5DA0F;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.award-card-link:hover {
+  opacity: 0.75;
+}
+
+.award-card-link svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* =====================================================
+   MODAL LINKS (website / telegram buttons)
+   ===================================================== */
+
+.modal-links {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+  margin-bottom: 6px;
+}
+
+.modal-link-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 14px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s;
+  line-height: 1;
+}
+
+.modal-link-btn svg {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+}
+
+.modal-link-btn--website {
+  background: rgba(200, 231, 18, 0.12);
+  color: #C8E712;
+  border: 1px solid rgba(200, 231, 18, 0.25);
+}
+
+.modal-link-btn--website:hover {
+  background: rgba(200, 231, 18, 0.22);
+  border-color: rgba(200, 231, 18, 0.45);
+}
+
+.modal-link-btn--telegram {
+  background: rgba(42, 171, 238, 0.12);
+  color: #2AABEE;
+  border: 1px solid rgba(42, 171, 238, 0.25);
+}
+
+.modal-link-btn--telegram:hover {
+  background: rgba(42, 171, 238, 0.22);
+  border-color: rgba(42, 171, 238, 0.45);
+}

@@ -658,6 +658,13 @@ const EVENTS = {
     weather: { temp: "18-22°C", description: "Тёплое лето, возможны дожди" },
     heroImage: "images/heroes/igb_london.jpg",
     startISO: "2026-07-01T09:00:00Z", endISO: "2026-07-02T18:00:00Z",
+    website: "https://www.igblive.com/",
+    telegramChannel: null,
+    awards: [
+      { name: "iGB Affiliate Awards 2026", date: "2 июля 2026", categories: ["Best Affiliate Programme", "Best New Programme", "SEO Superstar", "Best Affiliate Manager", "Best Employer"], website: "https://awards.igbaffiliate.com/" },
+      { name: "EGR B2B Awards 2026", date: "3 июня 2026", categories: ["Best Platform Provider", "Best Payment Provider", "Marketing Campaign of the Year", "Best Casino Supplier", "Individual Achievement Award", "Team Achievement Award"], website: "https://awards.egr.global/egrb2bawards/en" },
+      { name: "EGR Marketing & Innovation Awards 2026", date: "~июнь 2026", categories: ["Brand of the Year B2C", "Innovation of the Year", "Marketing Team of the Year", "Marketer of the Year", "Innovative Start-up"], website: "https://awards.egr.global/egrmarketinginnovationawards/en" },
+    ],
     restaurants: [
       { name: "Roka Canary Wharf", vibe: "посидеть", avgCheck: "$100-300", description: "Японский ресторан с robata грилем", img: "images/restaurants/igb_live_roka_canary_wharf.jpg" },
       { name: "Boisdale Canary Wharf", vibe: "громко", avgCheck: "$100-300", description: "Шотландский ресторан с живым джазом", img: "images/restaurants/igb_live_boisdale.jpg" },
@@ -691,6 +698,11 @@ const EVENTS = {
     weather: { temp: "28-32°C", description: "Жарко и влажно, сезон дождей заканчивается" },
     heroImage: "images/heroes/sbc_rio.jpg",
     startISO: "2026-03-03T09:00:00Z", endISO: "2026-03-05T18:00:00Z",
+    website: "https://sbcevents.com/sbc-summit-rio/",
+    telegramChannel: "https://t.me/sbceurasia",
+    awards: [
+      { name: "SBC Awards Latinoamerica 2026", date: "4 марта 2026", categories: ["Casino Operator of the Year", "Sportsbook Operator of the Year", "Rising Star", "Best Affiliate Program", "Payment Solution of the Year"], website: "https://sbcevents.com/en/sbc-awards-latinoamerica/" },
+    ],
     restaurants: [
       { name: "Shiso", vibe: "тихо", avgCheck: "$80-200", description: "Японский ресторан высокого класса", img: "images/restaurants/sbc_rio_shiso.jpg" },
       { name: "Zaza Bistro", vibe: "посидеть", avgCheck: "$60-150", description: "Bistro с органическими блюдами в Ipanema", img: "images/restaurants/sbc_rio_zaza_bistro.jpg" },
@@ -723,6 +735,11 @@ const EVENTS = {
     weather: { temp: "20-25°C", description: "Тёплая осень, солнечно" },
     heroImage: "images/heroes/sbc_lisbon.jpg",
     startISO: "2026-09-29T09:00:00Z", endISO: "2026-10-01T18:00:00Z",
+    website: "https://sbcevents.com/sbc-summit/",
+    telegramChannel: "https://t.me/sbceurasia",
+    awards: [
+      { name: "SBC Awards 2026", date: "1 октября 2026", categories: ["Casino Operator of the Year", "Sportsbook Operator of the Year", "Game Studio of the Year", "Best Affiliate Program", "Leader of the Year", "Payment Solution of the Year"], website: "https://sbcevents.com/sbc-awards/" },
+    ],
     restaurants: [
       { name: "Monte Mar Lisboa", vibe: "посидеть", avgCheck: "$80-180", description: "Морепродукты с видом на Тежу", img: "images/restaurants/sbc_lisbon_monte_mar.jpg" },
       { name: "JNcQUOI Avenida", vibe: "громко", avgCheck: "$100-250", description: "Элитный ресторан португальской кухни", img: "images/restaurants/sbc_lisbon_jncquoi.jpg" },
@@ -755,6 +772,9 @@ const EVENTS = {
     weather: { temp: "24-28°C", description: "Приятно тепло, низкая влажность" },
     heroImage: "images/heroes/aw_dubai.jpg",
     startISO: "2026-03-04T09:00:00Z", endISO: "2026-03-05T18:00:00Z",
+    website: "https://www.affiliateworldconferences.com/dubai",
+    telegramChannel: "https://t.me/affiliateworldconf",
+    awards: [],
     restaurants: [
       { name: "Zuma Dubai", vibe: "громко", avgCheck: "$150-350", description: "Японский ресторан мирового класса", img: "images/restaurants/aw_dubai_zuma.jpg" },
       { name: "La Petite Maison", vibe: "тихо", avgCheck: "$120-280", description: "Французская кухня Ривьеры", img: "images/restaurants/aw_dubai_la_petite_maison.jpg" },
@@ -787,6 +807,9 @@ const EVENTS = {
     weather: { temp: "22-28°C", description: "Тёплая весна, солнечно" },
     heroImage: "images/heroes/mac_yerevan.jpg",
     startISO: "2026-05-26T09:00:00Z", endISO: "2026-05-27T18:00:00Z",
+    website: "https://mac-conference.com/",
+    telegramChannel: "https://t.me/macpreparty",
+    awards: [],
     restaurants: [
       { name: "Dolmama", vibe: "посидеть", avgCheck: "$40-80", description: "Традиционная армянская кухня", img: "images/restaurants/mac_yerevan_dolmama.jpg" },
       { name: "The Club", vibe: "громко", avgCheck: "$60-120", description: "Живая музыка, популярен у экспатов", img: "images/restaurants/mac_yerevan_the_club.jpg" },
@@ -819,6 +842,9 @@ const EVENTS = {
     weather: { temp: "26-32°C", description: "Жаркое лето, сухо" },
     heroImage: "images/heroes/ggate_tbilisi.jpg",
     startISO: "2026-06-26T09:00:00Z", endISO: "2026-06-27T18:00:00Z",
+    website: "https://ggate.ge/",
+    telegramChannel: "https://t.me/ggatecommunity",
+    awards: [],
     restaurants: [
       { name: "Funicular Complex", vibe: "потанцевать", avgCheck: "$50-120", description: "Панорамный вид на город", img: "images/restaurants/ggate_tbilisi_funicular.jpg" },
       { name: "Barbarestan", vibe: "тихо", avgCheck: "$60-140", description: "Исторические рецепты XIX века", img: "images/restaurants/ggate_tbilisi_barbarestan.jpg" },
@@ -851,6 +877,9 @@ const EVENTS = {
     weather: { temp: "16-22°C", description: "Тёплая весна, возможны дожди" },
     heroImage: "images/heroes/broconf_sochi.jpg",
     startISO: "2026-04-25T09:00:00Z", endISO: "2026-04-26T18:00:00Z",
+    website: "https://mybroconf.com/",
+    telegramChannel: "https://t.me/broconf",
+    awards: [],
     restaurants: [
       { name: "Хмели & Сунели", vibe: "громко", avgCheck: "$40-100", description: "Грузинский ресторан", img: "images/restaurants/broconf_sochi_hmeli_suneli.jpg" },
       { name: "Sanremo", vibe: "посидеть", avgCheck: "$80-200", description: "Итальянская кухня, вид на море", img: "images/restaurants/broconf_sochi_sanremo.jpg" },
@@ -883,6 +912,11 @@ const EVENTS = {
     weather: { temp: "22-32°C", description: "Жарко днём, прохладно ночью" },
     heroImage: "images/heroes/g2e_vegas.jpg",
     startISO: "2026-09-28T09:00:00Z", endISO: "2026-10-01T18:00:00Z",
+    website: "https://www.global-gaming-expo.com/",
+    telegramChannel: null,
+    awards: [
+      { name: "Global Gaming Awards Americas 2026", date: "сентябрь 2026", categories: ["Casino Operator of the Year", "Digital Operator of the Year", "Casino Product of the Year", "Table Game Product of the Year", "Executive of the Year"], website: "https://www.globalgamingawards.com/" },
+    ],
     restaurants: [
       { name: "TAO Asian Bistro", vibe: "громко", avgCheck: "$80-200", description: "Легендарный азиатский в Venetian", img: "images/restaurants/g2e_vegas_tao.jpg" },
       { name: "CUT by Wolfgang Puck", vibe: "тихо", avgCheck: "$120-300", description: "Премиум стейкхаус", img: "images/restaurants/g2e_vegas_cut.jpg" },
@@ -915,6 +949,11 @@ const EVENTS = {
     weather: { temp: "28-33°C", description: "Жарко и влажно" },
     heroImage: "images/heroes/sbc_americas.jpg",
     startISO: "2026-06-09T09:00:00Z", endISO: "2026-06-11T18:00:00Z",
+    website: "https://sbcevents.com/sbc-summit-americas/",
+    telegramChannel: null,
+    awards: [
+      { name: "SBC Awards Americas 2026", date: "10 июня 2026", categories: ["Rising Star of the Year", "Casino Operator of the Year", "Sportsbook Operator of the Year", "Marketing Campaign of the Year", "Payment Solution of the Year"], website: "https://sbcevents.com/sbc-awards-americas/" },
+    ],
     restaurants: [
       { name: "Steak 954", vibe: "тихо", avgCheck: "$100-250", description: "Премиум стейкхаус в W Hotel, вид на океан", img: "images/restaurants/sbc_americas_steak_954.jpg" },
       { name: "Timpano", vibe: "посидеть", avgCheck: "$70-150", description: "Итальянский с приватными комнатами", img: "images/restaurants/sbc_americas_timpano.jpg" },
@@ -944,6 +983,11 @@ const EVENTS = {
     weather: { temp: "8-14°C", description: "Прохладная весна" },
     heroImage: "images/heroes/conversion_warsaw.jpg",
     startISO: "2026-04-01T09:00:00Z", endISO: "2026-04-02T18:00:00Z",
+    website: "https://www.conversion-conf.com/",
+    telegramChannel: "https://t.me/conversionconf",
+    awards: [
+      { name: "Affiliate Space Awards 2026", date: "4 декабря 2026, Бангкок", categories: ["Best Gambling Affiliate Program", "Best CPA Affiliate Program", "Best Online Casino Operator", "Rising Star of the Year", "Best Brand of the Year", "Best CEO of the Year"], website: "https://www.conversion-conf.com/event-details/affiliate-space-awards-2026-bangkok-thailand" },
+    ],
     restaurants: [
       { name: "Belvedere", vibe: "тихо", avgCheck: "$80-180", description: "В оранжерее парка Łazienki", img: "images/restaurants/conversion_warsaw_belvedere.jpg" },
       { name: "Warszawa Wschodnia", vibe: "громко", avgCheck: "$50-120", description: "Модный район Praga", img: "images/restaurants/conversion_warsaw_wschodnia.jpg" },
@@ -974,6 +1018,11 @@ const EVENTS = {
     weather: { temp: "28-32°C", description: "Жаркое средиземноморское лето" },
     heroImage: "images/heroes/conversion_cyprus.jpg",
     startISO: "2026-07-23T09:00:00Z", endISO: "2026-07-24T18:00:00Z",
+    website: "https://www.conversion-conf.com/",
+    telegramChannel: "https://t.me/conversionconf",
+    awards: [
+      { name: "Affiliate Space Awards 2026", date: "4 декабря 2026, Бангкок", categories: ["Best Gambling Affiliate Program", "Best CPA Affiliate Program", "Best Online Casino Operator", "Rising Star of the Year"], website: "https://www.conversion-conf.com/event-details/affiliate-space-awards-2026-bangkok-thailand" },
+    ],
     restaurants: [
       { name: "Pier One", vibe: "потанцевать", avgCheck: "$60-140", description: "На пляже, закаты", img: "images/restaurants/conversion_cyprus_pier_one.jpg" },
       { name: "Meze Taverna", vibe: "громко", avgCheck: "$40-80", description: "Традиционное мезе 20+ блюд", img: "images/restaurants/conversion_cyprus_meze_taverna.jpg" },
@@ -1003,6 +1052,11 @@ const EVENTS = {
     weather: { temp: "20-26°C", description: "Тёплая весна, солнечно" },
     heroImage: "images/heroes/affpapa_madrid.jpg",
     startISO: "2026-05-18T09:00:00Z", endISO: "2026-05-20T18:00:00Z",
+    website: "https://affpapaconf.com/",
+    telegramChannel: "https://t.me/affpapa",
+    awards: [
+      { name: "AffPapa iGaming Awards 2026", date: "20 мая 2026", categories: ["Woman Leader of the Year", "CEO of the Year", "Affiliate Manager of the Year", "Best Employer of the Year"], website: "https://affpapa.com/events/affpapa-igaming-awards-2026/" },
+    ],
     restaurants: [
       { name: "Sobrino de Botín", vibe: "посидеть", avgCheck: "$60-140", description: "Старейший ресторан мира (с 1725)", img: "images/restaurants/affpapa_madrid_sobrino_de_botin.jpg" },
       { name: "Streetxo", vibe: "громко", avgCheck: "$50-100", description: "Азиатский стритфуд от DiverXO", img: "images/restaurants/affpapa_madrid_streetxo.jpg" },
@@ -1033,6 +1087,9 @@ const EVENTS = {
     weather: { temp: "26-30°C", description: "Тепло, конец сезона дождей" },
     heroImage: "images/heroes/affpapa_cancun.jpg",
     startISO: "2026-11-23T09:00:00Z", endISO: "2026-11-25T18:00:00Z",
+    website: "https://affpapaconf.com/",
+    telegramChannel: "https://t.me/affpapa",
+    awards: [],
     restaurants: [
       { name: "Harry's Prime Steakhouse", vibe: "тихо", avgCheck: "$100-250", description: "Премиальный стейкхаус", img: "images/restaurants/affpapa_cancun_harrys.jpg" },
       { name: "Puerto Madero", vibe: "посидеть", avgCheck: "$70-160", description: "Морепродукты с видом на лагуну", img: "images/restaurants/affpapa_cancun_puerto_madero.jpg" },
@@ -1063,6 +1120,9 @@ const EVENTS = {
     weather: { temp: "—", description: "Даты уточняются" },
     heroImage: "images/heroes/conversion_kyiv.jpg",
     startISO: "2026-06-01T09:00:00Z", endISO: "2026-06-02T18:00:00Z",
+    website: "https://www.conversion-conf.com/",
+    telegramChannel: "https://t.me/conversionconf",
+    awards: [],
     restaurants: [
       { name: "Kanapa", vibe: "посидеть", avgCheck: "$40-100", description: "Современная украинская кухня", img: "images/restaurants/conversion_kyiv_kanapa.jpg" },
       { name: "Beef", vibe: "тихо", avgCheck: "$50-120", description: "Стейкхаус премиум класса", img: "images/restaurants/conversion_kyiv_beef.jpg" },
@@ -1091,6 +1151,9 @@ const EVENTS = {
     weather: { temp: "22-32°C", description: "Прохладный сезон, комфортно" },
     heroImage: "images/heroes/aw_bangkok.jpg",
     startISO: "2026-12-09T00:00:00", endISO: "2026-12-10",
+    website: "https://www.affiliateworldconferences.com/asia",
+    telegramChannel: "https://t.me/affiliateworldconf",
+    awards: [],
     restaurants: [
       { name: "Nahm", vibe: "тихо", avgCheck: "$50-100", description: "", img: "images/restaurants/aw_asia_nahm.jpg" },
       { name: "Bo.lan", vibe: "посидеть", avgCheck: "$50-100", description: "", img: "images/restaurants/aw_asia_bolan.jpg" },
@@ -1128,6 +1191,12 @@ const EVENTS = {
     weather: { temp: "22-28°C", description: "Приятная зима, идеальная погода" },
     heroImage: "images/heroes/aibc_dubai.jpg",
     startISO: "2026-02-09T00:00:00", endISO: "2026-02-11",
+    website: "https://aibc.world/eurasia/",
+    telegramChannel: "https://t.me/sigmaconnect",
+    awards: [
+      { name: "AIBC Eurasia Awards 2026", date: "10 февраля 2026", categories: ["Best Crypto Operator", "Best Crypto Payment Provider", "Most Innovative Web3 Startup", "Best Centralized Exchange", "Entrepreneur of the Year"], website: "https://aibc.world/eurasia/awards/" },
+      { name: "SiGMA Eurasia Awards 2026", date: "9 февраля 2026", categories: ["Best Operator", "Best Sports Operator", "Best Live Platform Provider", "Best Payment Provider", "Industry Rising Star", "Best AI Solution"], website: "https://sigma.world/eurasia/awards/" },
+    ],
     restaurants: [
       { name: "Zuma Dubai", vibe: "громко", avgCheck: "$50-100", description: "", img: "images/restaurants/aw_dubai_zuma.jpg" },
       { name: "Nobu Dubai", vibe: "тихо", avgCheck: "$50-100", description: "", img: "images/restaurants/aw_dubai_nobu.jpg" },
@@ -1165,6 +1234,11 @@ const EVENTS = {
     weather: { temp: "20-26°C", description: "Осень, комфортная погода" },
     heroImage: "images/heroes/sigma_sao_paulo.jpg",
     startISO: "2026-04-06T00:00:00", endISO: "2026-04-09",
+    website: "https://sigma.world/americas/",
+    telegramChannel: "https://t.me/sigmaconnect",
+    awards: [
+      { name: "SiGMA Americas Awards 2026", date: "6 апреля 2026", categories: ["Best Game Studio", "Most Played Game", "Best Operator", "Best Payment Provider", "Industry Rising Star"], website: "https://sigma.world/americas/awards/" },
+    ],
     restaurants: [
       { name: "D.O.M.", vibe: "тихо", avgCheck: "$50-100", description: "", img: "images/restaurants/bis_sigma_sp_dom.jpg" },
       { name: "Figueira Rubaiyat", vibe: "посидеть", avgCheck: "$50-100", description: "", img: "images/restaurants/bis_sigma_sp_figueira_rubaiyat.jpg" },
@@ -1202,6 +1276,12 @@ const EVENTS = {
     weather: { temp: "8-14°C", description: "Мягкая зима, возможны дожди" },
     heroImage: "images/heroes/igb_barcelona.jpg",
     startISO: "2026-01-19T00:00:00", endISO: "2026-01-20",
+    website: "https://www.igbaffiliate.com/",
+    telegramChannel: null,
+    awards: [
+      { name: "Global Gaming Awards EMEA 2026", date: "19 января 2026", categories: ["Casino Operator of the Year", "Digital Operator of the Year", "Casino Supplier of the Year", "Executive of the Year", "Corporate Social Responsibility"], website: "https://www.globalgamingawards.com/emea/2026/" },
+      { name: "International Gaming Awards (IGA) 2026", date: "18 января 2026", categories: ["Online Casino Operator of the Year", "Rising Star of the Year", "Global Gaming Company of the Year", "Affiliate of the Year", "Game of the Year"], website: "https://gaming-awards.com/iga/iga-winners-2026/" },
+    ],
     restaurants: [
       { name: "Cal Pep", vibe: "громко", avgCheck: "$50-100", description: "", img: "images/restaurants/igb_barcelona_cal_pep.jpg" },
       { name: "Quimet & Quimet", vibe: "громко", avgCheck: "$50-100", description: "", img: "images/restaurants/igb_barcelona_quimet_quimet.jpg" },
@@ -1239,6 +1319,11 @@ const EVENTS = {
     weather: { temp: "18-26°C", description: "Конец лета, тёплая погода" },
     heroImage: "images/heroes/sigma_africa.jpg",
     startISO: "2026-03-03T00:00:00", endISO: "2026-03-05",
+    website: "https://sigma.world/africa/",
+    telegramChannel: "https://t.me/sigmaconnect",
+    awards: [
+      { name: "SiGMA Africa Awards 2026", date: "4 марта 2026", categories: ["Best Operator", "Best Sports Provider", "Best Payment Provider", "Industry Rising Star", "Best Affiliate"], website: "https://sigma.world/africa/awards/" },
+    ],
     restaurants: [
       { name: "La Colombe", vibe: "тихо", avgCheck: "$50-100", description: "", img: "images/restaurants/sigma_africa_la_colombe.jpg" },
       { name: "The Test Kitchen", vibe: "тихо", avgCheck: "$50-100", description: "", img: "images/restaurants/sigma_africa_test_kitchen.jpg" },
@@ -1276,6 +1361,12 @@ const EVENTS = {
     weather: { temp: "28-34°C", description: "Жарко и влажно, начало сезона дождей" },
     heroImage: "images/heroes/sigma_manila.jpg",
     startISO: "2026-06-01T00:00:00", endISO: "2026-06-03",
+    website: "https://sigma.world/asia/",
+    telegramChannel: "https://t.me/sigmaconnect",
+    awards: [
+      { name: "SiGMA Asia Awards 2026", date: "2 июня 2026", categories: ["Best Operator", "Best Sports Provider", "Best Live Platform Provider", "Best Payment Provider", "Industry Rising Star"], website: "https://sigma.world/asia/awards/" },
+      { name: "Global Gaming Awards Asia-Pacific 2026", date: "2 июня 2026", categories: ["Casino Operator of the Year", "Digital Operator of the Year", "Casino Supplier of the Year", "Digital Sports Betting Supplier", "Executive of the Year"], website: "https://www.globalgamingawards.com/asia/2026/" },
+    ],
     restaurants: [
       { name: "Gallery by Chele", vibe: "тихо", avgCheck: "$50-100", description: "", img: "images/restaurants/sigma_asia_gallery_by_chele.jpg" },
       { name: "Toyo Eatery", vibe: "посидеть", avgCheck: "$50-100", description: "", img: "images/restaurants/sigma_asia_toyo_eatery.jpg" },
@@ -1313,6 +1404,11 @@ const EVENTS = {
     weather: { temp: "18-22°C", description: "Тёплая весна, солнечно" },
     heroImage: "images/heroes/sigma_malta.jpg",
     startISO: "2026-05-03T00:00:00", endISO: "2026-05-05",
+    website: "https://sigma.world/euromed/",
+    telegramChannel: "https://t.me/sigmaconnect",
+    awards: [
+      { name: "SiGMA Euro-Med Awards 2026", date: "4 мая 2026", categories: ["Best Operator", "Best Sports Provider", "Best Payment Provider", "Best Affiliate", "Industry Rising Star", "Best AI Solution"], website: "https://sigma.world/euromed/awards/" },
+    ],
     restaurants: [
       { name: "Noni", vibe: "тихо", avgCheck: "$50-100", description: "", img: "images/restaurants/sigma_malta_noni.jpg" },
       { name: "Under Grain", vibe: "тихо", avgCheck: "$50-100", description: "", img: "images/restaurants/sigma_malta_under_grain.jpg" },
@@ -1350,6 +1446,11 @@ const EVENTS = {
     weather: { temp: "16-24°C", description: "Сезон дождей, прохладные вечера" },
     heroImage: "images/heroes/sigma_mexico.jpg",
     startISO: "2026-09-01T00:00:00", endISO: "2026-09-03",
+    website: "https://sigma.world/northamerica/",
+    telegramChannel: "https://t.me/sigmaconnect",
+    awards: [
+      { name: "SiGMA North America Awards 2026", date: "2 сентября 2026", categories: ["Best Operator", "Best Sports Provider", "Best Payment Provider", "Best Affiliate", "Industry Rising Star"], website: "https://sigma.world/northamerica/awards/" },
+    ],
     restaurants: [
       { name: "Pujol", vibe: "тихо", avgCheck: "$50-100", description: "", img: "images/restaurants/sigma_mexico_pujol.jpg" },
       { name: "Quintonil", vibe: "тихо", avgCheck: "$50-100", description: "", img: "images/restaurants/sigma_mexico_quintonil.jpg" },
@@ -1387,6 +1488,11 @@ const EVENTS = {
     weather: { temp: "24-32°C", description: "Прохладный сезон, комфортно" },
     heroImage: "images/heroes/sigma_bangkok.jpg",
     startISO: "2026-11-30T00:00:00", endISO: "2026-12-02",
+    website: "https://sigma.world/southasia/",
+    telegramChannel: "https://t.me/sigmaconnect",
+    awards: [
+      { name: "SiGMA South Asia Awards 2026", date: "1 декабря 2026", categories: ["Best Operator", "Best Sports Provider", "Best Payment Provider", "Industry Rising Star", "Best AI Solution"], website: "https://sigma.world/southasia/awards/" },
+    ],
     restaurants: [
       { name: "Gaggan Anand", vibe: "тихо", avgCheck: "$50-100", description: "", img: "images/restaurants/sigma_bangkok_gaggan.jpg" },
       { name: "Le Du", vibe: "тихо", avgCheck: "$50-100", description: "", img: "images/restaurants/sigma_bangkok_le_du.jpg" },
@@ -1424,6 +1530,13 @@ const EVENTS = {
     weather: { temp: "12-18°C", description: "Прохладная осень, возможны дожди" },
     heroImage: "images/heroes/sigma_rome.jpg",
     startISO: "2026-11-02T00:00:00", endISO: "2026-11-05",
+    website: "https://sigma.world/world/",
+    telegramChannel: "https://t.me/sigmaconnect",
+    awards: [
+      { name: "SiGMA World Awards 2026", date: "4 ноября 2026", categories: ["Best Operator", "Best Sports Operator", "Best Live Platform Provider", "Best Payment Provider", "Crypto Casino of the Year", "Industry Rising Star", "Best AI Solution"], website: "https://sigma.world/europe/awards/" },
+      { name: "Affiliate Grand Slam Europe Awards 2026", date: "4 ноября 2026", categories: ["Best Affiliate Programme", "Best Affiliate Network", "Rising Star Affiliate", "Best Affiliate Manager"], website: "https://affiliategrandslam.com/europe/awards/" },
+      { name: "EGR Operator Awards 2026", date: "24 ноября 2026", categories: ["Casino Operator", "Sports Betting Operator", "Affiliate of the Year", "Innovator of the Year", "Employer of the Year", "Game of the Year"], website: "https://awards.egr.global/egroperatoraward/en" },
+    ],
     restaurants: [
       { name: "La Pergola", vibe: "тихо", avgCheck: "$50-100", description: "", img: "images/restaurants/sigma_rome_la_pergola.jpg" },
       { name: "Roscioli", vibe: "громко", avgCheck: "$50-100", description: "", img: "images/restaurants/sigma_rome_roscioli.jpg" },
@@ -1461,6 +1574,9 @@ const EVENTS = {
     weather: { temp: "20-28°C", description: "Комфортная погода" },
     heroImage: "images/heroes/aw_americas_cancun.jpg",
     startISO: "2026-09-07", endISO: "2026-09-08",
+    website: "https://www.affiliateworldconferences.com/americas",
+    telegramChannel: "https://t.me/affiliateworldconf",
+    awards: [],
     restaurants: [
       { name: "Taco y Tequila Grill & Bar", vibe: "громко", avgCheck: "$15-25", description: "Шумный мексиканский гриль-бар с музыкой и шотами", img: "images/restaurants/aw_americas_taco_y_tequila.jpg" },
       { name: "La Palapita", vibe: "посидеть", avgCheck: "$18-30", description: "Морепродукты с террасой и мягким вечерним движем", img: "images/restaurants/aw_americas_la_palapita.jpg" },
@@ -1486,6 +1602,9 @@ const EVENTS = {
     weather: { temp: "20-28°C", description: "Комфортная погода" },
     heroImage: "images/heroes/aw_europe_budapest.jpg",
     startISO: "2026-07-09", endISO: "2026-07-10",
+    website: "https://www.affiliateworldconferences.com/europe",
+    telegramChannel: "https://t.me/affiliateworldconf",
+    awards: [],
     restaurants: [
       { name: "Rosenstein Vendéglő", vibe: "посидеть", avgCheck: "$30-45", description: "Венгерские блюда в семейной атмосфере", img: "images/restaurants/aw_europe_rosentein.jpg" },
       { name: "Mazel Tov", vibe: "посидеть", avgCheck: "$35-55", description: "Стильный израильский ресторан-сад для вечерних встреч", img: "images/restaurants/aw_europe_mazel_tov.jpg" },
@@ -1511,6 +1630,13 @@ const EVENTS = {
     weather: { temp: "20-28°C", description: "Комфортная погода" },
     heroImage: "images/heroes/sbc_malta.jpg",
     startISO: "2026-04-28", endISO: "2026-04-30",
+    website: "https://sbcevents.com/sbc-summit-malta/",
+    telegramChannel: "https://t.me/sbceurasia",
+    awards: [
+      { name: "SBC Awards Europe 2026", date: "30 апреля 2026", categories: ["Casino Operator of the Year", "Sportsbook Operator of the Year", "Game Studio of the Year", "Best Affiliate Program", "Leader of the Year", "Employer of the Year"], website: "https://sbcevents.com/sbc-awards-europe/" },
+      { name: "Casino Guru Awards 2026", date: "25 мая 2026", categories: ["Best Online Casino", "Best Crypto Casino", "Fairest Bonus Policy", "Players' Choice", "Voice of the People"], website: "https://casinoguruint.com/en/awards" },
+      { name: "SiGMA Europe Awards 2026", date: "25 мая 2026", categories: ["Best Operator", "Best Affiliate", "Best Platform Provider", "Industry Rising Star", "Best Marketing Campaign"], website: "https://sigma.world/europe/awards/" },
+    ],
     restaurants: [
       { name: "Paranga", vibe: "посидеть", avgCheck: "$55-90", description: "Морской ресторан с террасой и видом на Средиземное море", img: "images/restaurants/sbc_malta_paranga.jpg" },
       { name: "Waterbiscuit", vibe: "посидеть", avgCheck: "$50-85", description: "Современный ресторан с изысканной атмосферой", img: "images/restaurants/sbc_malta_waterbiscuit.jpg" },
@@ -1536,6 +1662,9 @@ const EVENTS = {
     weather: { temp: "20-28°C", description: "Комфортная погода" },
     heroImage: "images/heroes/sbc_canada_toronto.jpg",
     startISO: "2026-05-19", endISO: "2026-05-21",
+    website: "https://sbcevents.com/sbc-summit-canada/",
+    telegramChannel: null,
+    awards: [],
     restaurants: [
       { name: "TOCA", vibe: "посидеть", avgCheck: "$60-90", description: "Элегантный ресторан в Ritz-Carlton с итальянскими блюдами", img: "images/restaurants/sbc_canada_toca.jpg" },
       { name: "Scaddabush", vibe: "посидеть", avgCheck: "$35-55", description: "Итальянская кухня с дружелюбной атмосферой и пиццами", img: "images/restaurants/sbc_canada_scaddabush.jpg" },
@@ -1561,6 +1690,11 @@ const EVENTS = {
     weather: { temp: "20-28°C", description: "Комфортная погода" },
     heroImage: "images/heroes/aibc_world_rome.jpg",
     startISO: "2026-11-02", endISO: "2026-11-05",
+    website: "https://aibc.world/europe/",
+    telegramChannel: "https://t.me/sigmaconnect",
+    awards: [
+      { name: "AIBC Europe Awards 2026", date: "4 ноября 2026", categories: ["Best Crypto Operator", "Best Crypto Payment Provider", "Best Web3 Gaming Project", "Most Innovative Web3 Startup", "Best Centralized Exchange"], website: "https://aibc.world/europe/awards/" },
+    ],
     restaurants: [
       { name: "L'Osteria Portuense", vibe: "тихо", avgCheck: "$30-45", description: "Итальянская остерия с домашними блюдами", img: "images/restaurants/aibc_rome_losteria.jpg" },
       { name: "La Porta del Principe", vibe: "посидеть", avgCheck: "$25-40", description: "Стильный ресторан с итальянским меню", img: "images/restaurants/aibc_rome_la_porta_del_principe.jpg" },
@@ -1585,6 +1719,11 @@ const EVENTS = {
     weather: { temp: "20-28°C", description: "Комфортная погода" },
     heroImage: "images/heroes/aibc_asia_manila.jpg",
     startISO: "2026-06-01", endISO: "2026-06-03",
+    website: "https://aibc.world/asia/",
+    telegramChannel: "https://t.me/sigmaconnect",
+    awards: [
+      { name: "AIBC Asia Awards 2026", date: "2 июня 2026", categories: ["Best Live Betting Product", "Best Slot Game Provider", "Best Online Payment Services", "Best Live Casino Provider", "Industry Rising Star", "Outstanding Contribution to Gaming"], website: "https://aibc.world/asia/awards/" },
+    ],
     restaurants: [
       { name: "Hard Rock Cafe Manila", vibe: "потанцевать", avgCheck: "$30-50", description: "Живые гитарные ритмы, коктейли и большая карта блюд", img: "images/restaurants/aibc_manila_hard_rock.jpg" },
       { name: "Sidechick MOA", vibe: "посидеть", avgCheck: "$20-35", description: "Современные филиппинские блюда в непринуждённой атмосфере", img: "images/restaurants/aibc_manila_sidechick_moa.jpg" },
@@ -1609,6 +1748,9 @@ const EVENTS = {
     weather: { temp: "20-28°C", description: "Комфортная погода" },
     heroImage: "images/heroes/g2e_asia_macau.jpg",
     startISO: "2026-05-12", endISO: "2026-05-14",
+    website: "https://www.g2easia.com/",
+    telegramChannel: null,
+    awards: [],
     restaurants: [
       { name: "Hiro by Hiroshi Kagata", vibe: "посидеть", avgCheck: "$80-120", description: "Японский ресторан с утончённой кухней и омакасэ от шефа", img: "images/restaurants/g2e_macau_hiro.jpg" },
       { name: "Jiang Nan by Jereme Leung", vibe: "тихо", avgCheck: "$70-110", description: "Современный китайский ресторан высокой кухни внутри Venetian", img: "images/restaurants/g2e_macau_jiang_nan.jpg" },
@@ -1633,6 +1775,11 @@ const EVENTS = {
     weather: { temp: "27-32°C", description: "Тёплая и сухая погода, конец сезона дождей" },
     heroImage: "images/heroes/sbwa_dakar.jpg",
     startISO: "2026-10-14T09:00:00Z", endISO: "2026-10-16T18:00:00Z",
+    website: "https://www.sportsbettingevents.com/sbwa",
+    telegramChannel: null,
+    awards: [
+      { name: "SBWA+ Eventus Awards 2026", date: "15 октября 2026", categories: ["Operator of the Year", "Leader in Sports Betting", "Leader in Online Casino", "Innovation of the Year", "Supplier of the Year"], website: "https://www.sportsbettingevents.com/sbwa-eventus-awards-nomination" },
+    ],
     restaurants: [
       { name: "La Calebasse", vibe: "тихо", avgCheck: "$30-60", description: "Сенегальская кухня с видом на океан", img: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=200&q=80" },
       { name: "Le Lagon 1", vibe: "посидеть", avgCheck: "$40-80", description: "Ресторан на воде, морепродукты", img: "images/restaurants/sbwa_dakar_le_lagon.jpg" },
@@ -1659,6 +1806,9 @@ const EVENTS = {
     weather: { temp: "16-24°C", description: "Зима в Бразилии, сухая и прохладная погода" },
     heroImage: "images/heroes/sigma_sao_paulo.jpg",
     startISO: "2026-08-13T08:00:00Z", endISO: "2026-08-13T20:00:00Z",
+    website: null,
+    telegramChannel: null,
+    awards: [],
     restaurants: [
       { name: "Figueira Rubaiyat", vibe: "посидеть", avgCheck: "$60-120", description: "Знаменитый стейкхаус под деревом", img: "images/restaurants/bis_sigma_sp_figueira_rubaiyat.jpg" },
       { name: "Maní", vibe: "тихо", avgCheck: "$50-100", description: "Современная бразильская кухня", img: "images/restaurants/gm_brazil_mani.jpg" },
@@ -1682,6 +1832,11 @@ const EVENTS = {
     weather: { temp: "26-33°C", description: "Жарко и влажно, сезон дождей" },
     heroImage: "images/heroes/spice_sea_bangkok.jpg",
     startISO: "2026-08-12T09:00:00Z", endISO: "2026-08-14T18:00:00Z",
+    website: "https://www.spiceseries.com/",
+    telegramChannel: null,
+    awards: [
+      { name: "SPiCE Eventus Awards 2026", date: "13 августа 2026", categories: ["Developer of the Year", "Best Platform Provider", "Online Gaming Operator Award", "Sports Betting Operator Award", "Responsible Gambling Award"], website: "https://www.spiceseries.com/spice-international-awards-form" },
+    ],
     restaurants: [
       { name: "Gaggan Anand", vibe: "тихо", avgCheck: "$80-150", description: "Прогрессивная индийская кухня, мировой топ", img: "images/restaurants/sigma_bangkok_gaggan.jpg" },
       { name: "Namsaah Bottling Trust", vibe: "посидеть", avgCheck: "$30-60", description: "Коктейль-бар с тайской кухней", img: "images/restaurants/spice_sea_namsaah.jpg" },
@@ -1708,6 +1863,9 @@ const EVENTS = {
     weather: { temp: "20-28°C", description: "Тёплое лето, солнечно" },
     heroImage: "images/heroes/conversion_kyiv.jpg",
     startISO: "2026-08-01T10:00:00Z", endISO: "2026-08-01T20:00:00Z",
+    website: "https://www.conversion-conf.com/",
+    telegramChannel: "https://t.me/conversionconf",
+    awards: [],
     restaurants: [
       { name: "Kanapa", vibe: "посидеть", avgCheck: "$40-100", description: "Современная украинская кухня", img: "images/restaurants/conversion_kyiv_kanapa.jpg" },
       { name: "Beef", vibe: "тихо", avgCheck: "$50-120", description: "Стейкхаус премиум класса", img: "images/restaurants/conversion_kyiv_beef.jpg" },
@@ -1759,6 +1917,18 @@ function populateModal(eventId) {
   // === INFO: название, место, даты, описание (БЕЗ тегов) ===
   const infoEl = qs("#modalInfo");
   if (infoEl) {
+    let linksHTML = '';
+    if (event.website || event.telegramChannel) {
+      linksHTML = '<div class="modal-links">';
+      if (event.website) {
+        linksHTML += `<a href="${event.website}" target="_blank" rel="noopener" class="modal-link-btn modal-link-btn--website" title="Официальный сайт"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>Оф. сайт</a>`;
+      }
+      if (event.telegramChannel) {
+        linksHTML += `<a href="${event.telegramChannel}" target="_blank" rel="noopener" class="modal-link-btn modal-link-btn--telegram" title="Telegram канал"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 000 12a12 12 0 0012 12 12 12 0 0012-12A12 12 0 0012 0h-.056zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 01.171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>Оф. канал</a>`;
+      }
+      linksHTML += '</div>';
+    }
+
     infoEl.innerHTML = `
       <h2 class="modal-title">${event.title}</h2>
       <p class="modal-location">
@@ -1774,6 +1944,7 @@ function populateModal(eventId) {
         </svg>
         ${event.dates}
       </p>
+      ${linksHTML}
       <p class="modal-description">${event.description}</p>
     `;
   }
@@ -1833,10 +2004,12 @@ function populateModal(eventId) {
   populateRestaurantsTab(event.restaurants || []);
   populateSideEventsTab(event.sideEvents || []);
   populateBrandsTab(event.brands || []);
+  populateAwardsTab(event.awards || []);
 
   // Update tab button labels with counts
   const eventsBtn = qs('[data-tab-btn="events"]');
   const brandsBtn = qs('[data-tab-btn="brands"]');
+  const awardsBtn = qs('[data-tab-btn="awards"]');
 
   if (eventsBtn) {
     const count = (event.sideEvents || []).length;
@@ -1846,6 +2019,11 @@ function populateModal(eventId) {
   if (brandsBtn) {
     const count = (event.brands || []).length;
     brandsBtn.textContent = count > 0 ? `Бренды (${count})` : "Бренды";
+  }
+
+  if (awardsBtn) {
+    const count = (event.awards || []).length;
+    awardsBtn.textContent = count > 0 ? `Awards (${count})` : "Awards";
   }
 
   // Default tab
@@ -1959,6 +2137,58 @@ function createBrandCard(brand) {
       <div class="brand-category">${brand.category}</div>
     </div>
   `;
+}
+
+function populateAwardsTab(awards) {
+  const container = qs("#awards");
+  if (!container) return;
+
+  if (!awards || awards.length === 0) {
+    container.innerHTML = `
+      <div class="text-center py-8 text-gray-400">
+        <p class="text-sm">Нет связанных awards-программ для этой конференции</p>
+      </div>
+    `;
+    return;
+  }
+
+  let html = `
+    <h3 class="text-lg font-bold text-white mb-4" style="margin-top: 24px;">
+      Awards-программы
+    </h3>
+  `;
+
+  awards.forEach(a => {
+    const categoriesHTML = (a.categories || []).map(c =>
+      `<span class="award-category-pill">${c}</span>`
+    ).join('');
+
+    const dateHTML = a.date ? `<div class="award-card-date">${a.date}</div>` : '';
+
+    const linkHTML = a.website ? `
+      <a href="${a.website}" target="_blank" rel="noopener" class="award-card-link">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        Подробнее
+      </a>
+    ` : '';
+
+    html += `
+      <div class="award-card">
+        <svg class="award-card-icon" viewBox="0 0 24 24" fill="#F5DA0F" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <div class="award-card-header">
+          <svg class="award-card-trophy" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <div>
+            <div class="award-card-name">${a.name}</div>
+            ${dateHTML}
+          </div>
+        </div>
+        ${categoriesHTML ? `<div class="award-categories">${categoriesHTML}</div>` : ''}
+        ${linkHTML}
+      </div>
+    `;
+  });
+
+  container.innerHTML = html;
 }
 
 function populateBrandsTab(brands) {
