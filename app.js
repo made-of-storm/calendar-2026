@@ -871,9 +871,9 @@ const EVENTS = {
   },
 
   "broconf_sochi_2026": {
-    title: "Broconf", description: "Главная конференция по арбитражу трафика в СНГ",
+    title: "BROCONF-7", description: "Главная конференция по арбитражу трафика в СНГ",
     city: "Sochi", country: "RU", countryName: "Россия",
-    dates: "25-26 апреля 2026", attendees: "3,500", promo: null,
+    dates: "25-26 апреля 2026", attendees: "3,500", promo: "SecretRoomBro", promoNote: "−15%",
     weather: { temp: "16-22°C", description: "Тёплая весна, возможны дожди" },
     heroImage: "images/heroes/broconf_sochi.jpg",
     startISO: "2026-04-25T09:00:00Z", endISO: "2026-04-26T18:00:00Z",
