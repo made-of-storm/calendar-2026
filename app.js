@@ -900,7 +900,7 @@ const EVENTS = {
       { name: "MetaCPA", category: "Партнёрка", logo: "images/brands/metacpa.png" }
     ],
     sideEvents: [
-      { title: "Broconf Party", date: "25 апреля", location: "Red Arena", type: "party" },
+      { title: "BROCONF-7 Party", date: "25 апреля", location: "Red Arena", type: "party" },
       { title: "Горный нетворкинг", date: "26 апреля", location: "Красная Поляна", type: "meetup" }
     ]
   },
