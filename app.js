@@ -810,6 +810,21 @@ const EVENTS = {
     website: "https://mac-conference.com/",
     telegramChannel: "https://t.me/macpreparty",
     awards: [],
+    partnerPromo: {
+      title: "ABC Hotel",
+      subtitle: "Комьюнити-отель MAC Yerevan",
+      badge: "PARTNER",
+      img: "images/promo/abc_hotel_mac.png",
+      description: "Закрытый деловой отель для участников MAC — 140+ номеров, 250+ резидентов, 10+ сайд-ивентов от партнёров. Speed networking, бизнес-завтраки, митапы, gala-ужин и awards — всё под одной крышей в Radisson Blu.",
+      dates: "25–28 мая",
+      location: "Radisson Blu Hotel, Ереван",
+      promo: "SECRETROOM",
+      promoNote: "−10% на бронирование",
+      cta: "Забронировать",
+      ctaUrl: "https://hotel.affiliatebusinessclub.com/?utm_source=secretroom",
+      telegram: "https://t.me/AffiliateBusinessClubRU",
+      telegramChat: "https://t.me/+8JdzvvojB-k1Yjgy"
+    },
     restaurants: [
       { name: "Dolmama", vibe: "посидеть", avgCheck: "$40-80", description: "Традиционная армянская кухня", img: "images/restaurants/mac_yerevan_dolmama.jpg" },
       { name: "The Club", vibe: "громко", avgCheck: "$60-120", description: "Живая музыка, популярен у экспатов", img: "images/restaurants/mac_yerevan_the_club.jpg" },
@@ -2001,7 +2016,7 @@ function populateModal(eventId) {
   }
 
   // Populate tabs
-  populateRestaurantsTab(event.restaurants || []);
+  populateRestaurantsTab(event.restaurants || [], event.partnerPromo || null);
   populateSideEventsTab(event.sideEvents || []);
   populateBrandsTab(event.brands || []);
   populateAwardsTab(event.awards || []);
@@ -2030,16 +2045,66 @@ function populateModal(eventId) {
   setActiveTab("guide");
 }
 
-function populateRestaurantsTab(restaurants) {
+function renderPartnerPromo(promo) {
+  if (!promo) return '';
+  return `
+    <div class="partner-promo">
+      <span class="partner-promo-badge">${promo.badge || 'PARTNER'}</span>
+      <img src="${promo.img}" class="partner-promo-img" alt="${promo.title}" loading="lazy" decoding="async">
+      <div class="partner-promo-body">
+        <div class="partner-promo-title">${promo.title}</div>
+        <div class="partner-promo-subtitle">${promo.subtitle}</div>
+        <div class="partner-promo-desc">${promo.description}</div>
+        <div class="partner-promo-meta">
+          <span class="partner-promo-meta-item">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+            ${promo.dates}
+          </span>
+          <span class="partner-promo-meta-item">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            ${promo.location}
+          </span>
+        </div>
+        <div class="partner-promo-code">
+          <span class="partner-promo-code-label">Промокод</span>
+          <span class="partner-promo-code-value">${promo.promo}</span>
+          <span class="partner-promo-code-note">${promo.promoNote}</span>
+        </div>
+        <div class="partner-promo-actions">
+          <a href="${promo.ctaUrl}" target="_blank" rel="noopener" class="partner-promo-cta">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+            ${promo.cta}
+          </a>
+          ${promo.telegram ? `<a href="${promo.telegram}" target="_blank" rel="noopener" class="partner-promo-tg">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 000 12a12 12 0 0012 12 12 12 0 0012-12A12 12 0 0012 0h-.056zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 01.171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+            TG-канал
+          </a>` : ''}
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function populateRestaurantsTab(restaurants, partnerPromo) {
   const container = qs("#guide");
   if (!container) return;
 
+  let html = '';
+
+  if (partnerPromo) {
+    html += renderPartnerPromo(partnerPromo);
+  }
+
   if (!restaurants || restaurants.length === 0) {
-    container.innerHTML = `
-      <div class="text-center py-8 text-gray-400">
-        <p class="text-sm">Скоро добавим рекомендации ближе к датам конференции</p>
-      </div>
-    `;
+    if (!partnerPromo) {
+      container.innerHTML = `
+        <div class="text-center py-8 text-gray-400">
+          <p class="text-sm">Скоро добавим рекомендации ближе к датам конференции</p>
+        </div>
+      `;
+      return;
+    }
+    container.innerHTML = html;
     return;
   }
 
@@ -2050,7 +2115,7 @@ function populateRestaurantsTab(restaurants) {
     'потанцевать': { label: '💃 Потанцевать', class: 'vibe-tag-dance' }
   };
 
-  let html = `
+  html += `
     <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-4" style="margin-top: 24px;">
       Рестораны для встреч
     </h3>

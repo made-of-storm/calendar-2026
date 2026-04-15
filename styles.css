@@ -155,6 +155,13 @@ body { background-color: #1B1B1B; color: #FBF2E8; }
   transition: all 0.2s;
 }
 
+@media (min-width: 768px) {
+  .tab-btn {
+    padding: 9px 14px;
+    font-size: 12.5px;
+  }
+}
+
 .tab-btn.active {
   color: #F5DA0F;
   border-bottom-color: #F5DA0F;
@@ -742,6 +749,12 @@ body { background-color: #1B1B1B; color: #FBF2E8; }
   border-radius: 16px 16px 0 0;
 }
 
+@media (min-width: 768px) {
+  .modal-hero {
+    height: 130px;
+  }
+}
+
 .modal-close-btn {
   position: absolute;
   top: 12px;
@@ -795,11 +808,24 @@ body { background-color: #1B1B1B; color: #FBF2E8; }
   animation: fadeIn 0.3s ease-out 0.1s both;
 }
 
+@media (min-width: 768px) {
+  .modal-info-section {
+    padding: 8px 16px 4px;
+  }
+}
+
 .modal-title {
   font-size: 1.5rem;
   font-weight: 700;
   margin-bottom: 4px;
   color: #FBF2E8;
+}
+
+@media (min-width: 768px) {
+  .modal-title {
+    font-size: 1.25rem;
+    margin-bottom: 2px;
+  }
 }
 
 .modal-location,
@@ -819,6 +845,13 @@ body { background-color: #1B1B1B; color: #FBF2E8; }
   line-height: 1.4;
 }
 
+@media (min-width: 768px) {
+  .modal-description {
+    margin-top: 4px;
+    font-size: 0.8rem;
+  }
+}
+
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
@@ -832,6 +865,13 @@ body { background-color: #1B1B1B; color: #FBF2E8; }
   animation: fadeIn 0.3s ease-out 0.2s both;
 }
 
+@media (min-width: 768px) {
+  .modal-stats-grid {
+    gap: 6px;
+    padding: 4px 20px 6px;
+  }
+}
+
 .stat-card {
   background: #1B1B1B;
   border: 1px solid #333333;
@@ -839,6 +879,13 @@ body { background-color: #1B1B1B; color: #FBF2E8; }
   padding: 10px 8px;
   text-align: center;
   transition: all 0.2s ease;
+}
+
+@media (min-width: 768px) {
+  .stat-card {
+    padding: 7px 6px;
+    border-radius: 6px;
+  }
 }
 
 .stat-card:hover {
@@ -851,6 +898,12 @@ body { background-color: #1B1B1B; color: #FBF2E8; }
   font-weight: 600;
   margin-bottom: 2px;
   line-height: 1.1;
+}
+
+@media (min-width: 768px) {
+  .stat-value {
+    font-size: 14px;
+  }
 }
 
 .stat-value.attendees {
@@ -903,6 +956,12 @@ body { background-color: #1B1B1B; color: #FBF2E8; }
   box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.15);
 }
 
+@media (min-width: 768px) {
+  .modal-footer {
+    padding: 8px 20px 10px;
+  }
+}
+
 .modal-footer button {
   flex: 1;
   padding: 12px 16px;
@@ -911,6 +970,13 @@ body { background-color: #1B1B1B; color: #FBF2E8; }
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s;
+}
+
+@media (min-width: 768px) {
+  .modal-footer button {
+    padding: 9px 14px;
+    font-size: 13px;
+  }
 }
 
 .btn-calendar {
@@ -1587,4 +1653,198 @@ body.auth-required main {
 .modal-link-btn--telegram:hover {
   background: rgba(42, 171, 238, 0.22);
   border-color: rgba(42, 171, 238, 0.45);
+}
+
+/* =====================================================
+   PARTNER PROMO BLOCK
+   ===================================================== */
+
+.partner-promo {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(138, 92, 246, 0.35);
+  background: linear-gradient(145deg, rgba(88, 52, 180, 0.20) 0%, rgba(60, 30, 140, 0.12) 50%, rgba(30, 15, 80, 0.08) 100%);
+  margin-bottom: 20px;
+  margin-top: 24px;
+}
+
+@media (min-width: 480px) {
+  .partner-promo {
+    flex-direction: row;
+  }
+}
+
+.partner-promo-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: rgba(138, 92, 246, 0.25);
+  color: #A78BFA;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  padding: 3px 8px;
+  border-radius: 5px;
+  border: 1px solid rgba(138, 92, 246, 0.35);
+  text-transform: uppercase;
+  z-index: 2;
+}
+
+.partner-promo-img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  flex-shrink: 0;
+  display: block;
+}
+
+@media (min-width: 480px) {
+  .partner-promo-img {
+    width: 150px;
+    height: auto;
+  }
+}
+
+.partner-promo-body {
+  padding: 14px 16px;
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.partner-promo-title {
+  font-size: 15px;
+  font-weight: 800;
+  color: #FBF2E8;
+  margin-bottom: 1px;
+}
+
+.partner-promo-subtitle {
+  font-size: 11px;
+  color: rgba(251, 242, 232, 0.5);
+  margin-bottom: 6px;
+}
+
+.partner-promo-desc {
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: rgba(251, 242, 232, 0.68);
+  margin-bottom: 10px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.partner-promo-meta {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+
+.partner-promo-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10.5px;
+  color: rgba(251, 242, 232, 0.55);
+}
+
+.partner-promo-meta-item svg {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+  opacity: 0.6;
+}
+
+.partner-promo-code {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(138, 92, 246, 0.15);
+  border: 1px dashed rgba(138, 92, 246, 0.45);
+  border-radius: 8px;
+  padding: 5px 10px;
+  margin-bottom: 10px;
+  align-self: flex-start;
+}
+
+.partner-promo-code-label {
+  font-size: 10px;
+  color: rgba(251, 242, 232, 0.5);
+}
+
+.partner-promo-code-value {
+  font-size: 13px;
+  font-weight: 800;
+  color: #A78BFA;
+  letter-spacing: 1px;
+}
+
+.partner-promo-code-note {
+  font-size: 10px;
+  color: rgba(251, 242, 232, 0.45);
+}
+
+.partner-promo-actions {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: auto;
+}
+
+.partner-promo-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 7px 14px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.2s;
+  background: linear-gradient(135deg, #7C3AED 0%, #5B21B6 100%);
+  color: #FBF2E8;
+  border: none;
+  cursor: pointer;
+}
+
+.partner-promo-cta:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(124, 58, 237, 0.35);
+}
+
+.partner-promo-cta svg {
+  width: 13px;
+  height: 13px;
+}
+
+.partner-promo-tg {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 7px 12px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s;
+  background: rgba(42, 171, 238, 0.12);
+  color: #2AABEE;
+  border: 1px solid rgba(42, 171, 238, 0.25);
+}
+
+.partner-promo-tg:hover {
+  background: rgba(42, 171, 238, 0.22);
+  border-color: rgba(42, 171, 238, 0.45);
+}
+
+.partner-promo-tg svg {
+  width: 13px;
+  height: 13px;
 }
