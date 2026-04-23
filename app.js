@@ -845,6 +845,14 @@ const EVENTS = {
       { name: "Mobidea", category: "Партнёрка", logo: "https://logo.clearbit.com/mobidea.com" }
     ],
     sideEvents: [
+      {
+        title: "partyJAN",
+        date: "24 мая, 15:00",
+        location: "Ереван (по регистрации)",
+        type: "party",
+        img: "images/side-events/mac_yerevan_partyjan.png",
+        description: "Закрытый нетворкинг для owners, C-level и инфлюенсеров affiliate-рынка. Участие по предварительным спискам."
+      },
       { title: "CIS Affiliates Meetup", date: "25 мая", location: "Meridian Expo", type: "meetup" },
       { title: "Closing Party", date: "27 мая", location: "TBA", type: "party" }
     ]
@@ -2164,21 +2172,32 @@ function populateSideEventsTab(sideEvents) {
   let html = '';
   sideEvents.forEach(e => {
     const cfg = typeConfig[e.type] || defaultType;
+    const locationHTML = e.location && e.location !== 'TBA' ? `
+            <p class="text-xs text-white/60 flex items-center gap-1.5 mt-1">
+              <svg class="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+              ${e.location}
+            </p>` : '';
+    const descriptionHTML = e.description ? `
+            <p class="text-xs text-white/70 leading-relaxed mt-2">${e.description}</p>` : '';
+    const innerContent = `
+            <div class="flex items-center gap-2 mb-3">
+              <span class="side-event-type-tag" style="color:${cfg.accent}; border-color:${cfg.accent}40; background:${cfg.accent}15">${cfg.label}</span>
+              ${e.date ? `<span class="text-[11px] text-white/50 font-medium">${e.date}</span>` : ''}
+            </div>
+            <h3 class="text-lg font-extrabold mb-1.5 leading-tight">${e.title}</h3>
+            ${locationHTML}
+            ${descriptionHTML}`;
+    const bodyHTML = e.img ? `
+        <div class="relative z-10 flex gap-3 items-start">
+          <img src="${e.img}" alt="${e.title}" class="w-16 h-16 rounded-xl object-cover flex-shrink-0 bg-white/5" onerror="this.style.display='none'">
+          <div class="flex-1 min-w-0">${innerContent}
+          </div>
+        </div>` : `
+        <div class="relative z-10">${innerContent}
+        </div>`;
     html += `
       <div class="side-event-card side-event-${e.type || 'default'} bg-gradient-to-br ${cfg.gradient} text-white p-5 rounded-2xl relative overflow-hidden shadow-lg group mb-4">
-        <svg class="side-event-bg-icon" viewBox="0 0 24 24" fill="${cfg.accent}" xmlns="http://www.w3.org/2000/svg">${cfg.icon}</svg>
-        <div class="relative z-10">
-          <div class="flex items-center gap-2 mb-3">
-            <span class="side-event-type-tag" style="color:${cfg.accent}; border-color:${cfg.accent}40; background:${cfg.accent}15">${cfg.label}</span>
-            ${e.date ? `<span class="text-[11px] text-white/50 font-medium">${e.date}</span>` : ''}
-          </div>
-          <h3 class="text-lg font-extrabold mb-1.5 leading-tight">${e.title}</h3>
-          ${e.location && e.location !== 'TBA' ? `
-          <p class="text-xs text-white/60 flex items-center gap-1.5 mt-1">
-            <svg class="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-            ${e.location}
-          </p>` : ''}
-        </div>
+        <svg class="side-event-bg-icon" viewBox="0 0 24 24" fill="${cfg.accent}" xmlns="http://www.w3.org/2000/svg">${cfg.icon}</svg>${bodyHTML}
       </div>
     `;
   });
