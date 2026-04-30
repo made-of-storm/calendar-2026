@@ -3543,10 +3543,9 @@ window.onTelegramAuth = function(user) {
 };
 
 function initAccessModal() {
-  // ⚡ ВРЕМЕННО ОТКЛЮЧЕНО для удобства просмотра правок.
-  // Чтобы включить обратно — поменяй true → false:
-  const SKIP_AUTH = true;
-  if (SKIP_AUTH) return;
+  // Старая модалка регистрации (имя + Telegram). Отключена общим флагом AUTH_ENABLED.
+  // Чтобы вернуть — поменяй AUTH_ENABLED → true в начале AUTH-секции ниже.
+  if (typeof AUTH_ENABLED !== "undefined" && !AUTH_ENABLED) return;
 
   // Check if user already has access
   if (checkAccess()) {
@@ -3626,6 +3625,12 @@ function initAccessModal() {
 // =====================================================
 // AUTH: server-validated sessions
 // =====================================================
+// ⚡ ФЛАГ РЕГИСТРАЦИИ
+// false = регистрация ОТКЛЮЧЕНА (сайт открыт всем без авторизации)
+// true  = регистрация ВКЛЮЧЕНА (требуется вход через Telegram-бота)
+// Чтобы вернуть регистрацию — поменяй false → true.
+const AUTH_ENABLED = false;
+
 const API_BASE = 'https://sr-calendar-bot.onrender.com';
 const SESSION_KEY = 'sr_session';
 
@@ -3637,6 +3642,12 @@ function authAllow() {
 }
 
 function checkAuth() {
+  // Регистрация отключена флагом — сразу пропускаем всех.
+  if (!AUTH_ENABLED) {
+    authAllow();
+    return;
+  }
+
   // --- Telegram Mini App ---
   if (isTelegramMiniApp) {
     const existingSession = localStorage.getItem(SESSION_KEY);
