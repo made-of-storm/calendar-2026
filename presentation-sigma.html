@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Secretroom × SiGMA — Partnership Proposal</title>
+<link rel="icon" href="images/favicon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #FBF2E8;
+    --surface: #FFFFFF;
+    --ink: #1B1B1B;
+    --ink-soft: #5A5A5A;
+    --line: #E8DFD2;
+    --yellow: #F5DA0F;
+    --blue: #2E39F7;
+    --lime: #C8E712;
+    --pink: #F6ADE5;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    color: var(--ink);
+    background: #EFE5D6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.5;
+  }
+
+  .deck {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    padding: 40px 20px 60px;
+  }
+
+  .slide {
+    width: 1280px;
+    height: 720px;
+    background: var(--bg);
+    border-radius: 24px;
+    padding: 64px 72px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .slide-num {
+    position: absolute;
+    top: 32px;
+    right: 40px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink-soft);
+    letter-spacing: 0.08em;
+  }
+
+  .brand-row {
+    position: absolute;
+    top: 32px;
+    left: 40px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .brand-row img {
+    width: 32px;
+    height: 32px;
+  }
+
+  .brand-row .brand-text {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--ink);
+    text-transform: uppercase;
+  }
+
+  h1, h2, h3, h4 {
+    margin: 0;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+
+  h1 { font-size: 64px; line-height: 1.1; }
+  h2 { font-size: 44px; line-height: 1.15; }
+  h3 { font-size: 24px; line-height: 1.3; }
+  p  { margin: 0; font-size: 17px; line-height: 1.55; color: var(--ink); }
+
+  .lead { font-size: 20px; color: var(--ink-soft); }
+  .muted { color: var(--ink-soft); }
+  .small { font-size: 13px; color: var(--ink-soft); }
+
+  .accent-yellow { color: var(--blue); background: var(--yellow); padding: 0 6px; border-radius: 4px; }
+  .accent-blue   { color: #fff; background: var(--blue); padding: 0 6px; border-radius: 4px; }
+
+  .pill {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: var(--ink);
+    color: var(--bg);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .pill.yellow { background: var(--yellow); color: var(--ink); }
+  .pill.blue   { background: var(--blue); color: #fff; }
+
+  /* ============ SLIDE 1 — COVER ============ */
+  .slide-cover {
+    background:
+      radial-gradient(circle at 85% 15%, rgba(245, 218, 15, 0.35) 0%, transparent 50%),
+      radial-gradient(circle at 10% 90%, rgba(46, 57, 247, 0.15) 0%, transparent 55%),
+      var(--bg);
+    justify-content: center;
+  }
+
+  .slide-cover .cover-inner {
+    text-align: left;
+    max-width: 900px;
+  }
+
+  .slide-cover .cover-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 32px;
+    padding: 10px 20px;
+    background: var(--ink);
+    color: var(--bg);
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .slide-cover h1 {
+    font-size: 88px;
+    line-height: 1;
+    margin-bottom: 24px;
+  }
+
+  .slide-cover h1 .x {
+    color: var(--blue);
+    font-weight: 900;
+    margin: 0 16px;
+  }
+
+  .slide-cover .cover-sub {
+    font-size: 24px;
+    color: var(--ink-soft);
+    margin-bottom: 48px;
+    max-width: 700px;
+  }
+
+  .slide-cover .cover-meta {
+    display: flex;
+    gap: 48px;
+    font-size: 14px;
+    color: var(--ink-soft);
+  }
+
+  .slide-cover .cover-meta strong {
+    display: block;
+    color: var(--ink);
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 4px;
+  }
+
+  /* ============ COMMON CONTENT ============ */
+  .slide-header {
+    margin-top: 24px;
+    margin-bottom: 36px;
+  }
+
+  .slide-header .kicker {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--blue);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+
+  .body-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    flex: 1;
+    align-items: start;
+  }
+
+  .body-grid.tight { gap: 40px; }
+
+  .lang-block .lang-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .lang-block.ru { border-left: 2px solid var(--line); padding-left: 32px; }
+  .lang-block.ru p, .lang-block.ru li { color: var(--ink-soft); }
+
+  ul.bullets {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  ul.bullets li {
+    position: relative;
+    padding-left: 28px;
+    font-size: 17px;
+    line-height: 1.5;
+    margin-bottom: 14px;
+  }
+
+  ul.bullets li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: 12px;
+    height: 12px;
+    background: var(--yellow);
+    border-radius: 3px;
+  }
+
+  ul.bullets.blue li::before { background: var(--blue); }
+
+  /* ============ SLIDE 4 — METRICS ============ */
+  .hero-metric {
+    background: var(--ink);
+    color: var(--bg);
+    border-radius: 18px;
+    padding: 28px 32px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+
+  .hero-metric .hero-num {
+    font-size: 72px;
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: var(--yellow);
+    flex-shrink: 0;
+  }
+
+  .hero-metric .hero-num .hero-plus {
+    color: var(--lime);
+    margin-left: 4px;
+  }
+
+  .hero-metric .hero-label {
+    font-size: 18px;
+    line-height: 1.4;
+    color: var(--bg);
+  }
+
+  .hero-metric .hero-label strong {
+    display: block;
+    font-size: 20px;
+    margin-bottom: 6px;
+  }
+
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-bottom: 24px;
+  }
+
+  .metrics-grid-3 { grid-template-columns: repeat(3, 1fr); }
+
+  .metric {
+    background: var(--surface);
+    border-radius: 16px;
+    padding: 24px;
+    border: 1px solid var(--line);
+  }
+
+  .metric .num {
+    font-size: 48px;
+    font-weight: 800;
+    color: var(--ink);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    margin-bottom: 8px;
+  }
+
+  .metric .num .pct { color: var(--blue); }
+
+  .metric .label {
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.35;
+  }
+
+  .brands-row {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 22px 28px;
+  }
+
+  .brands-row .brands-title {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--blue);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .brands-row .brands-list {
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--ink);
+  }
+
+  /* ============ SLIDE 6 — OFFER ============ */
+  .offer-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .offer-item {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 18px 22px;
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+  }
+
+  .offer-item .check {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    background: var(--yellow);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 900;
+    color: var(--ink);
+  }
+
+  .offer-item h4 {
+    font-size: 16px;
+    margin-bottom: 4px;
+  }
+
+  .offer-item p {
+    font-size: 14px;
+    color: var(--ink-soft);
+  }
+
+  /* ============ SLIDE 7 — PROMO MECHANICS ============ */
+  .mech-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    flex: 1;
+  }
+
+  .mech-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .mech-card .mech-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .mech-card .mech-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 800;
+  }
+
+  .mech-card.bad .mech-icon { background: #FFE2E2; color: #C2261D; }
+  .mech-card.bad { border-color: #F2C8C5; }
+  .mech-card.good .mech-icon { background: var(--lime); color: var(--ink); }
+  .mech-card.good { border-color: var(--lime); }
+
+  .mech-card h4 { font-size: 18px; margin-bottom: 12px; }
+  .mech-card p { font-size: 14px; color: var(--ink-soft); margin-bottom: 8px; }
+
+  .mech-card ul.bullets li { font-size: 14px; padding-left: 22px; margin-bottom: 8px; }
+  .mech-card ul.bullets li::before { width: 8px; height: 8px; top: 7px; background: var(--ink); }
+  .mech-card.good ul.bullets li::before { background: var(--blue); }
+
+  /* ============ SLIDE 8 — FEATURED GRID ============ */
+  .grid-feature {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    gap: 32px;
+    flex: 1;
+    align-items: center;
+  }
+
+  .grid-feature-img {
+    background: #1B1B1B;
+    border-radius: 16px;
+    border: 1px solid var(--line);
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .grid-feature-img img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+  }
+
+  .grid-feature-text { padding: 8px 4px; }
+
+  .legend-item {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    margin-bottom: 16px;
+  }
+
+  .legend-item .legend-dot {
+    flex-shrink: 0;
+    width: 14px;
+    height: 14px;
+    border-radius: 4px;
+    margin-top: 4px;
+  }
+
+  .legend-item strong {
+    display: block;
+    font-size: 16px;
+    color: var(--ink);
+    margin-bottom: 2px;
+  }
+
+  .legend-item .muted { font-size: 13px; }
+
+
+  /* ============ SLIDE 9 — FLOW CARDS ============ */
+  .flow-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    flex: 1;
+  }
+
+  .flow-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .flow-step {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  .flow-step .step-num {
+    width: 28px;
+    height: 28px;
+    background: var(--yellow);
+    color: var(--ink);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+
+  .flow-step .step-badge {
+    background: var(--blue);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 5px 10px;
+    border-radius: 6px;
+    flex-shrink: 0;
+  }
+
+  .flow-step .step-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: 0.02em;
+  }
+
+  .flow-img {
+    width: 100%;
+    height: 320px;
+    background: #1B1B1B;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+  }
+
+  .flow-img img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    display: block;
+  }
+
+  .flow-card p.small {
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    margin-top: auto;
+  }
+
+  /* ============ SLIDE 9 — CONTACTS ============ */
+  .slide-contact {
+    background:
+      radial-gradient(circle at 80% 80%, rgba(46, 57, 247, 0.12) 0%, transparent 60%),
+      radial-gradient(circle at 15% 20%, rgba(245, 218, 15, 0.4) 0%, transparent 50%),
+      var(--bg);
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 56px;
+    flex: 1;
+    align-items: center;
+  }
+
+  .contact-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .contact-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 22px 26px;
+  }
+
+  .contact-card .label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .contact-card .value {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--ink);
+  }
+
+  .contact-card .value a { color: var(--blue); text-decoration: none; }
+
+  /* ============ PRINT ============ */
+  @page {
+    size: 1280px 720px;
+    margin: 0;
+  }
+
+  @media print {
+    html, body { background: #fff; }
+    .deck { padding: 0; gap: 0; }
+    .slide {
+      box-shadow: none;
+      border-radius: 0;
+      page-break-after: always;
+      break-after: page;
+      margin: 0;
+    }
+    .slide:last-child { page-break-after: auto; break-after: auto; }
+  }
+</style>
+</head>
+<body>
+
+<div class="deck">
+
+  <!-- ============ SLIDE 1 — COVER ============ -->
+  <section class="slide slide-cover">
+    <div class="brand-row">
+      <img src="images/secretroomlogo.svg" alt="Secret Room" />
+      <span class="brand-text">Secret Room</span>
+    </div>
+    <span class="slide-num">01 / 10</span>
+
+    <div class="cover-inner">
+      <div class="cover-kicker">Partnership Proposal · 2026</div>
+      <h1>Secretroom<span class="x">×</span>SiGMA</h1>
+      <p class="cover-sub">CIS-focused iGaming Calendar &amp; Telegram media — partnership proposal for SiGMA conferences.</p>
+
+      <div class="cover-meta">
+        <div>
+          <strong>Prepared for</strong>
+          SiGMA Group
+        </div>
+        <div>
+          <strong>From</strong>
+          Secretroom Team
+        </div>
+        <div>
+          <strong>Date</strong>
+          April 2026
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- All slide-num updates done below in each slide individually. Total deck: 10 slides. -->
+
+
+  <!-- ============ SLIDE 2 — WHO IS SECRETROOM ============ -->
+  <section class="slide">
+    <div class="brand-row">
+      <img src="images/secretroomlogo.svg" alt="Secret Room" />
+      <span class="brand-text">Secret Room</span>
+    </div>
+    <span class="slide-num">02 / 10</span>
+
+    <div class="slide-header">
+      <div class="kicker">01 — Who we are</div>
+      <h2>A private iGaming community<br/>for CIS decision-makers.</h2>
+    </div>
+
+    <div class="body-grid">
+      <div class="lang-block en">
+        <div class="lang-label">English</div>
+        <ul class="bullets">
+          <li>Telegram-first network of operators, affiliates, payments and media — built around closed channels &amp; chats.</li>
+          <li>Audience: senior BDM, C-level, conference organizers, KAMs.</li>
+          <li><strong>7 543 subscribers</strong> in the main channel <a href="https://t.me/secreetroommedia" style="color:var(--blue);text-decoration:none;font-weight:700;">@secreetroommedia</a>.</li>
+          <li>Strong focus on the <strong>CIS &amp; Eastern European iGaming market</strong> — the segment SiGMA already wants to grow into.</li>
+        </ul>
+      </div>
+      <div class="lang-block ru">
+        <div class="lang-label">Русский</div>
+        <ul class="bullets blue">
+          <li>Закрытое iGaming-комьюнити в Telegram: операторы, партнёрки, платёжки, медиа.</li>
+          <li>Аудитория: senior BDM, C-level, организаторы ивентов, KAM.</li>
+          <li>7 543 подписчика в основном канале @secreetroommedia.</li>
+          <li>Главный фокус — рынок СНГ и Восточной Европы.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============ SLIDE 3 — WHAT IS THE CALENDAR ============ -->
+  <section class="slide">
+    <div class="brand-row">
+      <img src="images/secretroomlogo.svg" alt="Secret Room" />
+      <span class="brand-text">Secret Room</span>
+    </div>
+    <span class="slide-num">03 / 10</span>
+
+    <div class="slide-header">
+      <div class="kicker">02 — The product</div>
+      <h2>iGaming Calendar 2026 —<br/>the working tool for CIS pros.</h2>
+    </div>
+
+    <div class="body-grid">
+      <div class="lang-block en">
+        <div class="lang-label">English</div>
+        <p style="margin-bottom:18px;">Web + Telegram mini-app. One place to plan the year — events, logistics, networking.</p>
+        <ul class="bullets">
+          <li>All major iGaming events of 2026, organized by month.</li>
+          <li>Visa requirements per country.</li>
+          <li>Curated restaurants near each venue.</li>
+          <li>Side-events &amp; brand line-ups for each conference.</li>
+          <li>Weather forecast on event dates.</li>
+          <li>One-click "Add to Calendar" (Google · Apple · Outlook).</li>
+        </ul>
+      </div>
+      <div class="lang-block ru">
+        <div class="lang-label">Русский</div>
+        <p style="margin-bottom:18px;">Сайт + ТГ мини-апп. Всё в одном: ивенты, логистика, нетворкинг.</p>
+        <ul class="bullets blue">
+          <li>Все ключевые iGaming-ивенты 2026 по месяцам.</li>
+          <li>Визовые требования.</li>
+          <li>Подобранные рестораны рядом с локацией.</li>
+          <li>Сайд-ивенты и список брендов по каждой конфе.</li>
+          <li>Прогноз погоды на даты ивента.</li>
+          <li>Кнопка «Добавить в календарь» (Google · Apple · Outlook).</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============ SLIDE 4 — AUDIENCE / METRICS ============ -->
+  <section class="slide">
+    <div class="brand-row">
+      <img src="images/secretroomlogo.svg" alt="Secret Room" />
+      <span class="brand-text">Secret Room</span>
+    </div>
+    <span class="slide-num">04 / 10</span>
+
+    <div class="slide-header">
+      <div class="kicker">03 — Audience</div>
+      <h2>Real reach. Real decision-makers.</h2>
+      <p class="lead" style="margin-top:10px;">A focused CIS audience — not mass volume.</p>
+    </div>
+
+    <div class="hero-metric">
+      <div class="hero-num">7,500<span class="hero-plus">+</span></div>
+      <div class="hero-label">
+        <strong>Subscribers in our main TG channel</strong>
+        <a href="https://t.me/secreetroommedia" style="color:var(--blue);text-decoration:none;font-weight:700;">@secreetroommedia</a>
+        <span class="muted" style="display:block;margin-top:4px;font-size:13px;">Подписчиков в основном ТГ-канале Secretroom</span>
+      </div>
+    </div>
+
+    <div class="metrics-grid metrics-grid-3">
+      <div class="metric">
+        <div class="num"><span class="pct">87%</span></div>
+        <div class="label">Returning users on the calendar<br/><span class="muted">пользователи возвращаются регулярно</span></div>
+      </div>
+      <div class="metric">
+        <div class="num"><span class="pct">73%</span></div>
+        <div class="label">Telegram Premium<br/><span class="muted">vs ~5% TG average — paying audience</span></div>
+      </div>
+      <div class="metric">
+        <div class="num"><span class="pct">94%</span></div>
+        <div class="label">CIS / RU-speaking<br/><span class="muted">your growth segment</span></div>
+      </div>
+    </div>
+
+    <div class="brands-row">
+      <div class="brands-title">40+ verified B2B brands already onboarded</div>
+      <div class="brands-list">
+        Royal Partners · Godlike Partners · NOVA Partners · Ace Partners · B2B Casino · Cheelee · Betatransfer · PacoPay · EntentPay · CPA Life · A3F · Conversion Conf · MAC · G Gate · and more.
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============ SLIDE 5 — HOW IT WORKS FOR PARTNERS ============ -->
+  <section class="slide">
+    <div class="brand-row">
+      <img src="images/secretroomlogo.svg" alt="Secret Room" />
+      <span class="brand-text">Secret Room</span>
+    </div>
+    <span class="slide-num">05 / 10</span>
+
+    <div class="slide-header">
+      <div class="kicker">04 — How it works for partners</div>
+      <h2>Three layers of value<br/>for every event partner.</h2>
+    </div>
+
+    <div class="body-grid tight" style="grid-template-columns: 1fr 1fr 1fr; gap: 24px; align-items: stretch;">
+      <div class="mech-card good" style="border-color: var(--line);">
+        <div class="mech-head">
+          <div class="mech-icon" style="background: var(--yellow); color: var(--ink);">1</div>
+          <h4 style="margin: 0;">Listing</h4>
+        </div>
+        <p><strong>EN.</strong> Featured event card on web + Telegram mini-app. Visible all year — not just during your sales window.</p>
+        <p style="color: var(--ink-soft); font-size: 13px;"><strong>RU.</strong> Карточка ивента в календаре весь год, не только в окно продаж.</p>
+      </div>
+
+      <div class="mech-card good" style="border-color: var(--line);">
+        <div class="mech-head">
+          <div class="mech-icon" style="background: var(--blue); color: #fff;">2</div>
+          <h4 style="margin: 0;">Promo codes</h4>
+        </div>
+        <p><strong>EN.</strong> Discount codes embedded in the listing, driving direct ticket sales — fully attributable.</p>
+        <p style="color: var(--ink-soft); font-size: 13px;"><strong>RU.</strong> Промокоды внутри карточки → прямые продажи билетов.</p>
+      </div>
+
+      <div class="mech-card good" style="border-color: var(--line);">
+        <div class="mech-head">
+          <div class="mech-icon" style="background: var(--lime); color: var(--ink);">3</div>
+          <h4 style="margin: 0;">Traffic engine</h4>
+        </div>
+        <p><strong>EN.</strong> We push traffic via the Telegram channel + paid placements + cross-posts with our network of partners.</p>
+        <p style="color: var(--ink-soft); font-size: 13px;"><strong>RU.</strong> Трафик: ТГ-канал + платные размещения + кросс-посты.</p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============ SLIDE 6 — OFFER TO SIGMA ============ -->
+  <section class="slide">
+    <div class="brand-row">
+      <img src="images/secretroomlogo.svg" alt="Secret Room" />
+      <span class="brand-text">Secret Room</span>
+    </div>
+    <span class="slide-num">06 / 10</span>
+
+    <div class="slide-header">
+      <div class="kicker">05 — Our offer</div>
+      <h2>What we propose for SiGMA events.</h2>
+    </div>
+
+    <div class="body-grid tight">
+      <div class="offer-list">
+        <div class="offer-item">
+          <div class="check">✓</div>
+          <div>
+            <h4>Featured listing</h4>
+            <p>Dedicated event card on iGaming Calendar 2026 — web + Telegram mini-app.</p>
+          </div>
+        </div>
+        <div class="offer-item">
+          <div class="check">✓</div>
+          <div>
+            <h4>Category-specific promo codes</h4>
+            <p>Separate codes for Standard / VIP / Afterparty tickets — no shared public code, per your request.</p>
+          </div>
+        </div>
+        <div class="offer-item">
+          <div class="check">✓</div>
+          <div>
+            <h4>Telegram announcements</h4>
+            <p>We'll announce your events to our audience through @secreetroommedia and partner channels.</p>
+          </div>
+        </div>
+        <div class="offer-item">
+          <div class="check">✓</div>
+          <div>
+            <h4>Post-event coverage</h4>
+            <p>Recap post + photo report after the conference, distributed across our Telegram network.</p>
+          </div>
+        </div>
+        <div class="offer-item">
+          <div class="check">✓</div>
+          <div>
+            <h4>Backlink from igamingcalendar.com</h4>
+            <p>Direct link from the SiGMA event card on our site to your official page — SEO-positive and traffic-driving.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="lang-block ru" style="border-left: 2px solid var(--line); padding-left: 32px;">
+        <div class="lang-label">Русский — кратко</div>
+        <ul class="bullets blue">
+          <li>Featured-карточка SiGMA в календаре (сайт + мини-апп).</li>
+          <li>Категорийные промокоды: Standard / VIP / Afterparty — отдельно по каждой категории.</li>
+          <li>Анонс ивентов через @secreetroommedia и партнёрские каналы.</li>
+          <li>Пост-ивент coverage: recap + фотоотчёт.</li>
+          <li>Backlink с igamingcalendar.com на страницу SiGMA.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============ SLIDE 7 — PROMO CODE MECHANICS ============ -->
+  <section class="slide">
+    <div class="brand-row">
+      <img src="images/secretroomlogo.svg" alt="Secret Room" />
+      <span class="brand-text">Secret Room</span>
+    </div>
+    <span class="slide-num">07 / 10</span>
+
+    <div class="slide-header">
+      <div class="kicker">06 — Promo code mechanics</div>
+      <h2>This is <em style="font-style: normal; background: var(--yellow); padding: 2px 10px; border-radius: 6px;">not</em> a public discount.</h2>
+      <p class="lead" style="margin-top:10px;">Controlled distribution — codes never leak to aggregators or search engines.</p>
+    </div>
+
+    <div class="mech-row">
+      <div class="mech-card bad">
+        <div class="mech-head">
+          <div class="mech-icon">✕</div>
+          <h4>What it is NOT</h4>
+        </div>
+        <ul class="bullets">
+          <li>Not listed on coupon aggregators (RetailMeNot, Honey, etc.).</li>
+          <li>Not indexable by Google — code values never appear in plain text on the page.</li>
+          <li>Not a generic mass-market discount.</li>
+        </ul>
+        <p class="small" style="margin-top:auto; padding-top:14px;"><strong>RU.</strong> Не публичный купон, не индексируется поисковиками, не утекает в агрегаторы.</p>
+      </div>
+
+      <div class="mech-card good">
+        <div class="mech-head">
+          <div class="mech-icon">✓</div>
+          <h4>How it actually works</h4>
+        </div>
+        <ul class="bullets">
+          <li>Unique codes — separate per ticket category (Standard / VIP / Afterparty).</li>
+          <li>Revealed only through a deliberate user click — "Get promo code" inside the SiGMA event card.</li>
+          <li>SiGMA's primary distribution stays through your own channels — calendar adds incremental CIS reach.</li>
+          <li>You can rotate or disable any code on your end at any time.</li>
+        </ul>
+        <p class="small" style="margin-top:auto; padding-top:14px;"><strong>RU.</strong> Уникальные коды по категориям, раскрываются по клику внутри карточки. Основная раздача идёт через ваши каналы — мы добавляем СНГ-охват сверху.</p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============ SLIDE 8 — FEATURED PLACEMENT ============ -->
+  <section class="slide">
+    <div class="brand-row">
+      <img src="images/secretroomlogo.svg" alt="Secret Room" />
+      <span class="brand-text">Secret Room</span>
+    </div>
+    <span class="slide-num">08 / 10</span>
+
+    <div class="slide-header">
+      <div class="kicker">07 — Featured placement</div>
+      <h2>Your event stands out on the year-view grid.</h2>
+      <p class="lead" style="margin-top:10px;">Live example: May–July 2026, with three featured events highlighted by color borders.</p>
+    </div>
+
+    <div class="grid-feature">
+      <div class="grid-feature-img">
+        <img src="images/sigma/calendar-may-jul.png" alt="iGaming Calendar grid view May–July 2026" />
+      </div>
+      <div class="grid-feature-text">
+        <div class="legend-item">
+          <span class="legend-dot" style="background: var(--lime);"></span>
+          <div>
+            <strong>MAC Yerevan</strong>
+            <span class="muted">Featured · CIS focus · lime border</span>
+          </div>
+        </div>
+        <div class="legend-item">
+          <span class="legend-dot" style="background: var(--pink);"></span>
+          <div>
+            <strong>G Gate Tbilisi</strong>
+            <span class="muted">Featured · Eastern Europe · pink border</span>
+          </div>
+        </div>
+        <div class="legend-item">
+          <span class="legend-dot" style="background: var(--lime);"></span>
+          <div>
+            <strong>iGB Live London</strong>
+            <span class="muted">Featured · global · lime border</span>
+          </div>
+        </div>
+        <p class="small" style="margin-top: 24px; line-height: 1.55;">
+          Featured events break out of the standard list — image header, color border, prime visual position.
+          <br/><br/>
+          <strong style="color: var(--ink);">SiGMA events get the same treatment</strong> across every month they appear in.
+        </p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============ SLIDE 9 — PARTNER CARD FLOW ============ -->
+  <section class="slide">
+    <div class="brand-row">
+      <img src="images/secretroomlogo.svg" alt="Secret Room" />
+      <span class="brand-text">Secret Room</span>
+    </div>
+    <span class="slide-num">09 / 10</span>
+
+    <div class="slide-header">
+      <div class="kicker">08 — How a partner card actually works</div>
+      <h2>Two steps to the open card — plus a live promo example.</h2>
+      <p class="lead" style="margin-top:10px;">SiGMA World is already on the calendar. The third image is a real working promo block from G Gate Tbilisi.</p>
+    </div>
+
+    <div class="flow-grid">
+      <div class="flow-card">
+        <div class="flow-step">
+          <span class="step-num">1</span>
+          <span class="step-title">Featured preview</span>
+        </div>
+        <div class="flow-img"><img src="images/sigma/sigma-card-closed.png" alt="SiGMA World featured card preview" /></div>
+        <p class="small">SiGMA World card on the year-view grid — hero image, dates, scale (15k+), category tag.</p>
+      </div>
+
+      <div class="flow-card">
+        <div class="flow-step">
+          <span class="step-num">2</span>
+          <span class="step-title">Open modal</span>
+        </div>
+        <div class="flow-img"><img src="images/sigma/sigma-card-open.png" alt="SiGMA World open modal" /></div>
+        <p class="small">Full event view: weather, location, links, scale, visa status, promo block, side-events, brands, awards, restaurants.</p>
+      </div>
+
+      <div class="flow-card">
+        <div class="flow-step">
+          <span class="step-badge">Live example</span>
+          <span class="step-title">Promo block on a partner card</span>
+        </div>
+        <div class="flow-img"><img src="images/sigma/ggate-promo-block.png" alt="G Gate partner promo block" /></div>
+        <p class="small">G Gate Tbilisi — a working partner. The "SECRETROOM ПРОМО" block sits inside the open modal; the actual code is revealed only via the "Get promo code" button.</p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============ SLIDE 9 — CONTACT / NEXT STEPS ============ -->
+  <section class="slide slide-contact">
+    <div class="brand-row">
+      <img src="images/secretroomlogo.svg" alt="Secret Room" />
+      <span class="brand-text">Secret Room</span>
+    </div>
+    <span class="slide-num">10 / 10</span>
+
+    <div class="slide-header" style="margin-top: 80px;">
+      <div class="kicker">09 — Next steps</div>
+      <h2 style="font-size: 56px;">Let's make it happen.</h2>
+      <p class="lead" style="margin-top:14px; max-width: 600px;">Pick the SiGMA events you want featured first — we'll prepare placement &amp; promo within a week.</p>
+    </div>
+
+    <div class="contact-grid">
+      <div>
+        <p style="font-size: 18px; max-width: 480px;">
+          We can start with one upcoming SiGMA event as a pilot, measure ticket sales attribution, then scale to the full 2026 SiGMA line-up.
+        </p>
+        <p class="muted" style="margin-top: 24px; font-size: 15px;">
+          <strong>RU.</strong> Можем стартовать с одного ближайшего ивента SiGMA как пилот, посчитать атрибуцию по продажам — и масштабировать на всю линейку 2026.
+        </p>
+      </div>
+
+      <div class="contact-cards">
+        <div class="contact-card">
+          <div class="label">Contact person</div>
+          <div class="value">Yulia · <a href="https://t.me/yuliaanish">@yuliaanish</a></div>
+        </div>
+        <div class="contact-card">
+          <div class="label">Telegram channel</div>
+          <div class="value"><a href="https://t.me/secreetroommedia">@secreetroommedia</a></div>
+        </div>
+        <div class="contact-card">
+          <div class="label">Calendar</div>
+          <div class="value"><a href="https://igamingcalendar.com">igamingcalendar.com</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+</body>
+</html>
