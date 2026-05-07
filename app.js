@@ -2381,19 +2381,23 @@ document.addEventListener("DOMContentLoaded", () => {
   updateFilterLabels();
   applyFilters();
 
-  // Mark past events (up to March 2026 inclusive) as inactive
-  const PAST_CUTOFF = new Date('2026-04-01T00:00:00Z');
+  // Mark past events (ended before today) as inactive
+  const startOfToday = new Date();
+  startOfToday.setHours(0, 0, 0, 0);
   qsa(".event-card[data-event-id]").forEach((card) => {
     const id = card.getAttribute("data-event-id");
     const ev = EVENTS[id];
-    if (ev && ev.startISO) {
-      const start = new Date(ev.startISO);
-      if (start < PAST_CUTOFF) {
-        card.classList.add("past-event");
-        return;
-      }
+    if (!ev) return;
+    const endIso = ev.endISO || ev.startISO;
+    if (!endIso) return;
+    const endDate = new Date(endIso);
+    if (Number.isNaN(endDate.getTime())) return;
+    if (endDate < startOfToday) {
+      card.classList.add("past-event");
     }
   });
+
+  initMobilePastMonths();
 
   // Modal open: bind all clickable event cards (skip past events)
   qsa(".event-card[data-event-id]:not(.past-event)").forEach((card) => {
@@ -2434,6 +2438,57 @@ document.addEventListener("DOMContentLoaded", () => {
   // ------------------------------
   initAccessModal();
 });
+
+// ------------------------------
+// Mobile: hide past months under collapsible toggle
+// ------------------------------
+function initMobilePastMonths() {
+  const grid = document.querySelector('.calendar-grid');
+  if (!grid || grid.dataset.pastMonthsInit === '1') return;
+
+  const currentMonthIdx = new Date().getMonth() + 1;
+  const cells = Array.from(grid.querySelectorAll(':scope > .cell'));
+  let pastCount = 0;
+
+  cells.forEach((cell) => {
+    const numEl = cell.querySelector('.month-num');
+    const monthIdx = parseInt(numEl?.textContent?.trim() || '0', 10);
+    if (!monthIdx) return;
+    cell.dataset.monthIndex = String(monthIdx);
+    if (monthIdx < currentMonthIdx) {
+      cell.classList.add('cell--past');
+      pastCount += 1;
+    } else if (monthIdx === currentMonthIdx) {
+      cell.classList.add('cell--current');
+    } else {
+      cell.classList.add('cell--future');
+    }
+  });
+
+  if (pastCount === 0) {
+    grid.dataset.pastMonthsInit = '1';
+    return;
+  }
+
+  const toggle = document.createElement('button');
+  toggle.type = 'button';
+  toggle.className = 'past-months-toggle';
+  toggle.setAttribute('aria-expanded', 'false');
+  toggle.setAttribute('aria-controls', 'pastMonthsRegion');
+  toggle.innerHTML =
+    '<span class="past-months-toggle__label">Прошедшие ивенты</span>' +
+    '<span class="past-months-toggle__count">' + pastCount + '</span>' +
+    '<span class="past-months-toggle__chev" aria-hidden="true">▾</span>';
+
+  toggle.addEventListener('click', () => {
+    const expanded = toggle.getAttribute('aria-expanded') === 'true';
+    toggle.setAttribute('aria-expanded', String(!expanded));
+    grid.classList.toggle('past-months-open', !expanded);
+  });
+
+  grid.insertBefore(toggle, grid.firstChild);
+  grid.dataset.pastMonthsInit = '1';
+}
 
 // ------------------------------
 // Calendar Export Logic
