@@ -2448,7 +2448,7 @@ function initMobilePastMonths() {
 
   const currentMonthIdx = new Date().getMonth() + 1;
   const cells = Array.from(grid.querySelectorAll(':scope > .cell'));
-  let pastCount = 0;
+  let pastMonthsCount = 0;
 
   cells.forEach((cell) => {
     const numEl = cell.querySelector('.month-num');
@@ -2457,7 +2457,7 @@ function initMobilePastMonths() {
     cell.dataset.monthIndex = String(monthIdx);
     if (monthIdx < currentMonthIdx) {
       cell.classList.add('cell--past');
-      pastCount += 1;
+      pastMonthsCount += 1;
     } else if (monthIdx === currentMonthIdx) {
       cell.classList.add('cell--current');
     } else {
@@ -2465,7 +2465,9 @@ function initMobilePastMonths() {
     }
   });
 
-  if (pastCount === 0) {
+  const pastEventsCount = document.querySelectorAll('.event-card.past-event').length;
+
+  if (pastMonthsCount === 0 || pastEventsCount === 0) {
     grid.dataset.pastMonthsInit = '1';
     return;
   }
@@ -2477,7 +2479,7 @@ function initMobilePastMonths() {
   toggle.setAttribute('aria-controls', 'pastMonthsRegion');
   toggle.innerHTML =
     '<span class="past-months-toggle__label">Прошедшие ивенты</span>' +
-    '<span class="past-months-toggle__count">' + pastCount + '</span>' +
+    '<span class="past-months-toggle__count">' + pastEventsCount + '</span>' +
     '<span class="past-months-toggle__chev" aria-hidden="true">▾</span>';
 
   toggle.addEventListener('click', () => {
