@@ -887,11 +887,12 @@ const EVENTS = {
     sideEvents: [
       {
         title: "Riddick's Padel Cup",
-        date: "24 мая, 14:00",
-        location: "Ереван, падел-корт (по регистрации)",
+        cardVariant: "partner",
+        partnerBadge: "PARTNER · RIDDICK'S PARTNERS · MAC WEEK",
+        subtitle: "Ереван · 24 мая · старт 14:00",
         type: "sport",
-        img: "images/side-events/mac_yerevan_padel_cup.svg",
-        description: "Открытый турнир по паделу от Riddick's Partners для топов iGaming — аффилиатов, операторов, C-level и инфлюенсеров. Игроков делят на группы по уровню, чтобы матчи были честными — за процессом следят профессиональные тренеры, форма и инвентарь на месте. За кортом — healthy-бар, кейтеринг, фотозона и активности под живой DJ-сет. Программа: 14:00 регистрация и разминка, 15:00 старт турнира, 19:00 церемония награждения, 19:15 свободный нетворкинг.",
+        img: "images/side-events/riddicks_partners_logo.svg",
+        description: "Открытый турнир по паделу для топов iGaming — аффилиатов, операторов и C-level. На корте группы по уровню и тренеры; за кортом — healthy-бар, кейтеринг и DJ. Места ограничены.",
         registerUrl: "https://riddickspartners.com/ru/meetup/riddicks-padel-cup/",
         registerLabel: "Принять участие"
       },
@@ -2238,6 +2239,36 @@ function populateSideEventsTab(sideEvents) {
 
   let html = '';
   sideEvents.forEach(e => {
+    if (e.cardVariant === 'partner') {
+      const rawBadge = e.partnerBadge || 'PARTNER';
+      const bIdx = rawBadge.indexOf(' · ');
+      const badgeHTML =
+        bIdx === -1
+          ? rawBadge
+          : `<span class="side-event-card--partner__badge-accent">${rawBadge.slice(0, bIdx)}</span>${rawBadge.slice(bIdx)}`;
+      const registerHTML = e.registerUrl ? `
+            <a href="${e.registerUrl}" target="_blank" rel="noopener" class="side-event-register-btn side-event-register-btn--partner-solid">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 5l7 7-7 7"/></svg>
+              <span>${e.registerLabel || 'Принять участие'}</span>
+            </a>` : '';
+      const imgHTML = e.img ? `
+          <img src="${e.img}" alt="${e.title.replace(/"/g, '&quot;')}" class="side-event-card--partner__thumb side-event-card--partner__thumb--logo" loading="lazy" decoding="async" onerror="this.style.display='none'">` : '';
+      html += `
+      <div class="side-event-card side-event-card--partner mb-4">
+        <div class="side-event-card--partner__layout">
+          ${imgHTML}
+          <div class="side-event-card--partner__copy">
+            <div class="side-event-card--partner__badge">${badgeHTML}</div>
+            <h3 class="side-event-card--partner__title">${e.title}</h3>
+            ${e.subtitle ? `<p class="side-event-card--partner__meta">${e.subtitle}</p>` : ''}
+            ${e.description ? `<p class="side-event-card--partner__desc">${e.description}</p>` : ''}
+            ${registerHTML}
+          </div>
+        </div>
+      </div>`;
+      return;
+    }
+
     const cfg = typeConfig[e.type] || defaultType;
     const locationHTML = e.location && e.location !== 'TBA' ? `
             <p class="text-xs text-white/60 flex items-center gap-1.5 mt-1">
@@ -2481,6 +2512,19 @@ document.addEventListener("DOMContentLoaded", () => {
       openModal();
     });
   });
+
+  /* LOCAL_PARTNER_PROMO — раскомментируй вместе с блоками в index.html (баннер + тизер MAC)
+  qsa("[data-open-mac-side-events]").forEach((el) => {
+    el.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const eventId = el.getAttribute("data-open-mac-side-events") || "mac_yerevan_2026";
+      populateModal(eventId);
+      openModal();
+      setActiveTab("events");
+    });
+  });
+  */
 
   // Modal close
   qs("#modalCloseBtn")?.addEventListener("click", closeModal);

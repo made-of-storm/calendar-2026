@@ -117,6 +117,39 @@
   </div>
 </div>
 
+<!--
+  ========== LOCAL_PARTNER_PROMO (главная страница) ==========
+  Локальный макет: большой баннер + тизер в карточке MAC ниже.
+  Чтобы включить: раскомментируй эту секцию и блок в карточке MAC,
+  плюс обработчик в app.js (поиск: LOCAL_PARTNER_PROMO).
+<section class="partner-side-hero max-w-[1600px] mx-auto px-6 mb-8" aria-label="Анонс сайд-ивента партнёров">
+  <div class="partner-side-hero__card">
+    <div class="partner-side-hero__badge">
+      <span>PARTNER</span>
+      <span class="partner-side-hero__dot">·</span>
+      <span>Riddick’s Partners · MAC Week</span>
+    </div>
+    <div class="partner-side-hero__grid">
+      <div class="partner-side-hero__copy">
+        <h3 class="partner-side-hero__title">Riddick’s Padel Cup</h3>
+        <p class="partner-side-hero__meta">Ереван · 24 мая · старт 14:00</p>
+        <p class="partner-side-hero__text">
+          Открытый турнир по паделу для топов iGaming — аффилиатов, операторов и C-level.
+          На корте группы по уровню и тренеры; за кортом — healthy-бар, кейтеринг и DJ. Места ограничены.
+        </p>
+        <a class="partner-side-hero__cta" href="https://riddickspartners.com/ru/meetup/riddicks-padel-cup/" target="_blank" rel="noopener">
+          Принять участие
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+        </a>
+      </div>
+      <div class="partner-side-hero__art" aria-hidden="true">
+        <img src="images/side-events/riddicks_partners_logo.svg" alt="Riddick’s Partners" width="159" height="37" loading="lazy" decoding="async">
+      </div>
+    </div>
+  </div>
+</section>
+-->
+
 <main class="max-w-[1600px] mx-auto px-6">
   <div class="calendar-grid">
 
@@ -372,6 +405,18 @@
           <span class="tag bg-[#C8E712] text-[#1B1B1B] font-extrabold">5k+</span>
           <span class="tag border border-white/30 text-white/80">CIS</span>
         </div>
+        <!-- LOCAL_PARTNER_PROMO: тизер в карточке MAC — раскомментируй вместе с баннером и app.js
+        <div class="mac-side-teaser">
+          <p class="mac-side-teaser__text">
+            <span class="mac-side-teaser__label">Сайд-ивент</span>
+            Riddick’s Padel Cup — падел и нетворкинг для топов индустрии, 24 мая в Ереване.
+          </p>
+          <button type="button" class="mac-side-teaser__btn" data-open-mac-side-events="mac_yerevan_2026">
+            Читать про ивент
+            <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path></svg>
+          </button>
+        </div>
+        -->
       </div>
 
       <div class="pl-3 border-l-2 border-[#2E39F7] hover:bg-[#333333] p-2 rounded-r transition cursor-pointer event-card"

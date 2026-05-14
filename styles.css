@@ -797,6 +797,120 @@ body { background-color: #1B1B1B; color: #FBF2E8; }
   transform: translateX(2px);
 }
 
+/* Компактная карточка партнёрского сайд-ивента (как баннер на главной) */
+.side-event-card.side-event-card--partner {
+  cursor: default;
+  padding: 14px 16px;
+  border-radius: 16px;
+  border: 1px solid rgba(200, 231, 18, 0.35);
+  background: linear-gradient(135deg, #12180a 0%, #1b2212 45%, #151a0e 100%);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2), 0 8px 28px rgba(200, 231, 18, 0.06);
+}
+
+.side-event-card.side-event-card--partner:hover {
+  border-color: rgba(200, 231, 18, 0.45);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2), 0 12px 36px rgba(200, 231, 18, 0.12);
+}
+
+.side-event-card--partner__layout {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.side-event-card--partner__thumb {
+  width: auto;
+  max-width: 148px;
+  height: auto;
+  max-height: 38px;
+  padding: 10px 12px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  object-fit: contain;
+  background: rgba(0, 0, 0, 0.35);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+}
+
+.side-event-card--partner__thumb--logo {
+  align-self: center;
+}
+
+.side-event-card--partner__copy {
+  min-width: 0;
+  flex: 1;
+}
+
+.side-event-card--partner__badge {
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(251, 242, 232, 0.55);
+  line-height: 1.35;
+  margin-bottom: 8px;
+}
+
+.side-event-card--partner__badge-accent {
+  color: #C8E712;
+}
+
+.side-event-card--partner__title {
+  font-size: 17px;
+  font-weight: 900;
+  line-height: 1.2;
+  color: #FBF2E8;
+  margin: 0 0 4px;
+  letter-spacing: -0.02em;
+}
+
+.side-event-card--partner__meta {
+  font-size: 12px;
+  font-weight: 700;
+  color: #C8E712;
+  margin: 0 0 8px;
+  line-height: 1.35;
+}
+
+.side-event-card--partner__desc {
+  font-size: 11px;
+  line-height: 1.5;
+  color: rgba(251, 242, 232, 0.78);
+  margin: 0;
+}
+
+.side-event-register-btn.side-event-register-btn--partner-solid {
+  margin-top: 10px;
+  color: #1B1B1B;
+  background: linear-gradient(135deg, #C8E712 0%, #9fb60f 100%);
+  border: 1px solid rgba(200, 231, 18, 0.5);
+  border-radius: 10px;
+  padding: 8px 14px;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.side-event-register-btn.side-event-register-btn--partner-solid:hover {
+  color: #1B1B1B;
+  background: linear-gradient(135deg, #d4f016 0%, #b8c813 100%);
+  border-color: rgba(200, 231, 18, 0.65);
+  box-shadow: 0 6px 20px rgba(200, 231, 18, 0.35);
+}
+
+@media (max-width: 380px) {
+  .side-event-card--partner__layout {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .side-event-card--partner__copy {
+    width: 100%;
+  }
+  .side-event-register-btn.side-event-register-btn--partner-solid {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
 /* Modal Redesign */
 .modal-hero {
   position: relative;
@@ -1905,6 +2019,193 @@ body.auth-required main {
 .partner-promo-tg svg {
   width: 13px;
   height: 13px;
+}
+
+/* Локальный промо-блок партнёрского сайд-ивента над календарём */
+.partner-side-hero__card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+  border: 1px solid rgba(200, 231, 18, 0.35);
+  background: linear-gradient(135deg, #12180a 0%, #1b2212 45%, #151a0e 100%);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25), 0 12px 40px rgba(200, 231, 18, 0.08);
+}
+
+.partner-side-hero__card::before {
+  content: '';
+  position: absolute;
+  inset: -40% 55% auto -20%;
+  height: 120%;
+  background: radial-gradient(ellipse, rgba(200, 231, 18, 0.18) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.partner-side-hero__badge {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  padding: 14px 20px 0;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(251, 242, 232, 0.55);
+}
+
+.partner-side-hero__badge span:first-child {
+  color: #C8E712;
+}
+
+.partner-side-hero__dot {
+  opacity: 0.4;
+}
+
+.partner-side-hero__grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 20px;
+  align-items: center;
+  padding: 16px 20px 22px;
+}
+
+@media (max-width: 768px) {
+  .partner-side-hero__grid {
+    grid-template-columns: 1fr;
+    text-align: left;
+  }
+  .partner-side-hero__art {
+    justify-self: center;
+    order: -1;
+  }
+}
+
+.partner-side-hero__copy {
+  min-width: 0;
+}
+
+.partner-side-hero__title {
+  font-size: clamp(22px, 4vw, 30px);
+  font-weight: 900;
+  line-height: 1.15;
+  color: #FBF2E8;
+  margin: 0 0 6px;
+  letter-spacing: -0.02em;
+}
+
+.partner-side-hero__meta {
+  font-size: 13px;
+  font-weight: 700;
+  color: #C8E712;
+  margin: 0 0 12px;
+}
+
+.partner-side-hero__text {
+  font-size: 14px;
+  line-height: 1.55;
+  color: rgba(251, 242, 232, 0.72);
+  margin: 0 0 18px;
+  max-width: 46em;
+}
+
+.partner-side-hero__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 22px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 800;
+  text-decoration: none;
+  color: #1B1B1B;
+  background: linear-gradient(135deg, #C8E712 0%, #9fb60f 100%);
+  border: 1px solid rgba(200, 231, 18, 0.5);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.partner-side-hero__cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(200, 231, 18, 0.35);
+}
+
+.partner-side-hero__art {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.partner-side-hero__art img {
+  width: auto;
+  max-width: min(100%, 280px);
+  height: auto;
+  max-height: 44px;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.35));
+}
+
+@media (min-width: 769px) {
+  .partner-side-hero__art img {
+    max-width: 300px;
+    max-height: 48px;
+  }
+}
+
+/* Тизер сайд-ивента в карточке MAC на сетке */
+.mac-side-teaser {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.mac-side-teaser__text {
+  font-size: 11px;
+  line-height: 1.45;
+  color: rgba(251, 242, 232, 0.78);
+  margin: 0 0 10px;
+}
+
+.mac-side-teaser__label {
+  display: inline-block;
+  margin-right: 6px;
+  padding: 2px 7px;
+  border-radius: 6px;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #1B1B1B;
+  background: rgba(200, 231, 18, 0.95);
+}
+
+.mac-side-teaser__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  justify-content: center;
+  padding: 9px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(245, 218, 15, 0.35);
+  background: rgba(245, 218, 15, 0.12);
+  color: #F5DA0F;
+  font-size: 11px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.mac-side-teaser__btn:hover {
+  background: rgba(245, 218, 15, 0.2);
+  border-color: rgba(245, 218, 15, 0.55);
+}
+
+.mac-side-teaser__btn:focus-visible {
+  outline: 2px solid #F5DA0F;
+  outline-offset: 2px;
 }
 
 /* =====================================================
