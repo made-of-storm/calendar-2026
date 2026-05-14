@@ -632,6 +632,7 @@ function closeModal() {
 
   document.body.classList.remove("modal-open");
   currentEventId = null; // сброс "текущего события"
+  stopEventsTabPulse();
 }
 
 function setActiveTab(tabId) {
@@ -643,6 +644,45 @@ function setActiveTab(tabId) {
 
   if (tab) tab.classList.add("active");
   if (btn) btn.classList.add("active");
+
+  if (tabId === "events") stopEventsTabPulse({ markDone: true });
+}
+
+// Pulse-таймеры для таба «Сайд-ивенты» (3 пакета по 2 импульса с паузой 30с)
+let _pulseTimers = [];
+
+function stopEventsTabPulse(opts) {
+  _pulseTimers.forEach((t) => clearTimeout(t));
+  _pulseTimers = [];
+  const btn = document.querySelector('[data-tab-btn="events"]');
+  if (btn) {
+    btn.classList.remove("tab-pulse");
+    if (opts && opts.markDone) btn.dataset.pulseDone = "1";
+  }
+}
+
+function startEventsTabPulse() {
+  const btn = document.querySelector('[data-tab-btn="events"]');
+  if (!btn) return;
+  if (btn.dataset.pulseDone === "1") return;
+  if (btn.classList.contains("active")) return;
+
+  const PACKETS = 3;
+  const FIRST_DELAY_MS = 600;
+  const PACKET_GAP_MS = 30000;
+  const PULSE_DURATION_MS = 1800;
+
+  for (let i = 0; i < PACKETS; i++) {
+    const startT = setTimeout(() => {
+      const b = document.querySelector('[data-tab-btn="events"]');
+      if (!b || b.classList.contains("active")) return;
+      if (b.dataset.pulseDone === "1") return;
+      b.classList.add("tab-pulse");
+      const endT = setTimeout(() => b.classList.remove("tab-pulse"), PULSE_DURATION_MS);
+      _pulseTimers.push(endT);
+    }, FIRST_DELAY_MS + i * PACKET_GAP_MS);
+    _pulseTimers.push(startT);
+  }
 }
 
 // ------------------------------
@@ -846,6 +886,16 @@ const EVENTS = {
     ],
     sideEvents: [
       {
+        title: "Riddick's Padel Cup",
+        date: "24 мая, 14:00",
+        location: "Ереван, падел-корт (по регистрации)",
+        type: "sport",
+        img: "images/side-events/mac_yerevan_padel_cup.svg",
+        description: "Открытый турнир по паделу от Riddick's Partners для топов iGaming — аффилиатов, операторов, C-level и инфлюенсеров. Игроков делят на группы по уровню, чтобы матчи были честными — за процессом следят профессиональные тренеры, форма и инвентарь на месте. За кортом — healthy-бар, кейтеринг, фотозона и активности под живой DJ-сет. Программа: 14:00 регистрация и разминка, 15:00 старт турнира, 19:00 церемония награждения, 19:15 свободный нетворкинг.",
+        registerUrl: "https://riddickspartners.com/ru/meetup/riddicks-padel-cup/",
+        registerLabel: "Принять участие"
+      },
+      {
         title: "partyJAN",
         date: "24 мая, 15:00",
         location: "Ереван (по регистрации)",
@@ -853,6 +903,7 @@ const EVENTS = {
         img: "images/side-events/mac_yerevan_partyjan.png",
         description: "Закрытый нетворкинг для owners, C-level и инфлюенсеров affiliate-рынка. Участие по предварительным спискам."
       },
+      { title: "CIS Affiliates Meetup", date: "25 мая", location: "Meridian Expo", type: "meetup" },
       {
         title: "Armenian Nights by PIN-UP Partners",
         date: "26 мая, 20:30",
@@ -863,7 +914,6 @@ const EVENTS = {
         registerUrl: "https://partners-pu.com/ru/party/armenian-nights/",
         registerLabel: "Регистрация"
       },
-      { title: "CIS Affiliates Meetup", date: "25 мая", location: "Meridian Expo", type: "meetup" },
       { title: "Closing Party", date: "27 мая", location: "TBA", type: "party" }
     ]
   },
@@ -2059,8 +2109,14 @@ function populateModal(eventId) {
     awardsBtn.textContent = count > 0 ? `Awards (${count})` : "Awards";
   }
 
-  // Default tab
   setActiveTab("guide");
+
+  stopEventsTabPulse();
+  if (eventsBtn) eventsBtn.dataset.pulseDone = "";
+  const richSideEvents = (event.sideEvents || []).some(
+    (se) => se && (se.img || se.registerUrl)
+  );
+  if (richSideEvents) startEventsTabPulse();
 }
 
 function renderPartnerPromo(promo) {
@@ -2176,6 +2232,7 @@ function populateSideEventsTab(sideEvents) {
     meetup:     { gradient: 'from-blue-900/80 via-indigo-900/60 to-violet-900/40', icon: '<path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>', label: 'NETWORKING', accent: '#7B84FF' },
     dinner:     { gradient: 'from-emerald-900/80 via-teal-900/60 to-cyan-900/40', icon: '<path d="M8.1 13.34l2.83-2.83L3.91 3.5a4.008 4.008 0 000 5.66l4.19 4.18zm6.78-1.81c1.53.71 3.68.21 5.27-1.38 1.91-1.91 2.28-4.65.81-6.12-1.46-1.46-4.2-1.1-6.12.81-1.59 1.59-2.09 3.74-1.38 5.27L3.7 19.87l1.41 1.41L12 14.41l6.88 6.88 1.41-1.41L13.41 13l1.47-1.47z"/>', label: 'DINNER', accent: '#C8E712' },
     networking: { gradient: 'from-blue-900/80 via-indigo-900/60 to-violet-900/40', icon: '<path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>', label: 'NETWORKING', accent: '#7B84FF' },
+    sport:      { gradient: 'from-lime-900/80 via-emerald-900/60 to-green-900/40', icon: '<path d="M19.07 4.93a10 10 0 00-14.14 0 10 10 0 000 14.14 10 10 0 0014.14 0 10 10 0 000-14.14zM12 20a8 8 0 110-16 8 8 0 010 16zm0-13a5 5 0 100 10 5 5 0 000-10zm0 8a3 3 0 110-6 3 3 0 010 6z"/>', label: 'SPORT · NETWORKING', accent: '#C8E712' },
   };
   const defaultType = { gradient: 'from-gray-900/80 via-gray-800/60 to-gray-700/40', icon: '<path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20a2 2 0 002 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z"/>', label: 'EVENT', accent: '#F5DA0F' };
 

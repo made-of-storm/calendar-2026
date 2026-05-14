@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <linearGradient id="rpcBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0a1606"/>
+      <stop offset="60%" stop-color="#11240a"/>
+      <stop offset="100%" stop-color="#0d1b08"/>
+    </linearGradient>
+    <radialGradient id="rpcGlow" cx="62%" cy="38%" r="55%">
+      <stop offset="0%" stop-color="#C8E712" stop-opacity="0.32"/>
+      <stop offset="65%" stop-color="#C8E712" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="rpcGlow2" cx="22%" cy="78%" r="45%">
+      <stop offset="0%" stop-color="#F5DA0F" stop-opacity="0.22"/>
+      <stop offset="70%" stop-color="#F5DA0F" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="rpcDots" x="0" y="0" width="6" height="6" patternUnits="userSpaceOnUse">
+      <circle cx="3" cy="3" r="0.9" fill="#0d1b08"/>
+    </pattern>
+  </defs>
+  <rect width="200" height="200" rx="20" fill="url(#rpcBg)"/>
+  <rect width="200" height="200" rx="20" fill="url(#rpcGlow)"/>
+  <rect width="200" height="200" rx="20" fill="url(#rpcGlow2)"/>
+  <g transform="translate(100 78) rotate(-28)">
+    <ellipse cx="0" cy="-18" rx="36" ry="42" fill="#C8E712" stroke="#0d1b08" stroke-width="3"/>
+    <ellipse cx="0" cy="-18" rx="28" ry="34" fill="url(#rpcDots)"/>
+    <ellipse cx="0" cy="-18" rx="28" ry="34" fill="none" stroke="#0d1b08" stroke-width="1.2" opacity="0.5"/>
+    <rect x="-4.5" y="24" width="9" height="26" rx="2.2" fill="#0d1b08"/>
+    <rect x="-3" y="26" width="6" height="22" rx="1.2" fill="#C8E712" opacity="0.7"/>
+    <rect x="-7" y="48" width="14" height="6" rx="2" fill="#C8E712"/>
+  </g>
+  <circle cx="148" cy="62" r="9" fill="#F5DA0F" stroke="#0d1b08" stroke-width="2"/>
+  <path d="M 142 60 Q 148 56 154 62" stroke="#0d1b08" stroke-width="1.2" fill="none" opacity="0.7"/>
+  <path d="M 142 64 Q 148 68 154 62" stroke="#0d1b08" stroke-width="1.2" fill="none" opacity="0.7"/>
+  <text x="100" y="148" font-family="Inter, -apple-system, Helvetica, Arial, sans-serif" font-size="11" font-weight="800" fill="#C8E712" text-anchor="middle" letter-spacing="2.4">RIDDICK'S</text>
+  <text x="100" y="170" font-family="Inter, -apple-system, Helvetica, Arial, sans-serif" font-size="14" font-weight="900" fill="#FBF2E8" text-anchor="middle" letter-spacing="3.2">PADEL CUP</text>
+  <text x="100" y="186" font-family="Inter, -apple-system, Helvetica, Arial, sans-serif" font-size="8" font-weight="700" fill="#F5DA0F" opacity="0.85" text-anchor="middle" letter-spacing="1.6">YEREVAN · 24.05</text>
+</svg>
