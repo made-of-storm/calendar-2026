@@ -853,6 +853,16 @@ const EVENTS = {
         img: "images/side-events/mac_yerevan_partyjan.png",
         description: "Закрытый нетворкинг для owners, C-level и инфлюенсеров affiliate-рынка. Участие по предварительным спискам."
       },
+      {
+        title: "Armenian Nights by PIN-UP Partners",
+        date: "26 мая, 20:30",
+        location: "Ереван (invite-only, один из лучших клубов)",
+        type: "party",
+        img: "images/side-events/mac_yerevan_armenian_nights.svg",
+        description: "Премиальная invite-only вечеринка от PIN-UP Partners в первый день MAC Yerevan 2026. Аудитория — действующие партнёры, медиабаинговые команды, топ-вебмастера и C-level индустрии. Вход строго по предварительной регистрации и ручному апруву. Гостей ждут DJ-сеты, премиальный бар, кейтеринг, кальяны и аутентичные армянские активности. Мест ограничено.",
+        registerUrl: "https://partners-pu.com/ru/party/armenian-nights/",
+        registerLabel: "Регистрация"
+      },
       { title: "CIS Affiliates Meetup", date: "25 мая", location: "Meridian Expo", type: "meetup" },
       { title: "Closing Party", date: "27 мая", location: "TBA", type: "party" }
     ]
@@ -2179,6 +2189,11 @@ function populateSideEventsTab(sideEvents) {
             </p>` : '';
     const descriptionHTML = e.description ? `
             <p class="text-xs text-white/70 leading-relaxed mt-2">${e.description}</p>` : '';
+    const registerHTML = e.registerUrl ? `
+            <a href="${e.registerUrl}" target="_blank" rel="noopener" class="side-event-register-btn" style="--accent:${cfg.accent}">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 5l7 7-7 7"/></svg>
+              <span>${e.registerLabel || 'Регистрация'}</span>
+            </a>` : '';
     const innerContent = `
             <div class="flex items-center gap-2 mb-3">
               <span class="side-event-type-tag" style="color:${cfg.accent}; border-color:${cfg.accent}40; background:${cfg.accent}15">${cfg.label}</span>
@@ -2186,7 +2201,8 @@ function populateSideEventsTab(sideEvents) {
             </div>
             <h3 class="text-lg font-extrabold mb-1.5 leading-tight">${e.title}</h3>
             ${locationHTML}
-            ${descriptionHTML}`;
+            ${descriptionHTML}
+            ${registerHTML}`;
     const bodyHTML = e.img ? `
         <div class="relative z-10 flex gap-3 items-start">
           <img src="${e.img}" alt="${e.title}" class="w-16 h-16 rounded-xl object-cover flex-shrink-0 bg-white/5" onerror="this.style.display='none'">

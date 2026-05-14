@@ -739,6 +739,41 @@ body { background-color: #1B1B1B; color: #FBF2E8; }
   border: 1px solid;
 }
 
+.side-event-register-btn {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 12px;
+  padding: 7px 14px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--accent, #F5DA0F);
+  background: color-mix(in srgb, var(--accent, #F5DA0F) 14%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent, #F5DA0F) 45%, transparent);
+  border-radius: 999px;
+  text-decoration: none;
+  transition: all 0.18s ease;
+  white-space: nowrap;
+}
+
+.side-event-register-btn:hover {
+  background: color-mix(in srgb, var(--accent, #F5DA0F) 28%, transparent);
+  border-color: color-mix(in srgb, var(--accent, #F5DA0F) 75%, transparent);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px color-mix(in srgb, var(--accent, #F5DA0F) 22%, transparent);
+}
+
+.side-event-register-btn svg {
+  transition: transform 0.18s ease;
+}
+
+.side-event-register-btn:hover svg {
+  transform: translateX(2px);
+}
+
 /* Modal Redesign */
 .modal-hero {
   position: relative;
