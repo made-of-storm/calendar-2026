@@ -725,6 +725,21 @@ const EVENTS = {
       { name: "Playtech", category: "Провайдер", logo: "https://logo.clearbit.com/playtech.com" }
     ],
     sideEvents: [
+      {
+        title: "ANS at Piccadilly",
+        date: "30 июня, 19:00–23:00",
+        location: "Fenix Mayfair, London",
+        type: "dinner",
+        img: "images/side-events/ans_london_piccadilly.png",
+        imgLayout: "restaurant",
+        organizerLogos: [
+          { src: "images/side-events/ans_logo.svg", alt: "ANS" },
+          { src: "images/side-events/wintevents_logo.svg", alt: "Wintevents" }
+        ],
+        description: "ANS — глобальная серия аффилейт-митапов для топов рынка и ecommerce-предпринимателей. Вечер нетворкинга в неформальной атмосфере: живое шоу, бар и дегустационный ужин в премиальном ресторане.",
+        registerUrl: "https://wintevents.com/anslondon2026",
+        registerLabel: "Билеты"
+      },
       { title: "iGB Affiliate Awards", date: "1 июля", location: "ExCeL London", type: "awards" },
       { title: "Opening Night Party", date: "1 июля", location: "TBA", type: "party" },
       { title: "Affiliate Networking Drinks", date: "1 июля", location: "The Gun Docklands", type: "meetup" }
@@ -2282,18 +2297,34 @@ function populateSideEventsTab(sideEvents) {
               <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 5l7 7-7 7"/></svg>
               <span>${e.registerLabel || 'Регистрация'}</span>
             </a>` : '';
+    const organizerLogosHTML =
+      e.organizerLogos && e.organizerLogos.length
+        ? `<div class="side-event-organizer-logos">${e.organizerLogos
+            .map(
+              (logo) =>
+                `<img src="${logo.src}" alt="${(logo.alt || '').replace(/"/g, '&quot;')}" class="side-event-organizer-logo" loading="lazy" decoding="async">`
+            )
+            .join("")}</div>`
+        : "";
+    const titleHTML = organizerLogosHTML
+      ? `<div class="side-event-title-block mb-1.5">${organizerLogosHTML}<h3 class="text-lg font-extrabold leading-tight">${e.title}</h3></div>`
+      : `<h3 class="text-lg font-extrabold mb-1.5 leading-tight">${e.title}</h3>`;
     const innerContent = `
             <div class="flex items-center gap-2 mb-3">
               <span class="side-event-type-tag" style="color:${cfg.accent}; border-color:${cfg.accent}40; background:${cfg.accent}15">${cfg.label}</span>
               ${e.date ? `<span class="text-[11px] text-white/50 font-medium">${e.date}</span>` : ''}
             </div>
-            <h3 class="text-lg font-extrabold mb-1.5 leading-tight">${e.title}</h3>
+            ${titleHTML}
             ${locationHTML}
             ${descriptionHTML}
             ${registerHTML}`;
+    const imgClass =
+      e.imgLayout === "restaurant"
+        ? "side-event-img-restaurant"
+        : "w-16 h-16 rounded-xl object-cover flex-shrink-0 bg-white/5";
     const bodyHTML = e.img ? `
         <div class="relative z-10 flex gap-3 items-start">
-          <img src="${e.img}" alt="${e.title}" class="w-16 h-16 rounded-xl object-cover flex-shrink-0 bg-white/5" onerror="this.style.display='none'">
+          <img src="${e.img}" alt="${e.title.replace(/"/g, "&quot;")}" class="${imgClass}" loading="lazy" decoding="async" onerror="this.style.display='none'">
           <div class="flex-1 min-w-0">${innerContent}
           </div>
         </div>` : `

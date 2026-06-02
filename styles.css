@@ -753,6 +753,38 @@ body { background-color: #1B1B1B; color: #FBF2E8; }
   opacity: 0.12;
 }
 
+/* Превью сайд-ивента как у ресторанов в гиде */
+.side-event-img-restaurant {
+  width: 80px;
+  height: 96px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  object-fit: cover;
+  object-position: center top;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.side-event-organizer-logos {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.side-event-organizer-logo {
+  height: 22px;
+  width: auto;
+  max-width: 110px;
+  object-fit: contain;
+  opacity: 0.95;
+}
+
+.side-event-title-block h3 {
+  margin: 0;
+}
+
 .side-event-type-tag {
   font-size: 10px;
   font-weight: 800;
