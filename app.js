@@ -599,6 +599,9 @@ function applyFilters() {
   }
 }
 
+// Заглушка, когда реальный промокод ещё не согласован с организатором
+const PROMO_PENDING_MESSAGE = "Усиленно добываем для вас скидку";
+
 // ------------------------------
 // Modal open/close + tabs
 // ------------------------------
@@ -2078,9 +2081,10 @@ function populateModal(eventId) {
     }
 
     // Промо
-    const promoValue = event.promo || 'Скоро';
-    const promoClass = event.promo ? 'promo' : 'no-promo';
-    const promoNote = event.promoNote ? `<div class="stat-note">${event.promoNote}</div>` : '';
+    const hasPromoCode = Boolean(event.promo);
+    const promoValue = hasPromoCode ? event.promo : PROMO_PENDING_MESSAGE;
+    const promoClass = hasPromoCode ? "promo" : "no-promo promo-pending";
+    const promoNote = hasPromoCode && event.promoNote ? `<div class="stat-note">${event.promoNote}</div>` : "";
 
     statsEl.innerHTML = `
       <div class="stat-card">
@@ -2133,6 +2137,20 @@ function populateModal(eventId) {
     (se) => se && (se.img || se.registerUrl)
   );
   if (richSideEvents) startEventsTabPulse();
+
+  updateModalPromoButton(event);
+}
+
+function updateModalPromoButton(event) {
+  const btn = qs("#modalPromoBtn");
+  if (!btn) return;
+  if (event.promo) {
+    btn.textContent = "Получить промокод";
+    btn.setAttribute("aria-label", "Получить промокод");
+  } else {
+    btn.textContent = "Скидка в работе";
+    btn.setAttribute("aria-label", PROMO_PENDING_MESSAGE);
+  }
 }
 
 function renderPartnerPromo(promo) {
@@ -2704,31 +2722,47 @@ function initCalendarExport() {
     if (ev.promo) {
       showPromoToast(ev.promo, ev.promoNote);
     } else {
-      showPromoToast("СКОРО");
+      showPromoToast(null, null, { pending: true });
     }
   });
 }
 
 // Promo Toast Functions
-function showPromoToast(promoCode, note) {
+function showPromoToast(promoCode, note, options = {}) {
   const toast = qs("#promoToast");
   const codeValue = qs("#promoCodeValue");
   const copyBtn = qs("#promoCopyBtn");
   const noteEl = qs("#promoNoteDisplay");
+  const titleEl = qs(".promo-toast-title");
 
   if (!toast || !codeValue) return;
 
-  codeValue.textContent = promoCode;
-  if (noteEl) {
-    if (note) {
-      noteEl.textContent = note;
-      noteEl.style.display = "block";
-    } else {
-      noteEl.style.display = "none";
+  const isPending = options.pending || !promoCode;
+
+  if (isPending) {
+    if (titleEl) titleEl.textContent = "🎁 Промокод";
+    codeValue.textContent = PROMO_PENDING_MESSAGE;
+    codeValue.classList.add("promo-code-value--pending");
+    if (noteEl) noteEl.style.display = "none";
+    if (copyBtn) copyBtn.style.display = "none";
+  } else {
+    if (titleEl) titleEl.textContent = "🎉 Ваш промокод";
+    codeValue.textContent = promoCode;
+    codeValue.classList.remove("promo-code-value--pending");
+    if (noteEl) {
+      if (note) {
+        noteEl.textContent = note;
+        noteEl.style.display = "block";
+      } else {
+        noteEl.style.display = "none";
+      }
+    }
+    if (copyBtn) {
+      copyBtn.style.display = "";
+      copyBtn.classList.remove("copied");
+      copyBtn.textContent = "📋 Скопировать";
     }
   }
-  copyBtn.classList.remove("copied");
-  copyBtn.textContent = "📋 Скопировать";
 
   toast.classList.add("show");
 
