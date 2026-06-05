@@ -944,7 +944,7 @@ const EVENTS = {
     weather: { temp: "26-32°C", description: "Жаркое лето, сухо" },
     heroImage: "images/heroes/ggate_tbilisi.jpg",
     startISO: "2026-06-26T09:00:00Z", endISO: "2026-06-27T18:00:00Z",
-    website: "https://ggate.ge/",
+    website: "https://ggateconf.com/",
     telegramChannel: "https://t.me/ggatecommunity",
     awards: [],
     restaurants: [
