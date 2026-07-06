@@ -88,10 +88,9 @@ function parseCards(html) {
         datesLabel = subParts[1]?.trim() || '';
         const classLine = attrs.match(/class="([^"]+)"/)?.[1] || part.match(/class="([^"]*pl-3[^"]*)"/)?.[1] || '';
         accentColor = extractBorderColor(classLine);
-        const catMatch = part.match(/border border-[^"]*"[^>]*>([^<]+)</g);
-        if (catMatch) {
-          const last = catMatch[catMatch.length - 1];
-          category = last.replace(/<[^>]+>/g, '').trim();
+        const catMatches = [...part.matchAll(/border border-[^"]*"[^>]*>([^<]+)</g)];
+        if (catMatches.length) {
+          category = catMatches[catMatches.length - 1][1].trim();
         }
       }
 
