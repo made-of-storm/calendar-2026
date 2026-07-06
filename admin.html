@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Админка — Calendar 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="admin.css" />
+</head>
+<body>
+  <div id="loginScreen" class="screen">
+    <div class="card card--narrow">
+      <h1>Календарь 2026</h1>
+      <p class="muted">Вход для редакторов</p>
+      <label class="field">
+        <span>URL API (Google Apps Script)</span>
+        <input type="url" id="apiUrlInput" placeholder="https://script.google.com/macros/s/.../exec" />
+      </label>
+      <label class="field">
+        <span>Пароль</span>
+        <input type="password" id="passwordInput" placeholder="Пароль из настройки GAS" />
+      </label>
+      <p class="hint">Пока API не настроен — можно смотреть локальные данные (только чтение).</p>
+      <button type="button" class="btn btn--primary" id="loginBtn">Войти</button>
+      <p id="loginError" class="error hidden"></p>
+    </div>
+  </div>
+
+  <div id="appScreen" class="screen hidden">
+    <header class="topbar">
+      <div>
+        <strong>Календарь — редактор</strong>
+        <span class="muted" id="eventCount"></span>
+      </div>
+      <div class="topbar__actions">
+        <a href="/" target="_blank" class="btn btn--ghost">Открыть сайт ↗</a>
+        <button type="button" class="btn btn--primary" id="addEventBtn">+ Новый ивент</button>
+        <button type="button" class="btn btn--ghost" id="logoutBtn">Выйти</button>
+      </div>
+    </header>
+
+    <div class="layout">
+      <aside class="sidebar" id="eventList"></aside>
+      <main class="editor" id="editorPanel">
+        <p class="muted editor__empty">Выбери ивент слева или создай новый</p>
+      </main>
+    </div>
+  </div>
+
+  <script src="data/cms-config.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>
