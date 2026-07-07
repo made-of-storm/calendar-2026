@@ -102,10 +102,47 @@ function doPost(e) {
       writeAllEvents(body.events || []);
       return jsonResponse({ ok: true, events: readAllEvents() });
     }
+    if (action === 'uploadImage') {
+      return jsonResponse({ ok: true, url: uploadImage(body) });
+    }
     return jsonResponse({ ok: false, error: 'Unknown action' });
   } catch (err) {
     return jsonResponse({ ok: false, error: String(err) });
   }
+}
+
+// ===== Загрузка картинок в Google Drive =====
+const IMAGE_FOLDER_NAME = 'Calendar Images';
+
+function getImageFolder() {
+  const folders = DriveApp.getFoldersByName(IMAGE_FOLDER_NAME);
+  return folders.hasNext() ? folders.next() : DriveApp.createFolder(IMAGE_FOLDER_NAME);
+}
+
+// Запусти ОДИН РАЗ из редактора, чтобы выдать доступ к Google Drive
+function authorizeDrive() {
+  const folder = getImageFolder();
+  Logger.log('Drive готов, папка: ' + folder.getName());
+}
+
+function uploadImage(body) {
+  const dataUrl = body.dataUrl || '';
+  const m = dataUrl.match(/^data:([^;]+);base64,(.*)$/);
+  if (!m) throw new Error('Некорректный файл картинки');
+  const contentType = m[1];
+  const bytes = Utilities.base64Decode(m[2]);
+  let ext = 'jpg';
+  if (contentType.indexOf('png') >= 0) ext = 'png';
+  else if (contentType.indexOf('webp') >= 0) ext = 'webp';
+  const base = (body.name || ('img_' + Date.now()))
+    .replace(/\.[a-z0-9]+$/i, '')
+    .replace(/[^a-z0-9_-]+/gi, '_')
+    .slice(0, 40);
+  const name = base + '_' + Date.now() + '.' + ext;
+  const blob = Utilities.newBlob(bytes, contentType, name);
+  const file = getImageFolder().createFile(blob);
+  file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
+  return 'https://lh3.googleusercontent.com/d/' + file.getId() + '=w1600';
 }
 
 function getSheet() {

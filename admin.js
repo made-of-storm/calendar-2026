@@ -206,7 +206,13 @@ function renderEditor(ev) {
         <label class="field"><span>Категория</span><input id="f_category" value="${escapeAttr(ev.category)}" /></label>
         <label class="field"><span>Цвет полоски</span><input id="f_accentColor" value="${escapeAttr(ev.accentColor || '#2E39F7')}" /></label>
       </div>
-      <label class="field"><span>Картинка</span><input id="f_heroImage" value="${escapeAttr(ev.heroImage)}" placeholder="images/heroes/..." /></label>
+      <label class="field"><span>Картинка (путь или ссылка)</span><input id="f_heroImage" value="${escapeAttr(ev.heroImage)}" placeholder="images/heroes/... или https://..." /></label>
+      ${state.canWrite ? `<div class="field">
+        <span>Загрузить свою картинку (16:9, до 400 КБ)</span>
+        <input type="file" id="f_imageUpload" accept="image/jpeg,image/png,image/webp" />
+        <span id="uploadStatus" class="muted"></span>
+      </div>` : ''}
+      <div class="img-preview" id="imgPreview">${ev.heroImage ? `<img src="${escapeAttr(ev.heroImage)}" alt="превью" />` : '<span class="muted">Нет картинки</span>'}</div>
       <label class="field"><span><input type="checkbox" id="f_visible" ${ev.visible !== false ? 'checked' : ''} /> Показывать на сайте</span></label>
     </div>
 
@@ -219,6 +225,8 @@ function renderEditor(ev) {
 
   document.getElementById('saveBtn')?.addEventListener('click', () => saveCurrent(ev));
   document.getElementById('deleteBtn')?.addEventListener('click', () => deleteCurrent(ev.id));
+  document.getElementById('f_imageUpload')?.addEventListener('change', handleImageUpload);
+  document.getElementById('f_heroImage')?.addEventListener('input', (e) => updateImgPreview(e.target.value));
   document.getElementById('addSideBtn')?.addEventListener('click', () => {
     ev.sideEvents = ev.sideEvents || [];
     ev.sideEvents.push({ title: '', date: '', location: '', type: 'party' });
@@ -309,6 +317,42 @@ function collectForm(ev) {
 
   delete updated._isNew;
   return updated;
+}
+
+function updateImgPreview(url) {
+  const box = document.getElementById('imgPreview');
+  if (!box) return;
+  box.innerHTML = url
+    ? `<img src="${escapeAttr(url)}" alt="превью" />`
+    : '<span class="muted">Нет картинки</span>';
+}
+
+async function handleImageUpload(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  const status = document.getElementById('uploadStatus');
+  if (file.size > 1.5 * 1024 * 1024) {
+    if (!confirm('Файл больше 1.5 МБ — загрузка может быть долгой. Лучше сжать картинку. Всё равно загрузить?')) {
+      e.target.value = '';
+      return;
+    }
+  }
+  try {
+    if (status) status.textContent = 'Загружаю...';
+    const dataUrl = await new Promise((res, rej) => {
+      const r = new FileReader();
+      r.onload = () => res(r.result);
+      r.onerror = rej;
+      r.readAsDataURL(file);
+    });
+    const data = await apiPost({ action: 'uploadImage', dataUrl, name: file.name });
+    document.getElementById('f_heroImage').value = data.url;
+    updateImgPreview(data.url);
+    if (status) status.textContent = 'Готово ✓ Не забудь нажать «Сохранить»';
+  } catch (err) {
+    if (status) status.textContent = '';
+    alert('Ошибка загрузки: ' + err.message);
+  }
 }
 
 async function saveCurrent(ev) {
