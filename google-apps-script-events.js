@@ -41,6 +41,18 @@ function setupSheet() {
   SpreadsheetApp.getUi().alert('Лист Events готов. Импортируй данные через importFromJson или админку.');
 }
 
+// Автозагрузка ивентов прямо с сайта — запусти эту функцию из редактора (▶)
+function importFromSite() {
+  const url = 'https://igaming-calendar.com/data/events.json';
+  const resp = UrlFetchApp.fetch(url, { muteHttpExceptions: true });
+  const data = JSON.parse(resp.getContentText());
+  writeAllEvents(data.events || []);
+  Logger.log('Импортировано: ' + (data.events || []).length + ' ивентов');
+  try {
+    SpreadsheetApp.getActiveSpreadsheet().toast('Импортировано: ' + (data.events || []).length + ' ивентов', 'Готово', 5);
+  } catch (e) {}
+}
+
 function importFromJson() {
   const ui = SpreadsheetApp.getUi();
   const resp = ui.prompt('Вставь JSON', 'Вставь содержимое файла events.json (весь объект с events)', ui.ButtonSet.OK_CANCEL);
@@ -58,6 +70,7 @@ function onOpen() {
   SpreadsheetApp.getUi()
     .createMenu('Calendar CMS')
     .addItem('Создать лист Events', 'setupSheet')
+    .addItem('Загрузить ивенты с сайта', 'importFromSite')
     .addItem('Импорт из JSON', 'importFromJson')
     .addToUi();
 }
@@ -109,7 +122,7 @@ function readAllEvents() {
   const sheet = getSheet();
   const lastRow = sheet.getLastRow();
   if (lastRow < 2) return [];
-  const data = sheet.getRange(2, 1, lastRow, HEADERS.length).getValues();
+  const data = sheet.getRange(2, 1, lastRow - 1, HEADERS.length).getValues();
   return data.map(rowToEvent).filter(Boolean);
 }
 
@@ -152,11 +165,11 @@ function writeAllEvents(events) {
   const sheet = getSheet();
   const lastRow = sheet.getLastRow();
   if (lastRow > 1) {
-    sheet.getRange(2, 1, lastRow, HEADERS.length).clearContent();
+    sheet.getRange(2, 1, lastRow - 1, HEADERS.length).clearContent();
   }
   if (!events.length) return;
   const rows = events.map(eventToRow);
-  sheet.getRange(2, 1, rows.length + 1, HEADERS.length).setValues(rows);
+  sheet.getRange(2, 1, rows.length, HEADERS.length).setValues(rows);
 }
 
 function saveEvent(event) {
@@ -164,14 +177,14 @@ function saveEvent(event) {
   const sheet = getSheet();
   const lastRow = sheet.getLastRow();
   const ids = lastRow >= 2
-    ? sheet.getRange(2, 1, lastRow, 1).getValues().map(r => r[0])
+    ? sheet.getRange(2, 1, lastRow - 1, 1).getValues().map(r => r[0])
     : [];
   const idx = ids.indexOf(event.id);
   const row = eventToRow(event);
   if (idx >= 0) {
-    sheet.getRange(idx + 2, 1, idx + 2, HEADERS.length).setValues([row]);
+    sheet.getRange(idx + 2, 1, 1, HEADERS.length).setValues([row]);
   } else {
-    sheet.getRange(lastRow + 1, 1, lastRow + 1, HEADERS.length).setValues([row]);
+    sheet.getRange(lastRow + 1, 1, 1, HEADERS.length).setValues([row]);
   }
 }
 
@@ -179,7 +192,7 @@ function deleteEvent(id) {
   const sheet = getSheet();
   const lastRow = sheet.getLastRow();
   if (lastRow < 2) return;
-  const ids = sheet.getRange(2, 1, lastRow, 1).getValues();
+  const ids = sheet.getRange(2, 1, lastRow - 1, 1).getValues();
   for (let i = 0; i < ids.length; i++) {
     if (ids[i][0] === id) {
       sheet.deleteRow(i + 2);
