@@ -175,7 +175,7 @@ function writeVisaMatrix(matrix) {
 
 // Автозагрузка визовой матрицы с сайта — запусти из редактора (▶)
 function importVisaFromSite() {
-  const url = 'https://igaming-calendar.com/data/visa.json';
+  const url = 'https://raw.githubusercontent.com/made-of-storm/calendar-2026/main/data/visa.json';
   const resp = UrlFetchApp.fetch(url, { muteHttpExceptions: true });
   const data = JSON.parse(resp.getContentText());
   writeVisaMatrix(data.visa || {});
