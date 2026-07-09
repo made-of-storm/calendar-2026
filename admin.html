@@ -6,7 +6,7 @@
   <title>Админка — Calendar 2026</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="admin.css?v=3" />
+  <link rel="stylesheet" href="admin.css?v=4" />
 </head>
 <body>
   <div id="loginScreen" class="screen">
@@ -29,8 +29,9 @@
 
   <div id="appScreen" class="screen hidden">
     <header class="topbar">
-      <div>
-        <strong>Календарь — редактор</strong>
+      <div class="topbar__tabs">
+        <button type="button" class="tab-btn active" id="tabEvents">Ивенты</button>
+        <button type="button" class="tab-btn" id="tabVisa">Визы</button>
         <span class="muted" id="eventCount"></span>
       </div>
       <div class="topbar__actions">
@@ -40,15 +41,28 @@
       </div>
     </header>
 
-    <div class="layout">
+    <div class="layout" id="eventsView">
       <aside class="sidebar" id="eventList"></aside>
       <main class="editor" id="editorPanel">
         <p class="muted editor__empty">Выбери ивент слева или создай новый</p>
       </main>
     </div>
+
+    <div class="visa-view hidden" id="visaView">
+      <div class="visa-toolbar">
+        <label class="field visa-cit-field">
+          <span>Гражданство посетителя</span>
+          <select id="visaCitizenship"></select>
+        </label>
+        <button type="button" class="btn btn--primary" id="saveVisaBtn">Сохранить визы</button>
+      </div>
+      <p class="muted">Для выбранного гражданства задай визовый режим по каждой стране назначения. Меняется на сайте после «Сохранить» + Ctrl+F5.</p>
+      <div id="visaRows"></div>
+      <button type="button" class="btn btn--ghost" id="addVisaCountryBtn">+ Добавить страну</button>
+    </div>
   </div>
 
   <script src="data/cms-config.js"></script>
-  <script src="admin.js?v=3"></script>
+  <script src="admin.js?v=4"></script>
 </body>
 </html>

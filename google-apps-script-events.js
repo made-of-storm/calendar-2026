@@ -17,6 +17,7 @@
 
 const CONFIG = {
   SHEET_NAME: 'Events',
+  VISA_SHEET: 'Visa',
   ADMIN_PASSWORD: 'CHANGE_ME_sr2026', // ⬅️ ОБЯЗАТЕЛЬНО смени!
   SPREADSHEET_ID: SpreadsheetApp.getActiveSpreadsheet().getId()
 };
@@ -27,6 +28,8 @@ const HEADERS = [
   'locationLine', 'category', 'heroImage', 'description', 'website', 'telegramChannel',
   'startISO', 'endISO', 'weather', 'promo', 'awards', 'restaurants', 'brands', 'sideEvents'
 ];
+
+const VISA_HEADERS = ['citizenship', 'country', 'required', 'type', 'notes'];
 
 function setupSheet() {
   const ss = SpreadsheetApp.getActiveSpreadsheet();
@@ -72,6 +75,8 @@ function onOpen() {
     .addItem('Создать лист Events', 'setupSheet')
     .addItem('Загрузить ивенты с сайта', 'importFromSite')
     .addItem('Импорт из JSON', 'importFromJson')
+    .addSeparator()
+    .addItem('Загрузить визы с сайта', 'importVisaFromSite')
     .addToUi();
 }
 
@@ -79,6 +84,9 @@ function doGet(e) {
   const action = (e && e.parameter && e.parameter.action) || 'list';
   if (action === 'list') {
     return jsonResponse({ ok: true, events: readAllEvents() });
+  }
+  if (action === 'visa') {
+    return jsonResponse({ ok: true, visa: readVisaMatrix() });
   }
   return jsonResponse({ ok: false, error: 'Unknown action' });
 }
@@ -105,10 +113,77 @@ function doPost(e) {
     if (action === 'uploadImage') {
       return jsonResponse({ ok: true, url: uploadImage(body) });
     }
+    if (action === 'saveVisa') {
+      writeVisaMatrix(body.visa || {});
+      return jsonResponse({ ok: true, visa: readVisaMatrix() });
+    }
     return jsonResponse({ ok: false, error: 'Unknown action' });
   } catch (err) {
     return jsonResponse({ ok: false, error: String(err) });
   }
+}
+
+// ===== Визовая матрица =====
+function getVisaSheet() {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  let sheet = ss.getSheetByName(CONFIG.VISA_SHEET);
+  if (!sheet) {
+    sheet = ss.insertSheet(CONFIG.VISA_SHEET);
+    sheet.getRange(1, 1, 1, VISA_HEADERS.length).setValues([VISA_HEADERS]);
+    sheet.setFrozenRows(1);
+  }
+  return sheet;
+}
+
+function readVisaMatrix() {
+  const sheet = getVisaSheet();
+  const lastRow = sheet.getLastRow();
+  if (lastRow < 2) return {};
+  const rows = sheet.getRange(2, 1, lastRow - 1, VISA_HEADERS.length).getValues();
+  const matrix = {};
+  rows.forEach(r => {
+    const cit = String(r[0] || '').trim().toUpperCase();
+    const country = String(r[1] || '').trim().toUpperCase();
+    if (!cit || !country) return;
+    if (!matrix[cit]) matrix[cit] = {};
+    matrix[cit][country] = {
+      required: String(r[2] || '').trim(),
+      type: String(r[3] || '').trim(),
+      notes: String(r[4] || '').trim()
+    };
+  });
+  return matrix;
+}
+
+function writeVisaMatrix(matrix) {
+  const sheet = getVisaSheet();
+  const lastRow = sheet.getLastRow();
+  if (lastRow > 1) {
+    sheet.getRange(2, 1, lastRow - 1, VISA_HEADERS.length).clearContent();
+  }
+  const rows = [];
+  Object.keys(matrix).forEach(cit => {
+    Object.keys(matrix[cit]).forEach(country => {
+      const info = matrix[cit][country] || {};
+      rows.push([cit, country, info.required || '', info.type || '', info.notes || '']);
+    });
+  });
+  if (rows.length) {
+    sheet.getRange(2, 1, rows.length, VISA_HEADERS.length).setValues(rows);
+  }
+}
+
+// Автозагрузка визовой матрицы с сайта — запусти из редактора (▶)
+function importVisaFromSite() {
+  const url = 'https://igaming-calendar.com/data/visa.json';
+  const resp = UrlFetchApp.fetch(url, { muteHttpExceptions: true });
+  const data = JSON.parse(resp.getContentText());
+  writeVisaMatrix(data.visa || {});
+  const n = Object.keys(data.visa || {}).length;
+  Logger.log('Импортировано виз для ' + n + ' гражданств');
+  try {
+    SpreadsheetApp.getActiveSpreadsheet().toast('Визы загружены: ' + n + ' гражданств', 'Готово', 5);
+  } catch (e) {}
 }
 
 // ===== Загрузка картинок в Google Drive =====

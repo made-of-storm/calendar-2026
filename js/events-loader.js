@@ -63,6 +63,30 @@ function normalizeEventsData(data) {
   return data;
 }
 
+async function loadVisaMatrix() {
+  const apiUrl = (window.CMS_CONFIG && window.CMS_CONFIG.eventsApiUrl) || '';
+  if (apiUrl) {
+    try {
+      const sep = apiUrl.includes('?') ? '&' : '?';
+      const res = await fetch(apiUrl + sep + 'action=visa&t=' + Date.now());
+      if (res.ok) {
+        const data = await res.json();
+        if (data && data.visa && Object.keys(data.visa).length) return data.visa;
+      }
+    } catch (e) {
+      console.warn('Визы из CMS недоступны, используем встроенные', e);
+    }
+  }
+  try {
+    const res = await fetch('data/visa.json?t=' + Date.now());
+    if (res.ok) {
+      const data = await res.json();
+      if (data && data.visa) return data.visa;
+    }
+  } catch (e) {}
+  return null;
+}
+
 async function loadEventsData() {
   const apiUrl = (window.CMS_CONFIG && window.CMS_CONFIG.eventsApiUrl) || '';
   if (apiUrl) {

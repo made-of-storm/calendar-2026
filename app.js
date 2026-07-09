@@ -56,7 +56,7 @@ let currentEventId = null;
 // ------------------------------
 // Структура: citizenship -> destination -> {required, type, notes}
 // EU-страны (PT, PL, CY, ES, MT, IT, HU) используют колонку "EU" из таблицы
-const VISA_MATRIX = {
+let VISA_MATRIX = {
   // ===================== EU =====================
   'EU': {
     'PT': { required: 'нет', type: 'Безвиз', notes: 'Свободное перемещение' },
@@ -438,16 +438,20 @@ const CONF_COUNTRIES = {
 };
 
 // Старая функция для обратной совместимости (deprecated)
-const VISA_RULES = {};
-Object.keys(VISA_MATRIX).forEach(citizenship => {
-  VISA_RULES[citizenship] = {};
-  Object.keys(VISA_MATRIX[citizenship]).forEach(country => {
-    const info = VISA_MATRIX[citizenship][country];
-    VISA_RULES[citizenship][country] = info.required === 'нет' ? 'no' :
-                                        info.required === 'да' ? 'yes' :
-                                        'unknown';
+let VISA_RULES = {};
+function rebuildVisaRules() {
+  VISA_RULES = {};
+  Object.keys(VISA_MATRIX).forEach(citizenship => {
+    VISA_RULES[citizenship] = {};
+    Object.keys(VISA_MATRIX[citizenship]).forEach(country => {
+      const info = VISA_MATRIX[citizenship][country];
+      VISA_RULES[citizenship][country] = info.required === 'нет' ? 'no' :
+                                          info.required === 'да' ? 'yes' :
+                                          'unknown';
+    });
   });
-});
+}
+rebuildVisaRules();
 
 // Старая функция (для обратной совместимости)
 function getVisaStatus(citizenship, country) {
@@ -1196,6 +1200,16 @@ document.addEventListener("DOMContentLoaded", async () => {
     renderCalendarGrid(visibleEvents);
   } catch (err) {
     console.error("Ошибка загрузки ивентов:", err);
+  }
+
+  try {
+    const visa = await loadVisaMatrix();
+    if (visa && Object.keys(visa).length) {
+      VISA_MATRIX = visa;
+      rebuildVisaRules();
+    }
+  } catch (err) {
+    console.error("Ошибка загрузки виз (используем встроенные):", err);
   }
 
   // Citizenship
