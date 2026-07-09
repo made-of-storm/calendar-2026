@@ -181,6 +181,13 @@ function parseCell(key, val) {
   }
   if (key === 'visible') return val === true || val === 'TRUE' || val === 'true' || val === 1 || val === '1';
   if (['month', 'sortOrder', 'attendees'].indexOf(key) >= 0) return Number(val);
+  if (['startDate', 'endDate'].indexOf(key) >= 0) {
+    if (Object.prototype.toString.call(val) === '[object Date]') {
+      var tz = SpreadsheetApp.getActiveSpreadsheet().getSpreadsheetTimeZone();
+      return Utilities.formatDate(val, tz, 'yyyy-MM-dd');
+    }
+    return String(val);
+  }
   if (['weather', 'promo', 'awards', 'restaurants', 'brands', 'sideEvents'].indexOf(key) >= 0) {
     if (typeof val === 'object') return val;
     try { return JSON.parse(val); } catch (e) { return null; }

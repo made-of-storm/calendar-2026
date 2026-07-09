@@ -155,6 +155,9 @@ function renderEditor(ev) {
   }
 
   const sideRows = (ev.sideEvents || []).map((se, i) => sideEventRow(se, i)).join('');
+  const restRows = (ev.restaurants || []).map((r, i) => restaurantRow(r, i)).join('');
+  const brandRows = (ev.brands || []).map((b, i) => brandRow(b, i)).join('');
+  const w = ev.weather || { temp: '', description: '' };
 
   panel.innerHTML = `
     <div class="editor__head">
@@ -191,8 +194,8 @@ function renderEditor(ev) {
         <label class="field"><span>Порядок в месяце</span><input id="f_sortOrder" type="number" value="${ev.sortOrder || 0}" /></label>
       </div>
       <div class="field--row">
-        <label class="field"><span>Дата начала</span><input id="f_startDate" type="date" value="${escapeAttr(ev.startDate || '')}" /></label>
-        <label class="field"><span>Дата окончания</span><input id="f_endDate" type="date" value="${escapeAttr(ev.endDate || '')}" /></label>
+        <label class="field"><span>Дата начала</span><input id="f_startDate" type="date" value="${toDateInput(ev.startDate)}" /></label>
+        <label class="field"><span>Дата окончания</span><input id="f_endDate" type="date" value="${toDateInput(ev.endDate)}" /></label>
       </div>
       <div class="field--row">
         <label class="field"><span>Размер</span><select id="f_tier">${opt(['mega','large','mid','small'], ev.tier)}</select></label>
@@ -217,6 +220,27 @@ function renderEditor(ev) {
     </div>
 
     <div class="section">
+      <h3>Погода</h3>
+      <div class="field--row">
+        <label class="field"><span>Температура (18-22°C)</span><input id="f_weatherTemp" value="${escapeAttr(w.temp || '')}" placeholder="18-22°C" /></label>
+        <label class="field"><span>Описание погоды</span><input id="f_weatherDesc" value="${escapeAttr(w.description || '')}" placeholder="Тёплое лето, возможны дожди" /></label>
+      </div>
+      <p class="muted">Оставь оба поля пустыми, чтобы убрать блок погоды.</p>
+    </div>
+
+    <div class="section">
+      <h3>Рестораны</h3>
+      <div id="restList">${restRows || '<p class="muted">Нет ресторанов</p>'}</div>
+      ${state.canWrite ? '<button type="button" class="btn btn--ghost" id="addRestBtn">+ Добавить ресторан</button>' : ''}
+    </div>
+
+    <div class="section">
+      <h3>Бренды</h3>
+      <div id="brandList">${brandRows || '<p class="muted">Нет брендов</p>'}</div>
+      ${state.canWrite ? '<button type="button" class="btn btn--ghost" id="addBrandBtn">+ Добавить бренд</button>' : ''}
+    </div>
+
+    <div class="section">
       <h3>Сайд-ивенты</h3>
       <div id="sideEventsList">${sideRows || '<p class="muted">Нет сайд-ивентов</p>'}</div>
       ${state.canWrite ? '<button type="button" class="btn btn--ghost" id="addSideBtn">+ Добавить сайд-ивент</button>' : ''}
@@ -227,15 +251,41 @@ function renderEditor(ev) {
   document.getElementById('deleteBtn')?.addEventListener('click', () => deleteCurrent(ev.id));
   document.getElementById('f_imageUpload')?.addEventListener('change', handleImageUpload);
   document.getElementById('f_heroImage')?.addEventListener('input', (e) => updateImgPreview(e.target.value));
+
   document.getElementById('addSideBtn')?.addEventListener('click', () => {
-    ev.sideEvents = ev.sideEvents || [];
+    syncArraysFromForm(ev);
     ev.sideEvents.push({ title: '', date: '', location: '', type: 'party' });
     renderEditor(ev);
   });
+  document.getElementById('addRestBtn')?.addEventListener('click', () => {
+    syncArraysFromForm(ev);
+    ev.restaurants.push({ name: '', vibe: 'посидеть', avgCheck: '', description: '', img: '' });
+    renderEditor(ev);
+  });
+  document.getElementById('addBrandBtn')?.addEventListener('click', () => {
+    syncArraysFromForm(ev);
+    ev.brands.push({ name: '', category: '', logo: '' });
+    renderEditor(ev);
+  });
+
   panel.querySelectorAll('[data-remove-side]').forEach(btn => {
     btn.addEventListener('click', () => {
-      const i = Number(btn.dataset.removeSide);
-      ev.sideEvents.splice(i, 1);
+      syncArraysFromForm(ev);
+      ev.sideEvents.splice(Number(btn.dataset.removeSide), 1);
+      renderEditor(ev);
+    });
+  });
+  panel.querySelectorAll('[data-remove-rest]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      syncArraysFromForm(ev);
+      ev.restaurants.splice(Number(btn.dataset.removeRest), 1);
+      renderEditor(ev);
+    });
+  });
+  panel.querySelectorAll('[data-remove-brand]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      syncArraysFromForm(ev);
+      ev.brands.splice(Number(btn.dataset.removeBrand), 1);
       renderEditor(ev);
     });
   });
@@ -257,18 +307,67 @@ function escapeAttr(s) {
   return escapeHtml(s).replace(/"/g, '&quot;');
 }
 
+// Google Sheets отдаёт даты как объекты («Wed Jul 01 2026...») — приводим к yyyy-MM-dd
+function toDateInput(v) {
+  if (!v) return '';
+  if (/^\d{4}-\d{2}-\d{2}$/.test(String(v))) return String(v);
+  const d = new Date(v);
+  if (isNaN(d.getTime())) return '';
+  const p = n => String(n).padStart(2, '0');
+  return d.getFullYear() + '-' + p(d.getMonth() + 1) + '-' + p(d.getDate());
+}
+
+function imgWidget(label, url, urlClass) {
+  const safe = escapeAttr(url || '');
+  return `<div class="img-widget field">
+    <span>${label}</span>
+    <input class="${urlClass} js-img-url" value="${safe}" placeholder="images/... или https://..." />
+    ${state.canWrite ? '<input type="file" class="js-img-file" accept="image/jpeg,image/png,image/webp,image/svg+xml" /><span class="muted js-img-status"></span>' : ''}
+    <div class="img-preview img-preview--sm js-img-preview">${url ? `<img src="${safe}" alt="превью" />` : '<span class="muted">Нет</span>'}</div>
+  </div>`;
+}
+
 function sideEventRow(se, i) {
-  return `<div class="side-row" data-side="${i}">
+  return `<div class="sub-row side-row" data-side="${i}">
     <div class="field--row">
       <label class="field"><span>Название</span><input class="se-title" value="${escapeAttr(se.title)}" /></label>
       <label class="field"><span>Дата</span><input class="se-date" value="${escapeAttr(se.date)}" /></label>
     </div>
     <label class="field"><span>Место</span><input class="se-location" value="${escapeAttr(se.location)}" /></label>
+    <label class="field"><span>Описание</span><textarea class="se-desc">${escapeHtml(se.description || '')}</textarea></label>
     <div class="field--row">
       <label class="field"><span>Ссылка регистрации</span><input class="se-url" value="${escapeAttr(se.registerUrl || '')}" /></label>
       <label class="field"><span>Тип</span><select class="se-type">${opt(['party','dinner','awards','meetup'], se.type || 'party')}</select></label>
     </div>
+    <label class="field"><span>Подпись кнопки (Билеты / Регистрация)</span><input class="se-label" value="${escapeAttr(se.registerLabel || '')}" /></label>
+    ${imgWidget('Картинка сайд-ивента', se.img, 'se-img')}
     <div class="side-row__actions"><button type="button" class="btn btn--ghost" data-remove-side="${i}">Убрать</button></div>
+  </div>`;
+}
+
+function restaurantRow(r, i) {
+  return `<div class="sub-row rest-row" data-rest="${i}">
+    <div class="field--row">
+      <label class="field"><span>Название</span><input class="rest-name" value="${escapeAttr(r.name)}" /></label>
+      <label class="field"><span>Вайб</span><select class="rest-vibe">${opt(['посидеть','громко','тихо','потанцевать'], r.vibe || 'посидеть')}</select></label>
+    </div>
+    <div class="field--row">
+      <label class="field"><span>Средний чек ($50-100)</span><input class="rest-check" value="${escapeAttr(r.avgCheck || '')}" /></label>
+    </div>
+    <label class="field"><span>Описание</span><textarea class="rest-desc">${escapeHtml(r.description || '')}</textarea></label>
+    ${imgWidget('Фото ресторана', r.img, 'rest-img')}
+    <div class="side-row__actions"><button type="button" class="btn btn--ghost" data-remove-rest="${i}">Убрать</button></div>
+  </div>`;
+}
+
+function brandRow(b, i) {
+  return `<div class="sub-row brand-row" data-brand="${i}">
+    <div class="field--row">
+      <label class="field"><span>Название</span><input class="brand-name" value="${escapeAttr(b.name)}" /></label>
+      <label class="field"><span>Категория (Оператор, Провайдер...)</span><input class="brand-cat" value="${escapeAttr(b.category || '')}" /></label>
+    </div>
+    ${imgWidget('Логотип', b.logo, 'brand-logo')}
+    <div class="side-row__actions"><button type="button" class="btn btn--ghost" data-remove-brand="${i}">Убрать</button></div>
   </div>`;
 }
 
@@ -303,20 +402,73 @@ function collectForm(ev) {
   if (updated.startDate) updated.startISO = updated.startDate + 'T09:00:00Z';
   if (updated.endDate) updated.endISO = updated.endDate + 'T18:00:00Z';
 
-  const sideRows = document.querySelectorAll('.side-row');
-  updated.sideEvents = [];
-  sideRows.forEach(row => {
-    updated.sideEvents.push({
-      title: row.querySelector('.se-title')?.value.trim() || '',
-      date: row.querySelector('.se-date')?.value.trim() || '',
-      location: row.querySelector('.se-location')?.value.trim() || '',
-      registerUrl: row.querySelector('.se-url')?.value.trim() || undefined,
-      type: row.querySelector('.se-type')?.value || 'party'
-    });
-  });
+  updated.weather = readWeather();
+  updated.restaurants = readRestaurants();
+  updated.brands = readBrands();
+  updated.sideEvents = readSideEvents();
 
   delete updated._isNew;
   return updated;
+}
+
+function rowVal(row, sel) {
+  const el = row.querySelector(sel);
+  return el ? el.value.trim() : '';
+}
+
+function readWeather() {
+  const temp = document.getElementById('f_weatherTemp')?.value.trim() || '';
+  const desc = document.getElementById('f_weatherDesc')?.value.trim() || '';
+  if (!temp && !desc) return null;
+  return { temp, description: desc };
+}
+
+function readSideEvents() {
+  return [...document.querySelectorAll('.side-row')].map(row => {
+    const o = {
+      title: rowVal(row, '.se-title'),
+      date: rowVal(row, '.se-date'),
+      location: rowVal(row, '.se-location'),
+      type: row.querySelector('.se-type')?.value || 'party'
+    };
+    const desc = rowVal(row, '.se-desc');
+    const url = rowVal(row, '.se-url');
+    const label = rowVal(row, '.se-label');
+    const img = rowVal(row, '.se-img');
+    if (desc) o.description = desc;
+    if (url) o.registerUrl = url;
+    if (label) o.registerLabel = label;
+    if (img) o.img = img;
+    return o;
+  }).filter(o => o.title || o.date || o.location);
+}
+
+function readRestaurants() {
+  return [...document.querySelectorAll('.rest-row')].map(row => {
+    const o = {
+      name: rowVal(row, '.rest-name'),
+      vibe: row.querySelector('.rest-vibe')?.value || 'посидеть',
+      avgCheck: rowVal(row, '.rest-check'),
+      description: rowVal(row, '.rest-desc'),
+      img: rowVal(row, '.rest-img')
+    };
+    return o;
+  }).filter(o => o.name);
+}
+
+function readBrands() {
+  return [...document.querySelectorAll('.brand-row')].map(row => ({
+    name: rowVal(row, '.brand-name'),
+    category: rowVal(row, '.brand-cat'),
+    logo: rowVal(row, '.brand-logo')
+  })).filter(o => o.name);
+}
+
+function syncArraysFromForm(ev) {
+  ev.sideEvents = readSideEvents();
+  ev.restaurants = readRestaurants();
+  ev.brands = readBrands();
+  ev.weather = readWeather();
 }
 
 function updateImgPreview(url) {
@@ -325,6 +477,39 @@ function updateImgPreview(url) {
   box.innerHTML = url
     ? `<img src="${escapeAttr(url)}" alt="превью" />`
     : '<span class="muted">Нет картинки</span>';
+}
+
+async function fileToDataUrl(file) {
+  return new Promise((res, rej) => {
+    const r = new FileReader();
+    r.onload = () => res(r.result);
+    r.onerror = rej;
+    r.readAsDataURL(file);
+  });
+}
+
+async function handleWidgetUpload(fileInput) {
+  const file = fileInput.files[0];
+  if (!file) return;
+  const widget = fileInput.closest('.img-widget');
+  const urlInput = widget?.querySelector('.js-img-url');
+  const preview = widget?.querySelector('.js-img-preview');
+  const status = widget?.querySelector('.js-img-status');
+  if (file.size > 1.5 * 1024 * 1024 && !confirm('Файл больше 1.5 МБ, загрузка может быть долгой. Продолжить?')) {
+    fileInput.value = '';
+    return;
+  }
+  try {
+    if (status) status.textContent = 'Загружаю...';
+    const dataUrl = await fileToDataUrl(file);
+    const data = await apiPost({ action: 'uploadImage', dataUrl, name: file.name });
+    if (urlInput) urlInput.value = data.url;
+    if (preview) preview.innerHTML = `<img src="${escapeAttr(data.url)}" alt="превью" />`;
+    if (status) status.textContent = 'Готово ✓';
+  } catch (err) {
+    if (status) status.textContent = '';
+    alert('Ошибка загрузки: ' + err.message);
+  }
 }
 
 async function handleImageUpload(e) {
@@ -418,6 +603,11 @@ function logout() {
 
 document.getElementById('loginBtn').addEventListener('click', login);
 document.getElementById('logoutBtn').addEventListener('click', logout);
+document.getElementById('editorPanel').addEventListener('change', (e) => {
+  if (e.target.classList && e.target.classList.contains('js-img-file')) {
+    handleWidgetUpload(e.target);
+  }
+});
 document.getElementById('addEventBtn').addEventListener('click', () => {
   const ev = blankEvent();
   ev._isNew = true;

@@ -44,6 +44,25 @@ function buildEventsMap(eventList) {
   return map;
 }
 
+function normalizeDate(v) {
+  if (!v) return v;
+  if (/^\d{4}-\d{2}-\d{2}$/.test(String(v))) return String(v);
+  const d = new Date(v);
+  if (isNaN(d.getTime())) return v;
+  const p = n => String(n).padStart(2, '0');
+  return d.getFullYear() + '-' + p(d.getMonth() + 1) + '-' + p(d.getDate());
+}
+
+function normalizeEventsData(data) {
+  if (data && Array.isArray(data.events)) {
+    data.events.forEach(ev => {
+      ev.startDate = normalizeDate(ev.startDate);
+      ev.endDate = normalizeDate(ev.endDate);
+    });
+  }
+  return data;
+}
+
 async function loadEventsData() {
   const apiUrl = (window.CMS_CONFIG && window.CMS_CONFIG.eventsApiUrl) || '';
   if (apiUrl) {
@@ -52,7 +71,7 @@ async function loadEventsData() {
       const res = await fetch(apiUrl + sep + 'action=list&t=' + Date.now());
       if (res.ok) {
         const data = await res.json();
-        if (data && Array.isArray(data.events)) return data;
+        if (data && Array.isArray(data.events)) return normalizeEventsData(data);
       }
     } catch (e) {
       console.warn('CMS недоступен, используем локальный events.json', e);
@@ -60,5 +79,5 @@ async function loadEventsData() {
   }
   const res = await fetch('data/events.json?t=' + Date.now());
   if (!res.ok) throw new Error('Не удалось загрузить events.json');
-  return res.json();
+  return normalizeEventsData(await res.json());
 }
