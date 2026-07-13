@@ -104,6 +104,16 @@ function renderEventCard(ev) {
   return renderCompactCard(ev);
 }
 
+function isPastEventData(ev) {
+  const iso = ev.endISO || ev.endDate || ev.startISO || ev.startDate;
+  if (!iso) return false;
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return false;
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  return d < today;
+}
+
 function renderCalendarGrid(events) {
   const grid = document.getElementById('calendarGrid');
   if (!grid) return;
@@ -115,7 +125,12 @@ function renderCalendarGrid(events) {
     if (!byMonth[m]) byMonth[m] = [];
     byMonth[m].push(ev);
   }
-  Object.values(byMonth).forEach(arr => arr.sort((a, b) => (a.sortOrder || 0) - (b.sortOrder || 0)));
+  Object.values(byMonth).forEach(arr => arr.sort((a, b) => {
+    const pa = isPastEventData(a) ? 1 : 0;
+    const pb = isPastEventData(b) ? 1 : 0;
+    if (pa !== pb) return pa - pb;
+    return (a.sortOrder || 0) - (b.sortOrder || 0);
+  }));
 
   let html = '';
   for (let m = 1; m <= 12; m++) {

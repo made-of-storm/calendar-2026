@@ -25,6 +25,13 @@ body { background-color: #1B1B1B; color: #FBF2E8; }
 @media (min-width: 1024px) { .calendar-grid { grid-template-columns: repeat(3, 1fr); } }
 @media (min-width: 1280px) { .calendar-grid { grid-template-columns: repeat(4, 1fr); } }
 
+/* Desktop: текущий и будущие месяцы — наверху, прошедшие уходят вниз */
+@media (min-width: 768px) {
+  .calendar-grid > .cell.cell--current { order: 1; }
+  .calendar-grid > .cell.cell--future  { order: 2; }
+  .calendar-grid > .cell.cell--past    { order: 3; }
+}
+
 .cell {
   background-color: #222222;
   padding: 24px;
