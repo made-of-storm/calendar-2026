@@ -38,23 +38,23 @@
           "avgCheck": "$40-70",
           "description": "Fine dining по рецептам грузинской кухни XIX века из книги Барбаре Джорджадзе. Квеври-вина, атмосфера старого Тбилиси. Бронь обязательна.",
           "website": "https://www.google.com/maps/search/?api=1&query=Barbarestan%20Tbilisi",
-          "img": ""
+          "img": "images/restaurants/sbc_tbilisi_barbarestan.jpg"
         },
         {
           "name": "Café Littera",
           "vibe": "посидеть",
           "avgCheck": "$40-80",
           "description": "Nouveau Georgian от Текуны Гачечиладзе в саду Дома писателей. Одна из самых красивых террас города — идеально для делового ужина.",
-          "website": "https://culinarium.ge/emenu/littera",
-          "img": ""
+          "website": "https://www.google.ru/maps/place/Restaurant+Littera/@41.6902406,44.7970774,17z/data=!3m1!4b1!4m6!3m5!1s0x40440cf20c6e37ab:0x5ddfb346924ccead!8m2!3d41.6902406!4d44.7996523!16s%2Fg%2F11bxb8m70v",
+          "img": "images/restaurants/sbc_tbilisi_littera.jpg"
         },
         {
           "name": "Keto and Kote",
           "vibe": "посидеть",
           "avgCheck": "$30-60",
           "description": "Грузинская классика в особняке XIX века в районе Вера. Терраса с видом на крыши города и Мтацминду. Бронь обязательна.",
-          "website": "https://www.facebook.com/ketodakote",
-          "img": ""
+          "website": "https://www.google.ru/maps/place/Кето+да+Котэ/@41.7045939,44.7857919,17z/data=!3m1!4b1!4m6!3m5!1s0x40440cda58186cf3:0x970c6e7fc66ca250!8m2!3d41.7045939!4d44.7883668!16s%2Fg%2F11c48pgx64",
+          "img": "images/restaurants/sbc_tbilisi_keto_da_kote.jpg"
         },
         {
           "name": "Shavi Lomi",
@@ -62,7 +62,7 @@
           "avgCheck": "$25-50",
           "description": "Богемное бистро в Вере: современная грузинская кухня, натуральные вина, живая атмосфера «для своих».",
           "website": "https://www.google.com/maps/search/?api=1&query=Shavi%20Lomi%20Tbilisi",
-          "img": ""
+          "img": "images/restaurants/sbc_tbilisi_shavi_lomi.jpg"
         },
         {
           "name": "Vinotel",
@@ -70,7 +70,7 @@
           "avgCheck": "$50-90",
           "description": "Грузинская кухня и большая винная карта в историческом винном отеле. Отдельные залы для деловых ужинов и переговоров.",
           "website": "https://vinotel.ge/",
-          "img": ""
+          "img": "images/restaurants/sbc_tbilisi_vinotel.jpg"
         }
       ],
       "brands": [],
