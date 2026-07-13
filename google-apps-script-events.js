@@ -263,7 +263,7 @@ function parseCell(key, val) {
     }
     return String(val);
   }
-  if (['weather', 'promo', 'awards', 'restaurants', 'brands', 'sideEvents'].indexOf(key) >= 0) {
+  if (['weather', 'awards', 'restaurants', 'brands', 'sideEvents'].indexOf(key) >= 0) {
     if (typeof val === 'object') return val;
     try { return JSON.parse(val); } catch (e) { return null; }
   }
