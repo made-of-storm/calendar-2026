@@ -941,16 +941,24 @@ function populateRestaurantsTab(restaurants, partnerPromo) {
 
   restaurants.forEach(r => {
     const vibeInfo = vibeMap[r.vibe] || { label: r.vibe, class: 'vibe-tag-sit' };
+    const hasLink = !!r.website;
+    const openTag = hasLink
+      ? `<a href="${r.website}" target="_blank" rel="noopener" class="restaurant-card relative flex gap-4 p-4 rounded-xl border border-[#333333] bg-[#1B1B1B] mb-3 cursor-pointer" style="text-decoration:none;color:inherit">`
+      : `<div class="restaurant-card relative flex gap-4 p-4 rounded-xl border border-[#333333] bg-[#1B1B1B] mb-3">`;
+    const closeTag = hasLink ? `</a>` : `</div>`;
+    const linkIcon = hasLink
+      ? `<svg width="13" height="13" fill="none" stroke="#9CA3AF" stroke-width="2" viewBox="0 0 24 24" style="flex-shrink:0"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5h5v5M19 5l-9 9M11 5H7a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4"/></svg>`
+      : '';
     html += `
-      <div class="restaurant-card relative flex gap-4 p-4 rounded-xl border border-[#333333] bg-[#1B1B1B] mb-3 cursor-pointer">
+      ${openTag}
         ${r.avgCheck ? `<div class="absolute top-3 right-3"><span class="restaurant-check-pill">${r.avgCheck}</span></div>` : ''}
         <img src="${r.img || 'https://images.unsplash.com/photo-1552566626-52f8b828add9?q=80&w=200&auto=format&fit=crop'}" class="w-20 h-20 rounded-xl object-cover flex-shrink-0 shadow-lg" alt="${r.name}" loading="lazy" decoding="async">
         <div class="flex-1 flex flex-col min-w-0">
-          <div class="font-bold text-white text-[16px] mb-1.5">${r.name}</div>
+          <div class="font-bold text-white text-[16px] mb-1.5 flex items-center gap-1.5">${r.name}${linkIcon}</div>
           ${vibeInfo.label ? `<span class="vibe-tag ${vibeInfo.class} mb-2">${vibeInfo.label}</span>` : ''}
           <div class="restaurant-description text-xs text-gray-400 leading-relaxed mt-auto">${r.description || ''}</div>
         </div>
-      </div>
+      ${closeTag}
     `;
   });
 

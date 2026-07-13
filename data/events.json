@@ -20,17 +20,98 @@
       "locationLine": "Georgia, Tbilisi",
       "category": "iGaming",
       "heroImage": "images/heroes/sbc_tbilisi.jpg",
-      "description": "Конференция SBC Summit в Тбилиси",
+      "description": "Ключевая iGaming и беттинг-конференция для Восточной Европы и Центральной Азии. Площадка — Sheraton Grand Tbilisi Metechi Palace, 2000+ делегатов, 800 операторов, 300 аффилиатов и 70+ спикеров.",
       "website": "https://sbcevents.com/sbc-summit-tbilisi/",
       "telegramChannel": null,
       "startISO": "2026-07-15T09:00:00Z",
       "endISO": "2026-07-16T18:00:00Z",
-      "weather": null,
+      "weather": {
+        "temp": "+30°C",
+        "description": "Жарко и солнечно, вечером около +24°C"
+      },
       "promo": "Secretroom10 (−10%)",
       "awards": [],
-      "restaurants": [],
+      "restaurants": [
+        {
+          "name": "Barbarestan",
+          "vibe": "посидеть",
+          "avgCheck": "$40-70",
+          "description": "Fine dining по рецептам грузинской кухни XIX века из книги Барбаре Джорджадзе. Квеври-вина, атмосфера старого Тбилиси. Бронь обязательна.",
+          "website": "https://www.google.com/maps/search/?api=1&query=Barbarestan%20Tbilisi",
+          "img": ""
+        },
+        {
+          "name": "Café Littera",
+          "vibe": "посидеть",
+          "avgCheck": "$40-80",
+          "description": "Nouveau Georgian от Текуны Гачечиладзе в саду Дома писателей. Одна из самых красивых террас города — идеально для делового ужина.",
+          "website": "https://culinarium.ge/emenu/littera",
+          "img": ""
+        },
+        {
+          "name": "Keto and Kote",
+          "vibe": "посидеть",
+          "avgCheck": "$30-60",
+          "description": "Грузинская классика в особняке XIX века в районе Вера. Терраса с видом на крыши города и Мтацминду. Бронь обязательна.",
+          "website": "https://www.facebook.com/ketodakote",
+          "img": ""
+        },
+        {
+          "name": "Shavi Lomi",
+          "vibe": "громко",
+          "avgCheck": "$25-50",
+          "description": "Богемное бистро в Вере: современная грузинская кухня, натуральные вина, живая атмосфера «для своих».",
+          "website": "https://www.google.com/maps/search/?api=1&query=Shavi%20Lomi%20Tbilisi",
+          "img": ""
+        },
+        {
+          "name": "Vinotel",
+          "vibe": "тихо",
+          "avgCheck": "$50-90",
+          "description": "Грузинская кухня и большая винная карта в историческом винном отеле. Отдельные залы для деловых ужинов и переговоров.",
+          "website": "https://vinotel.ge/",
+          "img": ""
+        }
+      ],
       "brands": [],
-      "sideEvents": []
+      "sideEvents": [
+        {
+          "title": "SBC Summit Tbilisi — Opening Party",
+          "date": "15 июля, 19:30–00:00",
+          "location": "Rolling Stone Rooftop Bar, Telegraph Hotel",
+          "type": "party",
+          "description": "Официальная вечеринка открытия. Открыта для всех участников (по бейджу).",
+          "registerUrl": "https://sbcevents.com/sbc-summit-tbilisi/",
+          "registerLabel": "По бейджу"
+        },
+        {
+          "title": "SBC Summit Tbilisi — Closing Party",
+          "date": "16 июля, 21:00–02:00",
+          "location": "Noble Savage",
+          "type": "party",
+          "description": "Официальная закрывающая вечеринка. Открыта для всех участников (по бейджу).",
+          "registerUrl": "https://sbcevents.com/sbc-summit-tbilisi/",
+          "registerLabel": "По бейджу"
+        },
+        {
+          "title": "C-Level & Operator VIP Dinner",
+          "date": "16 июля, 19:00–22:00",
+          "location": "Filini, Radisson Blu Iveria Hotel",
+          "type": "dinner",
+          "description": "Закрытый VIP-ужин для операторов и топ-менеджмента. По приглашению.",
+          "registerUrl": "https://sbcevents.com/sbc-summit-tbilisi/",
+          "registerLabel": "Подробнее"
+        },
+        {
+          "title": "Poker Tournament (EvenBet × betlive.com)",
+          "date": "15 июля, 17:00–18:30",
+          "location": "Sheraton Grand Tbilisi Metechi Palace",
+          "type": "meetup",
+          "description": "Покерный турнир от EvenBet Gaming и betlive.com прямо на площадке. По приглашению.",
+          "registerUrl": "https://sbcevents.com/sbc-summit-tbilisi/",
+          "registerLabel": "Подробнее"
+        }
+      ]
     },
     {
       "id": "igb_affiliate_barcelona_2026",

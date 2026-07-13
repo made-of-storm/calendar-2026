@@ -397,6 +397,7 @@ function restaurantRow(r, i) {
     </div>
     <div class="field--row">
       <label class="field"><span>Средний чек ($50-100)</span><input class="rest-check" value="${escapeAttr(r.avgCheck || '')}" /></label>
+      <label class="field"><span>Ссылка (сайт / Google Maps)</span><input class="rest-website" value="${escapeAttr(r.website || '')}" /></label>
     </div>
     <label class="field"><span>Описание</span><textarea class="rest-desc">${escapeHtml(r.description || '')}</textarea></label>
     ${imgWidget('Фото ресторана', r.img, 'rest-img')}
@@ -496,6 +497,8 @@ function readRestaurants() {
       description: rowVal(row, '.rest-desc'),
       img: rowVal(row, '.rest-img')
     };
+    const website = rowVal(row, '.rest-website');
+    if (website) o.website = website;
     return o;
   }).filter(o => o.name);
 }
