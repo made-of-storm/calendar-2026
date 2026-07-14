@@ -607,6 +607,26 @@ function applyFilters() {
 const PROMO_PENDING_MESSAGE = "Усиленно добываем для вас скидку";
 
 // ------------------------------
+// Analytics (Umami)
+// ------------------------------
+function trackEvent(name, data) {
+  try {
+    if (typeof umami === 'function') umami.track(name, data);
+  } catch (_) { /* analytics optional */ }
+}
+
+function openEventFromUrl() {
+  const params = new URLSearchParams(window.location.search);
+  const eventId = params.get('event');
+  if (!eventId || !EVENTS[eventId]) return;
+  const tab = params.get('tab');
+  populateModal(eventId);
+  openModal();
+  if (tab && ['guide', 'events', 'awards'].includes(tab)) setActiveTab(tab);
+  trackEvent('deep_link_open', { event: eventId, tab: tab || 'guide' });
+}
+
+// ------------------------------
 // Modal open/close + tabs
 // ------------------------------
 function openModal() {
@@ -703,6 +723,7 @@ function populateModal(eventId) {
   if (!event) return;
 
   currentEventId = eventId;
+  trackEvent('event_open', { event: eventId, title: event.title || '' });
 
   // === HERO с погодой ===
   const heroEl = qs("#modalHero");
@@ -943,7 +964,7 @@ function populateRestaurantsTab(restaurants, partnerPromo) {
     const vibeInfo = vibeMap[r.vibe] || { label: r.vibe, class: 'vibe-tag-sit' };
     const hasLink = !!r.website;
     const openTag = hasLink
-      ? `<a href="${r.website}" target="_blank" rel="noopener" class="restaurant-card relative flex gap-4 p-4 rounded-xl border border-[#333333] bg-[#1B1B1B] mb-3 cursor-pointer" style="text-decoration:none;color:inherit">`
+      ? `<a href="${r.website}" target="_blank" rel="noopener" class="restaurant-card relative flex gap-4 p-4 rounded-xl border border-[#333333] bg-[#1B1B1B] mb-3 cursor-pointer" style="text-decoration:none;color:inherit" data-track-restaurant="${(r.name || '').replace(/"/g, '&quot;')}">`
       : `<div class="restaurant-card relative flex gap-4 p-4 rounded-xl border border-[#333333] bg-[#1B1B1B] mb-3">`;
     const closeTag = hasLink ? `</a>` : `</div>`;
     const linkIcon = hasLink
@@ -1327,8 +1348,19 @@ document.addEventListener("DOMContentLoaded", async () => {
   qsa("[data-tab-btn]").forEach((btn) => {
     btn.addEventListener("click", () => {
       const tab = btn.getAttribute("data-tab-btn");
-      if (tab) setActiveTab(tab);
+      if (tab) {
+        setActiveTab(tab);
+        if (currentEventId) trackEvent('tab_open', { event: currentEventId, tab });
+      }
     });
+  });
+
+  openEventFromUrl();
+
+  qs("#guide")?.addEventListener("click", (e) => {
+    const link = e.target.closest("[data-track-restaurant]");
+    if (!link || !currentEventId) return;
+    trackEvent("restaurant_click", { event: currentEventId, restaurant: link.getAttribute("data-track-restaurant") || "" });
   });
 
   // ------------------------------
@@ -1457,6 +1489,7 @@ function initCalendarExport() {
     if (!ev) return;
 
     if (ev.promo) {
+      trackEvent('promo_view', { event: currentEventId, promo: ev.promo });
       showPromoToast(ev.promo, ev.promoNote);
     } else {
       showPromoToast(null, null, { pending: true });
@@ -1526,6 +1559,7 @@ function copyPromoCode() {
 
   // Copy to clipboard
   navigator.clipboard.writeText(code).then(() => {
+    if (currentEventId) trackEvent('promo_copy', { event: currentEventId, promo: code });
     copyBtn.classList.add("copied");
     copyBtn.textContent = "✓ Скопировано!";
 
