@@ -26,7 +26,7 @@ const HEADERS = [
   'id', 'month', 'sortOrder', 'visible', 'cardType', 'cardStyle', 'accentColor',
   'tier', 'attendees', 'country', 'startDate', 'endDate', 'title', 'datesLabel',
   'locationLine', 'category', 'heroImage', 'description', 'website', 'telegramChannel',
-  'startISO', 'endISO', 'weather', 'promo', 'awards', 'restaurants', 'sideEvents'
+  'startISO', 'endISO', 'weather', 'promo', 'promoNote', 'awards', 'restaurants', 'sideEvents'
 ];
 
 const VISA_HEADERS = ['citizenship', 'country', 'required', 'type', 'notes'];

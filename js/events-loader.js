@@ -32,7 +32,8 @@ function toModalEvent(ev) {
     restaurants: ev.restaurants || [],
     brands: ev.brands || [],
     sideEvents: ev.sideEvents || [],
-    promo: ev.promo || null
+    promo: ev.promo || null,
+    promoNote: ev.promoNote || null
   };
 }
 

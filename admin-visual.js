@@ -1,7 +1,20 @@
 /**
- * Визуальный редактор: тот же календарь, правки в открытой карточке.
+ * Визуальный редактор календаря: сетка + боковая панель со всеми полями.
  */
 const CMS_STORAGE = 'sr_calendar_admin';
+
+const CMS_MONTHS = [
+  '', 'Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь',
+  'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'
+];
+
+const CMS_ACCENT_COLORS = [
+  ['#2E39F7', 'Синий'],
+  ['#F5DA0F', 'Жёлтый'],
+  ['#C8E712', 'Зелёный'],
+  ['#F6ADE5', 'Розовый'],
+  ['#EAB308', 'Золотой']
+];
 
 const cms = {
   apiUrl: '',
@@ -20,6 +33,54 @@ function cmsToast(msg) {
   el.textContent = msg;
   document.body.appendChild(el);
   setTimeout(() => el.remove(), 2600);
+}
+
+function escAttr(s) {
+  return String(s ?? '').replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
+}
+
+function escHtml(s) {
+  return String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+function cmsOpt(list, val) {
+  return list.map(v => `<option value="${v}" ${v === val ? 'selected' : ''}>${v}</option>`).join('');
+}
+
+function cmsMonthOptions(selected) {
+  let h = '';
+  for (let m = 1; m <= 12; m++) {
+    h += `<option value="${m}" ${m === Number(selected) ? 'selected' : ''}>${CMS_MONTHS[m]}</option>`;
+  }
+  return h;
+}
+
+function cmsAccentOptions(val) {
+  const cur = val || '#2E39F7';
+  let h = CMS_ACCENT_COLORS.map(([c, l]) =>
+    `<option value="${c}" ${c === cur ? 'selected' : ''}>${l} (${c})</option>`
+  ).join('');
+  if (!CMS_ACCENT_COLORS.some(([c]) => c === cur)) {
+    h += `<option value="${escAttr(cur)}" selected>${escAttr(cur)}</option>`;
+  }
+  return h;
+}
+
+function toDateInput(v) {
+  if (!v) return '';
+  if (/^\d{4}-\d{2}-\d{2}$/.test(String(v))) return String(v);
+  const d = new Date(v);
+  if (Number.isNaN(d.getTime())) return '';
+  const p = n => String(n).padStart(2, '0');
+  return d.getFullYear() + '-' + p(d.getMonth() + 1) + '-' + p(d.getDate());
+}
+
+function slugify(title) {
+  return (title || 'event')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '_')
+    .replace(/^_|_$/g, '')
+    .slice(0, 40) + '_2026';
 }
 
 function loadCmsSession() {
@@ -68,325 +129,439 @@ async function cmsReloadCalendar() {
     if (typeof updateAllVisaTags === 'function') updateAllVisaTags();
     if (typeof applyFilters === 'function') applyFilters();
   }
+  if (cms.editingId) {
+    const still = cms.events.find(e => e.id === cms.editingId);
+    if (still) {
+      cms.draft = JSON.parse(JSON.stringify(still));
+      cmsRenderEditor(cms.draft);
+      cmsHighlightCard(cms.editingId);
+    }
+  }
+}
+
+function cmsHighlightCard(id) {
+  document.querySelectorAll('.event-card.cms-selected').forEach(c => c.classList.remove('cms-selected'));
+  const card = document.querySelector(`.event-card[data-event-id="${CSS.escape(id)}"]`);
+  if (card) card.classList.add('cms-selected');
 }
 
 function cmsBindCards() {
   document.querySelectorAll('.event-card[data-event-id]').forEach(card => {
     const clone = card.cloneNode(true);
     card.parentNode.replaceChild(clone, card);
-    clone.addEventListener('click', () => {
+    clone.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
       const id = clone.getAttribute('data-event-id');
-      if (!id) return;
-      populateModal(id);
-      openModal();
+      if (id) cmsSelectEvent(id);
     });
   });
 }
 
-function cmsGetDraft() {
-  if (!cms.draft || cms.draft.id !== cms.editingId) {
-    cms.draft = JSON.parse(JSON.stringify(cms.events.find(e => e.id === cms.editingId) || {}));
-  }
-  return cms.draft;
+function cmsSelectEvent(id) {
+  const ev = cms.events.find(e => e.id === id);
+  if (!ev) return;
+  cms.editingId = id;
+  cms.draft = JSON.parse(JSON.stringify(ev));
+  cmsRenderEditor(cms.draft);
+  cmsHighlightCard(id);
+  cms$('#cmsPreviewBtn')?.removeAttribute('disabled');
+  cms$('#cmsHideBtn')?.removeAttribute('disabled');
+  const card = document.querySelector(`.event-card[data-event-id="${CSS.escape(id)}"]`);
+  card?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
 }
 
-function cmsInjectMetaPanel(ev) {
-  let panel = cms$('#cmsMetaPanel');
-  if (panel) panel.remove();
+function cmsImgWidget(label, url, urlClass, inputId) {
+  const safe = escAttr(url || '');
+  const idAttr = inputId ? ` id="${escAttr(inputId)}"` : '';
+  return `<label class="cms-fl cms-img-widget">
+    <span>${label}</span>
+    <input${idAttr} class="${urlClass} js-img-url" value="${safe}" placeholder="images/... или https://..." />
+    ${cms.canWrite ? '<input type="file" class="js-img-file" accept="image/jpeg,image/png,image/webp,image/svg+xml" /><span class="cms-hint js-img-status"></span>' : ''}
+    <div class="cms-img-preview cms-img-preview--sm js-img-preview">${url ? `<img src="${safe}" alt="" />` : '<span class="cms-hint">Нет</span>'}</div>
+  </label>`;
+}
 
-  panel = document.createElement('div');
-  panel.id = 'cmsMetaPanel';
-  panel.className = 'cms-meta-panel';
-  panel.innerHTML = `
-    <div class="cms-meta-panel__title">Поля карточки (как на сайте)</div>
-    <div class="cms-meta-grid">
-      <label><span>Даты (подпись)</span><input type="text" data-cms="datesLabel" value="${escAttr(ev.datesLabel || '')}" /></label>
-      <label><span>Локация</span><input type="text" data-cms="locationLine" value="${escAttr(ev.locationLine || '')}" /></label>
-      <label><span>Страна (код)</span><input type="text" data-cms="country" value="${escAttr(ev.country || '')}" maxlength="2" /></label>
-      <label><span>Участников</span><input type="number" data-cms="attendees" value="${escAttr(ev.attendees || 0)}" /></label>
-      <label><span>Дата начала</span><input type="date" data-cms="startDate" value="${escAttr(ev.startDate || '')}" /></label>
-      <label><span>Дата конца</span><input type="date" data-cms="endDate" value="${escAttr(ev.endDate || '')}" /></label>
-      <label><span>Промокод</span><input type="text" data-cms="promo" value="${escAttr(ev.promo || '')}" placeholder="пусто = скидка в работе" /></label>
-      <label><span>Категория</span><input type="text" data-cms="category" value="${escAttr(ev.category || '')}" /></label>
-      <label class="full"><span>Сайт</span><input type="url" data-cms="website" value="${escAttr(ev.website || '')}" /></label>
-      <label class="full"><span>Telegram</span><input type="url" data-cms="telegramChannel" value="${escAttr(ev.telegramChannel || '')}" /></label>
-      <label><span>Погода °C</span><input type="text" data-cms="weatherTemp" value="${escAttr(ev.weather?.temp || '')}" /></label>
-      <label class="full"><span>Погода текст</span><input type="text" data-cms="weatherDesc" value="${escAttr(ev.weather?.description || '')}" /></label>
-      <label class="full"><span>Обложка (URL)</span><input type="text" data-cms="heroImage" value="${escAttr(ev.heroImage || '')}" /></label>
+function cmsRestaurantRow(r, i) {
+  return `<div class="cms-sub rest-row" data-rest="${i}">
+    <div class="cms-form-row">
+      <label class="cms-fl"><span>Название</span><input class="rest-name" value="${escAttr(r.name)}" /></label>
+      <label class="cms-fl"><span>Вайб</span><select class="rest-vibe">${cmsOpt(['посидеть', 'громко', 'тихо', 'потанцевать'], r.vibe || 'посидеть')}</select></label>
+    </div>
+    <div class="cms-form-row">
+      <label class="cms-fl"><span>Средний чек</span><input class="rest-check" value="${escAttr(r.avgCheck || '')}" /></label>
+      <label class="cms-fl"><span>Ссылка</span><input class="rest-website" value="${escAttr(r.website || '')}" /></label>
+    </div>
+    <label class="cms-fl"><span>Описание</span><textarea class="rest-desc">${escHtml(r.description || '')}</textarea></label>
+    ${cmsImgWidget('Фото', r.img, 'rest-img')}
+    <div class="cms-sub__actions"><button type="button" class="cms-btn cms-btn--sm cms-btn--ghost" data-remove-rest="${i}">Удалить</button></div>
+  </div>`;
+}
+
+function cmsSideRow(se, i) {
+  return `<div class="cms-sub side-row" data-side="${i}">
+    <div class="cms-form-row">
+      <label class="cms-fl"><span>Название</span><input class="se-title" value="${escAttr(se.title)}" /></label>
+      <label class="cms-fl"><span>Дата</span><input class="se-date" value="${escAttr(se.date)}" /></label>
+    </div>
+    <label class="cms-fl"><span>Место</span><input class="se-location" value="${escAttr(se.location)}" /></label>
+    <label class="cms-fl"><span>Описание</span><textarea class="se-desc">${escHtml(se.description || '')}</textarea></label>
+    <div class="cms-form-row">
+      <label class="cms-fl"><span>Тип</span><select class="se-type">${cmsOpt(['party', 'dinner', 'awards', 'meetup', 'networking', 'sport'], se.type || 'party')}</select></label>
+      <label class="cms-fl"><span>Подпись кнопки</span><input class="se-label" value="${escAttr(se.registerLabel || '')}" placeholder="Билеты / По бейджу" /></label>
+    </div>
+    <label class="cms-fl"><span>Ссылка регистрации</span><input class="se-url" value="${escAttr(se.registerUrl || '')}" /></label>
+    ${cmsImgWidget('Картинка', se.img, 'se-img')}
+    <div class="cms-sub__actions"><button type="button" class="cms-btn cms-btn--sm cms-btn--ghost" data-remove-side="${i}">Удалить</button></div>
+  </div>`;
+}
+
+function cmsAwardRow(a, i) {
+  const cats = (a.categories || []).join('\n');
+  return `<div class="cms-sub award-row" data-award="${i}">
+    <label class="cms-fl"><span>Название</span><input class="aw-name" value="${escAttr(a.name)}" /></label>
+    <label class="cms-fl"><span>Дата церемонии</span><input class="aw-date" value="${escAttr(a.date || '')}" /></label>
+    <label class="cms-fl"><span>Категории (по одной на строку)</span><textarea class="aw-cats">${escHtml(cats)}</textarea></label>
+    <label class="cms-fl"><span>Сайт</span><input class="aw-web" value="${escAttr(a.website || '')}" /></label>
+    <div class="cms-sub__actions"><button type="button" class="cms-btn cms-btn--sm cms-btn--ghost" data-remove-award="${i}">Удалить</button></div>
+  </div>`;
+}
+
+function cmsRenderEditor(ev) {
+  const root = cms$('#cmsEditorRoot');
+  if (!root || !ev) return;
+
+  const w = ev.weather || { temp: '', description: '' };
+  const restRows = (ev.restaurants || []).map(cmsRestaurantRow).join('');
+  const sideRows = (ev.sideEvents || []).map(cmsSideRow).join('');
+  const awardRows = (ev.awards || []).map(cmsAwardRow).join('');
+
+  root.innerHTML = `
+    <div class="cms-editor__head">
+      <h2>${escHtml(ev.title || 'Новый ивент')}</h2>
+      <div class="cms-editor__actions">
+        ${cms.canWrite ? '<button type="button" class="cms-btn cms-btn--primary cms-btn--sm" id="cmsDrawerSave">Сохранить</button>' : ''}
+        ${cms.canWrite && ev.id && !ev._isNew ? '<button type="button" class="cms-btn cms-btn--danger cms-btn--sm" id="cmsDrawerDelete">Удалить</button>' : ''}
+      </div>
+    </div>
+    ${!cms.canWrite ? '<p class="cms-hint">Только просмотр — укажи API и пароль для сохранения</p>' : ''}
+
+    <div class="cms-form" id="cmsEditorForm">
+      <div class="cms-section">
+        <h3>Карточка в сетке календаря</h3>
+        <p class="cms-hint">То, что видно в маленькой/большой карточке на главной</p>
+        <label class="cms-fl"><span>Название на карточке</span><input id="f_title" value="${escAttr(ev.title)}" /></label>
+        <label class="cms-fl"><span>Короткие даты (19–20 Янв)</span><input id="f_datesLabel" value="${escAttr(ev.datesLabel)}" /></label>
+        <div class="cms-form-row">
+          <label class="cms-fl"><span>Место (Spain, Barcelona)</span><input id="f_locationLine" value="${escAttr(ev.locationLine)}" /></label>
+          <label class="cms-fl"><span>Код страны</span><input id="f_country" value="${escAttr(ev.country)}" maxlength="6" /></label>
+        </div>
+        <div class="cms-form-row">
+          <label class="cms-fl"><span>Участников (число)</span><input id="f_attendees" type="number" value="${ev.attendees || 0}" /></label>
+          <label class="cms-fl"><span>Категория (тег)</span><input id="f_category" value="${escAttr(ev.category)}" /></label>
+        </div>
+        <div class="cms-form-row">
+          <label class="cms-fl"><span>Тип карточки</span><select id="f_cardType">${cmsOpt(['compact', 'major'], ev.cardType || 'compact')}</select></label>
+          <label class="cms-fl"><span>Стиль major-карточки</span><select id="f_cardStyle">${cmsOpt(['elegant-dark', 'elegant-green'], ev.cardStyle || 'elegant-dark')}</select></label>
+        </div>
+        <div class="cms-form-row">
+          <label class="cms-fl"><span>Цвет полоски (compact)</span><select id="f_accentColor">${cmsAccentOptions(ev.accentColor)}</select></label>
+          <label class="cms-fl"><span>Размер (tier)</span><select id="f_tier">${cmsOpt(['mega', 'large', 'mid', 'small'], ev.tier || 'mid')}</select></label>
+        </div>
+        ${cmsImgWidget('Обложка major-карточки', ev.heroImage, 'hero-img', 'f_heroImage')}
+      </div>
+
+      <div class="cms-section">
+        <h3>Календарь и сортировка</h3>
+        <div class="cms-form-row">
+          <label class="cms-fl"><span>Месяц в сетке</span><select id="f_month">${cmsMonthOptions(ev.month)}</select></label>
+          <label class="cms-fl"><span>Порядок в месяце</span><input id="f_sortOrder" type="number" value="${ev.sortOrder || 0}" /></label>
+        </div>
+        <div class="cms-form-row">
+          <label class="cms-fl"><span>Дата начала</span><input id="f_startDate" type="date" value="${toDateInput(ev.startDate)}" /></label>
+          <label class="cms-fl"><span>Дата окончания</span><input id="f_endDate" type="date" value="${toDateInput(ev.endDate)}" /></label>
+        </div>
+        <label class="cms-fl cms-check"><input type="checkbox" id="f_visible" ${ev.visible !== false ? 'checked' : ''} /> Показывать на сайте</label>
+        <label class="cms-fl"><span>ID (латиница, не менять без нужды)</span><input id="f_id" value="${escAttr(ev.id)}" /></label>
+      </div>
+
+      <div class="cms-section">
+        <h3>Модалка (полная карточка)</h3>
+        <label class="cms-fl"><span>Описание</span><textarea id="f_description">${escHtml(ev.description || '')}</textarea></label>
+        <div class="cms-form-row">
+          <label class="cms-fl"><span>Оф. сайт</span><input id="f_website" type="url" value="${escAttr(ev.website)}" /></label>
+          <label class="cms-fl"><span>Telegram</span><input id="f_telegram" value="${escAttr(ev.telegramChannel || '')}" /></label>
+        </div>
+        <div class="cms-form-row">
+          <label class="cms-fl"><span>Погода — температура</span><input id="f_weatherTemp" value="${escAttr(w.temp || '')}" placeholder="18-22°C" /></label>
+          <label class="cms-fl"><span>Погода — текст</span><input id="f_weatherDesc" value="${escAttr(w.description || '')}" /></label>
+        </div>
+        <div class="cms-form-row">
+          <label class="cms-fl"><span>Промокод</span><input id="f_promo" value="${escAttr(ev.promo || '')}" placeholder="пусто = скидка в работе" /></label>
+          <label class="cms-fl"><span>Примечание к промо</span><input id="f_promoNote" value="${escAttr(ev.promoNote || '')}" placeholder="−10%" /></label>
+        </div>
+      </div>
+
+      <div class="cms-section">
+        <h3>Рестораны (${(ev.restaurants || []).length})</h3>
+        <div id="cmsRestList">${restRows || '<p class="cms-hint">Нет ресторанов</p>'}</div>
+        ${cms.canWrite ? '<button type="button" class="cms-btn cms-btn--sm" id="cmsAddRest">+ Ресторан</button>' : ''}
+      </div>
+
+      <div class="cms-section">
+        <h3>Сайд-ивенты (${(ev.sideEvents || []).length})</h3>
+        <div id="cmsSideList">${sideRows || '<p class="cms-hint">Нет сайд-ивентов</p>'}</div>
+        ${cms.canWrite ? '<button type="button" class="cms-btn cms-btn--sm" id="cmsAddSide">+ Сайд-ивент</button>' : ''}
+      </div>
+
+      <div class="cms-section">
+        <h3>Awards (${(ev.awards || []).length})</h3>
+        <div id="cmsAwardList">${awardRows || '<p class="cms-hint">Нет awards</p>'}</div>
+        ${cms.canWrite ? '<button type="button" class="cms-btn cms-btn--sm" id="cmsAddAward">+ Award</button>' : ''}
+      </div>
     </div>
   `;
 
-  const stats = cms$('#modalStats');
-  if (stats) stats.after(panel);
+  cms$('#cmsDrawerSave')?.addEventListener('click', cmsSave);
+  cms$('#cmsDrawerDelete')?.addEventListener('click', cmsDeleteCurrent);
 
-  panel.querySelector('[data-cms="heroImage"]')?.addEventListener('change', (e) => {
-    const url = e.target.value.trim();
-    const hero = cms$('.modal-hero');
-    if (hero && url) {
-      hero.style.backgroundImage = `linear-gradient(to bottom, transparent 40%, rgba(27,27,27,0.95)), url('${url}')`;
-    }
+  cms$('#cmsAddRest')?.addEventListener('click', () => {
+    cmsSyncDraftFromForm();
+    cms.draft.restaurants = cms.draft.restaurants || [];
+    cms.draft.restaurants.push({ name: '', vibe: 'посидеть', avgCheck: '', description: '', img: '', website: '' });
+    cmsRenderEditor(cms.draft);
   });
-}
-
-function cmsInjectHeroUpload() {
-  const heroWrap = cms$('#modalHero');
-  if (!heroWrap || heroWrap.querySelector('.cms-hero-edit')) return;
-  const bar = document.createElement('div');
-  bar.className = 'cms-hero-edit';
-  bar.innerHTML = `<button type="button" class="cms-btn" id="cmsHeroUploadBtn">📷 Фото</button>
-    <input type="file" accept="image/*" id="cmsHeroFile" hidden />`;
-  heroWrap.querySelector('.modal-hero')?.appendChild(bar);
-
-  cms$('#cmsHeroUploadBtn')?.addEventListener('click', () => cms$('#cmsHeroFile')?.click());
-  cms$('#cmsHeroFile')?.addEventListener('change', async (e) => {
-    const file = e.target.files?.[0];
-    if (!file || !cms.canWrite) return;
-    try {
-      cmsToast('Загружаю фото…');
-      const dataUrl = await new Promise((res, rej) => {
-        const r = new FileReader();
-        r.onload = () => res(r.result);
-        r.onerror = rej;
-        r.readAsDataURL(file);
-      });
-      const data = await cmsApiPost({ action: 'uploadImage', dataUrl, name: file.name });
-      const inp = cms$('#cmsMetaPanel [data-cms="heroImage"]');
-      if (inp) {
-        inp.value = data.url;
-        inp.dispatchEvent(new Event('change'));
-      }
-      cmsToast('Фото загружено');
-    } catch (err) {
-      alert(err.message);
-    }
-    e.target.value = '';
+  cms$('#cmsAddSide')?.addEventListener('click', () => {
+    cmsSyncDraftFromForm();
+    cms.draft.sideEvents = cms.draft.sideEvents || [];
+    cms.draft.sideEvents.push({ title: '', date: '', location: '', type: 'party', description: '' });
+    cmsRenderEditor(cms.draft);
   });
-}
+  cms$('#cmsAddAward')?.addEventListener('click', () => {
+    cmsSyncDraftFromForm();
+    cms.draft.awards = cms.draft.awards || [];
+    cms.draft.awards.push({ name: '', date: '', categories: [], website: '' });
+    cmsRenderEditor(cms.draft);
+  });
 
-function cmsInjectListEditors(ev) {
-  cmsInjectRestaurantEditors(ev.restaurants || []);
-  cmsInjectSideEventEditors(ev.sideEvents || []);
-}
-
-function cmsInjectRestaurantEditors(list) {
-  const guide = cms$('#guide');
-  if (!guide) return;
-
-  let tools = guide.querySelector('.cms-list-tools--rest');
-  if (!tools) {
-    tools = document.createElement('div');
-    tools.className = 'cms-list-tools cms-list-tools--rest';
-    tools.innerHTML = `<button type="button" class="cms-btn" id="cmsAddRest">+ Ресторан</button>`;
-    guide.prepend(tools);
-    cms$('#cmsAddRest')?.addEventListener('click', () => {
-      const d = cmsGetDraft();
-      d.restaurants = d.restaurants || [];
-      d.restaurants.push({ name: 'Новый ресторан', vibe: 'посидеть', avgCheck: '', description: '', img: '', website: '' });
-      populateModal(cms.editingId);
-      window.onCmsModalPopulated(cms.editingId, EVENTS[cms.editingId]);
+  root.querySelectorAll('[data-remove-rest]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      cmsSyncDraftFromForm();
+      cms.draft.restaurants.splice(Number(btn.dataset.removeRest), 1);
+      cmsRenderEditor(cms.draft);
     });
-  }
+  });
+  root.querySelectorAll('[data-remove-side]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      cmsSyncDraftFromForm();
+      cms.draft.sideEvents.splice(Number(btn.dataset.removeSide), 1);
+      cmsRenderEditor(cms.draft);
+    });
+  });
+  root.querySelectorAll('[data-remove-award]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      cmsSyncDraftFromForm();
+      cms.draft.awards.splice(Number(btn.dataset.removeAward), 1);
+      cmsRenderEditor(cms.draft);
+    });
+  });
 
-  guide.querySelectorAll('.restaurant-card').forEach((card, i) => {
-    if (card.closest('.cms-item-edit')) return;
-    const wrap = document.createElement('div');
-    wrap.className = 'cms-item-edit';
-    const r = list[i] || {};
-    wrap.innerHTML = `
-      <div class="cms-item-edit__bar">
-        <input data-r="name" value="${escAttr(r.name || '')}" placeholder="Название" />
-        <select data-r="vibe">
-          ${['посидеть','громко','тихо','потанцевать'].map(v =>
-            `<option value="${v}" ${r.vibe === v ? 'selected' : ''}>${v}</option>`).join('')}
-        </select>
-        <input data-r="avgCheck" value="${escAttr(r.avgCheck || '')}" placeholder="Чек" />
-        <input data-r="website" value="${escAttr(r.website || '')}" placeholder="Ссылка" />
-        <input data-r="img" value="${escAttr(r.img || '')}" placeholder="URL фото" />
-        <textarea data-r="description" placeholder="Описание">${escHtml(r.description || '')}</textarea>
-        <button type="button" data-r="del">Удалить</button>
-      </div>`;
-    card.parentNode.insertBefore(wrap, card);
-    wrap.appendChild(card);
-    wrap.querySelector('[data-r="del"]')?.addEventListener('click', () => {
-      const d = cmsGetDraft();
-      d.restaurants.splice(i, 1);
-      populateModal(cms.editingId);
-      window.onCmsModalPopulated(cms.editingId, EVENTS[cms.editingId]);
+  cms$('#f_heroImage')?.addEventListener('input', (e) => {
+    const widget = e.target.closest('.cms-img-widget');
+    cmsUpdateImgPreview(e.target.value, widget?.querySelector('.js-img-preview'));
+  });
+  root.querySelectorAll('.js-img-url').forEach(inp => {
+    inp.addEventListener('input', () => {
+      const widget = inp.closest('.cms-img-widget');
+      cmsUpdateImgPreview(inp.value, widget?.querySelector('.js-img-preview'));
     });
   });
 }
 
-function cmsInjectSideEventEditors(list) {
-  const tab = cms$('#events');
-  if (!tab) return;
-
-  let tools = tab.querySelector('.cms-list-tools--side');
-  if (!tools) {
-    tools = document.createElement('div');
-    tools.className = 'cms-list-tools cms-list-tools--side';
-    tools.innerHTML = `<button type="button" class="cms-btn" id="cmsAddSide">+ Сайд-ивент</button>`;
-    tab.prepend(tools);
-    cms$('#cmsAddSide')?.addEventListener('click', () => {
-      const d = cmsGetDraft();
-      d.sideEvents = d.sideEvents || [];
-      d.sideEvents.push({ title: 'Новый ивент', date: '', location: '', type: 'party', description: '' });
-      populateModal(cms.editingId);
-      window.onCmsModalPopulated(cms.editingId, EVENTS[cms.editingId]);
-    });
-  }
-
-  tab.querySelectorAll('.side-event-card').forEach((card, i) => {
-    if (card.closest('.cms-item-edit')) return;
-    const wrap = document.createElement('div');
-    wrap.className = 'cms-item-edit';
-    const se = list[i] || {};
-    wrap.innerHTML = `
-      <div class="cms-item-edit__bar">
-        <input data-s="title" value="${escAttr(se.title || '')}" placeholder="Название" />
-        <input data-s="date" value="${escAttr(se.date || '')}" placeholder="Дата" />
-        <input data-s="location" value="${escAttr(se.location || '')}" placeholder="Место" />
-        <select data-s="type">
-          ${['party','dinner','meetup','awards','networking','sport'].map(t =>
-            `<option value="${t}" ${se.type === t ? 'selected' : ''}>${t}</option>`).join('')}
-        </select>
-        <input data-s="registerUrl" value="${escAttr(se.registerUrl || '')}" placeholder="Ссылка" />
-        <input data-s="img" value="${escAttr(se.img || '')}" placeholder="URL картинки" />
-        <textarea data-s="description" placeholder="Описание">${escHtml(se.description || '')}</textarea>
-        <button type="button" data-s="del">Удалить</button>
-      </div>`;
-    card.parentNode.insertBefore(wrap, card);
-    wrap.appendChild(card);
-    wrap.querySelector('[data-s="del"]')?.addEventListener('click', () => {
-      const d = cmsGetDraft();
-      d.sideEvents.splice(i, 1);
-      populateModal(cms.editingId);
-      window.onCmsModalPopulated(cms.editingId, EVENTS[cms.editingId]);
-    });
-  });
+function cmsUpdateImgPreview(url, box) {
+  if (!box) return;
+  box.innerHTML = url.trim()
+    ? `<img src="${escAttr(url.trim())}" alt="" />`
+    : '<span class="cms-hint">Нет</span>';
 }
 
-function cmsReadListsFromDom() {
-  const restaurants = [];
-  cms$('#guide')?.querySelectorAll('.cms-item-edit').forEach(wrap => {
+function cmsRowVal(row, sel) {
+  const el = row.querySelector(sel);
+  return el ? el.value.trim() : '';
+}
+
+function cmsReadRestaurants() {
+  return [...(cms$('#cmsRestList')?.querySelectorAll('.rest-row') || [])].map(row => {
     const o = {
-      name: wrap.querySelector('[data-r="name"]')?.value.trim() || '',
-      vibe: wrap.querySelector('[data-r="vibe"]')?.value || 'посидеть',
-      avgCheck: wrap.querySelector('[data-r="avgCheck"]')?.value.trim() || '',
-      description: wrap.querySelector('[data-r="description"]')?.value.trim() || '',
-      img: wrap.querySelector('[data-r="img"]')?.value.trim() || '',
+      name: cmsRowVal(row, '.rest-name'),
+      vibe: row.querySelector('.rest-vibe')?.value || 'посидеть',
+      avgCheck: cmsRowVal(row, '.rest-check'),
+      description: cmsRowVal(row, '.rest-desc'),
+      img: cmsRowVal(row, '.rest-img')
     };
-    const web = wrap.querySelector('[data-r="website"]')?.value.trim();
+    const web = cmsRowVal(row, '.rest-website');
     if (web) o.website = web;
-    if (o.name) restaurants.push(o);
-  });
+    return o;
+  }).filter(o => o.name);
+}
 
-  const sideEvents = [];
-  cms$('#events')?.querySelectorAll('.cms-item-edit').forEach(wrap => {
+function cmsReadSideEvents() {
+  return [...(cms$('#cmsSideList')?.querySelectorAll('.side-row') || [])].map(row => {
     const o = {
-      title: wrap.querySelector('[data-s="title"]')?.value.trim() || '',
-      date: wrap.querySelector('[data-s="date"]')?.value.trim() || '',
-      location: wrap.querySelector('[data-s="location"]')?.value.trim() || '',
-      type: wrap.querySelector('[data-s="type"]')?.value || 'party',
-      description: wrap.querySelector('[data-s="description"]')?.value.trim() || '',
+      title: cmsRowVal(row, '.se-title'),
+      date: cmsRowVal(row, '.se-date'),
+      location: cmsRowVal(row, '.se-location'),
+      type: row.querySelector('.se-type')?.value || 'party',
+      description: cmsRowVal(row, '.se-desc')
     };
-    const url = wrap.querySelector('[data-s="registerUrl"]')?.value.trim();
-    const img = wrap.querySelector('[data-s="img"]')?.value.trim();
+    const url = cmsRowVal(row, '.se-url');
+    const label = cmsRowVal(row, '.se-label');
+    const img = cmsRowVal(row, '.se-img');
     if (url) o.registerUrl = url;
+    if (label) o.registerLabel = label;
     if (img) o.img = img;
-    if (o.title || o.date) sideEvents.push(o);
-  });
+    return o;
+  }).filter(o => o.title || o.date || o.location);
+}
 
-  return { restaurants, sideEvents };
+function cmsReadAwards() {
+  return [...(cms$('#cmsAwardList')?.querySelectorAll('.award-row') || [])].map(row => {
+    const catsRaw = row.querySelector('.aw-cats')?.value || '';
+    const categories = catsRaw.split('\n').map(s => s.trim()).filter(Boolean);
+    const o = {
+      name: cmsRowVal(row, '.aw-name'),
+      date: cmsRowVal(row, '.aw-date'),
+      categories,
+      website: cmsRowVal(row, '.aw-web')
+    };
+    return o;
+  }).filter(o => o.name);
+}
+
+function cmsReadWeather() {
+  const temp = cms$('#f_weatherTemp')?.value.trim() || '';
+  const desc = cms$('#f_weatherDesc')?.value.trim() || '';
+  if (!temp && !desc) return null;
+  return { temp, description: desc };
 }
 
 function cmsCollectEvent() {
-  const base = { ...cmsGetDraft() };
-  const panel = cms$('#cmsMetaPanel');
-  const val = (k) => panel?.querySelector(`[data-cms="${k}"]`)?.value.trim() ?? '';
+  const g = id => cms$('#' + id);
+  const title = g('f_title')?.value.trim() || '';
+  let id = g('f_id')?.value.trim() || '';
+  if (!id && title) id = slugify(title);
 
-  base.title = cms$('.modal-title')?.textContent.trim() || base.title;
-  base.description = cms$('.modal-description')?.textContent.trim() || base.description;
-  base.datesLabel = val('datesLabel');
-  base.locationLine = val('locationLine');
-  base.country = val('country').toUpperCase();
-  base.attendees = Number(val('attendees')) || 0;
-  base.startDate = val('startDate') || null;
-  base.endDate = val('endDate') || null;
-  base.promo = val('promo') || null;
-  base.category = val('category') || 'iGaming';
-  base.website = val('website') || '';
-  base.telegramChannel = val('telegramChannel') || null;
-  base.heroImage = val('heroImage') || '';
+  const updated = { ...(cms.draft || {}) };
+  updated.id = id;
+  updated.title = title;
+  updated.datesLabel = g('f_datesLabel')?.value.trim() || '';
+  updated.locationLine = g('f_locationLine')?.value.trim() || '';
+  updated.country = (g('f_country')?.value.trim() || '').toUpperCase();
+  updated.description = g('f_description')?.value.trim() || '';
+  updated.website = g('f_website')?.value.trim() || '';
+  updated.telegramChannel = g('f_telegram')?.value.trim() || null;
+  updated.month = Number(g('f_month')?.value) || 1;
+  updated.sortOrder = Number(g('f_sortOrder')?.value) || 0;
+  updated.startDate = g('f_startDate')?.value || null;
+  updated.endDate = g('f_endDate')?.value || null;
+  updated.tier = g('f_tier')?.value || 'mid';
+  updated.attendees = Number(g('f_attendees')?.value) || 0;
+  updated.cardType = g('f_cardType')?.value || 'compact';
+  updated.cardStyle = g('f_cardStyle')?.value || 'elegant-dark';
+  updated.category = g('f_category')?.value.trim() || 'iGaming';
+  updated.accentColor = g('f_accentColor')?.value.trim() || '#2E39F7';
+  updated.heroImage = g('f_heroImage')?.value.trim() || '';
+  updated.visible = g('f_visible')?.checked !== false;
+  updated.promo = g('f_promo')?.value.trim() || null;
+  updated.promoNote = g('f_promoNote')?.value.trim() || null;
 
-  const wTemp = val('weatherTemp');
-  const wDesc = val('weatherDesc');
-  base.weather = (wTemp || wDesc) ? { temp: wTemp, description: wDesc } : null;
+  if (updated.startDate) updated.startISO = updated.startDate + 'T09:00:00Z';
+  if (updated.endDate) updated.endISO = updated.endDate + 'T18:00:00Z';
 
-  if (base.startDate) base.startISO = base.startDate + 'T09:00:00Z';
-  if (base.endDate) base.endISO = base.endDate + 'T18:00:00Z';
+  updated.weather = cmsReadWeather();
+  updated.restaurants = cmsReadRestaurants();
+  updated.sideEvents = cmsReadSideEvents();
+  updated.awards = cmsReadAwards();
 
-  const lists = cmsReadListsFromDom();
-  base.restaurants = lists.restaurants;
-  base.sideEvents = lists.sideEvents;
-
-  delete base._isNew;
-  return base;
+  delete updated._isNew;
+  return updated;
 }
 
-function escAttr(s) {
-  return String(s ?? '').replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
+function cmsSyncDraftFromForm() {
+  if (!cms$('#cmsEditorForm')) return;
+  cms.draft = cmsCollectEvent();
 }
 
-function escHtml(s) {
-  return String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-}
-
-window.onCmsModalPopulated = function (eventId, event) {
-  cms.editingId = eventId;
-  cms.draft = JSON.parse(JSON.stringify(cms.events.find(e => e.id === eventId) || {}));
-
-  document.body.classList.add('cms-edit-mode');
-
-  let hint = cms$('#cmsModalHint');
-  if (!hint) {
-    hint = document.createElement('div');
-    hint.id = 'cmsModalHint';
-    hint.className = 'cms-modal-hint';
-    cms$('.modal-tabs')?.before(hint);
+async function cmsHandleImageUpload(fileInput) {
+  const file = fileInput.files?.[0];
+  if (!file || !cms.canWrite) return;
+  const widget = fileInput.closest('.cms-img-widget');
+  const urlInput = widget?.querySelector('.js-img-url');
+  const preview = widget?.querySelector('.js-img-preview');
+  const status = widget?.querySelector('.js-img-status');
+  if (file.size > 1.5 * 1024 * 1024 && !confirm('Файл больше 1.5 МБ — продолжить?')) {
+    fileInput.value = '';
+    return;
   }
-  hint.textContent = 'Кликай по тексту заголовка и описания — правь прямо на месте. Поля ниже и вкладки — как на сайте.';
-
-  cms$('.modal-title')?.classList.add('cms-editable');
-  cms$('.modal-description')?.classList.add('cms-editable');
-  if (cms$('.modal-title')) cms$('.modal-title').contentEditable = 'true';
-  if (cms$('.modal-description')) cms$('.modal-description').contentEditable = 'true';
-
-  cmsInjectMetaPanel(cms.draft);
-  cmsInjectHeroUpload();
-  cmsInjectListEditors(cms.draft);
-};
+  try {
+    if (status) status.textContent = 'Загружаю…';
+    const dataUrl = await new Promise((res, rej) => {
+      const r = new FileReader();
+      r.onload = () => res(r.result);
+      r.onerror = rej;
+      r.readAsDataURL(file);
+    });
+    const data = await cmsApiPost({ action: 'uploadImage', dataUrl, name: file.name });
+    if (urlInput) urlInput.value = data.url;
+    cmsUpdateImgPreview(data.url, preview);
+    if (status) status.textContent = 'Готово ✓';
+    cmsToast('Фото загружено');
+  } catch (err) {
+    if (status) status.textContent = '';
+    alert(err.message);
+  }
+  fileInput.value = '';
+}
 
 async function cmsSave() {
   if (!cms.canWrite) {
     alert('Нужны URL API и пароль для сохранения.');
     return;
   }
-  if (!cms.editingId) {
-    alert('Сначала открой карточку ивента на календаре.');
+  if (!cms.editingId && !cms$('#f_title')) {
+    alert('Сначала выбери ивент в календаре или создай новый.');
     return;
   }
   try {
     const updated = cmsCollectEvent();
-    if (!updated.title) {
-      alert('Укажи название');
+    if (!updated.id || !updated.title) {
+      alert('Нужны название и ID');
       return;
     }
     const data = await cmsApiPost({ action: 'save', event: updated });
     cms.events = data.events || [];
+    cms.editingId = updated.id;
+    cms.draft = JSON.parse(JSON.stringify(updated));
     await cmsReloadCalendar();
-    populateModal(updated.id);
-    window.onCmsModalPopulated(updated.id, EVENTS[updated.id]);
+    cmsSelectEvent(updated.id);
     cmsToast('Сохранено');
+  } catch (e) {
+    alert(e.message);
+  }
+}
+
+async function cmsDeleteCurrent() {
+  if (!cms.editingId || !cms.canWrite) return;
+  if (!confirm('Удалить ивент «' + cms.editingId + '»?')) return;
+  try {
+    const data = await cmsApiPost({ action: 'delete', id: cms.editingId });
+    cms.events = data.events || [];
+    cms.editingId = null;
+    cms.draft = null;
+    await cmsReloadCalendar();
+    cms$('#cmsEditorRoot').innerHTML = '<p class="cms-editor-empty">Кликни на ивент в календаре — все поля справа</p>';
+    cms$('#cmsPreviewBtn')?.setAttribute('disabled', 'disabled');
+    cmsToast('Удалено');
   } catch (e) {
     alert(e.message);
   }
@@ -394,27 +569,25 @@ async function cmsSave() {
 
 async function cmsHideCurrent() {
   if (!cms.editingId || !cms.canWrite) return;
-  if (!confirm('Скрыть ивент с сайта? (visible = false)')) return;
-  const ev = cmsCollectEvent();
-  ev.visible = false;
-  try {
-    await cmsApiPost({ action: 'save', event: ev });
-    await cmsReloadCalendar();
-    closeModal();
-    cmsToast('Ивент скрыт');
-  } catch (e) {
-    alert(e.message);
-  }
+  if (!confirm('Скрыть ивент с сайта?')) return;
+  cmsSyncDraftFromForm();
+  cms.draft.visible = false;
+  cmsRenderEditor(cms.draft);
+  cms$('#f_visible').checked = false;
+  await cmsSave();
 }
 
 function cmsNewEvent() {
   const ev = {
     id: 'new_event_' + Date.now(),
+    _isNew: true,
     month: new Date().getMonth() + 1,
     sortOrder: 0,
     visible: true,
     cardType: 'compact',
-    tier: 'small',
+    cardStyle: 'elegant-dark',
+    accentColor: '#2E39F7',
+    tier: 'mid',
     attendees: 500,
     country: 'CY',
     title: 'Новая конференция',
@@ -426,20 +599,30 @@ function cmsNewEvent() {
     telegramChannel: null,
     heroImage: '',
     promo: null,
+    promoNote: null,
     weather: null,
     awards: [],
     restaurants: [],
     sideEvents: []
   };
   cms.events.push(ev);
-  cms.draft = ev;
   cms.editingId = ev.id;
-  if (!EVENTS[ev.id]) {
-    EVENTS[ev.id] = typeof toModalEvent === 'function' ? toModalEvent(ev) : ev;
+  cms.draft = ev;
+  cmsRenderEditor(ev);
+  cms$('#cmsPreviewBtn')?.removeAttribute('disabled');
+}
+
+function cmsPreviewModal() {
+  if (!cms.editingId) return;
+  cmsSyncDraftFromForm();
+  const d = cms.draft;
+  if (typeof toModalEvent === 'function') {
+    EVENTS[d.id] = toModalEvent(d);
   }
-  populateModal(ev.id);
-  openModal();
-  window.onCmsModalPopulated(ev.id, EVENTS[ev.id]);
+  if (typeof populateModal === 'function' && typeof openModal === 'function') {
+    populateModal(d.id);
+    openModal();
+  }
 }
 
 async function cmsLogin() {
@@ -456,10 +639,11 @@ async function cmsLogin() {
     saveCmsSession();
     cms$('#cmsLogin')?.classList.add('hidden');
     cms$('#cmsToolbar')?.classList.remove('hidden');
+    cms$('#cmsDrawer')?.classList.remove('hidden');
     document.body.classList.remove('cms-pending');
-    document.body.classList.add('cms-ready');
+    document.body.classList.add('cms-ready', 'cms-drawer-open');
     cmsBindCards();
-    cmsToast('Редактор готов — кликни на ивент');
+    cmsToast('Кликни на ивент — все поля справа');
   } catch (e) {
     const err = cms$('#cmsLoginError');
     if (err) {
@@ -473,9 +657,10 @@ function cmsLogout() {
   cms.password = '';
   saveCmsSession();
   cms$('#cmsToolbar')?.classList.add('hidden');
+  cms$('#cmsDrawer')?.classList.add('hidden');
   cms$('#cmsLogin')?.classList.remove('hidden');
   document.body.classList.add('cms-pending');
-  document.body.classList.remove('cms-ready');
+  document.body.classList.remove('cms-ready', 'cms-drawer-open', 'cms-edit-mode');
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -486,8 +671,13 @@ document.addEventListener('DOMContentLoaded', () => {
   cms$('#cmsLoginBtn')?.addEventListener('click', cmsLogin);
   cms$('#cmsLogoutBtn')?.addEventListener('click', cmsLogout);
   cms$('#cmsSaveBtn')?.addEventListener('click', cmsSave);
+  cms$('#cmsPreviewBtn')?.addEventListener('click', cmsPreviewModal);
   cms$('#cmsNewBtn')?.addEventListener('click', cmsNewEvent);
   cms$('#cmsHideBtn')?.addEventListener('click', cmsHideCurrent);
+
+  cms$('#cmsEditorRoot')?.addEventListener('change', (e) => {
+    if (e.target.classList?.contains('js-img-file')) cmsHandleImageUpload(e.target);
+  });
 
   if (session.apiUrl && session.password) {
     cms$('#cmsPassword').value = session.password;

@@ -41,13 +41,13 @@
   </script>
 
   <link rel="stylesheet" href="./styles.css" />
-  <link rel="stylesheet" href="./admin-visual.css?v=2" />
+  <link rel="stylesheet" href="./admin-visual.css?v=3" />
   <script src="./data/cms-config.js"></script>
   <script src="./js/events-loader.js"></script>
   <script src="./js/calendar-render.js"></script>
   <script>window.CMS_EDIT_MODE = true;</script>
   <script defer src="./app.js"></script>
-  <script defer src="./admin-visual.js?v=2"></script>
+  <script defer src="./admin-visual.js?v=3"></script>
 </head>
 
 <body class="antialiased pb-20 cms-pending">
@@ -55,7 +55,7 @@
 <div id="cmsLogin" class="cms-login">
   <div class="cms-login__card">
     <h1>Редактор календаря</h1>
-    <p class="cms-login__muted">Тот же сайт — правки прямо в карточках</p>
+    <p class="cms-login__muted">Кликай на ивент в сетке — все поля в панели справа</p>
     <label class="cms-field">
       <span>URL API (Google Apps Script)</span>
       <input type="url" id="cmsApiUrl" placeholder="https://script.google.com/macros/s/.../exec" />
@@ -71,13 +71,20 @@
 
 <div id="cmsToolbar" class="cms-toolbar hidden">
   <span class="cms-toolbar__label">Режим редактирования</span>
-  <button type="button" class="cms-btn cms-btn--primary" id="cmsSaveBtn">Сохранить карточку</button>
+  <button type="button" class="cms-btn cms-btn--primary" id="cmsSaveBtn">Сохранить</button>
+  <button type="button" class="cms-btn" id="cmsPreviewBtn" disabled>Превью модалки</button>
   <button type="button" class="cms-btn" id="cmsNewBtn">+ Ивент</button>
-  <button type="button" class="cms-btn" id="cmsHideBtn">Скрыть с сайта</button>
+  <button type="button" class="cms-btn" id="cmsHideBtn">Скрыть</button>
   <a href="/" target="_blank" class="cms-btn">Сайт ↗</a>
   <a href="admin.html?legacy=visa" class="cms-btn">Визы</a>
   <button type="button" class="cms-btn cms-btn--ghost" id="cmsLogoutBtn">Выйти</button>
 </div>
+
+<aside id="cmsDrawer" class="cms-drawer hidden" aria-label="Редактор ивента">
+  <div id="cmsEditorRoot" class="cms-editor-root">
+    <p class="cms-editor-empty">Кликни на ивент в календаре — все поля справа</p>
+  </div>
+</aside>
 
 <header class="sticky top-0 z-40 bg-[#1B1B1B]/92 backdrop-blur-md border-b border-[#333333]">
   <div class="max-w-[1600px] mx-auto px-6 h-20 flex items-center justify-between">
