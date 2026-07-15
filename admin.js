@@ -449,7 +449,6 @@ function collectForm(ev) {
 
   updated.weather = readWeather();
   updated.restaurants = readRestaurants();
-  updated.brands = readBrands();
   updated.sideEvents = readSideEvents();
 
   delete updated._isNew;
@@ -514,7 +513,6 @@ function readBrands() {
 function syncArraysFromForm(ev) {
   ev.sideEvents = readSideEvents();
   ev.restaurants = readRestaurants();
-  ev.brands = readBrands();
   ev.weather = readWeather();
 }
 

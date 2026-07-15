@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-06T14:41:50.546Z",
+  "updatedAt": "2026-07-15T16:10:06.255Z",
   "events": [
     {
       "id": "sbc_summit_tbilisi_2026",
@@ -73,7 +73,6 @@
           "img": "images/restaurants/sbc_tbilisi_vinotel.jpg"
         }
       ],
-      "brands": [],
       "sideEvents": [
         {
           "title": "SBC Summit Tbilisi — Opening Party",
@@ -204,83 +203,6 @@
           "img": "images/restaurants/igb_barcelona_la_mar_salada.jpg"
         }
       ],
-      "brands": [
-        {
-          "name": "Betsson Group",
-          "category": "Оператор",
-          "logo": "images/brands/betsson_group.png"
-        },
-        {
-          "name": "Bet365",
-          "category": "Оператор",
-          "logo": "images/brands/bet365.png"
-        },
-        {
-          "name": "Flutter Entertainment",
-          "category": "Оператор",
-          "logo": "images/brands/flutter.png"
-        },
-        {
-          "name": "SOFTSWISS",
-          "category": "Технологии",
-          "logo": "images/brands/softswiss.png"
-        },
-        {
-          "name": "Sportradar",
-          "category": "Технологии",
-          "logo": "images/brands/sportradar.png"
-        },
-        {
-          "name": "BetConstruct",
-          "category": "Технологии",
-          "logo": "images/brands/betconstruct.png"
-        },
-        {
-          "name": "SBTech",
-          "category": "Технологии",
-          "logo": "images/brands/sbtech.png"
-        },
-        {
-          "name": "Kambi",
-          "category": "Технологии",
-          "logo": "images/brands/kambi.png"
-        },
-        {
-          "name": "AskGamblers",
-          "category": "Медиа",
-          "logo": "images/brands/askgamblers.png"
-        },
-        {
-          "name": "Gambling.com",
-          "category": "Медиа",
-          "logo": "images/brands/gambling_com.png"
-        },
-        {
-          "name": "Better Collective",
-          "category": "Медиа",
-          "logo": "images/brands/better_collective.png"
-        },
-        {
-          "name": "Catena Media",
-          "category": "Медиа",
-          "logo": "images/brands/catena_media.png"
-        },
-        {
-          "name": "Paysafe",
-          "category": "Платёжка",
-          "logo": "images/brands/paysafe.png"
-        },
-        {
-          "name": "Skrill",
-          "category": "Платёжка",
-          "logo": "images/brands/skrill.png"
-        },
-        {
-          "name": "Neteller",
-          "category": "Платёжка",
-          "logo": "images/brands/neteller.png"
-        }
-      ],
       "sideEvents": [
         {
           "title": "iGB Affiliate Awards",
@@ -388,83 +310,6 @@
           "img": "images/restaurants/aw_dubai_coya.jpg"
         }
       ],
-      "brands": [
-        {
-          "name": "Betsson Group",
-          "category": "Оператор",
-          "logo": "images/brands/betsson_group.png"
-        },
-        {
-          "name": "Bet365",
-          "category": "Оператор",
-          "logo": "images/brands/bet365.png"
-        },
-        {
-          "name": "Flutter Entertainment",
-          "category": "Оператор",
-          "logo": "images/brands/flutter.png"
-        },
-        {
-          "name": "Evolution Gaming",
-          "category": "Провайдер",
-          "logo": "images/brands/evolution_gaming.png"
-        },
-        {
-          "name": "Pragmatic Play",
-          "category": "Провайдер",
-          "logo": "images/brands/pragmatic_play.png"
-        },
-        {
-          "name": "NetEnt",
-          "category": "Провайдер",
-          "logo": "images/brands/netent.png"
-        },
-        {
-          "name": "SOFTSWISS",
-          "category": "Технологии",
-          "logo": "images/brands/softswiss.png"
-        },
-        {
-          "name": "Sportradar",
-          "category": "Технологии",
-          "logo": "images/brands/sportradar.png"
-        },
-        {
-          "name": "BetConstruct",
-          "category": "Технологии",
-          "logo": "images/brands/betconstruct.png"
-        },
-        {
-          "name": "AskGamblers",
-          "category": "Медиа",
-          "logo": "images/brands/askgamblers.png"
-        },
-        {
-          "name": "Gambling.com",
-          "category": "Медиа",
-          "logo": "images/brands/gambling_com.png"
-        },
-        {
-          "name": "Better Collective",
-          "category": "Медиа",
-          "logo": "images/brands/better_collective.png"
-        },
-        {
-          "name": "Paysafe",
-          "category": "Платёжка",
-          "logo": "images/brands/paysafe.png"
-        },
-        {
-          "name": "Skrill",
-          "category": "Платёжка",
-          "logo": "images/brands/skrill.png"
-        },
-        {
-          "name": "Neteller",
-          "category": "Платёжка",
-          "logo": "images/brands/neteller.png"
-        }
-      ],
       "sideEvents": [
         {
           "title": "AIBC Awards Ceremony",
@@ -559,58 +404,6 @@
           "img": "images/restaurants/sbc_rio_confeitaria_colombo.jpg"
         }
       ],
-      "brands": [
-        {
-          "name": "Betsson Group",
-          "category": "Оператор",
-          "logo": "https://logo.clearbit.com/betsson.com"
-        },
-        {
-          "name": "Betway",
-          "category": "Оператор",
-          "logo": "https://logo.clearbit.com/betway.com"
-        },
-        {
-          "name": "Pragmatic Play",
-          "category": "Провайдер",
-          "logo": "https://logo.clearbit.com/pragmaticplay.com"
-        },
-        {
-          "name": "Evolution Gaming",
-          "category": "Провайдер",
-          "logo": "https://logo.clearbit.com/evolution.com"
-        },
-        {
-          "name": "Stake",
-          "category": "Оператор",
-          "logo": "https://logo.clearbit.com/stake.com"
-        },
-        {
-          "name": "Sportradar",
-          "category": "Технологии",
-          "logo": "https://logo.clearbit.com/sportradar.com"
-        },
-        {
-          "name": "Betano",
-          "category": "Оператор",
-          "logo": "https://logo.clearbit.com/betano.com"
-        },
-        {
-          "name": "Superbet",
-          "category": "Оператор",
-          "logo": "https://logo.clearbit.com/superbet.com"
-        },
-        {
-          "name": "Aposta Ganha",
-          "category": "Оператор",
-          "logo": "images/brands/aposta_ganha.png"
-        },
-        {
-          "name": "PixBet",
-          "category": "Оператор",
-          "logo": "images/brands/pixbet.png"
-        }
-      ],
       "sideEvents": [
         {
           "title": "SBC Awards Latin America",
@@ -690,58 +483,6 @@
           "avgCheck": "$200-400",
           "description": "Индийская haute cuisine, 1 звезда Мишлен",
           "img": "images/restaurants/aw_dubai_tresind_studio.jpg"
-        }
-      ],
-      "brands": [
-        {
-          "name": "Clickbank",
-          "category": "Партнёрка",
-          "logo": "https://logo.clearbit.com/clickbank.com"
-        },
-        {
-          "name": "MaxBounty",
-          "category": "Партнёрка",
-          "logo": "https://logo.clearbit.com/maxbounty.com"
-        },
-        {
-          "name": "PropellerAds",
-          "category": "Технологии",
-          "logo": "https://logo.clearbit.com/propellerads.com"
-        },
-        {
-          "name": "Adsterra",
-          "category": "Технологии",
-          "logo": "https://logo.clearbit.com/adsterra.com"
-        },
-        {
-          "name": "Voluum",
-          "category": "Технологии",
-          "logo": "https://logo.clearbit.com/voluum.com"
-        },
-        {
-          "name": "Keitaro",
-          "category": "Технологии",
-          "logo": "https://logo.clearbit.com/keitaro.io"
-        },
-        {
-          "name": "Binom",
-          "category": "Технологии",
-          "logo": "https://logo.clearbit.com/binom.org"
-        },
-        {
-          "name": "RedTrack",
-          "category": "Технологии",
-          "logo": "https://logo.clearbit.com/redtrack.io"
-        },
-        {
-          "name": "ClickDealer",
-          "category": "Партнёрка",
-          "logo": "https://logo.clearbit.com/clickdealer.com"
-        },
-        {
-          "name": "Mobidea",
-          "category": "Партнёрка",
-          "logo": "https://logo.clearbit.com/mobidea.com"
         }
       ],
       "sideEvents": [
@@ -836,83 +577,6 @@
           "avgCheck": "$50-100",
           "description": "",
           "img": "images/restaurants/sigma_africa_belthazar.jpg"
-        }
-      ],
-      "brands": [
-        {
-          "name": "Betsson Group",
-          "category": "Оператор",
-          "logo": "images/brands/betsson_group.png"
-        },
-        {
-          "name": "Bet365",
-          "category": "Оператор",
-          "logo": "images/brands/bet365.png"
-        },
-        {
-          "name": "Flutter Entertainment",
-          "category": "Оператор",
-          "logo": "images/brands/flutter.png"
-        },
-        {
-          "name": "Evolution Gaming",
-          "category": "Провайдер",
-          "logo": "images/brands/evolution_gaming.png"
-        },
-        {
-          "name": "Pragmatic Play",
-          "category": "Провайдер",
-          "logo": "images/brands/pragmatic_play.png"
-        },
-        {
-          "name": "NetEnt",
-          "category": "Провайдер",
-          "logo": "images/brands/netent.png"
-        },
-        {
-          "name": "SOFTSWISS",
-          "category": "Технологии",
-          "logo": "images/brands/softswiss.png"
-        },
-        {
-          "name": "Sportradar",
-          "category": "Технологии",
-          "logo": "images/brands/sportradar.png"
-        },
-        {
-          "name": "BetConstruct",
-          "category": "Технологии",
-          "logo": "images/brands/betconstruct.png"
-        },
-        {
-          "name": "AskGamblers",
-          "category": "Медиа",
-          "logo": "images/brands/askgamblers.png"
-        },
-        {
-          "name": "Gambling.com",
-          "category": "Медиа",
-          "logo": "images/brands/gambling_com.png"
-        },
-        {
-          "name": "Better Collective",
-          "category": "Медиа",
-          "logo": "images/brands/better_collective.png"
-        },
-        {
-          "name": "Paysafe",
-          "category": "Платёжка",
-          "logo": "images/brands/paysafe.png"
-        },
-        {
-          "name": "Skrill",
-          "category": "Платёжка",
-          "logo": "images/brands/skrill.png"
-        },
-        {
-          "name": "Neteller",
-          "category": "Платёжка",
-          "logo": "images/brands/neteller.png"
         }
       ],
       "sideEvents": [
@@ -1010,53 +674,6 @@
           "img": "images/restaurants/conversion_warsaw_u_kucharzy.jpg"
         }
       ],
-      "brands": [
-        {
-          "name": "PropellerAds",
-          "category": "Технологии",
-          "logo": "https://logo.clearbit.com/propellerads.com"
-        },
-        {
-          "name": "Adsterra",
-          "category": "Технологии",
-          "logo": "https://logo.clearbit.com/adsterra.com"
-        },
-        {
-          "name": "RichAds",
-          "category": "Технологии",
-          "logo": "https://logo.clearbit.com/richads.com"
-        },
-        {
-          "name": "Binom",
-          "category": "Технологии",
-          "logo": "https://logo.clearbit.com/binom.org"
-        },
-        {
-          "name": "Keitaro",
-          "category": "Технологии",
-          "logo": "https://logo.clearbit.com/keitaro.io"
-        },
-        {
-          "name": "Zeydoo",
-          "category": "Партнёрка",
-          "logo": "https://logo.clearbit.com/zeydoo.com"
-        },
-        {
-          "name": "Mobidea",
-          "category": "Партнёрка",
-          "logo": "https://logo.clearbit.com/mobidea.com"
-        },
-        {
-          "name": "Clickadu",
-          "category": "Технологии",
-          "logo": "https://logo.clearbit.com/clickadu.com"
-        },
-        {
-          "name": "TrafficStars",
-          "category": "Технологии",
-          "logo": "https://logo.clearbit.com/trafficstars.com"
-        }
-      ],
       "sideEvents": [
         {
           "title": "Pre-Party",
@@ -1130,58 +747,6 @@
           "avgCheck": "$50-120",
           "description": "Кавказская кухня, вид на море",
           "img": "https://images.unsplash.com/photo-1559339352-11d035aa65de?w=200&q=80"
-        }
-      ],
-      "brands": [
-        {
-          "name": "Партнёркин",
-          "category": "Медиа",
-          "logo": "images/brands/partnerkin.png"
-        },
-        {
-          "name": "Conversion",
-          "category": "Медиа",
-          "logo": "https://logo.clearbit.com/conversion.im"
-        },
-        {
-          "name": "Кинза",
-          "category": "Медиа",
-          "logo": "images/brands/kinza.png"
-        },
-        {
-          "name": "Трафик Кардинал",
-          "category": "Медиа",
-          "logo": "images/brands/traffic_cardinals.png"
-        },
-        {
-          "name": "CPA.Club",
-          "category": "Партнёрка",
-          "logo": "images/brands/cpa_club.png"
-        },
-        {
-          "name": "Leadbit",
-          "category": "Партнёрка",
-          "logo": "https://logo.clearbit.com/leadbit.com"
-        },
-        {
-          "name": "Alfaleads",
-          "category": "Партнёрка",
-          "logo": "https://logo.clearbit.com/alfaleads.net"
-        },
-        {
-          "name": "Dr.Cash",
-          "category": "Партнёрка",
-          "logo": "images/brands/dr_cash.png"
-        },
-        {
-          "name": "Everad",
-          "category": "Партнёрка",
-          "logo": "https://logo.clearbit.com/everad.com"
-        },
-        {
-          "name": "MetaCPA",
-          "category": "Партнёрка",
-          "logo": "images/brands/metacpa.png"
         }
       ],
       "sideEvents": [
@@ -1276,83 +841,6 @@
           "avgCheck": "$50-100",
           "description": "",
           "img": "images/restaurants/bis_sigma_sp_skye.jpg"
-        }
-      ],
-      "brands": [
-        {
-          "name": "Betano",
-          "category": "Оператор",
-          "logo": "images/brands/betano.png"
-        },
-        {
-          "name": "Superbet",
-          "category": "Оператор",
-          "logo": "images/brands/superbet.png"
-        },
-        {
-          "name": "Betsson Group",
-          "category": "Оператор",
-          "logo": "images/brands/betsson_group.png"
-        },
-        {
-          "name": "Evolution Gaming",
-          "category": "Провайдер",
-          "logo": "images/brands/evolution_gaming.png"
-        },
-        {
-          "name": "Pragmatic Play",
-          "category": "Провайдер",
-          "logo": "images/brands/pragmatic_play.png"
-        },
-        {
-          "name": "NetEnt",
-          "category": "Провайдер",
-          "logo": "images/brands/netent.png"
-        },
-        {
-          "name": "Microgaming",
-          "category": "Провайдер",
-          "logo": "images/brands/microgaming.png"
-        },
-        {
-          "name": "SOFTSWISS",
-          "category": "Технологии",
-          "logo": "images/brands/softswiss.png"
-        },
-        {
-          "name": "Sportradar",
-          "category": "Технологии",
-          "logo": "images/brands/sportradar.png"
-        },
-        {
-          "name": "BetConstruct",
-          "category": "Технологии",
-          "logo": "images/brands/betconstruct.png"
-        },
-        {
-          "name": "SBTech",
-          "category": "Технологии",
-          "logo": "images/brands/sbtech.png"
-        },
-        {
-          "name": "Paysafe",
-          "category": "Платёжка",
-          "logo": "images/brands/paysafe.png"
-        },
-        {
-          "name": "Skrill",
-          "category": "Платёжка",
-          "logo": "images/brands/skrill.png"
-        },
-        {
-          "name": "Neteller",
-          "category": "Платёжка",
-          "logo": "images/brands/neteller.png"
-        },
-        {
-          "name": "Trustly",
-          "category": "Платёжка",
-          "logo": "images/brands/trustly.png"
         }
       ],
       "sideEvents": [
@@ -1474,28 +962,6 @@
           "img": "images/restaurants/sbc_malta_sotto_pinsa.jpg"
         }
       ],
-      "brands": [
-        {
-          "name": "Betsson Group",
-          "category": "Оператор",
-          "logo": "images/brands/betsson_group.png"
-        },
-        {
-          "name": "Evolution Gaming",
-          "category": "Провайдер",
-          "logo": "images/brands/evolution_gaming.png"
-        },
-        {
-          "name": "Pragmatic Play",
-          "category": "Провайдер",
-          "logo": "images/brands/pragmatic_play.png"
-        },
-        {
-          "name": "BetConstruct",
-          "category": "Провайдер",
-          "logo": "images/brands/betconstruct.png"
-        }
-      ],
       "sideEvents": [
         {
           "title": "Opening Party",
@@ -1583,83 +1049,6 @@
           "avgCheck": "$50-100",
           "description": "",
           "img": "images/restaurants/sigma_malta_caviar_and_bull.jpg"
-        }
-      ],
-      "brands": [
-        {
-          "name": "Betsson Group",
-          "category": "Оператор",
-          "logo": "images/brands/betsson_group.png"
-        },
-        {
-          "name": "Bet365",
-          "category": "Оператор",
-          "logo": "images/brands/bet365.png"
-        },
-        {
-          "name": "Flutter Entertainment",
-          "category": "Оператор",
-          "logo": "images/brands/flutter.png"
-        },
-        {
-          "name": "Evolution Gaming",
-          "category": "Провайдер",
-          "logo": "images/brands/evolution_gaming.png"
-        },
-        {
-          "name": "Pragmatic Play",
-          "category": "Провайдер",
-          "logo": "images/brands/pragmatic_play.png"
-        },
-        {
-          "name": "NetEnt",
-          "category": "Провайдер",
-          "logo": "images/brands/netent.png"
-        },
-        {
-          "name": "SOFTSWISS",
-          "category": "Технологии",
-          "logo": "images/brands/softswiss.png"
-        },
-        {
-          "name": "Sportradar",
-          "category": "Технологии",
-          "logo": "images/brands/sportradar.png"
-        },
-        {
-          "name": "BetConstruct",
-          "category": "Технологии",
-          "logo": "images/brands/betconstruct.png"
-        },
-        {
-          "name": "AskGamblers",
-          "category": "Медиа",
-          "logo": "images/brands/askgamblers.png"
-        },
-        {
-          "name": "Gambling.com",
-          "category": "Медиа",
-          "logo": "images/brands/gambling_com.png"
-        },
-        {
-          "name": "Better Collective",
-          "category": "Медиа",
-          "logo": "images/brands/better_collective.png"
-        },
-        {
-          "name": "Paysafe",
-          "category": "Платёжка",
-          "logo": "images/brands/paysafe.png"
-        },
-        {
-          "name": "Skrill",
-          "category": "Платёжка",
-          "logo": "images/brands/skrill.png"
-        },
-        {
-          "name": "Neteller",
-          "category": "Платёжка",
-          "logo": "images/brands/neteller.png"
         }
       ],
       "sideEvents": [
@@ -1755,48 +1144,6 @@
           "img": "images/restaurants/affpapa_madrid_ramon_freixa.jpg"
         }
       ],
-      "brands": [
-        {
-          "name": "AffPapa",
-          "category": "Медиа",
-          "logo": "https://logo.clearbit.com/affpapa.com"
-        },
-        {
-          "name": "Soft2Bet",
-          "category": "Оператор",
-          "logo": "https://logo.clearbit.com/soft2bet.com"
-        },
-        {
-          "name": "Digitain",
-          "category": "Провайдер",
-          "logo": "https://logo.clearbit.com/digitain.com"
-        },
-        {
-          "name": "Income Access",
-          "category": "Технологии",
-          "logo": "https://logo.clearbit.com/incomeaccess.com"
-        },
-        {
-          "name": "Affilka",
-          "category": "Технологии",
-          "logo": "https://logo.clearbit.com/affilka.com"
-        },
-        {
-          "name": "SOFTSWISS",
-          "category": "Технологии",
-          "logo": "https://logo.clearbit.com/softswiss.com"
-        },
-        {
-          "name": "BetConstruct",
-          "category": "Провайдер",
-          "logo": "https://logo.clearbit.com/betconstruct.com"
-        },
-        {
-          "name": "SiGMA",
-          "category": "Медиа",
-          "logo": "https://logo.clearbit.com/sigma.world"
-        }
-      ],
       "sideEvents": [
         {
           "title": "Tapas & Networking",
@@ -1876,58 +1223,6 @@
           "avgCheck": "$40-90",
           "description": "Армянская кухня, вид на Арарат",
           "img": "images/restaurants/mac_yerevan_lavash.jpg"
-        }
-      ],
-      "brands": [
-        {
-          "name": "Pin-Up Partners",
-          "category": "Партнёрка",
-          "logo": "images/brands/pinup_partners.png"
-        },
-        {
-          "name": "1xBet Partners",
-          "category": "Партнёрка",
-          "logo": "https://logo.clearbit.com/1xbet.com"
-        },
-        {
-          "name": "Lucky Partners",
-          "category": "Партнёрка",
-          "logo": "images/brands/lucky_partners.png"
-        },
-        {
-          "name": "Mostbet Partners",
-          "category": "Партнёрка",
-          "logo": "images/brands/mostbet_partners.png"
-        },
-        {
-          "name": "Gambling.pro",
-          "category": "Медиа",
-          "logo": "images/brands/gambling_pro.png"
-        },
-        {
-          "name": "CPA Life",
-          "category": "Медиа",
-          "logo": "images/brands/cpa_life.png"
-        },
-        {
-          "name": "Leadgid",
-          "category": "Партнёрка",
-          "logo": "images/brands/leadgid.png"
-        },
-        {
-          "name": "Affstar",
-          "category": "Партнёрка",
-          "logo": "images/brands/affstar.png"
-        },
-        {
-          "name": "MetaCPA",
-          "category": "Партнёрка",
-          "logo": "images/brands/metacpa.png"
-        },
-        {
-          "name": "Mobidea",
-          "category": "Партнёрка",
-          "logo": "https://logo.clearbit.com/mobidea.com"
         }
       ],
       "sideEvents": [
@@ -2033,28 +1328,6 @@
           "img": "images/restaurants/g2e_macau_mcsorleys.jpg"
         }
       ],
-      "brands": [
-        {
-          "name": "IGT",
-          "category": "Провайдер",
-          "logo": "images/brands/igt.png"
-        },
-        {
-          "name": "Aristocrat",
-          "category": "Провайдер",
-          "logo": "images/brands/aristocrat.png"
-        },
-        {
-          "name": "Konami Gaming",
-          "category": "Провайдер",
-          "logo": "images/brands/konami_gaming.png"
-        },
-        {
-          "name": "Interblock",
-          "category": "Провайдер",
-          "logo": "images/brands/interblock.png"
-        }
-      ],
       "sideEvents": [
         {
           "title": "Opening Party",
@@ -2130,28 +1403,6 @@
           "img": "images/restaurants/sbc_canada_jack_astor.jpg"
         }
       ],
-      "brands": [
-        {
-          "name": "Entain",
-          "category": "Оператор",
-          "logo": "images/brands/entain.png"
-        },
-        {
-          "name": "Sportradar",
-          "category": "Технологии",
-          "logo": "images/brands/sportradar.png"
-        },
-        {
-          "name": "Kambi",
-          "category": "Провайдер",
-          "logo": "images/brands/kambi.png"
-        },
-        {
-          "name": "Paysafe",
-          "category": "Технологии",
-          "logo": "images/brands/paysafe.png"
-        }
-      ],
       "sideEvents": [
         {
           "title": "Opening Party",
@@ -2225,58 +1476,6 @@
           "avgCheck": "$40-90",
           "description": "Инстаграмное место, авторская кухня",
           "img": "images/restaurants/ggate_tbilisi_shavi_lomi.jpg"
-        }
-      ],
-      "brands": [
-        {
-          "name": "Gambling.pro",
-          "category": "Медиа",
-          "logo": "images/brands/gambling_pro.png"
-        },
-        {
-          "name": "Traffic Cardinals",
-          "category": "Медиа",
-          "logo": "images/brands/traffic_cardinals.png"
-        },
-        {
-          "name": "Conversion",
-          "category": "Медиа",
-          "logo": "https://logo.clearbit.com/conversion.im"
-        },
-        {
-          "name": "SoftSwiss",
-          "category": "Технологии",
-          "logo": "https://logo.clearbit.com/softswiss.com"
-        },
-        {
-          "name": "BetConstruct",
-          "category": "Провайдер",
-          "logo": "https://logo.clearbit.com/betconstruct.com"
-        },
-        {
-          "name": "Digitain",
-          "category": "Провайдер",
-          "logo": "https://logo.clearbit.com/digitain.com"
-        },
-        {
-          "name": "Spribe",
-          "category": "Провайдер",
-          "logo": "https://logo.clearbit.com/spribe.co"
-        },
-        {
-          "name": "Slotegrator",
-          "category": "Технологии",
-          "logo": "https://logo.clearbit.com/slotegrator.com"
-        },
-        {
-          "name": "Endorphina",
-          "category": "Провайдер",
-          "logo": "https://logo.clearbit.com/endorphina.com"
-        },
-        {
-          "name": "Upgaming",
-          "category": "Провайдер",
-          "logo": "https://logo.clearbit.com/upgaming.com"
         }
       ],
       "sideEvents": [
@@ -2373,58 +1572,6 @@
           "img": "images/restaurants/sbc_americas_mastros.jpg"
         }
       ],
-      "brands": [
-        {
-          "name": "DraftKings",
-          "category": "Оператор",
-          "logo": "https://logo.clearbit.com/draftkings.com"
-        },
-        {
-          "name": "FanDuel",
-          "category": "Оператор",
-          "logo": "https://logo.clearbit.com/fanduel.com"
-        },
-        {
-          "name": "BetMGM",
-          "category": "Оператор",
-          "logo": "https://logo.clearbit.com/betmgm.com"
-        },
-        {
-          "name": "Caesars Sportsbook",
-          "category": "Оператор",
-          "logo": "https://logo.clearbit.com/caesars.com"
-        },
-        {
-          "name": "Penn Entertainment",
-          "category": "Оператор",
-          "logo": "https://logo.clearbit.com/pennentertainment.com"
-        },
-        {
-          "name": "Genius Sports",
-          "category": "Технологии",
-          "logo": "https://logo.clearbit.com/geniussports.com"
-        },
-        {
-          "name": "Sportradar",
-          "category": "Технологии",
-          "logo": "https://logo.clearbit.com/sportradar.com"
-        },
-        {
-          "name": "IGT",
-          "category": "Провайдер",
-          "logo": "https://logo.clearbit.com/igt.com"
-        },
-        {
-          "name": "Light & Wonder",
-          "category": "Провайдер",
-          "logo": "https://logo.clearbit.com/lnw.com"
-        },
-        {
-          "name": "Paysafe",
-          "category": "Платежи",
-          "logo": "https://logo.clearbit.com/paysafe.com"
-        }
-      ],
       "sideEvents": []
     },
     {
@@ -2518,83 +1665,6 @@
           "img": "images/restaurants/sigma_asia_wolfgangs.jpg"
         }
       ],
-      "brands": [
-        {
-          "name": "Betsson Group",
-          "category": "Оператор",
-          "logo": "images/brands/betsson_group.png"
-        },
-        {
-          "name": "Bet365",
-          "category": "Оператор",
-          "logo": "images/brands/bet365.png"
-        },
-        {
-          "name": "Flutter Entertainment",
-          "category": "Оператор",
-          "logo": "images/brands/flutter.png"
-        },
-        {
-          "name": "Evolution Gaming",
-          "category": "Провайдер",
-          "logo": "images/brands/evolution_gaming.png"
-        },
-        {
-          "name": "Pragmatic Play",
-          "category": "Провайдер",
-          "logo": "images/brands/pragmatic_play.png"
-        },
-        {
-          "name": "NetEnt",
-          "category": "Провайдер",
-          "logo": "images/brands/netent.png"
-        },
-        {
-          "name": "SOFTSWISS",
-          "category": "Технологии",
-          "logo": "images/brands/softswiss.png"
-        },
-        {
-          "name": "Sportradar",
-          "category": "Технологии",
-          "logo": "images/brands/sportradar.png"
-        },
-        {
-          "name": "BetConstruct",
-          "category": "Технологии",
-          "logo": "images/brands/betconstruct.png"
-        },
-        {
-          "name": "AskGamblers",
-          "category": "Медиа",
-          "logo": "images/brands/askgamblers.png"
-        },
-        {
-          "name": "Gambling.com",
-          "category": "Медиа",
-          "logo": "images/brands/gambling_com.png"
-        },
-        {
-          "name": "Better Collective",
-          "category": "Медиа",
-          "logo": "images/brands/better_collective.png"
-        },
-        {
-          "name": "Paysafe",
-          "category": "Платёжка",
-          "logo": "images/brands/paysafe.png"
-        },
-        {
-          "name": "Skrill",
-          "category": "Платёжка",
-          "logo": "images/brands/skrill.png"
-        },
-        {
-          "name": "Neteller",
-          "category": "Платёжка",
-          "logo": "images/brands/neteller.png"
-        }
-      ],
       "sideEvents": [
         {
           "title": "SiGMA Asia Awards",
@@ -2681,28 +1751,6 @@
           "avgCheck": "$25-40",
           "description": "Проверенная итальянская классика с большим меню",
           "img": "images/restaurants/aibc_manila_olive_garden.jpg"
-        }
-      ],
-      "brands": [
-        {
-          "name": "QTech Games",
-          "category": "Провайдер",
-          "logo": "images/brands/qtech_games.png"
-        },
-        {
-          "name": "Spribe",
-          "category": "Провайдер",
-          "logo": "images/brands/spribe.png"
-        },
-        {
-          "name": "Booming Games",
-          "category": "Провайдер",
-          "logo": "images/brands/booming_games.png"
-        },
-        {
-          "name": "Slotegrator",
-          "category": "Провайдер",
-          "logo": "images/brands/slotegrator.png"
         }
       ],
       "sideEvents": [
@@ -2818,58 +1866,6 @@
           "img": "images/restaurants/igb_live_hawksmoor.jpg"
         }
       ],
-      "brands": [
-        {
-          "name": "CoolAffs",
-          "category": "Партнёрка",
-          "logo": "images/brands/coolaffs.png"
-        },
-        {
-          "name": "EcoPayz",
-          "category": "Платежи",
-          "logo": "https://logo.clearbit.com/ecopayz.com"
-        },
-        {
-          "name": "Betsson Group",
-          "category": "Оператор",
-          "logo": "https://logo.clearbit.com/betsson.com"
-        },
-        {
-          "name": "Evolution Gaming",
-          "category": "Провайдер",
-          "logo": "https://logo.clearbit.com/evolution.com"
-        },
-        {
-          "name": "Pragmatic Play",
-          "category": "Провайдер",
-          "logo": "https://logo.clearbit.com/pragmaticplay.com"
-        },
-        {
-          "name": "Melbet",
-          "category": "Оператор",
-          "logo": "https://logo.clearbit.com/melbet.com"
-        },
-        {
-          "name": "1Bet",
-          "category": "Оператор",
-          "logo": "https://logo.clearbit.com/1bet.com"
-        },
-        {
-          "name": "22Bet Partners",
-          "category": "Партнёрка",
-          "logo": "https://logo.clearbit.com/22bet.com"
-        },
-        {
-          "name": "Sportradar",
-          "category": "Технологии",
-          "logo": "https://logo.clearbit.com/sportradar.com"
-        },
-        {
-          "name": "Playtech",
-          "category": "Провайдер",
-          "logo": "https://logo.clearbit.com/playtech.com"
-        }
-      ],
       "sideEvents": [
         {
           "title": "ANS at Piccadilly",
@@ -2939,7 +1935,7 @@
         "temp": "28-32°C",
         "description": "Жаркое средиземноморское лето"
       },
-      "promo": null,
+      "promo": "Secretroom10 (−10%)",
       "awards": [
         {
           "name": "Affiliate Space Awards 2026",
@@ -2988,48 +1984,6 @@
           "avgCheck": "$60-140",
           "description": "Лаунж на пляже",
           "img": "images/restaurants/conversion_cyprus_sailors_rest.jpg"
-        }
-      ],
-      "brands": [
-        {
-          "name": "PropellerAds",
-          "category": "Технологии",
-          "logo": "https://logo.clearbit.com/propellerads.com"
-        },
-        {
-          "name": "Exoclick",
-          "category": "Технологии",
-          "logo": "https://logo.clearbit.com/exoclick.com"
-        },
-        {
-          "name": "TwinRed",
-          "category": "Технологии",
-          "logo": "https://logo.clearbit.com/twinred.com"
-        },
-        {
-          "name": "Binom",
-          "category": "Технологии",
-          "logo": "https://logo.clearbit.com/binom.org"
-        },
-        {
-          "name": "Voluum",
-          "category": "Технологии",
-          "logo": "https://logo.clearbit.com/voluum.com"
-        },
-        {
-          "name": "Leadbit",
-          "category": "Партнёрка",
-          "logo": "https://logo.clearbit.com/leadbit.com"
-        },
-        {
-          "name": "Alfaleads",
-          "category": "Партнёрка",
-          "logo": "https://logo.clearbit.com/alfaleads.net"
-        },
-        {
-          "name": "Traffic Company",
-          "category": "Партнёрка",
-          "logo": "https://logo.clearbit.com/trafficcompany.com"
         }
       ],
       "sideEvents": [
@@ -3107,28 +2061,6 @@
           "img": "images/restaurants/aw_europe_fuego.jpg"
         }
       ],
-      "brands": [
-        {
-          "name": "Adsterra",
-          "category": "Технологии",
-          "logo": "images/brands/adsterra.png"
-        },
-        {
-          "name": "Binom",
-          "category": "Технологии",
-          "logo": "images/brands/binom.png"
-        },
-        {
-          "name": "Keitaro",
-          "category": "Технологии",
-          "logo": "images/brands/keitaro.png"
-        },
-        {
-          "name": "RichAds",
-          "category": "Технологии",
-          "logo": "images/brands/richads.png"
-        }
-      ],
       "sideEvents": [
         {
           "title": "Opening Party",
@@ -3188,28 +2120,6 @@
           "avgCheck": "$20-50",
           "description": "Ботеко для нетворкинга",
           "img": "images/restaurants/gm_brazil_bar_do_luiz.jpg"
-        }
-      ],
-      "brands": [
-        {
-          "name": "Oracle",
-          "category": "Технологии",
-          "logo": "images/brands/oracle.png"
-        },
-        {
-          "name": "Google",
-          "category": "Технологии",
-          "logo": "images/brands/google.png"
-        },
-        {
-          "name": "Bragg Gaming",
-          "category": "Провайдер",
-          "logo": "images/brands/bragg_gaming.png"
-        },
-        {
-          "name": "Optimove",
-          "category": "Технологии",
-          "logo": "images/brands/optimove.png"
         }
       ],
       "sideEvents": [
@@ -3293,33 +2203,6 @@
           "img": "images/restaurants/spice_sea_sirocco.jpg"
         }
       ],
-      "brands": [
-        {
-          "name": "Booming Games",
-          "category": "Провайдер",
-          "logo": "images/brands/booming_games.png"
-        },
-        {
-          "name": "Gaming Analytics",
-          "category": "Технологии",
-          "logo": "images/brands/gaming_analytics.png"
-        },
-        {
-          "name": "Trackier",
-          "category": "Технологии",
-          "logo": "images/brands/trackier.png"
-        },
-        {
-          "name": "Czar Gaming",
-          "category": "Провайдер",
-          "logo": "images/brands/czar_gaming.png"
-        },
-        {
-          "name": "1710 Gaming",
-          "category": "Технологии",
-          "logo": "images/brands/1710_gaming.png"
-        }
-      ],
       "sideEvents": [
         {
           "title": "SPiCE Breaker Welcome Reception",
@@ -3399,33 +2282,6 @@
           "avgCheck": "$40-90",
           "description": "Культовый бар на Майдане",
           "img": "images/restaurants/conversion_kyiv_ostannya_barykada.jpg"
-        }
-      ],
-      "brands": [
-        {
-          "name": "Conversion Club",
-          "category": "Медиа",
-          "logo": "images/brands/conversion_club.png"
-        },
-        {
-          "name": "Revenuelab",
-          "category": "Партнёрка",
-          "logo": "https://logo.clearbit.com/revenuelab.co"
-        },
-        {
-          "name": "Clickdealer",
-          "category": "Партнёрка",
-          "logo": "https://logo.clearbit.com/clickdealer.com"
-        },
-        {
-          "name": "AdCombo",
-          "category": "Партнёрка",
-          "logo": "https://logo.clearbit.com/adcombo.com"
-        },
-        {
-          "name": "Yellana",
-          "category": "Партнёрка",
-          "logo": "https://logo.clearbit.com/yellana.com"
         }
       ],
       "sideEvents": []
@@ -3508,58 +2364,6 @@
           "avgCheck": "$180-400",
           "description": "2 звезды Мишлен от José Avillez",
           "img": "images/restaurants/sbc_lisbon_belcanto.jpg"
-        }
-      ],
-      "brands": [
-        {
-          "name": "Betsson Group",
-          "category": "Оператор",
-          "logo": "https://logo.clearbit.com/betsson.com"
-        },
-        {
-          "name": "Flutter Entertainment",
-          "category": "Оператор",
-          "logo": "https://logo.clearbit.com/flutter.com"
-        },
-        {
-          "name": "Entain",
-          "category": "Оператор",
-          "logo": "https://logo.clearbit.com/entain.com"
-        },
-        {
-          "name": "Evolution Gaming",
-          "category": "Провайдер",
-          "logo": "https://logo.clearbit.com/evolution.com"
-        },
-        {
-          "name": "Pragmatic Play",
-          "category": "Провайдер",
-          "logo": "https://logo.clearbit.com/pragmaticplay.com"
-        },
-        {
-          "name": "Playtech",
-          "category": "Провайдер",
-          "logo": "https://logo.clearbit.com/playtech.com"
-        },
-        {
-          "name": "Sportradar",
-          "category": "Технологии",
-          "logo": "https://logo.clearbit.com/sportradar.com"
-        },
-        {
-          "name": "Kambi",
-          "category": "Технологии",
-          "logo": "https://logo.clearbit.com/kambi.com"
-        },
-        {
-          "name": "SoftSwiss",
-          "category": "Технологии",
-          "logo": "https://logo.clearbit.com/softswiss.com"
-        },
-        {
-          "name": "Nuvei",
-          "category": "Платежи",
-          "logo": "https://logo.clearbit.com/nuvei.com"
         }
       ],
       "sideEvents": [
@@ -3656,58 +2460,6 @@
           "img": "images/restaurants/g2e_vegas_bazaar_meat.jpg"
         }
       ],
-      "brands": [
-        {
-          "name": "IGT",
-          "category": "Провайдер",
-          "logo": "https://logo.clearbit.com/igt.com"
-        },
-        {
-          "name": "Aristocrat",
-          "category": "Провайдер",
-          "logo": "https://logo.clearbit.com/aristocrat.com"
-        },
-        {
-          "name": "Light & Wonder",
-          "category": "Провайдер",
-          "logo": "https://logo.clearbit.com/lnw.com"
-        },
-        {
-          "name": "Konami Gaming",
-          "category": "Провайдер",
-          "logo": "https://logo.clearbit.com/konami.com"
-        },
-        {
-          "name": "Everi",
-          "category": "Технологии",
-          "logo": "https://logo.clearbit.com/everi.com"
-        },
-        {
-          "name": "AGS",
-          "category": "Провайдер",
-          "logo": "https://logo.clearbit.com/playags.com"
-        },
-        {
-          "name": "Ainsworth",
-          "category": "Провайдер",
-          "logo": "https://logo.clearbit.com/ainsworth.com"
-        },
-        {
-          "name": "JCM Global",
-          "category": "Технологии",
-          "logo": "https://logo.clearbit.com/jcmglobal.com"
-        },
-        {
-          "name": "Interblock",
-          "category": "Провайдер",
-          "logo": "https://logo.clearbit.com/interblockgaming.com"
-        },
-        {
-          "name": "Aruze Gaming",
-          "category": "Провайдер",
-          "logo": "https://logo.clearbit.com/aruzegaming.com"
-        }
-      ],
       "sideEvents": [
         {
           "title": "G2E Networking Reception",
@@ -3802,83 +2554,6 @@
           "img": "images/restaurants/sigma_mexico_lardo.jpg"
         }
       ],
-      "brands": [
-        {
-          "name": "Betano",
-          "category": "Оператор",
-          "logo": "images/brands/betano.png"
-        },
-        {
-          "name": "Superbet",
-          "category": "Оператор",
-          "logo": "images/brands/superbet.png"
-        },
-        {
-          "name": "Betsson Group",
-          "category": "Оператор",
-          "logo": "images/brands/betsson_group.png"
-        },
-        {
-          "name": "Evolution Gaming",
-          "category": "Провайдер",
-          "logo": "images/brands/evolution_gaming.png"
-        },
-        {
-          "name": "Pragmatic Play",
-          "category": "Провайдер",
-          "logo": "images/brands/pragmatic_play.png"
-        },
-        {
-          "name": "NetEnt",
-          "category": "Провайдер",
-          "logo": "images/brands/netent.png"
-        },
-        {
-          "name": "Microgaming",
-          "category": "Провайдер",
-          "logo": "images/brands/microgaming.png"
-        },
-        {
-          "name": "SOFTSWISS",
-          "category": "Технологии",
-          "logo": "images/brands/softswiss.png"
-        },
-        {
-          "name": "Sportradar",
-          "category": "Технологии",
-          "logo": "images/brands/sportradar.png"
-        },
-        {
-          "name": "BetConstruct",
-          "category": "Технологии",
-          "logo": "images/brands/betconstruct.png"
-        },
-        {
-          "name": "SBTech",
-          "category": "Технологии",
-          "logo": "images/brands/sbtech.png"
-        },
-        {
-          "name": "Paysafe",
-          "category": "Платёжка",
-          "logo": "images/brands/paysafe.png"
-        },
-        {
-          "name": "Skrill",
-          "category": "Платёжка",
-          "logo": "images/brands/skrill.png"
-        },
-        {
-          "name": "Neteller",
-          "category": "Платёжка",
-          "logo": "images/brands/neteller.png"
-        },
-        {
-          "name": "Trustly",
-          "category": "Платёжка",
-          "logo": "images/brands/trustly.png"
-        }
-      ],
       "sideEvents": [
         {
           "title": "SiGMA North America Awards",
@@ -3960,28 +2635,6 @@
           "img": "images/restaurants/aw_americas_el_timon.jpg"
         }
       ],
-      "brands": [
-        {
-          "name": "PropellerAds",
-          "category": "Технологии",
-          "logo": "images/brands/propellerads.png"
-        },
-        {
-          "name": "ClickDealer",
-          "category": "Партнёрка",
-          "logo": "images/brands/clickdealer.png"
-        },
-        {
-          "name": "Voluum",
-          "category": "Технологии",
-          "logo": "images/brands/voluum.png"
-        },
-        {
-          "name": "Mobidea",
-          "category": "Партнёрка",
-          "logo": "images/brands/mobidea.png"
-        }
-      ],
       "sideEvents": [
         {
           "title": "Opening Party",
@@ -4054,38 +2707,6 @@
           "avgCheck": "$30-60",
           "description": "Пляжный ресторан для нетворкинга",
           "img": "images/restaurants/sbwa_dakar_noflaye_beach.jpg"
-        }
-      ],
-      "brands": [
-        {
-          "name": "Qtech Games",
-          "category": "Провайдер",
-          "logo": "images/brands/qtech_games.png"
-        },
-        {
-          "name": "DST Gaming",
-          "category": "Технологии",
-          "logo": "images/brands/dst_gaming.png"
-        },
-        {
-          "name": "pawaPay",
-          "category": "Платёжка",
-          "logo": "images/brands/pawapay.png"
-        },
-        {
-          "name": "LexisNexis Risk Solutions",
-          "category": "Технологии",
-          "logo": "images/brands/lexisnexis.png"
-        },
-        {
-          "name": "Siru Mobile",
-          "category": "Платёжка",
-          "logo": "images/brands/siru_mobile.png"
-        },
-        {
-          "name": "ComplyGuard",
-          "category": "Технологии",
-          "logo": "images/brands/complyguard.png"
         }
       ],
       "sideEvents": [
@@ -4167,48 +2788,6 @@
           "avgCheck": "$15-40",
           "description": "Аутентичные тако, лучшая цена",
           "img": "images/restaurants/affpapa_cancun_tacos_rigo.jpg"
-        }
-      ],
-      "brands": [
-        {
-          "name": "AffPapa",
-          "category": "Медиа",
-          "logo": "https://logo.clearbit.com/affpapa.com"
-        },
-        {
-          "name": "Stake",
-          "category": "Оператор",
-          "logo": "https://logo.clearbit.com/stake.com"
-        },
-        {
-          "name": "Betway",
-          "category": "Оператор",
-          "logo": "https://logo.clearbit.com/betway.com"
-        },
-        {
-          "name": "Bitcasino",
-          "category": "Оператор",
-          "logo": "https://logo.clearbit.com/bitcasino.io"
-        },
-        {
-          "name": "Sportsbet.io",
-          "category": "Оператор",
-          "logo": "https://logo.clearbit.com/sportsbet.io"
-        },
-        {
-          "name": "Cloudbet",
-          "category": "Оператор",
-          "logo": "https://logo.clearbit.com/cloudbet.com"
-        },
-        {
-          "name": "Rollbit",
-          "category": "Оператор",
-          "logo": "https://logo.clearbit.com/rollbit.com"
-        },
-        {
-          "name": "Duelbits",
-          "category": "Оператор",
-          "logo": "https://logo.clearbit.com/duelbits.com"
         }
       ],
       "sideEvents": [
@@ -4331,83 +2910,6 @@
           "img": "images/restaurants/sigma_rome_il_pagliaccio.jpg"
         }
       ],
-      "brands": [
-        {
-          "name": "Betsson Group",
-          "category": "Оператор",
-          "logo": "images/brands/betsson_group.png"
-        },
-        {
-          "name": "Bet365",
-          "category": "Оператор",
-          "logo": "images/brands/bet365.png"
-        },
-        {
-          "name": "Flutter Entertainment",
-          "category": "Оператор",
-          "logo": "images/brands/flutter.png"
-        },
-        {
-          "name": "Evolution Gaming",
-          "category": "Провайдер",
-          "logo": "images/brands/evolution_gaming.png"
-        },
-        {
-          "name": "Pragmatic Play",
-          "category": "Провайдер",
-          "logo": "images/brands/pragmatic_play.png"
-        },
-        {
-          "name": "NetEnt",
-          "category": "Провайдер",
-          "logo": "images/brands/netent.png"
-        },
-        {
-          "name": "SOFTSWISS",
-          "category": "Технологии",
-          "logo": "images/brands/softswiss.png"
-        },
-        {
-          "name": "Sportradar",
-          "category": "Технологии",
-          "logo": "images/brands/sportradar.png"
-        },
-        {
-          "name": "BetConstruct",
-          "category": "Технологии",
-          "logo": "images/brands/betconstruct.png"
-        },
-        {
-          "name": "AskGamblers",
-          "category": "Медиа",
-          "logo": "images/brands/askgamblers.png"
-        },
-        {
-          "name": "Gambling.com",
-          "category": "Медиа",
-          "logo": "images/brands/gambling_com.png"
-        },
-        {
-          "name": "Better Collective",
-          "category": "Медиа",
-          "logo": "images/brands/better_collective.png"
-        },
-        {
-          "name": "Paysafe",
-          "category": "Платёжка",
-          "logo": "images/brands/paysafe.png"
-        },
-        {
-          "name": "Skrill",
-          "category": "Платёжка",
-          "logo": "images/brands/skrill.png"
-        },
-        {
-          "name": "Neteller",
-          "category": "Платёжка",
-          "logo": "images/brands/neteller.png"
-        }
-      ],
       "sideEvents": [
         {
           "title": "SiGMA World Awards",
@@ -4502,83 +3004,6 @@
           "img": "images/restaurants/sigma_bangkok_sirocco.jpg"
         }
       ],
-      "brands": [
-        {
-          "name": "Betsson Group",
-          "category": "Оператор",
-          "logo": "images/brands/betsson_group.png"
-        },
-        {
-          "name": "Bet365",
-          "category": "Оператор",
-          "logo": "images/brands/bet365.png"
-        },
-        {
-          "name": "Flutter Entertainment",
-          "category": "Оператор",
-          "logo": "images/brands/flutter.png"
-        },
-        {
-          "name": "Evolution Gaming",
-          "category": "Провайдер",
-          "logo": "images/brands/evolution_gaming.png"
-        },
-        {
-          "name": "Pragmatic Play",
-          "category": "Провайдер",
-          "logo": "images/brands/pragmatic_play.png"
-        },
-        {
-          "name": "NetEnt",
-          "category": "Провайдер",
-          "logo": "images/brands/netent.png"
-        },
-        {
-          "name": "SOFTSWISS",
-          "category": "Технологии",
-          "logo": "images/brands/softswiss.png"
-        },
-        {
-          "name": "Sportradar",
-          "category": "Технологии",
-          "logo": "images/brands/sportradar.png"
-        },
-        {
-          "name": "BetConstruct",
-          "category": "Технологии",
-          "logo": "images/brands/betconstruct.png"
-        },
-        {
-          "name": "AskGamblers",
-          "category": "Медиа",
-          "logo": "images/brands/askgamblers.png"
-        },
-        {
-          "name": "Gambling.com",
-          "category": "Медиа",
-          "logo": "images/brands/gambling_com.png"
-        },
-        {
-          "name": "Better Collective",
-          "category": "Медиа",
-          "logo": "images/brands/better_collective.png"
-        },
-        {
-          "name": "Paysafe",
-          "category": "Платёжка",
-          "logo": "images/brands/paysafe.png"
-        },
-        {
-          "name": "Skrill",
-          "category": "Платёжка",
-          "logo": "images/brands/skrill.png"
-        },
-        {
-          "name": "Neteller",
-          "category": "Платёжка",
-          "logo": "images/brands/neteller.png"
-        }
-      ],
       "sideEvents": [
         {
           "title": "SiGMA South Asia Awards",
@@ -4666,28 +3091,6 @@
           "img": "images/restaurants/aibc_rome_ovale_pinseria.jpg"
         }
       ],
-      "brands": [
-        {
-          "name": "Softswiss",
-          "category": "Провайдер",
-          "logo": "images/brands/softswiss.png"
-        },
-        {
-          "name": "Playtech",
-          "category": "Провайдер",
-          "logo": "images/brands/playtech.png"
-        },
-        {
-          "name": "Digitain",
-          "category": "Провайдер",
-          "logo": "images/brands/digitain.png"
-        },
-        {
-          "name": "Endorphina",
-          "category": "Провайдер",
-          "logo": "images/brands/endorphina.png"
-        }
-      ],
       "sideEvents": [
         {
           "title": "Opening Party",
@@ -4761,83 +3164,6 @@
           "avgCheck": "$50-100",
           "description": "",
           "img": "images/restaurants/aw_asia_jay_fai.jpg"
-        }
-      ],
-      "brands": [
-        {
-          "name": "Betsson Group",
-          "category": "Оператор",
-          "logo": "images/brands/betsson_group.png"
-        },
-        {
-          "name": "Bet365",
-          "category": "Оператор",
-          "logo": "images/brands/bet365.png"
-        },
-        {
-          "name": "Flutter Entertainment",
-          "category": "Оператор",
-          "logo": "images/brands/flutter.png"
-        },
-        {
-          "name": "SOFTSWISS",
-          "category": "Технологии",
-          "logo": "images/brands/softswiss.png"
-        },
-        {
-          "name": "Sportradar",
-          "category": "Технологии",
-          "logo": "images/brands/sportradar.png"
-        },
-        {
-          "name": "BetConstruct",
-          "category": "Технологии",
-          "logo": "images/brands/betconstruct.png"
-        },
-        {
-          "name": "SBTech",
-          "category": "Технологии",
-          "logo": "images/brands/sbtech.png"
-        },
-        {
-          "name": "Kambi",
-          "category": "Технологии",
-          "logo": "images/brands/kambi.png"
-        },
-        {
-          "name": "AskGamblers",
-          "category": "Медиа",
-          "logo": "images/brands/askgamblers.png"
-        },
-        {
-          "name": "Gambling.com",
-          "category": "Медиа",
-          "logo": "images/brands/gambling_com.png"
-        },
-        {
-          "name": "Better Collective",
-          "category": "Медиа",
-          "logo": "images/brands/better_collective.png"
-        },
-        {
-          "name": "Catena Media",
-          "category": "Медиа",
-          "logo": "images/brands/catena_media.png"
-        },
-        {
-          "name": "Paysafe",
-          "category": "Платёжка",
-          "logo": "images/brands/paysafe.png"
-        },
-        {
-          "name": "Skrill",
-          "category": "Платёжка",
-          "logo": "images/brands/skrill.png"
-        },
-        {
-          "name": "Neteller",
-          "category": "Платёжка",
-          "logo": "images/brands/neteller.png"
         }
       ],
       "sideEvents": [

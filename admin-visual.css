@@ -1,0 +1,127 @@
+/* Визуальный редактор — поверх сайта */
+body.cms-pending { overflow: hidden; }
+body.cms-pending > header,
+body.cms-pending > div,
+body.cms-pending > main,
+body.cms-pending > footer { visibility: hidden; }
+
+body.cms-ready { padding-top: 52px; }
+
+.cms-login {
+  position: fixed; inset: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: center;
+  background: #1B1B1B;
+}
+.cms-login.hidden { display: none; }
+.cms-login__card {
+  width: min(420px, 92vw);
+  background: #222; border: 1px solid #333; border-radius: 16px;
+  padding: 28px;
+}
+.cms-login__card h1 { font-size: 1.35rem; font-weight: 800; color: #F5DA0F; margin: 0 0 6px; }
+.cms-login__muted { color: #999; font-size: 14px; margin: 0 0 20px; }
+.cms-login__error { color: #f87171; font-size: 13px; margin-top: 12px; }
+.cms-field { display: block; margin-bottom: 14px; }
+.cms-field span { display: block; font-size: 11px; font-weight: 700; color: #888; text-transform: uppercase; margin-bottom: 6px; }
+.cms-field input {
+  width: 100%; padding: 10px 12px; border-radius: 10px;
+  border: 1px solid #444; background: #1B1B1B; color: #fff; font-size: 14px;
+}
+
+.cms-toolbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 150;
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  padding: 8px 16px; background: #111; border-bottom: 2px solid #F5DA0F;
+}
+.cms-toolbar.hidden { display: none; }
+.cms-toolbar__label { font-size: 12px; font-weight: 800; color: #F5DA0F; margin-right: 8px; }
+
+.cms-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 7px 14px; border-radius: 8px; border: 1px solid #444;
+  background: #2a2a2a; color: #fff; font-size: 13px; font-weight: 700;
+  text-decoration: none; cursor: pointer; font-family: inherit;
+}
+.cms-btn:hover { background: #333; }
+.cms-btn--primary { background: #F5DA0F; color: #1B1B1B; border-color: #F5DA0F; }
+.cms-btn--primary:hover { opacity: 0.9; }
+.cms-btn--ghost { background: transparent; }
+
+.cms-editable {
+  outline: 1px dashed rgba(245, 218, 15, 0.45);
+  outline-offset: 4px;
+  border-radius: 4px;
+  cursor: text;
+}
+.cms-editable:focus { outline-color: #F5DA0F; }
+
+.cms-meta-panel {
+  margin: 0 2rem 1rem;
+  padding: 14px 16px;
+  background: rgba(245, 218, 15, 0.06);
+  border: 1px dashed rgba(245, 218, 15, 0.35);
+  border-radius: 12px;
+}
+.cms-meta-panel__title {
+  font-size: 11px; font-weight: 800; color: #F5DA0F;
+  text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 10px;
+}
+.cms-meta-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+}
+@media (max-width: 560px) { .cms-meta-grid { grid-template-columns: 1fr; } }
+.cms-meta-grid label { display: block; }
+.cms-meta-grid label span {
+  display: block; font-size: 10px; color: #888; font-weight: 700; margin-bottom: 4px;
+}
+.cms-meta-grid input, .cms-meta-grid select, .cms-meta-grid textarea {
+  width: 100%; padding: 8px 10px; border-radius: 8px;
+  border: 1px solid #444; background: #1B1B1B; color: #fff; font-size: 13px;
+  font-family: inherit;
+}
+.cms-meta-grid textarea { min-height: 56px; resize: vertical; }
+.cms-meta-grid .full { grid-column: 1 / -1; }
+
+.cms-hero-edit {
+  position: absolute; top: 12px; left: 12px; z-index: 5;
+}
+.cms-hero-edit .cms-btn { font-size: 12px; padding: 6px 10px; }
+
+.cms-list-tools {
+  display: flex; gap: 8px; margin: 12px 0 8px;
+}
+.cms-item-edit {
+  position: relative;
+  outline: 1px dashed rgba(245, 218, 15, 0.25);
+  border-radius: 12px;
+}
+.cms-item-edit__bar {
+  display: flex; gap: 6px; flex-wrap: wrap;
+  padding: 8px 10px; margin-bottom: 8px;
+  background: rgba(0,0,0,0.35); border-radius: 8px;
+}
+.cms-item-edit__bar input, .cms-item-edit__bar select, .cms-item-edit__bar textarea {
+  flex: 1 1 120px; min-width: 80px;
+  padding: 6px 8px; border-radius: 6px; border: 1px solid #555;
+  background: #1B1B1B; color: #fff; font-size: 12px;
+}
+.cms-item-edit__bar textarea { min-height: 48px; flex-basis: 100%; }
+.cms-item-edit__bar button {
+  padding: 4px 10px; border-radius: 6px; border: 1px solid #666;
+  background: #333; color: #fff; font-size: 11px; cursor: pointer;
+}
+
+.cms-toast {
+  position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+  z-index: 300; padding: 12px 20px; border-radius: 10px;
+  background: #F5DA0F; color: #1B1B1B; font-weight: 800; font-size: 14px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+}
+
+body.cms-edit-mode .modal-footer .btn-calendar,
+body.cms-edit-mode .modal-footer .btn-promo { display: none; }
+
+.cms-modal-hint {
+  padding: 8px 2rem; font-size: 12px; color: #888;
+  border-bottom: 1px solid #333;
+}

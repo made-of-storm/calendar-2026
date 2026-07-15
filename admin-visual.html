@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Календарь iGaming конференций 2026: даты, визы, рестораны, сайд-ивенты и промокоды. Secretroom." />
   <link rel="canonical" href="https://igaming-calendar.com/" />
-  <title>Secretroom I-Gaming Calendar 2026</title>
+  <title>Редактор — Calendar 2026</title>
   <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -41,15 +41,43 @@
   </script>
 
   <link rel="stylesheet" href="./styles.css" />
+  <link rel="stylesheet" href="./admin-visual.css?v=1" />
   <script src="./data/cms-config.js"></script>
   <script src="./js/events-loader.js"></script>
   <script src="./js/calendar-render.js"></script>
+  <script>window.CMS_EDIT_MODE = true;</script>
   <script defer src="./app.js"></script>
-
-  <script defer src="https://cloud.umami.is/script.js" data-website-id="f22bda07-4ac9-4a02-b0ec-db04942fa844"></script>
+  <script defer src="./admin-visual.js?v=1"></script>
 </head>
 
-<body class="antialiased pb-20">
+<body class="antialiased pb-20 cms-pending">
+
+<div id="cmsLogin" class="cms-login">
+  <div class="cms-login__card">
+    <h1>Редактор календаря</h1>
+    <p class="cms-login__muted">Тот же сайт — правки прямо в карточках</p>
+    <label class="cms-field">
+      <span>URL API (Google Apps Script)</span>
+      <input type="url" id="cmsApiUrl" placeholder="https://script.google.com/macros/s/.../exec" />
+    </label>
+    <label class="cms-field">
+      <span>Пароль</span>
+      <input type="password" id="cmsPassword" placeholder="Пароль из GAS" />
+    </label>
+    <button type="button" class="cms-btn cms-btn--primary" id="cmsLoginBtn">Войти</button>
+    <p id="cmsLoginError" class="cms-login__error hidden"></p>
+  </div>
+</div>
+
+<div id="cmsToolbar" class="cms-toolbar hidden">
+  <span class="cms-toolbar__label">Режим редактирования</span>
+  <button type="button" class="cms-btn cms-btn--primary" id="cmsSaveBtn">Сохранить карточку</button>
+  <button type="button" class="cms-btn" id="cmsNewBtn">+ Ивент</button>
+  <button type="button" class="cms-btn" id="cmsHideBtn">Скрыть с сайта</button>
+  <a href="/" target="_blank" class="cms-btn">Сайт ↗</a>
+  <a href="admin.html?legacy=visa" class="cms-btn">Визы</a>
+  <button type="button" class="cms-btn cms-btn--ghost" id="cmsLogoutBtn">Выйти</button>
+</div>
 
 <header class="sticky top-0 z-40 bg-[#1B1B1B]/92 backdrop-blur-md border-b border-[#333333]">
   <div class="max-w-[1600px] mx-auto px-6 h-20 flex items-center justify-between">
@@ -213,8 +241,8 @@
   </button>
 </div>
 
-<!-- ACCESS MODAL (Lead Capture) -->
-<div id="accessModalOverlay" class="fixed inset-0 z-50 hidden">
+<!-- ACCESS MODAL — отключён в редакторе -->
+<div id="accessModalOverlay" class="fixed inset-0 z-50 hidden" style="display:none !important">
   <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" id="accessModalBg"></div>
   <div class="absolute inset-0 flex items-center justify-center p-4">
     <div id="accessModalPanel" class="access-modal-panel w-full max-w-md bg-white/10 backdrop-blur-xl rounded-3xl border border-white/20 shadow-2xl p-8 text-white">

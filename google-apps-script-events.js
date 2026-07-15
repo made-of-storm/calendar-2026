@@ -26,7 +26,7 @@ const HEADERS = [
   'id', 'month', 'sortOrder', 'visible', 'cardType', 'cardStyle', 'accentColor',
   'tier', 'attendees', 'country', 'startDate', 'endDate', 'title', 'datesLabel',
   'locationLine', 'category', 'heroImage', 'description', 'website', 'telegramChannel',
-  'startISO', 'endISO', 'weather', 'promo', 'awards', 'restaurants', 'brands', 'sideEvents'
+  'startISO', 'endISO', 'weather', 'promo', 'awards', 'restaurants', 'sideEvents'
 ];
 
 const VISA_HEADERS = ['citizenship', 'country', 'required', 'type', 'notes'];
@@ -250,7 +250,7 @@ function rowToEvent(row) {
 
 function parseCell(key, val) {
   if (val === '' || val === null || val === undefined) {
-    if (['awards', 'restaurants', 'brands', 'sideEvents'].indexOf(key) >= 0) return [];
+    if (['awards', 'restaurants', 'sideEvents'].indexOf(key) >= 0) return [];
     if (key === 'visible') return true;
     return null;
   }
@@ -263,7 +263,7 @@ function parseCell(key, val) {
     }
     return String(val);
   }
-  if (['weather', 'awards', 'restaurants', 'brands', 'sideEvents'].indexOf(key) >= 0) {
+  if (['weather', 'awards', 'restaurants', 'sideEvents'].indexOf(key) >= 0) {
     if (typeof val === 'object') return val;
     try { return JSON.parse(val); } catch (e) { return null; }
   }

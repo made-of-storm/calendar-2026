@@ -2,67 +2,17 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="refresh" content="0;url=admin-visual.html" />
   <title>Админка — Calendar 2026</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="admin.css?v=4" />
+  <script>
+    if (location.search.includes('legacy=visa')) {
+      location.replace('admin-legacy.html' + location.search);
+    } else {
+      location.replace('admin-visual.html' + location.search);
+    }
+  </script>
 </head>
 <body>
-  <div id="loginScreen" class="screen">
-    <div class="card card--narrow">
-      <h1>Календарь 2026</h1>
-      <p class="muted">Вход для редакторов</p>
-      <label class="field">
-        <span>URL API (Google Apps Script)</span>
-        <input type="url" id="apiUrlInput" placeholder="https://script.google.com/macros/s/.../exec" />
-      </label>
-      <label class="field">
-        <span>Пароль</span>
-        <input type="password" id="passwordInput" placeholder="Пароль из настройки GAS" />
-      </label>
-      <p class="hint">Пока API не настроен — можно смотреть локальные данные (только чтение).</p>
-      <button type="button" class="btn btn--primary" id="loginBtn">Войти</button>
-      <p id="loginError" class="error hidden"></p>
-    </div>
-  </div>
-
-  <div id="appScreen" class="screen hidden">
-    <header class="topbar">
-      <div class="topbar__tabs">
-        <button type="button" class="tab-btn active" id="tabEvents">Ивенты</button>
-        <button type="button" class="tab-btn" id="tabVisa">Визы</button>
-        <span class="muted" id="eventCount"></span>
-      </div>
-      <div class="topbar__actions">
-        <a href="/" target="_blank" class="btn btn--ghost">Открыть сайт ↗</a>
-        <button type="button" class="btn btn--primary" id="addEventBtn">+ Новый ивент</button>
-        <button type="button" class="btn btn--ghost" id="logoutBtn">Выйти</button>
-      </div>
-    </header>
-
-    <div class="layout" id="eventsView">
-      <aside class="sidebar" id="eventList"></aside>
-      <main class="editor" id="editorPanel">
-        <p class="muted editor__empty">Выбери ивент слева или создай новый</p>
-      </main>
-    </div>
-
-    <div class="visa-view hidden" id="visaView">
-      <div class="visa-toolbar">
-        <label class="field visa-cit-field">
-          <span>Гражданство посетителя</span>
-          <select id="visaCitizenship"></select>
-        </label>
-        <button type="button" class="btn btn--primary" id="saveVisaBtn">Сохранить визы</button>
-      </div>
-      <p class="muted">Для выбранного гражданства задай визовый режим по каждой стране назначения. Меняется на сайте после «Сохранить» + Ctrl+F5.</p>
-      <div id="visaRows"></div>
-      <button type="button" class="btn btn--ghost" id="addVisaCountryBtn">+ Добавить страну</button>
-    </div>
-  </div>
-
-  <script src="data/cms-config.js"></script>
-  <script src="admin.js?v=4"></script>
+  <p><a href="admin-visual.html">Перейти в редактор</a></p>
 </body>
 </html>

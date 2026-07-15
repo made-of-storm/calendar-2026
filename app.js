@@ -837,22 +837,15 @@ function populateModal(eventId) {
   // Populate tabs
   populateRestaurantsTab(event.restaurants || [], event.partnerPromo || null);
   populateSideEventsTab(event.sideEvents || []);
-  populateBrandsTab(event.brands || []);
   populateAwardsTab(event.awards || []);
 
   // Update tab button labels with counts
   const eventsBtn = qs('[data-tab-btn="events"]');
-  const brandsBtn = qs('[data-tab-btn="brands"]');
   const awardsBtn = qs('[data-tab-btn="awards"]');
 
   if (eventsBtn) {
     const count = (event.sideEvents || []).length;
     eventsBtn.textContent = count > 0 ? `Сайд-ивенты (${count})` : "Сайд-ивенты";
-  }
-
-  if (brandsBtn) {
-    const count = (event.brands || []).length;
-    brandsBtn.textContent = count > 0 ? `Бренды (${count})` : "Бренды";
   }
 
   if (awardsBtn) {
@@ -870,6 +863,10 @@ function populateModal(eventId) {
   if (richSideEvents) startEventsTabPulse();
 
   updateModalPromoButton(event);
+
+  if (window.CMS_EDIT_MODE && typeof window.onCmsModalPopulated === 'function') {
+    window.onCmsModalPopulated(eventId, event);
+  }
 }
 
 function updateModalPromoButton(event) {
@@ -1097,24 +1094,6 @@ function populateSideEventsTab(sideEvents) {
   container.innerHTML = html;
 }
 
-function createBrandCard(brand) {
-  const initials = brand.name.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase();
-
-  return `
-    <div class="brand-card">
-      <img
-        src="${brand.logo}"
-        alt="${brand.name}"
-        class="brand-logo"
-        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-      >
-      <div class="brand-icon-fallback" style="display: none;">${initials}</div>
-      <div class="brand-name">${brand.name}</div>
-      <div class="brand-category">${brand.category}</div>
-    </div>
-  `;
-}
-
 function populateAwardsTab(awards) {
   const container = qs("#awards");
   if (!container) return;
@@ -1163,30 +1142,6 @@ function populateAwardsTab(awards) {
       </div>
     `;
   });
-
-  container.innerHTML = html;
-}
-
-function populateBrandsTab(brands) {
-  const container = qs("#brands");
-  if (!container) return;
-
-  if (!brands || brands.length === 0) {
-    container.innerHTML = `
-      <div class="text-center py-8 text-gray-400">
-        <p class="text-sm">Скоро добавим список участников и брендов</p>
-      </div>
-    `;
-    return;
-  }
-
-  let html = '<div class="brands-grid">';
-
-  brands.forEach(brand => {
-    html += createBrandCard(brand);
-  });
-
-  html += '</div>';
 
   container.innerHTML = html;
 }
@@ -1310,8 +1265,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   initMobilePastMonths();
 
-  // Modal open: bind all clickable event cards (skip past events)
-  qsa(".event-card[data-event-id]:not(.past-event)").forEach((card) => {
+  // Modal open: bind all clickable event cards (skip past events on public site)
+  const cardClickSelector = window.CMS_EDIT_MODE
+    ? ".event-card[data-event-id]"
+    : ".event-card[data-event-id]:not(.past-event)";
+  qsa(cardClickSelector).forEach((card) => {
     card.addEventListener("click", () => {
       const id = card.getAttribute("data-event-id");
       if (!id) return;
