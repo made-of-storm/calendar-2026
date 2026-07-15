@@ -1,9 +1,13 @@
 /* Визуальный редактор — поверх сайта */
-body.cms-pending { overflow: hidden; }
+body.cms-pending { overflow: hidden; background: #1B1B1B; }
 body.cms-pending > header,
-body.cms-pending > div,
 body.cms-pending > main,
-body.cms-pending > footer { visibility: hidden; }
+body.cms-pending > div:not(#cmsLogin):not(#cmsToolbar) {
+  visibility: hidden;
+}
+body.cms-pending #cmsLogin {
+  visibility: visible;
+}
 
 body.cms-ready { padding-top: 52px; }
 
