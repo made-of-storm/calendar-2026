@@ -723,7 +723,7 @@ window.onCmsModalPopulated = function (eventId) {
     hint = document.createElement('div');
     hint.id = 'cmsModalHint';
     hint.className = 'cms-modal-hint';
-    cms$('#modalPanel')?.insertBefore(hint, cms$('#modalHero'));
+    cms$('#modalPanel')?.insertBefore(hint, cms$('#cmsModalScroll'));
   }
   hint.textContent = 'Редактируй как на сайте. Поля с карточки слева уже подставлены.';
 

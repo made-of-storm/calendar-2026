@@ -41,13 +41,13 @@
   </script>
 
   <link rel="stylesheet" href="./styles.css" />
-  <link rel="stylesheet" href="./admin-visual.css?v=4" />
+  <link rel="stylesheet" href="./admin-visual.css?v=5" />
   <script src="./data/cms-config.js"></script>
   <script src="./js/events-loader.js"></script>
   <script src="./js/calendar-render.js"></script>
   <script>window.CMS_EDIT_MODE = true;</script>
   <script defer src="./app.js"></script>
-  <script defer src="./admin-visual.js?v=4"></script>
+  <script defer src="./admin-visual.js?v=5"></script>
 </head>
 
 <body class="antialiased pb-20 cms-pending">
@@ -197,8 +197,9 @@
 <!-- MODAL -->
 <div id="modalOverlay" class="fixed inset-0 z-50 hidden">
   <div class="absolute inset-0 bg-black/80 backdrop-blur-sm transition-opacity opacity-0" id="modalBg"></div>
-  <div class="absolute inset-y-0 right-0 w-full md:w-[600px] bg-[#222222] shadow-2xl transform translate-x-full transition-transform duration-300 flex flex-col border-l border-[#333333]" id="modalPanel">
+  <div class="absolute inset-y-0 right-0 w-full md:w-[600px] bg-[#222222] shadow-2xl transform translate-x-full transition-transform duration-300 flex flex-col border-l border-[#333333] min-h-0" id="modalPanel">
 
+    <div id="cmsModalScroll" class="cms-modal-scroll flex-1 min-h-0 overflow-y-auto overscroll-contain">
     <!-- Hero с погодой -->
     <div id="modalHero"></div>
 
@@ -209,14 +210,13 @@
     <div id="modalStats" class="modal-stats-grid"></div>
 
     <!-- Табы -->
-    <div class="flex-1 overflow-y-auto">
       <div class="modal-tabs">
         <button data-tab-btn="guide" class="tab-btn active" type="button">Гид</button>
         <button data-tab-btn="events" class="tab-btn" type="button">Сайд-ивенты</button>
         <button data-tab-btn="awards" class="tab-btn" type="button">Awards</button>
       </div>
 
-      <div class="px-8">
+      <div class="px-8 cms-modal-tab-body">
         <div id="guide" class="tab-content active space-y-4 pb-8"></div>
         <div id="events" class="tab-content space-y-4 pb-8"></div>
         <div id="awards" class="tab-content space-y-4 pb-8"></div>
