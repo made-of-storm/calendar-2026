@@ -143,6 +143,67 @@ body.cms-ready.cms-drawer-open { padding-right: min(440px, 42vw); }
 .cms-btn--sm { padding: 5px 10px; font-size: 11px; }
 .cms-btn:disabled { opacity: 0.45; cursor: not-allowed; }
 
+/* Модалка поверх drawer — не перекрывается панелью справа */
+body.cms-modal-open #modalOverlay {
+  z-index: 160;
+  right: min(440px, 42vw);
+  left: 0;
+}
+body.cms-modal-open #modalPanel {
+  width: min(600px, 100%);
+  max-width: none;
+}
+body.cms-modal-open #modalBg {
+  right: 0;
+}
+
+.cms-modal-hint {
+  flex-shrink: 0;
+  padding: 10px 1.5rem;
+  font-size: 12px;
+  font-weight: 700;
+  color: #F5DA0F;
+  background: rgba(245, 218, 15, 0.08);
+  border-bottom: 1px solid rgba(245, 218, 15, 0.2);
+}
+.cms-modal-extra {
+  padding: 0 2rem 12px;
+  display: grid;
+  gap: 8px;
+}
+.cms-modal-extra label {
+  display: block;
+}
+.cms-modal-extra label span {
+  display: block;
+  font-size: 10px;
+  font-weight: 700;
+  color: #666;
+  text-transform: uppercase;
+  margin-bottom: 3px;
+}
+.cms-modal-extra input {
+  width: 100%;
+  padding: 7px 10px;
+  border-radius: 8px;
+  border: 1px dashed rgba(245, 218, 15, 0.35);
+  background: rgba(0, 0, 0, 0.25);
+  color: #fff;
+  font-size: 13px;
+  font-family: inherit;
+}
+.cms-modal-extra .cms-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.cms-stat-edit {
+  outline: 1px dashed rgba(245, 218, 15, 0.45) !important;
+  outline-offset: 2px;
+  cursor: text;
+  min-width: 2em;
+}
+
 .cms-login {
   position: fixed; inset: 0; z-index: 200;
   display: flex; align-items: center; justify-content: center;

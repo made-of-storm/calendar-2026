@@ -231,11 +231,6 @@ function cmsRenderEditor(ev) {
   const root = cms$('#cmsEditorRoot');
   if (!root || !ev) return;
 
-  const w = ev.weather || { temp: '', description: '' };
-  const restRows = (ev.restaurants || []).map(cmsRestaurantRow).join('');
-  const sideRows = (ev.sideEvents || []).map(cmsSideRow).join('');
-  const awardRows = (ev.awards || []).map(cmsAwardRow).join('');
-
   root.innerHTML = `
     <div class="cms-editor__head">
       <h2>${escHtml(ev.title || 'Новый ивент')}</h2>
@@ -249,7 +244,7 @@ function cmsRenderEditor(ev) {
     <div class="cms-form" id="cmsEditorForm">
       <div class="cms-section">
         <h3>Карточка в сетке календаря</h3>
-        <p class="cms-hint">То, что видно в маленькой/большой карточке на главной</p>
+        <p class="cms-hint">Маленькая/большая карточка на главной. Описание, рестораны, сайд-ивенты — в модалке.</p>
         <label class="cms-fl"><span>Название на карточке</span><input id="f_title" value="${escAttr(ev.title)}" /></label>
         <label class="cms-fl"><span>Короткие даты (19–20 Янв)</span><input id="f_datesLabel" value="${escAttr(ev.datesLabel)}" /></label>
         <div class="cms-form-row">
@@ -287,88 +282,20 @@ function cmsRenderEditor(ev) {
 
       <div class="cms-section">
         <h3>Модалка (полная карточка)</h3>
-        <label class="cms-fl"><span>Описание</span><textarea id="f_description">${escHtml(ev.description || '')}</textarea></label>
-        <div class="cms-form-row">
-          <label class="cms-fl"><span>Оф. сайт</span><input id="f_website" type="url" value="${escAttr(ev.website)}" /></label>
-          <label class="cms-fl"><span>Telegram</span><input id="f_telegram" value="${escAttr(ev.telegramChannel || '')}" /></label>
-        </div>
-        <div class="cms-form-row">
-          <label class="cms-fl"><span>Погода — температура</span><input id="f_weatherTemp" value="${escAttr(w.temp || '')}" placeholder="18-22°C" /></label>
-          <label class="cms-fl"><span>Погода — текст</span><input id="f_weatherDesc" value="${escAttr(w.description || '')}" /></label>
-        </div>
-        <div class="cms-form-row">
-          <label class="cms-fl"><span>Промокод</span><input id="f_promo" value="${escAttr(ev.promo || '')}" placeholder="пусто = скидка в работе" /></label>
-          <label class="cms-fl"><span>Примечание к промо</span><input id="f_promoNote" value="${escAttr(ev.promoNote || '')}" placeholder="−10%" /></label>
-        </div>
-      </div>
-
-      <div class="cms-section">
-        <h3>Рестораны (${(ev.restaurants || []).length})</h3>
-        <div id="cmsRestList">${restRows || '<p class="cms-hint">Нет ресторанов</p>'}</div>
-        ${cms.canWrite ? '<button type="button" class="cms-btn cms-btn--sm" id="cmsAddRest">+ Ресторан</button>' : ''}
-      </div>
-
-      <div class="cms-section">
-        <h3>Сайд-ивенты (${(ev.sideEvents || []).length})</h3>
-        <div id="cmsSideList">${sideRows || '<p class="cms-hint">Нет сайд-ивентов</p>'}</div>
-        ${cms.canWrite ? '<button type="button" class="cms-btn cms-btn--sm" id="cmsAddSide">+ Сайд-ивент</button>' : ''}
-      </div>
-
-      <div class="cms-section">
-        <h3>Awards (${(ev.awards || []).length})</h3>
-        <div id="cmsAwardList">${awardRows || '<p class="cms-hint">Нет awards</p>'}</div>
-        ${cms.canWrite ? '<button type="button" class="cms-btn cms-btn--sm" id="cmsAddAward">+ Award</button>' : ''}
+        <p class="cms-hint">Открой модалку — поля с карточки подставятся автоматически. Редактируй прямо в окне как на сайте.</p>
+        <button type="button" class="cms-btn cms-btn--primary" id="cmsDrawerModalBtn" style="width:100%">Открыть модалку для редактирования</button>
       </div>
     </div>
   `;
 
   cms$('#cmsDrawerSave')?.addEventListener('click', cmsSave);
   cms$('#cmsDrawerDelete')?.addEventListener('click', cmsDeleteCurrent);
-
-  cms$('#cmsAddRest')?.addEventListener('click', () => {
-    cmsSyncDraftFromForm();
-    cms.draft.restaurants = cms.draft.restaurants || [];
-    cms.draft.restaurants.push({ name: '', vibe: 'посидеть', avgCheck: '', description: '', img: '', website: '' });
-    cmsRenderEditor(cms.draft);
-  });
-  cms$('#cmsAddSide')?.addEventListener('click', () => {
-    cmsSyncDraftFromForm();
-    cms.draft.sideEvents = cms.draft.sideEvents || [];
-    cms.draft.sideEvents.push({ title: '', date: '', location: '', type: 'party', description: '' });
-    cmsRenderEditor(cms.draft);
-  });
-  cms$('#cmsAddAward')?.addEventListener('click', () => {
-    cmsSyncDraftFromForm();
-    cms.draft.awards = cms.draft.awards || [];
-    cms.draft.awards.push({ name: '', date: '', categories: [], website: '' });
-    cmsRenderEditor(cms.draft);
-  });
-
-  root.querySelectorAll('[data-remove-rest]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      cmsSyncDraftFromForm();
-      cms.draft.restaurants.splice(Number(btn.dataset.removeRest), 1);
-      cmsRenderEditor(cms.draft);
-    });
-  });
-  root.querySelectorAll('[data-remove-side]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      cmsSyncDraftFromForm();
-      cms.draft.sideEvents.splice(Number(btn.dataset.removeSide), 1);
-      cmsRenderEditor(cms.draft);
-    });
-  });
-  root.querySelectorAll('[data-remove-award]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      cmsSyncDraftFromForm();
-      cms.draft.awards.splice(Number(btn.dataset.removeAward), 1);
-      cmsRenderEditor(cms.draft);
-    });
-  });
+  cms$('#cmsDrawerModalBtn')?.addEventListener('click', cmsOpenModal);
 
   cms$('#f_heroImage')?.addEventListener('input', (e) => {
     const widget = e.target.closest('.cms-img-widget');
     cmsUpdateImgPreview(e.target.value, widget?.querySelector('.js-img-preview'));
+    if (cms.draft) cms.draft.heroImage = e.target.value.trim();
   });
   root.querySelectorAll('.js-img-url').forEach(inp => {
     inp.addEventListener('input', () => {
@@ -390,33 +317,54 @@ function cmsRowVal(row, sel) {
   return el ? el.value.trim() : '';
 }
 
+function cmsModalPlainText(el) {
+  if (!el) return '';
+  return el.textContent.replace(/\s+/g, ' ').trim();
+}
+
+function cmsApplyDraftToEventMap(d) {
+  if (!d || !d.id || typeof toModalEvent !== 'function') return;
+  const modal = toModalEvent(d);
+  modal.promoNote = d.promoNote || null;
+  modal.heroImage = d.heroImage || modal.heroImage || '';
+  modal.restaurants = d.restaurants || [];
+  modal.sideEvents = d.sideEvents || [];
+  modal.awards = d.awards || [];
+  modal.weather = d.weather || null;
+  modal.promo = d.promo || null;
+  modal.website = d.website || '';
+  modal.telegramChannel = d.telegramChannel || null;
+  modal.description = d.description || '';
+  EVENTS[d.id] = modal;
+}
+
 function cmsReadRestaurants() {
-  return [...(cms$('#cmsRestList')?.querySelectorAll('.rest-row') || [])].map(row => {
+  return [...(cms$('#guide')?.querySelectorAll('.cms-item-edit') || [])].map(wrap => {
     const o = {
-      name: cmsRowVal(row, '.rest-name'),
-      vibe: row.querySelector('.rest-vibe')?.value || 'посидеть',
-      avgCheck: cmsRowVal(row, '.rest-check'),
-      description: cmsRowVal(row, '.rest-desc'),
-      img: cmsRowVal(row, '.rest-img')
+      name: cmsRowVal(wrap, '[data-r="name"]'),
+      vibe: wrap.querySelector('[data-r="vibe"]')?.value || 'посидеть',
+      avgCheck: cmsRowVal(wrap, '[data-r="avgCheck"]'),
+      description: cmsRowVal(wrap, '[data-r="description"]'),
+      img: cmsRowVal(wrap, '[data-r="img"]')
     };
-    const web = cmsRowVal(row, '.rest-website');
+    const web = cmsRowVal(wrap, '[data-r="website"]');
     if (web) o.website = web;
     return o;
   }).filter(o => o.name);
 }
 
 function cmsReadSideEvents() {
-  return [...(cms$('#cmsSideList')?.querySelectorAll('.side-row') || [])].map(row => {
+  return [...(cms$('#events')?.querySelectorAll('.cms-item-edit') || [])].map(wrap => {
     const o = {
-      title: cmsRowVal(row, '.se-title'),
-      date: cmsRowVal(row, '.se-date'),
-      location: cmsRowVal(row, '.se-location'),
-      type: row.querySelector('.se-type')?.value || 'party',
-      description: cmsRowVal(row, '.se-desc')
+      title: cmsRowVal(wrap, '[data-s="title"]'),
+      date: cmsRowVal(wrap, '[data-s="date"]'),
+      location: cmsRowVal(wrap, '[data-s="location"]'),
+      type: wrap.querySelector('[data-s="type"]')?.value || 'party',
+      description: cmsRowVal(wrap, '[data-s="description"]')
     };
-    const url = cmsRowVal(row, '.se-url');
-    const label = cmsRowVal(row, '.se-label');
-    const img = cmsRowVal(row, '.se-img');
+    const url = cmsRowVal(wrap, '[data-s="registerUrl"]');
+    const label = cmsRowVal(wrap, '[data-s="registerLabel"]');
+    const img = cmsRowVal(wrap, '[data-s="img"]');
     if (url) o.registerUrl = url;
     if (label) o.registerLabel = label;
     if (img) o.img = img;
@@ -425,71 +373,397 @@ function cmsReadSideEvents() {
 }
 
 function cmsReadAwards() {
-  return [...(cms$('#cmsAwardList')?.querySelectorAll('.award-row') || [])].map(row => {
-    const catsRaw = row.querySelector('.aw-cats')?.value || '';
-    const categories = catsRaw.split('\n').map(s => s.trim()).filter(Boolean);
-    const o = {
-      name: cmsRowVal(row, '.aw-name'),
-      date: cmsRowVal(row, '.aw-date'),
-      categories,
-      website: cmsRowVal(row, '.aw-web')
+  return [...(cms$('#awards')?.querySelectorAll('.cms-item-edit') || [])].map(wrap => {
+    const catsRaw = wrap.querySelector('[data-a="cats"]')?.value || '';
+    return {
+      name: cmsRowVal(wrap, '[data-a="name"]'),
+      date: cmsRowVal(wrap, '[data-a="date"]'),
+      categories: catsRaw.split('\n').map(s => s.trim()).filter(Boolean),
+      website: cmsRowVal(wrap, '[data-a="web"]')
     };
-    return o;
   }).filter(o => o.name);
 }
 
-function cmsReadWeather() {
-  const temp = cms$('#f_weatherTemp')?.value.trim() || '';
-  const desc = cms$('#f_weatherDesc')?.value.trim() || '';
+function cmsReadWeatherFromModal() {
+  const temp = cms$('#cmsM_weatherTemp')?.value.trim() || '';
+  const desc = cms$('#cmsM_weatherDesc')?.value.trim() || '';
   if (!temp && !desc) return null;
   return { temp, description: desc };
 }
 
-function cmsCollectEvent() {
+function cmsCollectFromModal() {
+  const promoRaw = cmsModalPlainText(cms$('.stat-value.promo, .stat-value.no-promo'));
+  const promoPending = typeof PROMO_PENDING_MESSAGE !== 'undefined' ? PROMO_PENDING_MESSAGE : 'Скидка в работе';
+  const attRaw = cmsModalPlainText(cms$('.stat-value.attendees')).replace(/[^\d]/g, '');
+
+  return {
+    title: cmsModalPlainText(cms$('.modal-title')) || cms.draft?.title || '',
+    description: cmsModalPlainText(cms$('.modal-description')) || '',
+    locationLine: cms$('#cmsM_location')?.value.trim() || cmsModalPlainText(cms$('.modal-location')) || '',
+    datesLabel: cms$('#cmsM_dates')?.value.trim() || cmsModalPlainText(cms$('.modal-dates')) || '',
+    attendees: Number(attRaw) || Number(cms$('#cmsM_attendees')?.value) || cms.draft?.attendees || 0,
+    website: cms$('#cmsM_website')?.value.trim() || '',
+    telegramChannel: cms$('#cmsM_telegram')?.value.trim() || null,
+    promo: (promoRaw && promoRaw !== promoPending) ? promoRaw : (cms$('#cmsM_promo')?.value.trim() || null),
+    promoNote: cms$('#cmsM_promoNote')?.value.trim() || null,
+    weather: cmsReadWeatherFromModal(),
+    restaurants: cmsReadRestaurants(),
+    sideEvents: cmsReadSideEvents(),
+    awards: cmsReadAwards(),
+    heroImage: cms.draft?.heroImage || ''
+  };
+}
+
+function cmsCollectCardFields() {
   const g = id => cms$('#' + id);
   const title = g('f_title')?.value.trim() || '';
   let id = g('f_id')?.value.trim() || '';
   if (!id && title) id = slugify(title);
 
-  const updated = { ...(cms.draft || {}) };
-  updated.id = id;
-  updated.title = title;
-  updated.datesLabel = g('f_datesLabel')?.value.trim() || '';
-  updated.locationLine = g('f_locationLine')?.value.trim() || '';
-  updated.country = (g('f_country')?.value.trim() || '').toUpperCase();
-  updated.description = g('f_description')?.value.trim() || '';
-  updated.website = g('f_website')?.value.trim() || '';
-  updated.telegramChannel = g('f_telegram')?.value.trim() || null;
-  updated.month = Number(g('f_month')?.value) || 1;
-  updated.sortOrder = Number(g('f_sortOrder')?.value) || 0;
-  updated.startDate = g('f_startDate')?.value || null;
-  updated.endDate = g('f_endDate')?.value || null;
-  updated.tier = g('f_tier')?.value || 'mid';
-  updated.attendees = Number(g('f_attendees')?.value) || 0;
-  updated.cardType = g('f_cardType')?.value || 'compact';
-  updated.cardStyle = g('f_cardStyle')?.value || 'elegant-dark';
-  updated.category = g('f_category')?.value.trim() || 'iGaming';
-  updated.accentColor = g('f_accentColor')?.value.trim() || '#2E39F7';
-  updated.heroImage = g('f_heroImage')?.value.trim() || '';
-  updated.visible = g('f_visible')?.checked !== false;
-  updated.promo = g('f_promo')?.value.trim() || null;
-  updated.promoNote = g('f_promoNote')?.value.trim() || null;
+  const updated = {
+    id,
+    title,
+    datesLabel: g('f_datesLabel')?.value.trim() || '',
+    locationLine: g('f_locationLine')?.value.trim() || '',
+    country: (g('f_country')?.value.trim() || '').toUpperCase(),
+    month: Number(g('f_month')?.value) || 1,
+    sortOrder: Number(g('f_sortOrder')?.value) || 0,
+    startDate: g('f_startDate')?.value || null,
+    endDate: g('f_endDate')?.value || null,
+    tier: g('f_tier')?.value || 'mid',
+    attendees: Number(g('f_attendees')?.value) || 0,
+    cardType: g('f_cardType')?.value || 'compact',
+    cardStyle: g('f_cardStyle')?.value || 'elegant-dark',
+    category: g('f_category')?.value.trim() || 'iGaming',
+    accentColor: g('f_accentColor')?.value.trim() || '#2E39F7',
+    heroImage: g('f_heroImage')?.value.trim() || '',
+    visible: g('f_visible')?.checked !== false
+  };
 
   if (updated.startDate) updated.startISO = updated.startDate + 'T09:00:00Z';
   if (updated.endDate) updated.endISO = updated.endDate + 'T18:00:00Z';
 
-  updated.weather = cmsReadWeather();
-  updated.restaurants = cmsReadRestaurants();
-  updated.sideEvents = cmsReadSideEvents();
-  updated.awards = cmsReadAwards();
-
-  delete updated._isNew;
   return updated;
 }
 
+function cmsCollectFullDraft() {
+  cmsSyncDraftFromForm();
+  if (document.body.classList.contains('cms-modal-open')) {
+    Object.assign(cms.draft, cmsCollectFromModal());
+  }
+  const out = { ...cms.draft };
+  delete out._isNew;
+  return out;
+}
+
 function cmsSyncDraftFromForm() {
-  if (!cms$('#cmsEditorForm')) return;
-  cms.draft = cmsCollectEvent();
+  if (!cms$('#cmsEditorForm') || !cms.draft) return;
+  Object.assign(cms.draft, cmsCollectCardFields());
+}
+
+function cmsSyncModalToSidebar() {
+  if (!cms.draft) return;
+  Object.assign(cms.draft, cmsCollectFromModal());
+  cmsRenderEditor(cms.draft);
+}
+
+function cmsRefreshModalEdit() {
+  if (!cms.editingId || !document.body.classList.contains('cms-modal-open')) return;
+  Object.assign(cms.draft, cmsCollectFromModal());
+  cmsSyncDraftFromForm();
+  cmsApplyDraftToEventMap(cms.draft);
+  if (typeof populateModal === 'function') populateModal(cms.editingId);
+}
+
+function cmsInjectModalExtraFields(ev) {
+  cms$('#cmsModalExtra')?.remove();
+  const w = ev.weather || { temp: '', description: '' };
+  const box = document.createElement('div');
+  box.id = 'cmsModalExtra';
+  box.className = 'cms-modal-extra';
+  box.innerHTML = `
+    <div class="cms-form-row">
+      <label><span>Место (как в модалке)</span><input id="cmsM_location" value="${escAttr(ev.locationLine || '')}" /></label>
+      <label><span>Даты (подпись)</span><input id="cmsM_dates" value="${escAttr(ev.datesLabel || '')}" /></label>
+    </div>
+    <div class="cms-form-row">
+      <label><span>Участников</span><input id="cmsM_attendees" type="number" value="${ev.attendees || 0}" /></label>
+      <label><span>Промокод</span><input id="cmsM_promo" value="${escAttr(ev.promo || '')}" placeholder="пусто = скидка в работе" /></label>
+    </div>
+    <div class="cms-form-row">
+      <label><span>Оф. сайт</span><input id="cmsM_website" type="url" value="${escAttr(ev.website || '')}" /></label>
+      <label><span>Telegram</span><input id="cmsM_telegram" value="${escAttr(ev.telegramChannel || '')}" /></label>
+    </div>
+    <div class="cms-form-row">
+      <label><span>Погода °C</span><input id="cmsM_weatherTemp" value="${escAttr(w.temp || '')}" /></label>
+      <label><span>Погода текст</span><input id="cmsM_weatherDesc" value="${escAttr(w.description || '')}" /></label>
+    </div>
+    <label><span>Примечание к промо</span><input id="cmsM_promoNote" value="${escAttr(ev.promoNote || '')}" /></label>
+  `;
+  cms$('#modalStats')?.after(box);
+
+  box.querySelectorAll('input').forEach(inp => {
+    inp.addEventListener('input', () => {
+      if (inp.id === 'cmsM_location') {
+        const loc = cms$('.modal-location');
+        if (loc) loc.lastChild.textContent = ' ' + inp.value;
+      }
+      if (inp.id === 'cmsM_dates') {
+        const d = cms$('.modal-dates');
+        if (d) d.lastChild.textContent = ' ' + inp.value;
+      }
+      if (inp.id === 'cmsM_attendees') {
+        const n = Number(inp.value) || 0;
+        const el = cms$('.stat-value.attendees');
+        if (el) el.textContent = n >= 1000 ? (Math.round(n / 100) / 10).toString().replace(/\.0$/, '') + ',000' : String(n);
+      }
+      if (inp.id === 'cmsM_weatherTemp' || inp.id === 'cmsM_weatherDesc') {
+        cmsUpdateModalWeatherPreview();
+      }
+    });
+  });
+}
+
+function cmsUpdateModalWeatherPreview() {
+  const temp = cms$('#cmsM_weatherTemp')?.value.trim();
+  const desc = cms$('#cmsM_weatherDesc')?.value.trim();
+  let overlay = cms$('.weather-overlay');
+  if (!temp && !desc) {
+    overlay?.remove();
+    return;
+  }
+  if (!overlay) {
+    overlay = document.createElement('div');
+    overlay.className = 'weather-overlay';
+    cms$('.modal-hero')?.appendChild(overlay);
+  }
+  overlay.innerHTML = `<div class="temp">🌡️ ${escHtml(temp || '—')}</div><div>${escHtml(desc || '')}</div>`;
+}
+
+function cmsInjectModalHeroUpload() {
+  const heroWrap = cms$('#modalHero');
+  if (!heroWrap || heroWrap.querySelector('.cms-hero-edit')) return;
+  const bar = document.createElement('div');
+  bar.className = 'cms-hero-edit';
+  bar.innerHTML = `<button type="button" class="cms-btn cms-btn--sm" id="cmsHeroUploadBtn">📷 Фото</button>
+    <input type="file" accept="image/*" id="cmsHeroFile" hidden />`;
+  heroWrap.querySelector('.modal-hero')?.appendChild(bar);
+
+  cms$('#cmsHeroUploadBtn')?.addEventListener('click', () => cms$('#cmsHeroFile')?.click());
+  cms$('#cmsHeroFile')?.addEventListener('change', async (e) => {
+    const file = e.target.files?.[0];
+    if (!file || !cms.canWrite) return;
+    try {
+      cmsToast('Загружаю фото…');
+      const dataUrl = await new Promise((res, rej) => {
+        const r = new FileReader();
+        r.onload = () => res(r.result);
+        r.onerror = rej;
+        r.readAsDataURL(file);
+      });
+      const data = await cmsApiPost({ action: 'uploadImage', dataUrl, name: file.name });
+      cms.draft.heroImage = data.url;
+      const hero = cms$('.modal-hero');
+      if (hero) hero.style.backgroundImage = `linear-gradient(to bottom, transparent 40%, rgba(27,27,27,0.95)), url('${data.url}')`;
+      const inp = cms$('#f_heroImage');
+      if (inp) inp.value = data.url;
+      cmsToast('Фото загружено');
+    } catch (err) {
+      alert(err.message);
+    }
+    e.target.value = '';
+  });
+}
+
+function cmsInjectModalListEditors(ev) {
+  cmsInjectModalRestaurants(ev.restaurants || []);
+  cmsInjectModalSideEvents(ev.sideEvents || []);
+  cmsInjectModalAwards(ev.awards || []);
+}
+
+function cmsInjectModalRestaurants(list) {
+  const guide = cms$('#guide');
+  if (!guide) return;
+
+  guide.querySelectorAll('.cms-list-tools--rest, .cms-item-edit').forEach(el => el.remove());
+
+  const tools = document.createElement('div');
+  tools.className = 'cms-list-tools cms-list-tools--rest';
+  tools.innerHTML = `<button type="button" class="cms-btn cms-btn--sm" id="cmsAddRest">+ Ресторан</button>`;
+  guide.prepend(tools);
+  cms$('#cmsAddRest')?.addEventListener('click', () => {
+    Object.assign(cms.draft, cmsCollectFromModal());
+    cmsSyncDraftFromForm();
+    cms.draft.restaurants = cms.draft.restaurants || [];
+    cms.draft.restaurants.push({ name: 'Новый ресторан', vibe: 'посидеть', avgCheck: '', description: '', img: '', website: '' });
+    cmsRefreshModalEdit();
+  });
+
+  guide.querySelectorAll('.restaurant-card').forEach((card, i) => {
+    if (card.closest('.cms-item-edit')) return;
+    const wrap = document.createElement('div');
+    wrap.className = 'cms-item-edit';
+    const r = list[i] || {};
+    wrap.innerHTML = `
+      <div class="cms-item-edit__bar">
+        <input data-r="name" value="${escAttr(r.name || '')}" placeholder="Название" />
+        <select data-r="vibe">${['посидеть','громко','тихо','потанцевать'].map(v =>
+          `<option value="${v}" ${r.vibe === v ? 'selected' : ''}>${v}</option>`).join('')}</select>
+        <input data-r="avgCheck" value="${escAttr(r.avgCheck || '')}" placeholder="Чек" />
+        <input data-r="website" value="${escAttr(r.website || '')}" placeholder="Ссылка" />
+        <input data-r="img" value="${escAttr(r.img || '')}" placeholder="URL фото" />
+        <textarea data-r="description" placeholder="Описание">${escHtml(r.description || '')}</textarea>
+        <button type="button" data-r="del">Удалить</button>
+      </div>`;
+    card.parentNode.insertBefore(wrap, card);
+    wrap.appendChild(card);
+    wrap.querySelector('[data-r="del"]')?.addEventListener('click', () => {
+      Object.assign(cms.draft, cmsCollectFromModal());
+      cms.draft.restaurants.splice(i, 1);
+      cmsRefreshModalEdit();
+    });
+  });
+}
+
+function cmsInjectModalSideEvents(list) {
+  const tab = cms$('#events');
+  if (!tab) return;
+
+  tab.querySelectorAll('.cms-list-tools--side, .cms-item-edit').forEach(el => el.remove());
+
+  const tools = document.createElement('div');
+  tools.className = 'cms-list-tools cms-list-tools--side';
+  tools.innerHTML = `<button type="button" class="cms-btn cms-btn--sm" id="cmsAddSide">+ Сайд-ивент</button>`;
+  tab.prepend(tools);
+  cms$('#cmsAddSide')?.addEventListener('click', () => {
+    Object.assign(cms.draft, cmsCollectFromModal());
+    cms.draft.sideEvents = cms.draft.sideEvents || [];
+    cms.draft.sideEvents.push({ title: 'Новый ивент', date: '', location: '', type: 'party', description: '' });
+    cmsRefreshModalEdit();
+  });
+
+  tab.querySelectorAll('.side-event-card').forEach((card, i) => {
+    if (card.closest('.cms-item-edit')) return;
+    const wrap = document.createElement('div');
+    wrap.className = 'cms-item-edit';
+    const se = list[i] || {};
+    wrap.innerHTML = `
+      <div class="cms-item-edit__bar">
+        <input data-s="title" value="${escAttr(se.title || '')}" placeholder="Название" />
+        <input data-s="date" value="${escAttr(se.date || '')}" placeholder="Дата" />
+        <input data-s="location" value="${escAttr(se.location || '')}" placeholder="Место" />
+        <select data-s="type">${['party','dinner','meetup','awards','networking','sport'].map(t =>
+          `<option value="${t}" ${se.type === t ? 'selected' : ''}>${t}</option>`).join('')}</select>
+        <input data-s="registerUrl" value="${escAttr(se.registerUrl || '')}" placeholder="Ссылка" />
+        <input data-s="registerLabel" value="${escAttr(se.registerLabel || '')}" placeholder="Подпись кнопки" />
+        <input data-s="img" value="${escAttr(se.img || '')}" placeholder="URL картинки" />
+        <textarea data-s="description" placeholder="Описание">${escHtml(se.description || '')}</textarea>
+        <button type="button" data-s="del">Удалить</button>
+      </div>`;
+    card.parentNode.insertBefore(wrap, card);
+    wrap.appendChild(card);
+    wrap.querySelector('[data-s="del"]')?.addEventListener('click', () => {
+      Object.assign(cms.draft, cmsCollectFromModal());
+      cms.draft.sideEvents.splice(i, 1);
+      cmsRefreshModalEdit();
+    });
+  });
+}
+
+function cmsInjectModalAwards(list) {
+  const tab = cms$('#awards');
+  if (!tab) return;
+
+  tab.querySelectorAll('.cms-list-tools--awards, .cms-item-edit').forEach(el => el.remove());
+
+  const tools = document.createElement('div');
+  tools.className = 'cms-list-tools cms-list-tools--awards';
+  tools.innerHTML = `<button type="button" class="cms-btn cms-btn--sm" id="cmsAddAward">+ Award</button>`;
+  tab.prepend(tools);
+  cms$('#cmsAddAward')?.addEventListener('click', () => {
+    Object.assign(cms.draft, cmsCollectFromModal());
+    cms.draft.awards = cms.draft.awards || [];
+    cms.draft.awards.push({ name: '', date: '', categories: [], website: '' });
+    cmsRefreshModalEdit();
+  });
+
+  tab.querySelectorAll('.award-card').forEach((card, i) => {
+    if (card.closest('.cms-item-edit')) return;
+    const wrap = document.createElement('div');
+    wrap.className = 'cms-item-edit';
+    const a = list[i] || {};
+    wrap.innerHTML = `
+      <div class="cms-item-edit__bar">
+        <input data-a="name" value="${escAttr(a.name || '')}" placeholder="Название" />
+        <input data-a="date" value="${escAttr(a.date || '')}" placeholder="Дата" />
+        <textarea data-a="cats" placeholder="Категории (по строке)">${escHtml((a.categories || []).join('\n'))}</textarea>
+        <input data-a="web" value="${escAttr(a.website || '')}" placeholder="Сайт" />
+        <button type="button" data-a="del">Удалить</button>
+      </div>`;
+    card.parentNode.insertBefore(wrap, card);
+    wrap.appendChild(card);
+    wrap.querySelector('[data-a="del"]')?.addEventListener('click', () => {
+      Object.assign(cms.draft, cmsCollectFromModal());
+      cms.draft.awards.splice(i, 1);
+      cmsRefreshModalEdit();
+    });
+  });
+}
+
+window.onCmsModalPopulated = function (eventId) {
+  cms.editingId = eventId;
+  if (!cms.draft || cms.draft.id !== eventId) {
+    cms.draft = JSON.parse(JSON.stringify(cms.events.find(e => e.id === eventId) || {}));
+  }
+
+  document.body.classList.add('cms-edit-mode');
+
+  let hint = cms$('#cmsModalHint');
+  if (!hint) {
+    hint = document.createElement('div');
+    hint.id = 'cmsModalHint';
+    hint.className = 'cms-modal-hint';
+    cms$('#modalPanel')?.insertBefore(hint, cms$('#modalHero'));
+  }
+  hint.textContent = 'Редактируй как на сайте. Поля с карточки слева уже подставлены.';
+
+  const title = cms$('.modal-title');
+  const desc = cms$('.modal-description');
+  if (title) { title.classList.add('cms-editable'); title.contentEditable = 'true'; }
+  if (desc) { desc.classList.add('cms-editable'); desc.contentEditable = 'true'; }
+
+  cms$('.stat-value.attendees')?.classList.add('cms-stat-edit');
+  cms$$('.stat-value.promo, .stat-value.no-promo, .stat-value.promo-pending').forEach(el => el.classList.add('cms-stat-edit'));
+  cms$$('.cms-stat-edit').forEach(el => { el.contentEditable = 'true'; });
+
+  cmsInjectModalExtraFields(cms.draft);
+  cmsInjectModalHeroUpload();
+  cmsInjectModalListEditors(cms.draft);
+};
+
+function cms$$(sel) { return [...document.querySelectorAll(sel)]; }
+
+function cmsOpenModal() {
+  if (!cms.editingId) return;
+  cmsSyncDraftFromForm();
+  cmsApplyDraftToEventMap(cms.draft);
+  if (typeof populateModal === 'function') populateModal(cms.editingId);
+  if (typeof openModal === 'function') openModal();
+  document.body.classList.add('cms-modal-open');
+}
+
+function cmsHookModalClose() {
+  const original = window.closeModal;
+  if (typeof original !== 'function') return;
+  window.closeModal = function () {
+    if (window.CMS_EDIT_MODE && document.body.classList.contains('cms-modal-open')) {
+      cmsSyncModalToSidebar();
+    }
+    document.body.classList.remove('cms-modal-open', 'cms-edit-mode');
+    cms$('#cmsModalHint')?.remove();
+    cms$('#cmsModalExtra')?.remove();
+    original();
+  };
 }
 
 async function cmsHandleImageUpload(fileInput) {
@@ -533,7 +807,7 @@ async function cmsSave() {
     return;
   }
   try {
-    const updated = cmsCollectEvent();
+    const updated = cmsCollectFullDraft();
     if (!updated.id || !updated.title) {
       alert('Нужны название и ID');
       return;
@@ -567,14 +841,14 @@ async function cmsDeleteCurrent() {
   }
 }
 
-async function cmsHideCurrent() {
+function cmsHideCurrent() {
   if (!cms.editingId || !cms.canWrite) return;
   if (!confirm('Скрыть ивент с сайта?')) return;
   cmsSyncDraftFromForm();
   cms.draft.visible = false;
-  cmsRenderEditor(cms.draft);
-  cms$('#f_visible').checked = false;
-  await cmsSave();
+  const vis = cms$('#f_visible');
+  if (vis) vis.checked = false;
+  cmsSave();
 }
 
 function cmsNewEvent() {
@@ -610,19 +884,6 @@ function cmsNewEvent() {
   cms.draft = ev;
   cmsRenderEditor(ev);
   cms$('#cmsPreviewBtn')?.removeAttribute('disabled');
-}
-
-function cmsPreviewModal() {
-  if (!cms.editingId) return;
-  cmsSyncDraftFromForm();
-  const d = cms.draft;
-  if (typeof toModalEvent === 'function') {
-    EVENTS[d.id] = toModalEvent(d);
-  }
-  if (typeof populateModal === 'function' && typeof openModal === 'function') {
-    populateModal(d.id);
-    openModal();
-  }
 }
 
 async function cmsLogin() {
@@ -671,9 +932,11 @@ document.addEventListener('DOMContentLoaded', () => {
   cms$('#cmsLoginBtn')?.addEventListener('click', cmsLogin);
   cms$('#cmsLogoutBtn')?.addEventListener('click', cmsLogout);
   cms$('#cmsSaveBtn')?.addEventListener('click', cmsSave);
-  cms$('#cmsPreviewBtn')?.addEventListener('click', cmsPreviewModal);
+  cms$('#cmsPreviewBtn')?.addEventListener('click', cmsOpenModal);
   cms$('#cmsNewBtn')?.addEventListener('click', cmsNewEvent);
   cms$('#cmsHideBtn')?.addEventListener('click', cmsHideCurrent);
+
+  cmsHookModalClose();
 
   cms$('#cmsEditorRoot')?.addEventListener('change', (e) => {
     if (e.target.classList?.contains('js-img-file')) cmsHandleImageUpload(e.target);
