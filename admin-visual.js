@@ -174,12 +174,175 @@ function cmsSelectEvent(id) {
 function cmsImgWidget(label, url, urlClass, inputId) {
   const safe = escAttr(url || '');
   const idAttr = inputId ? ` id="${escAttr(inputId)}"` : '';
+  const previewHtml = url
+    ? `<img src="${safe}" alt="" />`
+    : '<span class="cms-img-drop__empty">📷</span><span class="cms-img-drop__text">Перетащи фото или нажми «Загрузить»</span>';
+
+  if (!cms.canWrite) {
+    return `<label class="cms-fl cms-img-widget">
+      <span>${label}</span>
+      <div class="cms-img-preview cms-img-preview--sm js-img-preview">${url ? `<img src="${safe}" alt="" />` : '<span class="cms-hint">Нет</span>'}</div>
+    </label>`;
+  }
+
   return `<label class="cms-fl cms-img-widget">
     <span>${label}</span>
-    <input${idAttr} class="${urlClass} js-img-url" value="${safe}" placeholder="images/... или https://..." />
-    ${cms.canWrite ? '<input type="file" class="js-img-file" accept="image/jpeg,image/png,image/webp,image/svg+xml" /><span class="cms-hint js-img-status"></span>' : ''}
-    <div class="cms-img-preview cms-img-preview--sm js-img-preview">${url ? `<img src="${safe}" alt="" />` : '<span class="cms-hint">Нет</span>'}</div>
+    <div class="cms-img-drop js-img-drop">
+      <div class="cms-img-preview js-img-preview">${previewHtml}</div>
+      <button type="button" class="cms-btn cms-btn--sm js-img-pick">Загрузить</button>
+      <input type="file" class="js-img-file hidden" accept="image/jpeg,image/png,image/webp,image/svg+xml" />
+    </div>
+    <span class="cms-hint js-img-status"></span>
+    <input${idAttr} class="${urlClass} js-img-url cms-img-url-field" value="${safe}" placeholder="или вставь ссылку" />
   </label>`;
+}
+
+function cmsItemImgUpload(dataKey, url) {
+  const safe = escAttr(url || '');
+  const previewHtml = url
+    ? `<img src="${safe}" alt="" />`
+    : '<span class="cms-img-drop__empty">📷</span>';
+
+  if (!cms.canWrite) {
+    return `<input data-${dataKey}="img" class="js-img-url" value="${safe}" readonly />`;
+  }
+
+  return `<div class="cms-img-widget cms-img-widget--bar">
+    <div class="cms-img-drop js-img-drop cms-img-drop--compact">
+      <div class="cms-img-preview cms-img-preview--sm js-img-preview">${previewHtml}</div>
+      <button type="button" class="cms-btn cms-btn--sm js-img-pick">Загрузить</button>
+      <input type="file" class="js-img-file hidden" accept="image/jpeg,image/png,image/webp,image/svg+xml" />
+    </div>
+    <input data-${dataKey}="img" class="js-img-url cms-img-url-inline" value="${safe}" placeholder="или ссылка" />
+    <span class="cms-hint js-img-status"></span>
+  </div>`;
+}
+
+async function cmsUploadImageFile(file) {
+  if (!file || !cms.canWrite) return null;
+  if (!file.type.startsWith('image/')) {
+    alert('Нужен файл изображения');
+    return null;
+  }
+  if (file.size > 1.5 * 1024 * 1024 && !confirm('Файл больше 1.5 МБ — продолжить?')) {
+    return null;
+  }
+  const dataUrl = await new Promise((res, rej) => {
+    const r = new FileReader();
+    r.onload = () => res(r.result);
+    r.onerror = rej;
+    r.readAsDataURL(file);
+  });
+  const data = await cmsApiPost({ action: 'uploadImage', dataUrl, name: file.name });
+  return data.url;
+}
+
+function cmsApplyImgUrl(widget, url) {
+  const urlInput = widget?.querySelector('.js-img-url');
+  const preview = widget?.querySelector('.js-img-preview');
+  if (urlInput) urlInput.value = url;
+  cmsUpdateImgPreview(url, preview);
+
+  const cardImg = widget?.closest('.cms-item-edit')?.querySelector('.restaurant-card img, .side-event-card img, .side-event-card--partner__thumb');
+  if (cardImg && url) {
+    cardImg.src = url;
+    cardImg.style.display = '';
+  }
+}
+
+async function cmsUploadToWidget(file, widget) {
+  if (!widget) return;
+  const status = widget.querySelector('.js-img-status');
+  try {
+    if (status) status.textContent = 'Загружаю…';
+    const url = await cmsUploadImageFile(file);
+    if (!url) {
+      if (status) status.textContent = '';
+      return;
+    }
+    cmsApplyImgUrl(widget, url);
+    if (status) status.textContent = 'Готово ✓';
+    cmsToast('Фото загружено');
+  } catch (err) {
+    if (status) status.textContent = '';
+    alert(err.message);
+  }
+  const fileInput = widget.querySelector('.js-img-file');
+  if (fileInput) fileInput.value = '';
+}
+
+function cmsBindImgWidgets(scope) {
+  (scope || document).querySelectorAll('.cms-img-widget').forEach(widget => {
+    if (widget.dataset.cmsImgBound === '1') return;
+    widget.dataset.cmsImgBound = '1';
+
+    const drop = widget.querySelector('.js-img-drop');
+    const fileInput = widget.querySelector('.js-img-file');
+    const urlInput = widget.querySelector('.js-img-url');
+    const preview = widget.querySelector('.js-img-preview');
+
+    widget.querySelector('.js-img-pick')?.addEventListener('click', (e) => {
+      e.preventDefault();
+      fileInput?.click();
+    });
+
+    fileInput?.addEventListener('change', () => {
+      const file = fileInput.files?.[0];
+      if (file) cmsUploadToWidget(file, widget);
+    });
+
+    urlInput?.addEventListener('input', () => {
+      cmsUpdateImgPreview(urlInput.value, preview);
+      cmsApplyImgUrl(widget, urlInput.value.trim());
+    });
+
+    if (!drop || !cms.canWrite) return;
+
+    const onDrag = (e) => { e.preventDefault(); e.stopPropagation(); };
+    drop.addEventListener('dragenter', onDrag);
+    drop.addEventListener('dragover', (e) => {
+      onDrag(e);
+      drop.classList.add('is-drag');
+    });
+    drop.addEventListener('dragleave', () => drop.classList.remove('is-drag'));
+    drop.addEventListener('drop', (e) => {
+      onDrag(e);
+      drop.classList.remove('is-drag');
+      const file = e.dataTransfer?.files?.[0];
+      if (file) cmsUploadToWidget(file, widget);
+    });
+  });
+}
+
+function cmsBindHeroDrop(heroEl) {
+  if (!heroEl || heroEl.dataset.cmsHeroDrop === '1' || !cms.canWrite) return;
+  heroEl.dataset.cmsHeroDrop = '1';
+
+  const onDrag = (e) => { e.preventDefault(); e.stopPropagation(); };
+  heroEl.addEventListener('dragenter', onDrag);
+  heroEl.addEventListener('dragover', (e) => {
+    onDrag(e);
+    heroEl.classList.add('cms-hero-drag');
+  });
+  heroEl.addEventListener('dragleave', () => heroEl.classList.remove('cms-hero-drag'));
+  heroEl.addEventListener('drop', async (e) => {
+    onDrag(e);
+    heroEl.classList.remove('cms-hero-drag');
+    const file = e.dataTransfer?.files?.[0];
+    if (!file) return;
+    try {
+      cmsToast('Загружаю фото…');
+      const url = await cmsUploadImageFile(file);
+      if (!url) return;
+      cms.draft.heroImage = url;
+      heroEl.style.backgroundImage = `linear-gradient(to bottom, transparent 40%, rgba(27,27,27,0.95)), url('${url}')`;
+      const inp = cms$('#f_heroImage');
+      if (inp) inp.value = url;
+      cmsToast('Фото загружено');
+    } catch (err) {
+      alert(err.message);
+    }
+  });
 }
 
 function cmsRestaurantRow(r, i) {
@@ -303,13 +466,18 @@ function cmsRenderEditor(ev) {
       cmsUpdateImgPreview(inp.value, widget?.querySelector('.js-img-preview'));
     });
   });
+  cmsBindImgWidgets(root);
 }
 
 function cmsUpdateImgPreview(url, box) {
   if (!box) return;
-  box.innerHTML = url.trim()
-    ? `<img src="${escAttr(url.trim())}" alt="" />`
-    : '<span class="cms-hint">Нет</span>';
+  const trimmed = (url || '').trim();
+  box.innerHTML = trimmed
+    ? `<img src="${escAttr(trimmed)}" alt="" />`
+    : '<span class="cms-img-drop__empty">📷</span><span class="cms-img-drop__text">Перетащи фото или нажми «Загрузить»</span>';
+  if (trimmed && box.closest('.cms-img-drop--compact')) {
+    box.innerHTML = `<img src="${escAttr(trimmed)}" alt="" />`;
+  }
 }
 
 function cmsRowVal(row, sel) {
@@ -543,11 +711,13 @@ function cmsUpdateModalWeatherPreview() {
 function cmsInjectModalHeroUpload() {
   const heroWrap = cms$('#modalHero');
   if (!heroWrap || heroWrap.querySelector('.cms-hero-edit')) return;
+  const hero = heroWrap.querySelector('.modal-hero');
   const bar = document.createElement('div');
   bar.className = 'cms-hero-edit';
-  bar.innerHTML = `<button type="button" class="cms-btn cms-btn--sm" id="cmsHeroUploadBtn">📷 Фото</button>
+  bar.innerHTML = `<button type="button" class="cms-btn cms-btn--sm" id="cmsHeroUploadBtn">📷 Загрузить</button>
+    <span class="cms-hero-edit__hint">или перетащи на обложку</span>
     <input type="file" accept="image/*" id="cmsHeroFile" hidden />`;
-  heroWrap.querySelector('.modal-hero')?.appendChild(bar);
+  hero?.appendChild(bar);
 
   cms$('#cmsHeroUploadBtn')?.addEventListener('click', () => cms$('#cmsHeroFile')?.click());
   cms$('#cmsHeroFile')?.addEventListener('change', async (e) => {
@@ -555,24 +725,19 @@ function cmsInjectModalHeroUpload() {
     if (!file || !cms.canWrite) return;
     try {
       cmsToast('Загружаю фото…');
-      const dataUrl = await new Promise((res, rej) => {
-        const r = new FileReader();
-        r.onload = () => res(r.result);
-        r.onerror = rej;
-        r.readAsDataURL(file);
-      });
-      const data = await cmsApiPost({ action: 'uploadImage', dataUrl, name: file.name });
-      cms.draft.heroImage = data.url;
-      const hero = cms$('.modal-hero');
-      if (hero) hero.style.backgroundImage = `linear-gradient(to bottom, transparent 40%, rgba(27,27,27,0.95)), url('${data.url}')`;
+      const url = await cmsUploadImageFile(file);
+      if (!url) return;
+      cms.draft.heroImage = url;
+      if (hero) hero.style.backgroundImage = `linear-gradient(to bottom, transparent 40%, rgba(27,27,27,0.95)), url('${url}')`;
       const inp = cms$('#f_heroImage');
-      if (inp) inp.value = data.url;
+      if (inp) inp.value = url;
       cmsToast('Фото загружено');
     } catch (err) {
       alert(err.message);
     }
     e.target.value = '';
   });
+  if (hero) cmsBindHeroDrop(hero);
 }
 
 function cmsInjectModalListEditors(ev) {
@@ -611,7 +776,7 @@ function cmsInjectModalRestaurants(list) {
           `<option value="${v}" ${r.vibe === v ? 'selected' : ''}>${v}</option>`).join('')}</select>
         <input data-r="avgCheck" value="${escAttr(r.avgCheck || '')}" placeholder="Чек" />
         <input data-r="website" value="${escAttr(r.website || '')}" placeholder="Ссылка" />
-        <input data-r="img" value="${escAttr(r.img || '')}" placeholder="URL фото" />
+        ${cmsItemImgUpload('r', r.img || '')}
         <textarea data-r="description" placeholder="Описание">${escHtml(r.description || '')}</textarea>
         <button type="button" data-r="del">Удалить</button>
       </div>`;
@@ -622,6 +787,7 @@ function cmsInjectModalRestaurants(list) {
       cms.draft.restaurants.splice(i, 1);
       cmsRefreshModalEdit();
     });
+    cmsBindImgWidgets(wrap);
   });
 }
 
@@ -656,7 +822,7 @@ function cmsInjectModalSideEvents(list) {
           `<option value="${t}" ${se.type === t ? 'selected' : ''}>${t}</option>`).join('')}</select>
         <input data-s="registerUrl" value="${escAttr(se.registerUrl || '')}" placeholder="Ссылка" />
         <input data-s="registerLabel" value="${escAttr(se.registerLabel || '')}" placeholder="Подпись кнопки" />
-        <input data-s="img" value="${escAttr(se.img || '')}" placeholder="URL картинки" />
+        ${cmsItemImgUpload('s', se.img || '')}
         <textarea data-s="description" placeholder="Описание">${escHtml(se.description || '')}</textarea>
         <button type="button" data-s="del">Удалить</button>
       </div>`;
@@ -667,6 +833,7 @@ function cmsInjectModalSideEvents(list) {
       cms.draft.sideEvents.splice(i, 1);
       cmsRefreshModalEdit();
     });
+    cmsBindImgWidgets(wrap);
   });
 }
 
@@ -739,6 +906,7 @@ window.onCmsModalPopulated = function (eventId) {
   cmsInjectModalExtraFields(cms.draft);
   cmsInjectModalHeroUpload();
   cmsInjectModalListEditors(cms.draft);
+  cmsBindImgWidgets(cms$('#cmsModalScroll'));
 };
 
 function cms$$(sel) { return [...document.querySelectorAll(sel)]; }
@@ -768,33 +936,8 @@ function cmsHookModalClose() {
 
 async function cmsHandleImageUpload(fileInput) {
   const file = fileInput.files?.[0];
-  if (!file || !cms.canWrite) return;
   const widget = fileInput.closest('.cms-img-widget');
-  const urlInput = widget?.querySelector('.js-img-url');
-  const preview = widget?.querySelector('.js-img-preview');
-  const status = widget?.querySelector('.js-img-status');
-  if (file.size > 1.5 * 1024 * 1024 && !confirm('Файл больше 1.5 МБ — продолжить?')) {
-    fileInput.value = '';
-    return;
-  }
-  try {
-    if (status) status.textContent = 'Загружаю…';
-    const dataUrl = await new Promise((res, rej) => {
-      const r = new FileReader();
-      r.onload = () => res(r.result);
-      r.onerror = rej;
-      r.readAsDataURL(file);
-    });
-    const data = await cmsApiPost({ action: 'uploadImage', dataUrl, name: file.name });
-    if (urlInput) urlInput.value = data.url;
-    cmsUpdateImgPreview(data.url, preview);
-    if (status) status.textContent = 'Готово ✓';
-    cmsToast('Фото загружено');
-  } catch (err) {
-    if (status) status.textContent = '';
-    alert(err.message);
-  }
-  fileInput.value = '';
+  if (file && widget) await cmsUploadToWidget(file, widget);
 }
 
 async function cmsSave() {
