@@ -4,6 +4,8 @@
 *.zip
 node_modules/
 .env
+.cms-secret
+data/.cms-secret
 .context.md
 .playwright-mcp/
 static/
