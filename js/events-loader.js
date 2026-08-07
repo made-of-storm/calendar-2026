@@ -5,7 +5,7 @@ function toModalEvent(ev) {
   const countryName = locParts[0] || ev.country || '';
   const city = locParts.length > 1 ? locParts.slice(1).join(', ') : (locParts[0] || '');
 
-  let attendeesStr = '';
+  let attendeesStr = '—';
   if (ev.attendees) {
     const n = Number(ev.attendees);
     attendeesStr = n >= 1000

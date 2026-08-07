@@ -70,7 +70,7 @@ function renderMajorCard(ev) {
         <h3 class="font-bold text-lg mb-1 text-white">${esc(ev.title)}</h3>
         <p class="text-xs text-white/60 mb-3">${esc(ev.locationLine)}</p>
         <div class="flex items-center gap-2">
-          <span class="tag bg-[#F5DA0F] text-[#1B1B1B] font-extrabold">${formatCardAttendees(ev.attendees)}</span>
+          ${Number(ev.attendees) ? `<span class="tag bg-[#F5DA0F] text-[#1B1B1B] font-extrabold">${formatCardAttendees(ev.attendees)}</span>` : ''}
           <span class="${majorCategoryClass(ev.category)}">${esc(ev.category)}</span>
         </div>
       </div>`;
@@ -93,7 +93,7 @@ function renderCompactCard(ev) {
         <div class="text-sm font-bold text-white">${esc(ev.title)}</div>
         <div class="text-[11px] text-white/50 mt-1">${sub}</div>
         <div class="flex gap-2 mt-2">
-          <span class="text-[10px] text-[#F5DA0F] font-extrabold bg-[#333333] px-1.5 rounded">${formatCardAttendees(ev.attendees)}</span>
+          ${Number(ev.attendees) ? `<span class="text-[10px] text-[#F5DA0F] font-extrabold bg-[#333333] px-1.5 rounded">${formatCardAttendees(ev.attendees)}</span>` : ''}
           <span class="${categoryTagClass(ev.category)}">${esc(ev.category)}</span>
         </div>
       </div>`;

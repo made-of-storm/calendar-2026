@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-15T16:10:06.255Z",
+  "updatedAt": "2026-08-07T13:50:00.000Z",
   "events": [
     {
       "id": "sbc_summit_tbilisi_2026",
@@ -2284,6 +2284,38 @@
           "img": "images/restaurants/conversion_kyiv_ostannya_barykada.jpg"
         }
       ],
+      "sideEvents": []
+    },
+    {
+      "id": "flow_broconf_pool_2026",
+      "month": 8,
+      "sortOrder": 3,
+      "visible": true,
+      "cardType": "compact",
+      "cardStyle": null,
+      "accentColor": "#F6ADE5",
+      "tier": "small",
+      "attendees": null,
+      "country": "RU",
+      "startDate": "2026-08-20",
+      "endDate": "2026-08-20",
+      "title": "FLOW by BROCONF. Pool Edition",
+      "datesLabel": "20 Авг",
+      "locationLine": "Russia, Yakhroma",
+      "category": "Affiliate",
+      "heroImage": "images/heroes/flow_broconf_yakhroma.jpg",
+      "description": "Affiliate Meetup от карточного сервиса MyBrocard в формате pool-party для профессионалов affiliate-индустрии. В программе — networking, DJ-сеты, speed networking FLOW Connect, podcast zone, VIP lounge и afterparty с хедлайнером.",
+      "website": "http://mybroflow.ru/",
+      "telegramChannel": "https://t.me/broconf",
+      "startISO": "2026-08-20T12:00:00Z",
+      "endISO": "2026-08-20T23:00:00Z",
+      "weather": {
+        "temp": "20-26°C",
+        "description": "Тёплое лето, вечером около +18°C"
+      },
+      "promo": null,
+      "awards": [],
+      "restaurants": [],
       "sideEvents": []
     },
     {
