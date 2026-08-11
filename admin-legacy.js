@@ -147,12 +147,17 @@ function addVisaCountry() {
 // проверки пароля, так что «Неверный пароль» надёжно означает неверный пароль.
 async function verifyPassword() {
   if (!state.apiUrl || !state.password) throw new Error('Введи пароль');
-  const res = await fetch(state.apiUrl, {
-    method: 'POST',
-    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-    body: JSON.stringify({ action: 'auth', password: state.password })
-  });
-  const data = await res.json();
+  let data;
+  try {
+    const res = await fetch(state.apiUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({ action: 'auth', password: state.password })
+    });
+    data = await res.json();
+  } catch (e) {
+    throw new Error('Нет связи с сервером Google. Если включён VPN — отключи его и попробуй снова.');
+  }
   if (!data.ok && /парол/i.test(data.error || '')) {
     throw new Error('Неверный пароль — проверь раскладку и лишние пробелы');
   }
