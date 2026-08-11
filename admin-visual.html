@@ -41,13 +41,13 @@
   </script>
 
   <link rel="stylesheet" href="./styles.css" />
-  <link rel="stylesheet" href="./admin-visual.css?v=6" />
+  <link rel="stylesheet" href="./admin-visual.css?v=7" />
   <script src="./data/cms-config.js"></script>
   <script src="./js/events-loader.js"></script>
   <script src="./js/calendar-render.js"></script>
   <script>window.CMS_EDIT_MODE = true;</script>
   <script defer src="./app.js"></script>
-  <script defer src="./admin-visual.js?v=6"></script>
+  <script defer src="./admin-visual.js?v=8"></script>
 </head>
 
 <body class="antialiased pb-20 cms-pending">
@@ -55,17 +55,27 @@
 <div id="cmsLogin" class="cms-login">
   <div class="cms-login__card">
     <h1>Редактор календаря</h1>
-    <p class="cms-login__muted">Кликай на ивент в сетке — все поля в панели справа</p>
-    <label class="cms-field">
-      <span>URL API (Google Apps Script)</span>
-      <input type="url" id="cmsApiUrl" placeholder="https://script.google.com/macros/s/.../exec" />
-    </label>
+    <p class="cms-login__muted">Введи пароль — и кликай на ивенты в сетке</p>
     <label class="cms-field">
       <span>Пароль</span>
-      <input type="password" id="cmsPassword" placeholder="Пароль из GAS" />
+      <div class="cms-pass-wrap">
+        <input type="password" id="cmsPassword" placeholder="Введи пароль" autocomplete="current-password" />
+        <button type="button" class="cms-pass-toggle" id="cmsPassToggle" aria-label="Показать пароль" title="Показать пароль">
+          <svg class="cms-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          <svg class="cms-eye-off hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/><path d="M14.12 14.12a3 3 0 1 1-4.24-4.24"/></svg>
+        </button>
+      </div>
     </label>
     <button type="button" class="cms-btn cms-btn--primary" id="cmsLoginBtn">Войти</button>
     <p id="cmsLoginError" class="cms-login__error hidden"></p>
+    <details class="cms-advanced">
+      <summary>Настройки подключения</summary>
+      <label class="cms-field">
+        <span>URL API (Google Apps Script)</span>
+        <input type="url" id="cmsApiUrl" placeholder="https://script.google.com/macros/s/.../exec" />
+      </label>
+      <p class="cms-login__muted">Заполняется автоматически — трогать не нужно.</p>
+    </details>
   </div>
 </div>
 

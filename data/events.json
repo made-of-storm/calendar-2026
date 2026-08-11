@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-07T13:50:00.000Z",
+  "updatedAt": "2026-08-11T08:13:37.000Z",
   "events": [
     {
       "id": "sbc_summit_tbilisi_2026",
@@ -2220,8 +2220,8 @@
     },
     {
       "id": "conversion_forum_kyiv_2026",
-      "month": 8,
-      "sortOrder": 2,
+      "month": 9,
+      "sortOrder": 4,
       "visible": true,
       "cardType": "compact",
       "cardStyle": null,
@@ -2229,23 +2229,23 @@
       "tier": "small",
       "attendees": 1000,
       "country": "UA",
-      "startDate": "2026-08-01",
-      "endDate": "2026-08-01",
+      "startDate": "2026-09-15",
+      "endDate": "2026-09-15",
       "title": "Conversion Forum Kyiv",
-      "datesLabel": "Авг 2026",
+      "datesLabel": "15 Сен",
       "locationLine": "Ukraine, Kyiv",
-      "category": "Affiliate",
+      "category": "Conversion",
       "heroImage": "images/heroes/conversion_kyiv.jpg",
-      "description": "Один день практических инсайтов и нетворкинга для affiliate и performance-маркетинга",
-      "website": "https://www.conversion-conf.com/",
+      "description": "Один день практических инсайтов и нетворкинга для affiliate и performance-маркетинга. Stepana Bandery Ave, 23, Kyiv.",
+      "website": "https://www.conversion-conf.com/conversion-forum-kyiv-2026",
       "telegramChannel": "https://t.me/conversionconf",
-      "startISO": "2026-08-01T10:00:00Z",
-      "endISO": "2026-08-01T20:00:00Z",
+      "startISO": "2026-09-15T07:00:00Z",
+      "endISO": "2026-09-15T17:00:00Z",
       "weather": {
-        "temp": "20-28°C",
-        "description": "Тёплое лето, солнечно"
+        "temp": "12-20°C",
+        "description": "Мягкая осень, переменная облачность"
       },
-      "promo": null,
+      "promo": "Secret10 (−10%)",
       "awards": [],
       "restaurants": [
         {
@@ -2284,7 +2284,14 @@
           "img": "images/restaurants/conversion_kyiv_ostannya_barykada.jpg"
         }
       ],
-      "sideEvents": []
+      "sideEvents": [
+        {
+          "title": "Official Afterparty (Scroodgee)",
+          "date": "15 сентября",
+          "location": "Pochayna Event Hall",
+          "type": "party"
+        }
+      ]
     },
     {
       "id": "flow_broconf_pool_2026",
@@ -2409,6 +2416,94 @@
           "title": "Sunset Networking",
           "date": "29 сентября",
           "location": "LX Factory",
+          "type": "meetup"
+        }
+      ]
+    },
+    {
+      "id": "sbc_affiliate_leaders_lisbon_2026",
+      "month": 9,
+      "sortOrder": 5,
+      "visible": true,
+      "cardType": "major",
+      "cardStyle": "elegant-dark",
+      "accentColor": "#2E39F7",
+      "tier": "large",
+      "attendees": null,
+      "country": "PT",
+      "startDate": "2026-09-29",
+      "endDate": "2026-10-01",
+      "title": "SBC Affiliate Leaders Summit × Conversion Conf",
+      "datesLabel": "29 Сен – 1 Окт",
+      "locationLine": "Portugal, Lisbon",
+      "category": "Affiliate",
+      "heroImage": "https://lh3.googleusercontent.com/d/1hsV3UXLtPs5Dl5_ie5VXEU7PLtdxLTiH=w1600",
+      "description": "Standalone саммит по affiliate и performance-маркетингу, co-located с SBC Summit. Две сцены: Affiliate Leaders Stage и Conversion Conf Stage в партнёрстве с Conversion Club.",
+      "website": "https://sbcevents.com/affiliate-leaders-summit/",
+      "telegramChannel": "https://t.me/conversionconf",
+      "startISO": "2026-09-29T09:00:00Z",
+      "endISO": "2026-10-01T18:00:00Z",
+      "weather": {
+        "temp": "20-25°C",
+        "description": "Тёплая осень, солнечно"
+      },
+      "promo": null,
+      "awards": [
+        {
+          "name": "Affiliate Leaders Awards 2026",
+          "date": "30 сентября 2026",
+          "categories": [],
+          "website": "https://sbcevents.com/affiliate-leaders-summit/"
+        }
+      ],
+      "restaurants": [
+        {
+          "name": "Monte Mar Lisboa",
+          "vibe": "посидеть",
+          "avgCheck": "$80-180",
+          "description": "Морепродукты с видом на Тежу",
+          "img": "images/restaurants/sbc_lisbon_monte_mar.jpg"
+        },
+        {
+          "name": "JNcQUOI Avenida",
+          "vibe": "громко",
+          "avgCheck": "$100-250",
+          "description": "Элитный ресторан португальской кухни",
+          "img": "images/restaurants/sbc_lisbon_jncquoi.jpg"
+        },
+        {
+          "name": "Zambeze",
+          "vibe": "потанцевать",
+          "avgCheck": "$60-140",
+          "description": "Панорамный вид, терраса 300м²",
+          "img": "images/restaurants/sbc_lisbon_zambeze.jpg"
+        },
+        {
+          "name": "Doca Peixe",
+          "vibe": "посидеть",
+          "avgCheck": "$50-120",
+          "description": "Лучший рыбный ресторан, вид на марину",
+          "img": "images/restaurants/sbc_lisbon_doca_peixe.jpg"
+        },
+        {
+          "name": "Belcanto",
+          "vibe": "тихо",
+          "avgCheck": "$180-400",
+          "description": "2 звезды Мишлен от José Avillez",
+          "img": "images/restaurants/sbc_lisbon_belcanto.jpg"
+        }
+      ],
+      "sideEvents": [
+        {
+          "title": "Affiliate Leaders Awards",
+          "date": "30 сентября",
+          "location": "MEO Arena",
+          "type": "awards"
+        },
+        {
+          "title": "Conversion Conf Stage",
+          "date": "29 сентября – 1 октября",
+          "location": "FIL / MEO Arena",
           "type": "meetup"
         }
       ]
