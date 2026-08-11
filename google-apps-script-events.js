@@ -18,7 +18,12 @@
 const CONFIG = {
   SHEET_NAME: 'Events',
   VISA_SHEET: 'Visa',
-  ADMIN_PASSWORD: 'CHANGE_ME_sr2026', // ⬅️ ОБЯЗАТЕЛЬНО смени!
+  // Пароли редакторов. Подходит любой из списка — можно завести
+  // отдельный простой пароль для заказчицы, не раскрывая основной.
+  ADMIN_PASSWORDS: [
+    'CHANGE_ME_sr2026', // ⬅️ основной, ОБЯЗАТЕЛЬНО смени!
+    // 'lena', // ⬅️ пример простого гостевого пароля — раскомментируй и впиши свой
+  ],
   SPREADSHEET_ID: SpreadsheetApp.getActiveSpreadsheet().getId()
 };
 
@@ -94,10 +99,13 @@ function doGet(e) {
 function doPost(e) {
   try {
     const body = JSON.parse(e.postData.contents);
-    if (body.password !== CONFIG.ADMIN_PASSWORD) {
+    if (CONFIG.ADMIN_PASSWORDS.indexOf(body.password) === -1) {
       return jsonResponse({ ok: false, error: 'Неверный пароль' });
     }
     const action = body.action;
+    if (action === 'auth') {
+      return jsonResponse({ ok: true });
+    }
     if (action === 'save') {
       saveEvent(body.event);
       return jsonResponse({ ok: true, events: readAllEvents() });

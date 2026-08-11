@@ -1029,6 +1029,24 @@ function cmsNewEvent() {
   cms$('#cmsPreviewBtn')?.removeAttribute('disabled');
 }
 
+// Проверка пароля на сервере. Старые деплои GAS без action=auth отвечают
+// «Unknown action» уже ПОСЛЕ проверки пароля, так что «Неверный пароль»
+// в любом случае означает именно неверный пароль.
+async function cmsVerifyPassword() {
+  if (!cms.apiUrl || !cms.password) {
+    throw new Error('Введи пароль');
+  }
+  const res = await fetch(cms.apiUrl, {
+    method: 'POST',
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    body: JSON.stringify({ action: 'auth', password: cms.password })
+  });
+  const data = await res.json();
+  if (!data.ok && /парол/i.test(data.error || '')) {
+    throw new Error('Неверный пароль — проверь раскладку и лишние пробелы');
+  }
+}
+
 async function cmsLogin() {
   const apiUrl = cms$('#cmsApiUrl')?.value.trim();
   const password = cms$('#cmsPassword')?.value || '';
@@ -1038,6 +1056,7 @@ async function cmsLogin() {
 
   cms$('#cmsLoginError')?.classList.add('hidden');
   try {
+    await cmsVerifyPassword();
     await cmsReloadCalendar();
     cms.events = (await cmsApiList()).events || [];
     saveCmsSession();
@@ -1073,6 +1092,21 @@ document.addEventListener('DOMContentLoaded', () => {
   if (cms$('#cmsApiUrl')) cms$('#cmsApiUrl').value = session.apiUrl || defaultApi;
 
   cms$('#cmsLoginBtn')?.addEventListener('click', cmsLogin);
+  cms$('#cmsPassword')?.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') cmsLogin();
+  });
+  cms$('#cmsPassToggle')?.addEventListener('click', () => {
+    const input = cms$('#cmsPassword');
+    const btn = cms$('#cmsPassToggle');
+    if (!input || !btn) return;
+    const show = input.type === 'password';
+    input.type = show ? 'text' : 'password';
+    btn.querySelector('.cms-eye')?.classList.toggle('hidden', show);
+    btn.querySelector('.cms-eye-off')?.classList.toggle('hidden', !show);
+    btn.setAttribute('aria-label', show ? 'Скрыть пароль' : 'Показать пароль');
+    btn.setAttribute('title', show ? 'Скрыть пароль' : 'Показать пароль');
+    input.focus();
+  });
   cms$('#cmsLogoutBtn')?.addEventListener('click', cmsLogout);
   cms$('#cmsSaveBtn')?.addEventListener('click', cmsSave);
   cms$('#cmsPreviewBtn')?.addEventListener('click', cmsOpenModal);

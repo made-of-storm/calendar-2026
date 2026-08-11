@@ -36,6 +36,24 @@ body {
 .field textarea { min-height: 72px; resize: vertical; }
 .field--row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 
+.pass-wrap { position: relative; }
+.pass-wrap input { padding-right: 44px; }
+.pass-toggle {
+  position: absolute; top: 50%; right: 6px; transform: translateY(-50%);
+  width: 34px; height: 34px; display: flex; align-items: center; justify-content: center;
+  background: none; border: none; border-radius: 8px; cursor: pointer;
+  color: #888; padding: 0;
+}
+.pass-toggle:hover { color: #F5DA0F; background: rgba(255, 255, 255, 0.06); }
+.pass-toggle svg { width: 20px; height: 20px; }
+.pass-toggle .hidden { display: none; }
+
+.advanced { margin-top: 18px; border-top: 1px solid #333; padding-top: 12px; }
+.advanced summary { font-size: 12px; color: #777; cursor: pointer; user-select: none; }
+.advanced summary:hover { color: #aaa; }
+.advanced .field { margin-top: 12px; }
+.advanced .muted { margin: 6px 0 0; font-size: 12px; }
+
 .btn {
   border: none;
   border-radius: 10px;

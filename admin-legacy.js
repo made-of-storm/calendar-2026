@@ -143,6 +143,21 @@ function addVisaCountry() {
   renderVisaRows();
 }
 
+// Старые деплои GAS без action=auth отвечают «Unknown action» уже ПОСЛЕ
+// проверки пароля, так что «Неверный пароль» надёжно означает неверный пароль.
+async function verifyPassword() {
+  if (!state.apiUrl || !state.password) throw new Error('Введи пароль');
+  const res = await fetch(state.apiUrl, {
+    method: 'POST',
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    body: JSON.stringify({ action: 'auth', password: state.password })
+  });
+  const data = await res.json();
+  if (!data.ok && /парол/i.test(data.error || '')) {
+    throw new Error('Неверный пароль — проверь раскладку и лишние пробелы');
+  }
+}
+
 async function login() {
   state.apiUrl = document.getElementById('apiUrlInput').value.trim() ||
     (window.CMS_CONFIG && window.CMS_CONFIG.eventsApiUrl) || '';
@@ -150,6 +165,7 @@ async function login() {
   state.canWrite = !!(state.apiUrl && state.password);
   document.getElementById('loginError').classList.add('hidden');
   try {
+    await verifyPassword();
     state.visa = await apiVisa();
     saveSession();
     document.getElementById('loginScreen').classList.add('hidden');
@@ -169,6 +185,20 @@ function logout() {
 }
 
 document.getElementById('loginBtn').addEventListener('click', login);
+document.getElementById('passwordInput').addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') login();
+});
+document.getElementById('passToggle').addEventListener('click', () => {
+  const input = document.getElementById('passwordInput');
+  const btn = document.getElementById('passToggle');
+  const show = input.type === 'password';
+  input.type = show ? 'text' : 'password';
+  btn.querySelector('.eye').classList.toggle('hidden', show);
+  btn.querySelector('.eye-off').classList.toggle('hidden', !show);
+  btn.setAttribute('aria-label', show ? 'Скрыть пароль' : 'Показать пароль');
+  btn.setAttribute('title', show ? 'Скрыть пароль' : 'Показать пароль');
+  input.focus();
+});
 document.getElementById('logoutBtn').addEventListener('click', logout);
 document.getElementById('saveVisaBtn').addEventListener('click', saveVisa);
 document.getElementById('addVisaCountryBtn').addEventListener('click', addVisaCountry);
