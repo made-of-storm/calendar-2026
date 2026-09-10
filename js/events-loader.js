@@ -8,10 +8,15 @@ function toModalEvent(ev) {
   let attendeesStr = '—';
   if (ev.attendees) {
     const n = Number(ev.attendees);
-    attendeesStr = n >= 1000
-      ? (Math.round(n / 100) / 10).toString().replace(/\.0$/, '') + ',000'
-      : String(n);
-    if (n < 1000) attendeesStr = String(n);
+    if (!Number.isFinite(n) || n <= 0) {
+      attendeesStr = '—';
+    } else if (n >= 1000 && n % 1000 === 0) {
+      attendeesStr = (n / 1000) + ',000';
+    } else if (n >= 1000) {
+      attendeesStr = String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    } else {
+      attendeesStr = String(n);
+    }
   }
 
   return {

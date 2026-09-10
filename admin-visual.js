@@ -364,16 +364,19 @@ function cmsRestaurantRow(r, i) {
 function cmsSideRow(se, i) {
   return `<div class="cms-sub side-row" data-side="${i}">
     <div class="cms-form-row">
+      <label class="cms-fl"><span>Организатор</span><input class="se-organizer" value="${escAttr(se.organizer || '')}" /></label>
       <label class="cms-fl"><span>Название</span><input class="se-title" value="${escAttr(se.title)}" /></label>
+    </div>
+    <div class="cms-form-row">
       <label class="cms-fl"><span>Дата</span><input class="se-date" value="${escAttr(se.date)}" /></label>
+      <label class="cms-fl"><span>Тип</span><select class="se-type">${cmsOpt(['party', 'dinner', 'awards', 'meetup', 'networking', 'sport'], se.type || 'party')}</select></label>
     </div>
     <label class="cms-fl"><span>Место</span><input class="se-location" value="${escAttr(se.location)}" /></label>
     <label class="cms-fl"><span>Описание</span><textarea class="se-desc">${escHtml(se.description || '')}</textarea></label>
     <div class="cms-form-row">
-      <label class="cms-fl"><span>Тип</span><select class="se-type">${cmsOpt(['party', 'dinner', 'awards', 'meetup', 'networking', 'sport'], se.type || 'party')}</select></label>
       <label class="cms-fl"><span>Подпись кнопки</span><input class="se-label" value="${escAttr(se.registerLabel || '')}" placeholder="Билеты / По бейджу" /></label>
+      <label class="cms-fl"><span>Ссылка регистрации</span><input class="se-url" value="${escAttr(se.registerUrl || '')}" /></label>
     </div>
-    <label class="cms-fl"><span>Ссылка регистрации</span><input class="se-url" value="${escAttr(se.registerUrl || '')}" /></label>
     ${cmsImgWidget('Картинка', se.img, 'se-img')}
     <div class="cms-sub__actions"><button type="button" class="cms-btn cms-btn--sm cms-btn--ghost" data-remove-side="${i}">Удалить</button></div>
   </div>`;
@@ -530,14 +533,16 @@ function cmsReadSideEvents() {
       type: wrap.querySelector('[data-s="type"]')?.value || 'party',
       description: cmsRowVal(wrap, '[data-s="description"]')
     };
+    const organizer = cmsRowVal(wrap, '[data-s="organizer"]');
     const url = cmsRowVal(wrap, '[data-s="registerUrl"]');
     const label = cmsRowVal(wrap, '[data-s="registerLabel"]');
     const img = cmsRowVal(wrap, '[data-s="img"]');
+    if (organizer) o.organizer = organizer;
     if (url) o.registerUrl = url;
     if (label) o.registerLabel = label;
     if (img) o.img = img;
     return o;
-  }).filter(o => o.title || o.date || o.location);
+  }).filter(o => o.title || o.date || o.location || o.organizer);
 }
 
 function cmsReadAwards() {
@@ -560,26 +565,24 @@ function cmsReadWeatherFromModal() {
 }
 
 function cmsCollectFromModal() {
-  const promoRaw = cmsModalPlainText(cms$('.stat-value.promo, .stat-value.no-promo'));
-  const promoPending = typeof PROMO_PENDING_MESSAGE !== 'undefined' ? PROMO_PENDING_MESSAGE : 'Скидка в работе';
-  const attRaw = cmsModalPlainText(cms$('.stat-value.attendees')).replace(/[^\d]/g, '');
-
-  return {
-    title: cmsModalPlainText(cms$('.modal-title')) || cms.draft?.title || '',
-    description: cmsModalPlainText(cms$('.modal-description')) || '',
-    locationLine: cms$('#cmsM_location')?.value.trim() || cmsModalPlainText(cms$('.modal-location')) || '',
-    datesLabel: cms$('#cmsM_dates')?.value.trim() || cmsModalPlainText(cms$('.modal-dates')) || '',
-    attendees: Number(attRaw) || Number(cms$('#cmsM_attendees')?.value) || cms.draft?.attendees || 0,
-    website: cms$('#cmsM_website')?.value.trim() || '',
-    telegramChannel: cms$('#cmsM_telegram')?.value.trim() || null,
-    promo: (promoRaw && promoRaw !== promoPending) ? promoRaw : (cms$('#cmsM_promo')?.value.trim() || null),
-    promoNote: cms$('#cmsM_promoNote')?.value.trim() || null,
-    weather: cmsReadWeatherFromModal(),
-    restaurants: cmsReadRestaurants(),
-    sideEvents: cmsReadSideEvents(),
-    awards: cmsReadAwards(),
-    heroImage: cms.draft?.heroImage || ''
-  };
+  const out = cmsCollectModalScalars();
+  // Списки читаем только если редакторы уже вмонтированы; иначе сохраняем draft
+  if (cms$('#guide')?.querySelector('.cms-list-tools--rest')) {
+    out.restaurants = cmsReadRestaurants();
+  } else {
+    out.restaurants = (cms.draft && cms.draft.restaurants) || [];
+  }
+  if (cms$('#events')?.querySelector('.cms-list-tools--side')) {
+    out.sideEvents = cmsReadSideEvents();
+  } else {
+    out.sideEvents = (cms.draft && cms.draft.sideEvents) || [];
+  }
+  if (cms$('#awards')?.querySelector('.cms-list-tools--awards')) {
+    out.awards = cmsReadAwards();
+  } else {
+    out.awards = (cms.draft && cms.draft.awards) || [];
+  }
+  return out;
 }
 
 function cmsCollectCardFields() {
@@ -637,10 +640,31 @@ function cmsSyncModalToSidebar() {
 
 function cmsRefreshModalEdit() {
   if (!cms.editingId || !document.body.classList.contains('cms-modal-open')) return;
-  Object.assign(cms.draft, cmsCollectFromModal());
+  // Не читаем списки из DOM здесь: add/delete уже обновили cms.draft,
+  // а DOM ещё со старым содержимым — иначе рестораны/сайд-ивенты/awards сразу затираются.
   cmsSyncDraftFromForm();
   cmsApplyDraftToEventMap(cms.draft);
   if (typeof populateModal === 'function') populateModal(cms.editingId);
+}
+
+/** Снять с формы модалки всё, кроме списков (их берём из draft, если DOM ещё не обновлён). */
+function cmsCollectModalScalars() {
+  const promoRaw = cmsModalPlainText(cms$('.stat-value.promo, .stat-value.no-promo'));
+  const promoPending = typeof PROMO_PENDING_MESSAGE !== 'undefined' ? PROMO_PENDING_MESSAGE : 'Скидка в работе';
+  const attRaw = cmsModalPlainText(cms$('.stat-value.attendees')).replace(/[^\d]/g, '');
+  return {
+    title: cmsModalPlainText(cms$('.modal-title')) || cms.draft?.title || '',
+    description: cmsModalPlainText(cms$('.modal-description')) || '',
+    locationLine: cms$('#cmsM_location')?.value.trim() || cmsModalPlainText(cms$('.modal-location')) || '',
+    datesLabel: cms$('#cmsM_dates')?.value.trim() || cmsModalPlainText(cms$('.modal-dates')) || '',
+    attendees: Number(attRaw) || Number(cms$('#cmsM_attendees')?.value) || cms.draft?.attendees || 0,
+    website: cms$('#cmsM_website')?.value.trim() || '',
+    telegramChannel: cms$('#cmsM_telegram')?.value.trim() || null,
+    promo: (promoRaw && promoRaw !== promoPending) ? promoRaw : (cms$('#cmsM_promo')?.value.trim() || null),
+    promoNote: cms$('#cmsM_promoNote')?.value.trim() || null,
+    weather: cmsReadWeatherFromModal(),
+    heroImage: cms.draft?.heroImage || ''
+  };
 }
 
 function cmsInjectModalExtraFields(ev) {
@@ -757,7 +781,8 @@ function cmsInjectModalRestaurants(list) {
   tools.innerHTML = `<button type="button" class="cms-btn cms-btn--sm" id="cmsAddRest">+ Ресторан</button>`;
   guide.prepend(tools);
   cms$('#cmsAddRest')?.addEventListener('click', () => {
-    Object.assign(cms.draft, cmsCollectFromModal());
+    Object.assign(cms.draft, cmsCollectModalScalars());
+    cmsSyncListsFromModalDom();
     cmsSyncDraftFromForm();
     cms.draft.restaurants = cms.draft.restaurants || [];
     cms.draft.restaurants.push({ name: 'Новый ресторан', vibe: 'посидеть', avgCheck: '', description: '', img: '', website: '' });
@@ -783,12 +808,25 @@ function cmsInjectModalRestaurants(list) {
     card.parentNode.insertBefore(wrap, card);
     wrap.appendChild(card);
     wrap.querySelector('[data-r="del"]')?.addEventListener('click', () => {
-      Object.assign(cms.draft, cmsCollectFromModal());
+      Object.assign(cms.draft, cmsCollectModalScalars());
+      cmsSyncListsFromModalDom();
       cms.draft.restaurants.splice(i, 1);
       cmsRefreshModalEdit();
     });
     cmsBindImgWidgets(wrap);
   });
+}
+
+function cmsSyncListsFromModalDom() {
+  if (cms$('#guide')?.querySelector('.cms-item-edit')) {
+    cms.draft.restaurants = cmsReadRestaurants();
+  }
+  if (cms$('#events')?.querySelector('.cms-item-edit')) {
+    cms.draft.sideEvents = cmsReadSideEvents();
+  }
+  if (cms$('#awards')?.querySelector('.cms-item-edit')) {
+    cms.draft.awards = cmsReadAwards();
+  }
 }
 
 function cmsInjectModalSideEvents(list) {
@@ -802,9 +840,17 @@ function cmsInjectModalSideEvents(list) {
   tools.innerHTML = `<button type="button" class="cms-btn cms-btn--sm" id="cmsAddSide">+ Сайд-ивент</button>`;
   tab.prepend(tools);
   cms$('#cmsAddSide')?.addEventListener('click', () => {
-    Object.assign(cms.draft, cmsCollectFromModal());
+    Object.assign(cms.draft, cmsCollectModalScalars());
+    cmsSyncListsFromModalDom();
     cms.draft.sideEvents = cms.draft.sideEvents || [];
-    cms.draft.sideEvents.push({ title: 'Новый ивент', date: '', location: '', type: 'party', description: '' });
+    cms.draft.sideEvents.push({
+      title: 'Новый ивент',
+      organizer: '',
+      date: '',
+      location: '',
+      type: 'party',
+      description: ''
+    });
     cmsRefreshModalEdit();
   });
 
@@ -815,6 +861,7 @@ function cmsInjectModalSideEvents(list) {
     const se = list[i] || {};
     wrap.innerHTML = `
       <div class="cms-item-edit__bar">
+        <input data-s="organizer" value="${escAttr(se.organizer || '')}" placeholder="Организатор" />
         <input data-s="title" value="${escAttr(se.title || '')}" placeholder="Название" />
         <input data-s="date" value="${escAttr(se.date || '')}" placeholder="Дата" />
         <input data-s="location" value="${escAttr(se.location || '')}" placeholder="Место" />
@@ -829,7 +876,8 @@ function cmsInjectModalSideEvents(list) {
     card.parentNode.insertBefore(wrap, card);
     wrap.appendChild(card);
     wrap.querySelector('[data-s="del"]')?.addEventListener('click', () => {
-      Object.assign(cms.draft, cmsCollectFromModal());
+      Object.assign(cms.draft, cmsCollectModalScalars());
+      cmsSyncListsFromModalDom();
       cms.draft.sideEvents.splice(i, 1);
       cmsRefreshModalEdit();
     });
@@ -848,9 +896,10 @@ function cmsInjectModalAwards(list) {
   tools.innerHTML = `<button type="button" class="cms-btn cms-btn--sm" id="cmsAddAward">+ Award</button>`;
   tab.prepend(tools);
   cms$('#cmsAddAward')?.addEventListener('click', () => {
-    Object.assign(cms.draft, cmsCollectFromModal());
+    Object.assign(cms.draft, cmsCollectModalScalars());
+    cmsSyncListsFromModalDom();
     cms.draft.awards = cms.draft.awards || [];
-    cms.draft.awards.push({ name: '', date: '', categories: [], website: '' });
+    cms.draft.awards.push({ name: 'Новый award', date: '', categories: [], website: '' });
     cmsRefreshModalEdit();
   });
 
@@ -870,7 +919,8 @@ function cmsInjectModalAwards(list) {
     card.parentNode.insertBefore(wrap, card);
     wrap.appendChild(card);
     wrap.querySelector('[data-a="del"]')?.addEventListener('click', () => {
-      Object.assign(cms.draft, cmsCollectFromModal());
+      Object.assign(cms.draft, cmsCollectModalScalars());
+      cmsSyncListsFromModalDom();
       cms.draft.awards.splice(i, 1);
       cmsRefreshModalEdit();
     });
