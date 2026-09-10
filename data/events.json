@@ -2677,6 +2677,45 @@
       ]
     },
     {
+      "id": "broconf_moscow_2026",
+      "month": 10,
+      "sortOrder": 0,
+      "visible": true,
+      "cardType": "major",
+      "cardStyle": "elegant-dark",
+      "accentColor": "#F6ADE5",
+      "tier": "large",
+      "attendees": 1500,
+      "country": "RU",
+      "startDate": "2026-10-07",
+      "endDate": "2026-10-07",
+      "title": "BROCONF-7½",
+      "datesLabel": "7 окт",
+      "locationLine": "Russia, Moscow",
+      "category": "Affiliate Marketing",
+      "heroImage": "https://lh3.googleusercontent.com/d/1o3kOdH2wC6e4tHy-un4k0jUndtf9unvx=w1600",
+      "description": "BROCONF-7½ — конференция в сфере арбитража трафика и affiliate-маркетинга. В 2026 году мероприятие пройдет в новом однодневном формате и объединит 1500+ участников, 16 спикеров и более 130 партнеров. В программе — выступления, профессиональный нетворкинг, speed dating, podcast zone, тематические зоны и вечерний afterparty с хедлайнером",
+      "website": "",
+      "telegramChannel": "https://t.me/broconf",
+      "startISO": "2026-10-07T09:00:00Z",
+      "endISO": "2026-10-07T18:00:00Z",
+      "weather": null,
+      "promo": null,
+      "awards": [],
+      "restaurants": [],
+      "brands": [],
+      "sideEvents": [
+        {
+          "organizer": "BROCONF",
+          "title": "AFTERPARTY",
+          "date": "07.10.2026",
+          "location": "Концертный зал «Атмосфера», Москва, Шмитовский проезд 32А, стр. 1",
+          "type": "party",
+          "img": "images/side-events/broconf_party.jpg"
+        }
+      ]
+    },
+    {
       "id": "sbwa_dakar_2026",
       "month": 10,
       "sortOrder": 0,
