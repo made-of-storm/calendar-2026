@@ -637,10 +637,15 @@ function cmsSyncModalToSidebar() {
 
 function cmsRefreshModalEdit() {
   if (!cms.editingId || !document.body.classList.contains('cms-modal-open')) return;
-  Object.assign(cms.draft, cmsCollectFromModal());
-  cmsSyncDraftFromForm();
+  // Не перечитываем списки из DOM: вызывающий код уже обновил cms.draft
+  // (push/splice). Старый collect затирал только что добавленный пункт —
+  // из‑за этого «+ Ресторан / + Сайд-ивент» визуально ничего не делали.
+  const activeTab = document.querySelector('.tab-btn.active')?.getAttribute('data-tab-btn') || 'guide';
+  const idx = cms.events.findIndex(e => e.id === cms.draft.id);
+  if (idx >= 0) cms.events[idx] = { ...cms.events[idx], ...cms.draft };
   cmsApplyDraftToEventMap(cms.draft);
   if (typeof populateModal === 'function') populateModal(cms.editingId);
+  if (typeof setActiveTab === 'function') setActiveTab(activeTab);
 }
 
 function cmsInjectModalExtraFields(ev) {
