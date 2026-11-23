@@ -2368,3 +2368,7 @@ body.auth-required main {
   .year-switcher__label { display: none; }
   .year-switcher__btn { height: 36px; padding: 0 12px; }
 }
+
+/* Скрытое окошко промокода не должно перехватывать клики (оно висело над панелью админки) */
+.promo-toast { pointer-events: none; visibility: hidden; }
+.promo-toast.show { pointer-events: auto; visibility: visible; }
