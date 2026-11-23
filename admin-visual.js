@@ -80,7 +80,18 @@ function slugify(title) {
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, '_')
     .replace(/^_|_$/g, '')
-    .slice(0, 40) + '_2026';
+    .slice(0, 40) + '_' + cmsYear();
+}
+
+// Год, который сейчас открыт в редакторе (?year=2027), см. js/events-loader.js
+function cmsYear() {
+  return (typeof SELECTED_YEAR !== 'undefined') ? SELECTED_YEAR
+    : (typeof getSelectedYear === 'function' ? getSelectedYear() : 2026);
+}
+
+function cmsEventsOfYear(list) {
+  if (typeof getEventYear !== 'function') return list;
+  return list.filter(e => getEventYear(e) === cmsYear());
 }
 
 function loadCmsSession() {
@@ -121,7 +132,8 @@ async function cmsApiPost(body) {
 async function cmsReloadCalendar() {
   const data = await cmsApiList();
   cms.events = data.events || [];
-  const visible = cms.events.filter(e => e.visible !== false);
+  const visible = cmsEventsOfYear(cms.events).filter(e => e.visible !== false);
+  cmsUpdateImportBtn();
   if (typeof buildEventsMap === 'function' && typeof renderCalendarGrid === 'function') {
     EVENTS = buildEventsMap(visible);
     renderCalendarGrid(visible);
@@ -1001,9 +1013,10 @@ function cmsHideCurrent() {
 
 function cmsNewEvent() {
   const ev = {
-    id: 'new_event_' + Date.now(),
+    id: 'new_event_' + Date.now() + '_' + cmsYear(),
     _isNew: true,
-    month: new Date().getMonth() + 1,
+    year: cmsYear(),
+    month: cmsYear() === new Date().getFullYear() ? new Date().getMonth() + 1 : 1,
     sortOrder: 0,
     visible: true,
     cardType: 'compact',
@@ -1032,6 +1045,55 @@ function cmsNewEvent() {
   cms.draft = ev;
   cmsRenderEditor(ev);
   cms$('#cmsPreviewBtn')?.removeAttribute('disabled');
+}
+
+// ------------------------------
+// Перенос ивентов года из запасного файла data/events-YYYY.json в Google Таблицу.
+// Кнопка видна, только если в таблице ещё нет ни одного ивента этого года.
+// ------------------------------
+function cmsUpdateImportBtn() {
+  const btn = cms$('#cmsImportYearBtn');
+  if (!btn) return;
+  const year = cmsYear();
+  const need = cms.canWrite && year !== 2026 && cmsEventsOfYear(cms.events).length === 0;
+  btn.textContent = 'Перенести ' + year + ' в таблицу';
+  btn.classList.toggle('hidden', !need);
+}
+
+async function cmsImportYear() {
+  const year = cmsYear();
+  if (!cms.canWrite) return;
+  let list = [];
+  try {
+    const res = await fetch('data/events-' + year + '.json?t=' + Date.now());
+    list = (await res.json()).events || [];
+  } catch (e) {
+    alert('Не нашёл файл data/events-' + year + '.json');
+    return;
+  }
+  if (!list.length) { alert('В файле нет ивентов'); return; }
+  const have = new Set(cms.events.map(e => e.id));
+  const todo = list.filter(e => !have.has(e.id));
+  if (!confirm('Перенести в Google Таблицу ' + todo.length + ' ивентов ' + year + ' года?')) return;
+  const btn = cms$('#cmsImportYearBtn');
+  let done = 0;
+  for (const ev of todo) {
+    if (btn) btn.textContent = 'Переношу… ' + done + ' / ' + todo.length;
+    const out = { ...ev };
+    // позиция картинки хранится в ссылке, чтобы не потеряться в таблице
+    if (out.heroPosition && out.heroImage && !/#pos=/.test(out.heroImage)) {
+      out.heroImage = out.heroImage + '#pos=' + encodeURIComponent(out.heroPosition);
+    }
+    try {
+      await cmsApiPost({ action: 'save', event: out });
+      done++;
+    } catch (e) {
+      alert('Ошибка на «' + ev.title + '»: ' + e.message + '\nПеренесено: ' + done);
+      break;
+    }
+  }
+  await cmsReloadCalendar();
+  cmsToast('Перенесено ' + done + ' из ' + todo.length);
 }
 
 async function cmsLogin() {
@@ -1083,6 +1145,7 @@ document.addEventListener('DOMContentLoaded', () => {
   cms$('#cmsPreviewBtn')?.addEventListener('click', cmsOpenModal);
   cms$('#cmsNewBtn')?.addEventListener('click', cmsNewEvent);
   cms$('#cmsHideBtn')?.addEventListener('click', cmsHideCurrent);
+  cms$('#cmsImportYearBtn')?.addEventListener('click', cmsImportYear);
 
   cmsHookModalClose();
 

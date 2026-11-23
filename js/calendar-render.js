@@ -53,7 +53,7 @@ function renderMajorCard(ev) {
   const dataStart = ev.startDate ? ` data-start="${esc(ev.startDate)}"` : '';
   const dataEnd = ev.endDate ? ` data-end="${esc(ev.endDate)}"` : '';
   const img = ev.heroImage
-    ? `<img src="${esc(ev.heroImage)}" class="event-img" alt="${esc(ev.title)}" loading="lazy" decoding="async">`
+    ? `<img src="${esc(ev.heroImage)}" class="event-img" alt="${esc(ev.title)}" loading="lazy" decoding="async"${getHeroPosition(ev) ? ` style="object-position:${esc(getHeroPosition(ev))}"` : ''}>`
     : '';
 
   return `<div class="major-card ${esc(style)} event-card"

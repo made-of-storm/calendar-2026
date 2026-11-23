@@ -2332,3 +2332,39 @@ body.auth-required main {
     transform: rotate(180deg);
   }
 }
+
+
+/* ===== Переключатель года в шапке (2026 / 2027) ===== */
+.year-switcher { position: relative; }
+.year-switcher__btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  height: 40px; padding: 0 14px 0 16px;
+  background: #222222; border: 1px solid #333333; border-radius: 999px;
+  color: #FBF2E8; font-family: 'Nunito', sans-serif; cursor: pointer;
+  transition: border-color .2s, background .2s;
+}
+.year-switcher__btn:hover, .year-switcher.is-open .year-switcher__btn { border-color: #F5DA0F; background: #2a2a2a; }
+.year-switcher__btn:focus-visible { outline: 2px solid #F5DA0F; outline-offset: 2px; }
+.year-switcher__label { font-size: 10px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: rgba(251,242,232,.5); }
+.year-switcher__value { font-size: 16px; font-weight: 900; color: #F5DA0F; line-height: 1; }
+.year-switcher__chev { color: rgba(251,242,232,.6); transition: transform .2s; }
+.year-switcher.is-open .year-switcher__chev { transform: rotate(180deg); }
+.year-switcher__menu {
+  position: absolute; right: 0; top: calc(100% + 8px); min-width: 100%;
+  background: #222222; border: 1px solid #333333; border-radius: 14px;
+  padding: 6px; box-shadow: 0 12px 32px rgba(0,0,0,.45);
+  opacity: 0; visibility: hidden; transform: translateY(-4px);
+  transition: opacity .15s, transform .15s, visibility .15s; z-index: 50;
+}
+.year-switcher.is-open .year-switcher__menu { opacity: 1; visibility: visible; transform: translateY(0); }
+.year-switcher__opt {
+  display: block; width: 100%; padding: 9px 16px; border-radius: 10px;
+  background: none; border: 0; text-align: left; cursor: pointer;
+  font-family: 'Nunito', sans-serif; font-size: 15px; font-weight: 800; color: #FBF2E8;
+}
+.year-switcher__opt:hover { background: #333333; }
+.year-switcher__opt.is-active { color: #1B1B1B; background: #F5DA0F; }
+@media (max-width: 480px) {
+  .year-switcher__label { display: none; }
+  .year-switcher__btn { height: 36px; padding: 0 12px; }
+}

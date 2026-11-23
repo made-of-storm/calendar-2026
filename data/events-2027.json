@@ -1,0 +1,1234 @@
+{
+  "year": 2027,
+  "events": [
+    {
+      "id": "ice_barcelona_2027",
+      "year": 2027,
+      "month": 1,
+      "sortOrder": 1,
+      "visible": true,
+      "cardType": "compact",
+      "cardStyle": null,
+      "accentColor": "#C8E712",
+      "tier": "mega",
+      "attendees": null,
+      "country": "ES",
+      "startDate": "2027-01-18",
+      "endDate": "2027-01-20",
+      "title": "ICE Barcelona",
+      "datesLabel": "18–20 Янв",
+      "locationLine": "Spain, Barcelona",
+      "category": "Land-based",
+      "heroImage": "images/heroes/2027/ice_barcelona.jpg",
+      "description": "Крупнейшая выставка игорной индустрии: казино, онлайн-гейминг, беттинг, платёжные и технологические решения. Проходит на Fira Gran Via и открывает World Gaming Week (17–21 января), в те же дни, что и iGB Affiliate.",
+      "website": "https://www.icegaming.com/",
+      "telegramChannel": null,
+      "startISO": "2027-01-18T09:00:00Z",
+      "endISO": "2027-01-20T18:00:00Z",
+      "weather": {
+        "temp": "8-14°C",
+        "description": "Мягкая зима, возможны дожди"
+      },
+      "promo": null,
+      "awards": [],
+      "restaurants": [
+        {
+          "name": "Cal Pep",
+          "vibe": "громко",
+          "avgCheck": "$50-100",
+          "description": "",
+          "img": "images/restaurants/igb_barcelona_cal_pep.jpg"
+        },
+        {
+          "name": "Quimet & Quimet",
+          "vibe": "громко",
+          "avgCheck": "$50-100",
+          "description": "",
+          "img": "images/restaurants/igb_barcelona_quimet_quimet.jpg"
+        },
+        {
+          "name": "Els Quatre Gats",
+          "vibe": "посидеть",
+          "avgCheck": "$50-100",
+          "description": "",
+          "img": "images/restaurants/igb_barcelona_els_quatre_gats.jpg"
+        },
+        {
+          "name": "Disfrutar",
+          "vibe": "тихо",
+          "avgCheck": "$50-100",
+          "description": "",
+          "img": "images/restaurants/igb_barcelona_disfrutar.jpg"
+        },
+        {
+          "name": "La Mar Salada",
+          "vibe": "посидеть",
+          "avgCheck": "$50-100",
+          "description": "",
+          "img": "images/restaurants/igb_barcelona_la_mar_salada.jpg"
+        }
+      ],
+      "brands": [],
+      "sideEvents": [],
+      "heroPosition": "center 18%"
+    },
+    {
+      "id": "igb_affiliate_barcelona_2027",
+      "year": 2027,
+      "month": 1,
+      "sortOrder": 2,
+      "visible": true,
+      "cardType": "major",
+      "cardStyle": "elegant-dark",
+      "accentColor": null,
+      "tier": "mega",
+      "attendees": 8000,
+      "country": "ES",
+      "startDate": "2027-01-19",
+      "endDate": "2027-01-20",
+      "title": "iGB Affiliate Barcelona",
+      "datesLabel": "19–20 Янв",
+      "locationLine": "Spain, Barcelona",
+      "category": "iGaming",
+      "heroImage": "images/heroes/2027/igb_affiliate_barcelona.jpg",
+      "description": "Крупнейшая affiliate-конференция Европы. Проходит на Fira Gran Via (Hall 8) рядом с ICE Barcelona, около 8000 участников: аффилиаты, операторы и партнёрские программы.",
+      "website": "https://barcelona.igbaffiliate.com/",
+      "telegramChannel": null,
+      "startISO": "2027-01-19T09:00:00Z",
+      "endISO": "2027-01-20T18:00:00Z",
+      "weather": {
+        "temp": "8-14°C",
+        "description": "Мягкая зима, возможны дожди"
+      },
+      "promo": null,
+      "awards": [],
+      "restaurants": [
+        {
+          "name": "Cal Pep",
+          "vibe": "громко",
+          "avgCheck": "$50-100",
+          "description": "",
+          "img": "images/restaurants/igb_barcelona_cal_pep.jpg"
+        },
+        {
+          "name": "Quimet & Quimet",
+          "vibe": "громко",
+          "avgCheck": "$50-100",
+          "description": "",
+          "img": "images/restaurants/igb_barcelona_quimet_quimet.jpg"
+        },
+        {
+          "name": "Els Quatre Gats",
+          "vibe": "посидеть",
+          "avgCheck": "$50-100",
+          "description": "",
+          "img": "images/restaurants/igb_barcelona_els_quatre_gats.jpg"
+        },
+        {
+          "name": "Disfrutar",
+          "vibe": "тихо",
+          "avgCheck": "$50-100",
+          "description": "",
+          "img": "images/restaurants/igb_barcelona_disfrutar.jpg"
+        },
+        {
+          "name": "La Mar Salada",
+          "vibe": "посидеть",
+          "avgCheck": "$50-100",
+          "description": "",
+          "img": "images/restaurants/igb_barcelona_la_mar_salada.jpg"
+        }
+      ],
+      "brands": [],
+      "sideEvents": [],
+      "heroPosition": "center 18%"
+    },
+    {
+      "id": "affiliate_world_dubai_2027",
+      "year": 2027,
+      "month": 3,
+      "sortOrder": 3,
+      "visible": true,
+      "cardType": "compact",
+      "cardStyle": null,
+      "accentColor": "#F6ADE5",
+      "tier": "mid",
+      "attendees": 7000,
+      "country": "AE",
+      "startDate": null,
+      "endDate": null,
+      "title": "Affiliate World Dubai",
+      "datesLabel": "Весна · даты TBA",
+      "locationLine": "UAE, Dubai",
+      "category": "Affiliate",
+      "heroImage": "images/heroes/2027/affiliate_world_dubai.jpg",
+      "description": "Глобальная конференция аффилиатов и performance-маркетологов. Издание 2026 года перенесли на весну 2027-го, официальных дат пока нет.",
+      "website": "https://www.affiliateworldconferences.com/dubai",
+      "telegramChannel": "https://t.me/affiliateworldconf",
+      "startISO": null,
+      "endISO": null,
+      "weather": {
+        "temp": "24-28°C",
+        "description": "Приятно тепло, низкая влажность"
+      },
+      "promo": null,
+      "awards": [],
+      "restaurants": [
+        {
+          "name": "Zuma Dubai",
+          "vibe": "громко",
+          "avgCheck": "$150-350",
+          "description": "Японский ресторан мирового класса",
+          "img": "images/restaurants/aw_dubai_zuma.jpg"
+        },
+        {
+          "name": "La Petite Maison",
+          "vibe": "тихо",
+          "avgCheck": "$120-280",
+          "description": "Французская кухня Ривьеры",
+          "img": "images/restaurants/aw_dubai_la_petite_maison.jpg"
+        },
+        {
+          "name": "Nobu Dubai",
+          "vibe": "тихо",
+          "avgCheck": "$150-400",
+          "description": "Японо-перуанский премиум",
+          "img": "images/restaurants/aw_dubai_nobu.jpg"
+        },
+        {
+          "name": "Coya Dubai",
+          "vibe": "потанцевать",
+          "avgCheck": "$100-250",
+          "description": "Перуанская кухня, живая музыка",
+          "img": "images/restaurants/aw_dubai_coya.jpg"
+        },
+        {
+          "name": "Tresind Studio",
+          "vibe": "тихо",
+          "avgCheck": "$200-400",
+          "description": "Индийская haute cuisine, 1 звезда Мишлен",
+          "img": "images/restaurants/aw_dubai_tresind_studio.jpg"
+        }
+      ],
+      "brands": [],
+      "sideEvents": []
+    },
+    {
+      "id": "sbc_rio_2027",
+      "year": 2027,
+      "month": 3,
+      "sortOrder": 1,
+      "visible": true,
+      "cardType": "major",
+      "cardStyle": "elegant-dark",
+      "accentColor": null,
+      "tier": "large",
+      "attendees": 15000,
+      "country": "BR",
+      "startDate": "2027-03-02",
+      "endDate": "2027-03-04",
+      "title": "SBC Summit Rio",
+      "datesLabel": "2–4 Мар",
+      "locationLine": "Brazil, Rio de Janeiro",
+      "category": "iGaming",
+      "heroImage": "images/heroes/2027/sbc_rio.jpg",
+      "description": "Крупнейшее событие iGaming и беттинга в Латинской Америке. Площадка Riocentro, около 15 000 участников.",
+      "website": "https://sbcevents.com/sbc-summit-rio/",
+      "telegramChannel": "https://t.me/sbceurasia",
+      "startISO": "2027-03-02T09:00:00Z",
+      "endISO": "2027-03-04T18:00:00Z",
+      "weather": {
+        "temp": "28-32°C",
+        "description": "Жарко и влажно, сезон дождей заканчивается"
+      },
+      "promo": null,
+      "awards": [],
+      "restaurants": [
+        {
+          "name": "Shiso",
+          "vibe": "тихо",
+          "avgCheck": "$80-200",
+          "description": "Японский ресторан высокого класса",
+          "img": "images/restaurants/sbc_rio_shiso.jpg"
+        },
+        {
+          "name": "Zaza Bistro",
+          "vibe": "посидеть",
+          "avgCheck": "$60-150",
+          "description": "Bistro с органическими блюдами в Ipanema",
+          "img": "images/restaurants/sbc_rio_zaza_bistro.jpg"
+        },
+        {
+          "name": "Giuseppe Grill",
+          "vibe": "громко",
+          "avgCheck": "$100-250",
+          "description": "Премиальный стейкхаус",
+          "img": "images/restaurants/sbc_rio_giuseppe_grill.jpg"
+        },
+        {
+          "name": "Braseiro da Gávea",
+          "vibe": "громко",
+          "avgCheck": "$40-80",
+          "description": "Традиционная бразильская кухня",
+          "img": "images/restaurants/sbc_rio_braseiro_da_gavea.jpg"
+        },
+        {
+          "name": "Confeitaria Colombo",
+          "vibe": "посидеть",
+          "avgCheck": "$30-60",
+          "description": "Историческое кафе 1894 года",
+          "img": "images/restaurants/sbc_rio_confeitaria_colombo.jpg"
+        }
+      ],
+      "brands": [],
+      "sideEvents": []
+    },
+    {
+      "id": "sbc_summit_europe_2027",
+      "year": 2027,
+      "month": 4,
+      "sortOrder": 1,
+      "visible": true,
+      "cardType": "compact",
+      "cardStyle": null,
+      "accentColor": "#2E39F7",
+      "tier": "mid",
+      "attendees": 8000,
+      "country": "NL",
+      "startDate": "2027-04-19",
+      "endDate": "2027-04-21",
+      "title": "SBC Summit Europe",
+      "datesLabel": "19–21 Апр",
+      "locationLine": "Netherlands, Amsterdam",
+      "category": "iGaming",
+      "heroImage": "images/heroes/2027/sbc_summit_europe.jpg",
+      "description": "Новый ивент SBC в RAI Amsterdam. Организатор ждёт 8000+ участников, 250 стендов и 200 спикеров. По всей видимости, заменяет SBC Summit Malta.",
+      "website": "https://sbcevents.com/sbc-summit-europe/",
+      "telegramChannel": null,
+      "startISO": "2027-04-19T09:00:00Z",
+      "endISO": "2027-04-21T18:00:00Z",
+      "weather": {
+        "temp": "8-14°C",
+        "description": "Прохладная весна, ветрено, возможны дожди"
+      },
+      "promo": null,
+      "awards": [],
+      "restaurants": [],
+      "brands": [],
+      "sideEvents": []
+    },
+    {
+      "id": "conversion_warsaw_2027",
+      "year": 2027,
+      "month": 3,
+      "sortOrder": 2,
+      "visible": true,
+      "cardType": "compact",
+      "cardStyle": null,
+      "accentColor": "#2E39F7",
+      "tier": "mid",
+      "attendees": 3000,
+      "country": "PL",
+      "startDate": "2027-03-24",
+      "endDate": "2027-03-25",
+      "title": "Conversion Conf Warsaw",
+      "datesLabel": "24–25 Мар",
+      "locationLine": "Poland, Warsaw",
+      "category": "Conversion",
+      "heroImage": "images/heroes/2027/conversion_warsaw.jpg",
+      "description": "Конференция по лидогенерации и affiliate-маркетингу в Варшаве: два дня докладов, нетворкинга и встреч с партнёрскими программами.",
+      "website": "https://www.conversion-conf.com/",
+      "telegramChannel": "https://t.me/conversionconf",
+      "startISO": "2027-03-24T09:00:00Z",
+      "endISO": "2027-03-25T18:00:00Z",
+      "weather": {
+        "temp": "4-11°C",
+        "description": "Ранняя весна, прохладно"
+      },
+      "promo": null,
+      "awards": [],
+      "restaurants": [
+        {
+          "name": "Belvedere",
+          "vibe": "тихо",
+          "avgCheck": "$80-180",
+          "description": "В оранжерее парка Łazienki",
+          "img": "images/restaurants/conversion_warsaw_belvedere.jpg"
+        },
+        {
+          "name": "Warszawa Wschodnia",
+          "vibe": "громко",
+          "avgCheck": "$50-120",
+          "description": "Модный район Praga",
+          "img": "images/restaurants/conversion_warsaw_wschodnia.jpg"
+        },
+        {
+          "name": "Stary Dom",
+          "vibe": "посидеть",
+          "avgCheck": "$40-90",
+          "description": "Традиционная польская кухня",
+          "img": "images/restaurants/conversion_warsaw_stary_dom.jpg"
+        },
+        {
+          "name": "Atelier Amaro",
+          "vibe": "тихо",
+          "avgCheck": "$150-350",
+          "description": "Первый Мишлен в Польше",
+          "img": "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=200&q=80"
+        },
+        {
+          "name": "U Kucharzy",
+          "vibe": "посидеть",
+          "avgCheck": "$60-140",
+          "description": "Открытая кухня, польская классика",
+          "img": "images/restaurants/conversion_warsaw_u_kucharzy.jpg"
+        }
+      ],
+      "brands": [],
+      "sideEvents": []
+    },
+    {
+      "id": "sbc_summit_malta_2027",
+      "year": 2027,
+      "month": 4,
+      "sortOrder": 2,
+      "visible": true,
+      "cardType": "compact",
+      "cardStyle": null,
+      "accentColor": "#2E39F7",
+      "tier": "large",
+      "attendees": 6000,
+      "country": "MT",
+      "startDate": "2027-04-28",
+      "endDate": "2027-04-30",
+      "title": "SBC Summit Malta",
+      "datesLabel": "28–30 Апр",
+      "locationLine": "Malta, St. Julian's",
+      "category": "iGaming",
+      "heroImage": "images/heroes/2027/sbc_summit_malta.jpg",
+      "description": "Саммит SBC на Мальте для операторов, аффилиатов и поставщиков iGaming. Около 6000 участников в St. Julian's.",
+      "website": "https://sbcevents.com/sbc-summit-malta/",
+      "telegramChannel": "https://t.me/sbceurasia",
+      "startISO": "2027-04-28T09:00:00Z",
+      "endISO": "2027-04-30T18:00:00Z",
+      "weather": {
+        "temp": "20-28°C",
+        "description": "Комфортная погода"
+      },
+      "promo": null,
+      "awards": [],
+      "restaurants": [
+        {
+          "name": "Paranga",
+          "vibe": "посидеть",
+          "avgCheck": "$55-90",
+          "description": "Морской ресторан с террасой и видом на Средиземное море",
+          "img": "images/restaurants/sbc_malta_paranga.jpg"
+        },
+        {
+          "name": "Waterbiscuit",
+          "vibe": "посидеть",
+          "avgCheck": "$50-85",
+          "description": "Современный ресторан с изысканной атмосферой",
+          "img": "images/restaurants/sbc_malta_waterbiscuit.jpg"
+        },
+        {
+          "name": "Lumi Malta",
+          "vibe": "громко",
+          "avgCheck": "$45-75",
+          "description": "Стильный ресторан с яркими блюдами и лаунж-атмосферой",
+          "img": "images/restaurants/sbc_malta_lumi_malta.jpg"
+        },
+        {
+          "name": "Toro Toro",
+          "vibe": "громко",
+          "avgCheck": "$70-100",
+          "description": "Паназиатский стейк-хаус на крыше с коктейлями",
+          "img": "images/restaurants/sbc_malta_toro_toro.jpg"
+        },
+        {
+          "name": "Sotto Pinsa Romana",
+          "vibe": "тихо",
+          "avgCheck": "$25-40",
+          "description": "Высококлассная пицца с итальянским вайбом",
+          "img": "images/restaurants/sbc_malta_sotto_pinsa.jpg"
+        }
+      ],
+      "brands": [],
+      "sideEvents": []
+    },
+    {
+      "id": "broconf_8_2027",
+      "year": 2027,
+      "month": 4,
+      "sortOrder": 3,
+      "visible": true,
+      "cardType": "major",
+      "cardStyle": "elegant-green",
+      "accentColor": null,
+      "tier": "mid",
+      "attendees": 4000,
+      "country": "RU",
+      "startDate": null,
+      "endDate": null,
+      "title": "BROCONF-8",
+      "datesLabel": "Даты TBA",
+      "locationLine": "Russia, TBA",
+      "category": "CIS",
+      "heroImage": "images/heroes/2027/broconf_8.jpg",
+      "description": "Главная конференция по арбитражу трафика в СНГ. В 2026 году прошла 25–26 апреля в Сочи, анонса 2027 года пока нет.",
+      "website": "https://mybroconf.ru/",
+      "telegramChannel": "https://t.me/broconf",
+      "startISO": null,
+      "endISO": null,
+      "weather": null,
+      "promo": null,
+      "awards": [],
+      "restaurants": [],
+      "brands": [],
+      "sideEvents": []
+    },
+    {
+      "id": "sigma_world_rome_2027",
+      "year": 2027,
+      "month": 5,
+      "sortOrder": 1,
+      "visible": true,
+      "cardType": "major",
+      "cardStyle": "elegant-green",
+      "accentColor": null,
+      "tier": "mega",
+      "attendees": 15000,
+      "country": "IT",
+      "startDate": "2027-05-01",
+      "endDate": "2027-05-04",
+      "title": "SiGMA World",
+      "datesLabel": "1–4 Мая",
+      "locationLine": "Italy, Rome",
+      "category": "iGaming",
+      "heroImage": "images/heroes/2027/sigma_world_rome.jpg",
+      "description": "Главное глобальное событие SiGMA. В 2027 году его перенесли с ноября на май. Площадка Fiera Roma, около 15 000 участников.",
+      "website": "https://sigma.world/world/",
+      "telegramChannel": "https://t.me/+iUgSeE1BID4yZTc0",
+      "startISO": "2027-05-01T09:00:00Z",
+      "endISO": "2027-05-04T18:00:00Z",
+      "weather": {
+        "temp": "16-24°C",
+        "description": "Тёплая весна, солнечно"
+      },
+      "promo": null,
+      "awards": [],
+      "restaurants": [
+        {
+          "name": "La Pergola",
+          "vibe": "тихо",
+          "avgCheck": "$50-100",
+          "description": "",
+          "img": "images/restaurants/sigma_rome_la_pergola.jpg"
+        },
+        {
+          "name": "Roscioli",
+          "vibe": "громко",
+          "avgCheck": "$50-100",
+          "description": "",
+          "img": "images/restaurants/sigma_rome_roscioli.jpg"
+        },
+        {
+          "name": "Armando al Pantheon",
+          "vibe": "посидеть",
+          "avgCheck": "$50-100",
+          "description": "",
+          "img": "images/restaurants/sigma_rome_armando_al_pantheon.jpg"
+        },
+        {
+          "name": "Pierluigi",
+          "vibe": "тихо",
+          "avgCheck": "$50-100",
+          "description": "",
+          "img": "images/restaurants/sigma_rome_pierluigi.jpg"
+        },
+        {
+          "name": "Il Pagliaccio",
+          "vibe": "тихо",
+          "avgCheck": "$50-100",
+          "description": "",
+          "img": "images/restaurants/sigma_rome_il_pagliaccio.jpg"
+        }
+      ],
+      "brands": [],
+      "sideEvents": [],
+      "heroPosition": "center 88%"
+    },
+    {
+      "id": "mac_yerevan_2027",
+      "year": 2027,
+      "month": 5,
+      "sortOrder": 2,
+      "visible": true,
+      "cardType": "major",
+      "cardStyle": "elegant-green",
+      "accentColor": null,
+      "tier": "mid",
+      "attendees": 5000,
+      "country": "AM",
+      "startDate": "2027-05-17",
+      "endDate": "2027-05-19",
+      "title": "MAC Yerevan",
+      "datesLabel": "17–19 Мая",
+      "locationLine": "Armenia, Yerevan",
+      "category": "CIS",
+      "heroImage": "images/heroes/2027/mac_yerevan.jpg",
+      "description": "СНГ-конференция по партнёрскому маркетингу в Ереване. Около 5000 участников: аффилиаты, рекламодатели и партнёрские сети.",
+      "website": "https://yerevan.affiliateconf.com/",
+      "telegramChannel": "https://t.me/macpreparty",
+      "startISO": "2027-05-17T09:00:00Z",
+      "endISO": "2027-05-19T18:00:00Z",
+      "weather": {
+        "temp": "22-28°C",
+        "description": "Тёплая весна, солнечно"
+      },
+      "promo": null,
+      "awards": [],
+      "restaurants": [
+        {
+          "name": "Dolmama",
+          "vibe": "посидеть",
+          "avgCheck": "$40-80",
+          "description": "Традиционная армянская кухня",
+          "img": "images/restaurants/mac_yerevan_dolmama.jpg"
+        },
+        {
+          "name": "The Club",
+          "vibe": "громко",
+          "avgCheck": "$60-120",
+          "description": "Живая музыка, популярен у экспатов",
+          "img": "images/restaurants/mac_yerevan_the_club.jpg"
+        },
+        {
+          "name": "Sherep",
+          "vibe": "посидеть",
+          "avgCheck": "$50-100",
+          "description": "Авторская армянская кухня",
+          "img": "images/restaurants/mac_yerevan_sherep.jpg"
+        },
+        {
+          "name": "Pandok Yerevan",
+          "vibe": "громко",
+          "avgCheck": "$30-70",
+          "description": "Традиционный ресторан с шоу",
+          "img": "images/restaurants/mac_yerevan_pandok.jpg"
+        },
+        {
+          "name": "Lavash",
+          "vibe": "посидеть",
+          "avgCheck": "$40-90",
+          "description": "Армянская кухня, вид на Арарат",
+          "img": "images/restaurants/mac_yerevan_lavash.jpg"
+        }
+      ],
+      "brands": [],
+      "sideEvents": []
+    },
+    {
+      "id": "ggate_tbilisi_2027",
+      "year": 2027,
+      "month": 9,
+      "sortOrder": 1,
+      "visible": true,
+      "cardType": "major",
+      "cardStyle": "elegant-dark",
+      "accentColor": null,
+      "tier": "mid",
+      "attendees": 7000,
+      "country": "GE",
+      "startDate": "2027-09-02",
+      "endDate": "2027-09-03",
+      "title": "G Gate Tbilisi",
+      "datesLabel": "2–3 Сен",
+      "locationLine": "Georgia, Tbilisi",
+      "category": "Eastern Europe",
+      "heroImage": "images/heroes/2027/ggate_tbilisi.jpg",
+      "description": "G GATE CONF'27 — восточноевропейский iGaming-форум в Тбилиси. Около 7000 участников: операторы, аффилиаты и провайдеры.",
+      "website": "https://ggateconf.com/",
+      "telegramChannel": "https://t.me/ggatecommunity",
+      "startISO": "2027-09-02T09:00:00Z",
+      "endISO": "2027-09-03T18:00:00Z",
+      "weather": {
+        "temp": "22-28°C",
+        "description": "Тёплая осень, солнечно"
+      },
+      "promo": null,
+      "awards": [],
+      "restaurants": [
+        {
+          "name": "Funicular Complex",
+          "vibe": "потанцевать",
+          "avgCheck": "$50-120",
+          "description": "Панорамный вид на город",
+          "img": "images/restaurants/ggate_tbilisi_funicular.jpg"
+        },
+        {
+          "name": "Barbarestan",
+          "vibe": "тихо",
+          "avgCheck": "$60-140",
+          "description": "Исторические рецепты XIX века",
+          "img": "images/restaurants/ggate_tbilisi_barbarestan.jpg"
+        },
+        {
+          "name": "Café Stamba",
+          "vibe": "посидеть",
+          "avgCheck": "$40-90",
+          "description": "Модное место в дизайн-отеле",
+          "img": "images/restaurants/ggate_tbilisi_cafe_stamba.jpg"
+        },
+        {
+          "name": "Keto and Kote",
+          "vibe": "громко",
+          "avgCheck": "$30-70",
+          "description": "Современная грузинская кухня",
+          "img": "images/restaurants/ggate_tbilisi_keto_and_kote.jpg"
+        },
+        {
+          "name": "Shavi Lomi",
+          "vibe": "громко",
+          "avgCheck": "$40-90",
+          "description": "Инстаграмное место, авторская кухня",
+          "img": "images/restaurants/ggate_tbilisi_shavi_lomi.jpg"
+        }
+      ],
+      "brands": [],
+      "sideEvents": [],
+      "heroPosition": "center 8%"
+    },
+    {
+      "id": "igb_live_2027",
+      "year": 2027,
+      "month": 7,
+      "sortOrder": 1,
+      "visible": true,
+      "cardType": "major",
+      "cardStyle": "elegant-green",
+      "accentColor": null,
+      "tier": "large",
+      "attendees": 15000,
+      "country": "NL",
+      "startDate": "2027-07-14",
+      "endDate": "2027-07-15",
+      "title": "iGB L!VE",
+      "datesLabel": "14–15 Июл",
+      "locationLine": "Netherlands, Amsterdam",
+      "category": "iGaming",
+      "heroImage": "images/heroes/2027/igb_live.jpg",
+      "description": "Крупнейшая iGaming-выставка Европы переезжает из Лондона в Амстердам, в RAI Amsterdam. Около 15 000 участников.",
+      "website": "https://www.igblive.com/",
+      "telegramChannel": null,
+      "startISO": "2027-07-14T09:00:00Z",
+      "endISO": "2027-07-15T18:00:00Z",
+      "weather": {
+        "temp": "17-23°C",
+        "description": "Тёплое лето, возможны дожди"
+      },
+      "promo": null,
+      "awards": [],
+      "restaurants": [],
+      "brands": [],
+      "sideEvents": []
+    },
+    {
+      "id": "sbc_summit_tbilisi_2027",
+      "year": 2027,
+      "month": 7,
+      "sortOrder": 2,
+      "visible": true,
+      "cardType": "major",
+      "cardStyle": "elegant-dark",
+      "accentColor": "#2E39F7",
+      "tier": "mid",
+      "attendees": 2000,
+      "country": "GE",
+      "startDate": "2027-07-15",
+      "endDate": "2027-07-16",
+      "title": "SBC Summit Tbilisi",
+      "datesLabel": "15–16 Июл",
+      "locationLine": "Georgia, Tbilisi",
+      "category": "iGaming",
+      "heroImage": "images/heroes/2027/sbc_summit_tbilisi.jpg",
+      "description": "iGaming- и беттинг-конференция для Восточной Европы и Центральной Азии. Около 2000 делегатов: операторы, аффилиаты и спикеры.",
+      "website": "https://sbcevents.com/sbc-summit-tbilisi/",
+      "telegramChannel": null,
+      "startISO": "2027-07-15T09:00:00Z",
+      "endISO": "2027-07-16T18:00:00Z",
+      "weather": {
+        "temp": "+30°C",
+        "description": "Жарко и солнечно, вечером около +24°C"
+      },
+      "promo": null,
+      "awards": [],
+      "restaurants": [
+        {
+          "name": "Barbarestan",
+          "vibe": "посидеть",
+          "avgCheck": "$40-70",
+          "description": "Fine dining по рецептам грузинской кухни XIX века из книги Барбаре Джорджадзе. Квеври-вина, атмосфера старого Тбилиси. Бронь обязательна.",
+          "website": "https://www.google.com/maps/search/?api=1&query=Barbarestan%20Tbilisi",
+          "img": "images/restaurants/sbc_tbilisi_barbarestan.jpg"
+        },
+        {
+          "name": "Café Littera",
+          "vibe": "посидеть",
+          "avgCheck": "$40-80",
+          "description": "Nouveau Georgian от Текуны Гачечиладзе в саду Дома писателей. Одна из самых красивых террас города — идеально для делового ужина.",
+          "website": "https://www.google.ru/maps/place/Restaurant+Littera/@41.6902406,44.7970774,17z/data=!3m1!4b1!4m6!3m5!1s0x40440cf20c6e37ab:0x5ddfb346924ccead!8m2!3d41.6902406!4d44.7996523!16s%2Fg%2F11bxb8m70v",
+          "img": "images/restaurants/sbc_tbilisi_littera.jpg"
+        },
+        {
+          "name": "Keto and Kote",
+          "vibe": "посидеть",
+          "avgCheck": "$30-60",
+          "description": "Грузинская классика в особняке XIX века в районе Вера. Терраса с видом на крыши города и Мтацминду. Бронь обязательна.",
+          "website": "https://www.google.ru/maps/place/Кето+да+Котэ/@41.7045939,44.7857919,17z/data=!3m1!4b1!4m6!3m5!1s0x40440cda58186cf3:0x970c6e7fc66ca250!8m2!3d41.7045939!4d44.7883668!16s%2Fg%2F11c48pgx64",
+          "img": "images/restaurants/sbc_tbilisi_keto_da_kote.jpg"
+        },
+        {
+          "name": "Shavi Lomi",
+          "vibe": "громко",
+          "avgCheck": "$25-50",
+          "description": "Богемное бистро в Вере: современная грузинская кухня, натуральные вина, живая атмосфера «для своих».",
+          "website": "https://www.google.com/maps/search/?api=1&query=Shavi%20Lomi%20Tbilisi",
+          "img": "images/restaurants/sbc_tbilisi_shavi_lomi.jpg"
+        },
+        {
+          "name": "Vinotel",
+          "vibe": "тихо",
+          "avgCheck": "$50-90",
+          "description": "Грузинская кухня и большая винная карта в историческом винном отеле. Отдельные залы для деловых ужинов и переговоров.",
+          "website": "https://vinotel.ge/",
+          "img": "images/restaurants/sbc_tbilisi_vinotel.jpg"
+        }
+      ],
+      "brands": [],
+      "sideEvents": []
+    },
+    {
+      "id": "flow_broconf_2027",
+      "year": 2027,
+      "month": 8,
+      "sortOrder": 1,
+      "visible": true,
+      "cardType": "major",
+      "cardStyle": "elegant-dark",
+      "accentColor": "#F6ADE5",
+      "tier": "small",
+      "attendees": null,
+      "country": "RU",
+      "startDate": "2027-08-20",
+      "endDate": "2027-08-20",
+      "title": "FLOW by BROCONF",
+      "datesLabel": "20 Авг",
+      "locationLine": "Russia, Yakhroma",
+      "category": "Affiliate",
+      "heroImage": "images/heroes/2027/flow_broconf.jpg",
+      "description": "Летний affiliate-митап от команды BROCONF в формате pool-party на курорте «Волен» под Яхромой: нетворкинг, DJ-сеты и afterparty.",
+      "website": "http://mybroflow.ru/",
+      "telegramChannel": "https://t.me/broconf",
+      "startISO": "2027-08-20T09:00:00Z",
+      "endISO": "2027-08-20T18:00:00Z",
+      "weather": {
+        "temp": "20-26°C",
+        "description": "Тёплое лето, вечером около +18°C"
+      },
+      "promo": null,
+      "awards": [],
+      "restaurants": [],
+      "brands": [],
+      "sideEvents": [],
+      "heroPosition": "center 80%"
+    },
+    {
+      "id": "conversion_limassol_2027",
+      "year": 2027,
+      "month": 9,
+      "sortOrder": 2,
+      "visible": true,
+      "cardType": "compact",
+      "cardStyle": null,
+      "accentColor": "#F6ADE5",
+      "tier": "small",
+      "attendees": 1500,
+      "country": "CY",
+      "startDate": "2027-09-06",
+      "endDate": "2027-09-07",
+      "title": "Conversion Conf Limassol",
+      "datesLabel": "6–7 Сен",
+      "locationLine": "Cyprus, Limassol",
+      "category": "Conversion",
+      "heroImage": "images/heroes/2027/conversion_limassol.jpg",
+      "description": "Конференция аффилиатов на Кипре от Conversion Club: два дня докладов и нетворкинга у моря в Лимассоле.",
+      "website": "https://www.conversion-conf.com/",
+      "telegramChannel": "https://t.me/conversionconf",
+      "startISO": "2027-09-06T09:00:00Z",
+      "endISO": "2027-09-07T18:00:00Z",
+      "weather": {
+        "temp": "26-31°C",
+        "description": "Тёплое море, сухо и солнечно"
+      },
+      "promo": null,
+      "awards": [],
+      "restaurants": [
+        {
+          "name": "Pier One",
+          "vibe": "потанцевать",
+          "avgCheck": "$60-140",
+          "description": "На пляже, закаты",
+          "img": "images/restaurants/conversion_cyprus_pier_one.jpg"
+        },
+        {
+          "name": "Meze Taverna",
+          "vibe": "громко",
+          "avgCheck": "$40-80",
+          "description": "Традиционное мезе 20+ блюд",
+          "img": "images/restaurants/conversion_cyprus_meze_taverna.jpg"
+        },
+        {
+          "name": "Epsilon",
+          "vibe": "посидеть",
+          "avgCheck": "$50-120",
+          "description": "Современный европейский",
+          "img": "images/restaurants/conversion_cyprus_epsilon.jpg"
+        },
+        {
+          "name": "Kipriakon",
+          "vibe": "посидеть",
+          "avgCheck": "$40-90",
+          "description": "Кипрская таверна, мезе 25 блюд",
+          "img": "images/restaurants/conversion_cyprus_kipriakon.jpg"
+        },
+        {
+          "name": "Sailor's Rest",
+          "vibe": "потанцевать",
+          "avgCheck": "$60-140",
+          "description": "Лаунж на пляже",
+          "img": "images/restaurants/conversion_cyprus_sailors_rest.jpg"
+        }
+      ],
+      "brands": [],
+      "sideEvents": []
+    },
+    {
+      "id": "sbc_lisbon_2027",
+      "year": 2027,
+      "month": 9,
+      "sortOrder": 3,
+      "visible": true,
+      "cardType": "major",
+      "cardStyle": "elegant-dark",
+      "accentColor": null,
+      "tier": "mega",
+      "attendees": 25000,
+      "country": "PT",
+      "startDate": "2027-09-21",
+      "endDate": "2027-09-23",
+      "title": "SBC Summit",
+      "datesLabel": "21–23 Сен",
+      "locationLine": "Portugal, Lisbon",
+      "category": "Leaders",
+      "heroImage": "images/heroes/2027/sbc_lisbon.jpg",
+      "description": "Главный саммит беттинг- и iGaming-индустрии. Площадки FIL и MEO Arena, около 25 000 участников.",
+      "website": "https://sbcevents.com/sbc-summit/",
+      "telegramChannel": "https://t.me/sbceurasia",
+      "startISO": "2027-09-21T09:00:00Z",
+      "endISO": "2027-09-23T18:00:00Z",
+      "weather": {
+        "temp": "20-25°C",
+        "description": "Тёплая осень, солнечно"
+      },
+      "promo": null,
+      "awards": [],
+      "restaurants": [
+        {
+          "name": "Monte Mar Lisboa",
+          "vibe": "посидеть",
+          "avgCheck": "$80-180",
+          "description": "Морепродукты с видом на Тежу",
+          "img": "images/restaurants/sbc_lisbon_monte_mar.jpg"
+        },
+        {
+          "name": "JNcQUOI Avenida",
+          "vibe": "громко",
+          "avgCheck": "$100-250",
+          "description": "Элитный ресторан португальской кухни",
+          "img": "images/restaurants/sbc_lisbon_jncquoi.jpg"
+        },
+        {
+          "name": "Zambeze",
+          "vibe": "потанцевать",
+          "avgCheck": "$60-140",
+          "description": "Панорамный вид, терраса 300м²",
+          "img": "images/restaurants/sbc_lisbon_zambeze.jpg"
+        },
+        {
+          "name": "Doca Peixe",
+          "vibe": "посидеть",
+          "avgCheck": "$50-120",
+          "description": "Лучший рыбный ресторан, вид на марину",
+          "img": "images/restaurants/sbc_lisbon_doca_peixe.jpg"
+        },
+        {
+          "name": "Belcanto",
+          "vibe": "тихо",
+          "avgCheck": "$180-400",
+          "description": "2 звезды Мишлен от José Avillez",
+          "img": "images/restaurants/sbc_lisbon_belcanto.jpg"
+        }
+      ],
+      "brands": [],
+      "sideEvents": [],
+      "heroPosition": "center 85%"
+    },
+    {
+      "id": "sbc_affiliate_leaders_lisbon_2027",
+      "year": 2027,
+      "month": 9,
+      "sortOrder": 4,
+      "visible": true,
+      "cardType": "major",
+      "cardStyle": "elegant-dark",
+      "accentColor": "#2E39F7",
+      "tier": "large",
+      "attendees": null,
+      "country": "PT",
+      "startDate": "2027-09-21",
+      "endDate": "2027-09-23",
+      "title": "SBC Affiliate Leaders Summit × Conversion Conf",
+      "datesLabel": "21–23 Сен",
+      "locationLine": "Portugal, Lisbon",
+      "category": "Affiliate",
+      "heroImage": "images/heroes/2027/sbc_affiliate_leaders_lisbon.jpg",
+      "description": "Саммит по affiliate- и performance-маркетингу, проходит одновременно с SBC Summit на FIL & MEO Arena. Две сцены: Affiliate Leaders Stage и Conversion Conf Stage.",
+      "website": "https://sbcevents.com/affiliate-leaders-summit/",
+      "telegramChannel": "https://t.me/conversionconf",
+      "startISO": "2027-09-21T09:00:00Z",
+      "endISO": "2027-09-23T18:00:00Z",
+      "weather": {
+        "temp": "20-25°C",
+        "description": "Тёплая осень, солнечно"
+      },
+      "promo": null,
+      "awards": [],
+      "restaurants": [
+        {
+          "name": "Monte Mar Lisboa",
+          "vibe": "посидеть",
+          "avgCheck": "$80-180",
+          "description": "Морепродукты с видом на Тежу",
+          "img": "images/restaurants/sbc_lisbon_monte_mar.jpg"
+        },
+        {
+          "name": "JNcQUOI Avenida",
+          "vibe": "громко",
+          "avgCheck": "$100-250",
+          "description": "Элитный ресторан португальской кухни",
+          "img": "images/restaurants/sbc_lisbon_jncquoi.jpg"
+        },
+        {
+          "name": "Zambeze",
+          "vibe": "потанцевать",
+          "avgCheck": "$60-140",
+          "description": "Панорамный вид, терраса 300м²",
+          "img": "images/restaurants/sbc_lisbon_zambeze.jpg"
+        },
+        {
+          "name": "Doca Peixe",
+          "vibe": "посидеть",
+          "avgCheck": "$50-120",
+          "description": "Лучший рыбный ресторан, вид на марину",
+          "img": "images/restaurants/sbc_lisbon_doca_peixe.jpg"
+        },
+        {
+          "name": "Belcanto",
+          "vibe": "тихо",
+          "avgCheck": "$180-400",
+          "description": "2 звезды Мишлен от José Avillez",
+          "img": "images/restaurants/sbc_lisbon_belcanto.jpg"
+        }
+      ],
+      "brands": [],
+      "sideEvents": []
+    },
+    {
+      "id": "broconf_8_5_moscow_2027",
+      "year": 2027,
+      "month": 10,
+      "sortOrder": 1,
+      "visible": true,
+      "cardType": "major",
+      "cardStyle": "elegant-dark",
+      "accentColor": "#F6ADE5",
+      "tier": "large",
+      "attendees": 1500,
+      "country": "RU",
+      "startDate": null,
+      "endDate": null,
+      "title": "BROCONF-8½",
+      "datesLabel": "Даты TBA",
+      "locationLine": "Russia, Moscow",
+      "category": "Affiliate Marketing",
+      "heroImage": "images/heroes/2027/broconf_8_5_moscow.jpg",
+      "description": "Однодневная конференция по арбитражу трафика и affiliate-маркетингу в Москве. В 2026 году прошла 7 октября, даты 2027 года пока не объявлены.",
+      "website": "https://mybroconf.ru/",
+      "telegramChannel": "https://t.me/broconf",
+      "startISO": null,
+      "endISO": null,
+      "weather": {
+        "temp": "5-12°C",
+        "description": "Прохладная осень, возможны дожди"
+      },
+      "promo": null,
+      "awards": [],
+      "restaurants": [],
+      "brands": [],
+      "sideEvents": [],
+      "heroPosition": "center 22%"
+    },
+    {
+      "id": "sigma_eurasia_2027",
+      "year": 2027,
+      "month": 12,
+      "sortOrder": 1,
+      "visible": true,
+      "cardType": "major",
+      "cardStyle": "elegant-green",
+      "accentColor": null,
+      "tier": "mega",
+      "attendees": 14500,
+      "country": "AE",
+      "startDate": "2027-12-15",
+      "endDate": "2027-12-17",
+      "title": "SiGMA Eurasia + AIBC Eurasia",
+      "datesLabel": "15–17 Дек",
+      "locationLine": "UAE, RAK – Dubai",
+      "category": "iGaming",
+      "heroImage": "images/heroes/2027/sigma_eurasia.jpg",
+      "description": "SiGMA Dubai: iGaming-, блокчейн- и AI-конференция на Ближнем Востоке, около 14 500 участников. В 2027 году её перенесли с марта на 15–17 декабря.",
+      "website": "https://sigma.world/eurasia/",
+      "telegramChannel": "https://t.me/+iUgSeE1BID4yZTc0",
+      "startISO": "2027-12-15T09:00:00Z",
+      "endISO": "2027-12-17T18:00:00Z",
+      "weather": {
+        "temp": "20-26°C",
+        "description": "Тёплая зима, солнечно"
+      },
+      "promo": null,
+      "awards": [],
+      "restaurants": [
+        {
+          "name": "Zuma Dubai",
+          "vibe": "громко",
+          "avgCheck": "$50-100",
+          "description": "",
+          "img": "images/restaurants/aw_dubai_zuma.jpg"
+        },
+        {
+          "name": "Nobu Dubai",
+          "vibe": "тихо",
+          "avgCheck": "$50-100",
+          "description": "",
+          "img": "images/restaurants/aw_dubai_nobu.jpg"
+        },
+        {
+          "name": "La Petite Maison",
+          "vibe": "тихо",
+          "avgCheck": "$50-100",
+          "description": "",
+          "img": "images/restaurants/aw_dubai_la_petite_maison.jpg"
+        },
+        {
+          "name": "Tresind Studio",
+          "vibe": "тихо",
+          "avgCheck": "$50-100",
+          "description": "",
+          "img": "images/restaurants/aw_dubai_tresind_studio.jpg"
+        },
+        {
+          "name": "Coya Dubai",
+          "vibe": "громко",
+          "avgCheck": "$50-100",
+          "description": "",
+          "img": "images/restaurants/aw_dubai_coya.jpg"
+        }
+      ],
+      "brands": [],
+      "sideEvents": []
+    },
+    {
+      "id": "affiliate_world_asia_2027",
+      "year": 2027,
+      "month": 12,
+      "sortOrder": 2,
+      "visible": true,
+      "cardType": "compact",
+      "cardStyle": null,
+      "accentColor": "#F5DA0F",
+      "tier": "mega",
+      "attendees": 7000,
+      "country": "TH",
+      "startDate": null,
+      "endDate": null,
+      "title": "Affiliate World Asia",
+      "datesLabel": "Дек · даты TBA",
+      "locationLine": "Thailand, Bangkok",
+      "category": "Affiliate",
+      "heroImage": "images/heroes/2027/affiliate_world_asia.jpg",
+      "description": "Крупнейшая affiliate-конференция Азии. Издание 2026 года проходит 9–10 декабря в Бангкоке, даты 2027 года пока не объявлены.",
+      "website": "https://www.affiliateworldconferences.com/asia",
+      "telegramChannel": "https://t.me/affiliateworldconf",
+      "startISO": null,
+      "endISO": null,
+      "weather": {
+        "temp": "22-32°C",
+        "description": "Прохладный сезон, комфортно"
+      },
+      "promo": null,
+      "awards": [],
+      "restaurants": [
+        {
+          "name": "Nahm",
+          "vibe": "тихо",
+          "avgCheck": "$50-100",
+          "description": "",
+          "img": "images/restaurants/aw_asia_nahm.jpg"
+        },
+        {
+          "name": "Bo.lan",
+          "vibe": "посидеть",
+          "avgCheck": "$50-100",
+          "description": "",
+          "img": "images/restaurants/aw_asia_bolan.jpg"
+        },
+        {
+          "name": "Sorn",
+          "vibe": "тихо",
+          "avgCheck": "$50-100",
+          "description": "",
+          "img": "images/restaurants/aw_asia_sorn.jpg"
+        },
+        {
+          "name": "Rooftop Bar at Vertigo",
+          "vibe": "громко",
+          "avgCheck": "$50-100",
+          "description": "",
+          "img": "images/restaurants/aw_asia_vertigo.jpg"
+        },
+        {
+          "name": "Jay Fai",
+          "vibe": "громко",
+          "avgCheck": "$50-100",
+          "description": "",
+          "img": "images/restaurants/aw_asia_jay_fai.jpg"
+        }
+      ],
+      "brands": [],
+      "sideEvents": []
+    }
+  ]
+}

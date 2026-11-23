@@ -736,7 +736,7 @@ function populateModal(eventId) {
     ` : '';
 
     heroEl.innerHTML = `
-      <div class="modal-hero" style="background-image: linear-gradient(to bottom, transparent 40%, rgba(27,27,27,0.95)), url('${event.heroImage || ''}')">
+      <div class="modal-hero" style="background-image: linear-gradient(to bottom, transparent 40%, rgba(27,27,27,0.95)), url('${event.heroImage || ''}')${event.heroPosition ? `; background-position: ${event.heroPosition}` : ''}">
         <button class="modal-close-btn" onclick="closeModal()" type="button">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
@@ -1176,9 +1176,15 @@ function toICSDateTime(iso) {
 // ------------------------------
 // Init
 // ------------------------------
+// Выбранный год календаря (?year=2027), см. js/events-loader.js
+const SELECTED_YEAR = (typeof getSelectedYear === 'function') ? getSelectedYear() : 2026;
+
 document.addEventListener("DOMContentLoaded", async () => {
+  initYearSwitcher();
   try {
-    const eventsData = await loadEventsData();
+    const eventsData = (typeof loadEventsForYear === 'function')
+      ? await loadEventsForYear(SELECTED_YEAR)
+      : await loadEventsData();
     const visibleEvents = (eventsData.events || []).filter(e => e.visible !== false);
     EVENTS = buildEventsMap(visibleEvents);
     renderCalendarGrid(visibleEvents);
@@ -1258,9 +1264,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (!endIso) return;
     const endDate = new Date(endIso);
     if (Number.isNaN(endDate.getTime())) return;
-    if (endDate < startOfToday) {
-      card.classList.add("past-event");
-    }
+    // Прошедшие ивенты больше не затемняем (просьба заказчика, 23.11.2026)
+    // if (endDate < startOfToday) card.classList.add("past-event");
   });
 
   initMobilePastMonths();
@@ -1339,7 +1344,11 @@ function initMobilePastMonths() {
   const grid = document.querySelector('.calendar-grid');
   if (!grid || grid.dataset.pastMonthsInit === '1') return;
 
-  const currentMonthIdx = new Date().getMonth() + 1;
+  const now = new Date();
+  // Для будущего года прошедших месяцев нет, для прошлого — прошли все
+  const currentMonthIdx = SELECTED_YEAR > now.getFullYear() ? 0
+    : SELECTED_YEAR < now.getFullYear() ? 13
+    : now.getMonth() + 1;
   const cells = Array.from(grid.querySelectorAll(':scope > .cell'));
   let pastMonthsCount = 0;
 
@@ -1575,6 +1584,7 @@ function showMultiEventModal(visibleCards) {
     const eventId = card.dataset.eventId;
     const event = EVENTS[eventId];
     if (!event) return;
+    if (!event.startISO) return; // даты ещё не объявлены — в календарь добавить нельзя
 
     const eventItem = document.createElement('div');
     eventItem.className = 'multi-event-item';
@@ -1829,8 +1839,8 @@ function parseDateText(text, card) {
     const monthLower = monthRu.toLowerCase().substring(0, 3);
     const month = MONTH_MAP_RU[monthLower];
     if (month) {
-      result.start = `2026-${month}-${startDay.padStart(2, '0')}`;
-      result.end = `2026-${month}-${endDay.padStart(2, '0')}`;
+      result.start = `${SELECTED_YEAR}-${month}-${startDay.padStart(2, '0')}`;
+      result.end = `${SELECTED_YEAR}-${month}-${endDay.padStart(2, '0')}`;
       return result;
     }
   }
@@ -1860,8 +1870,8 @@ function parseDateText(text, card) {
     }
 
     if (month) {
-      result.start = `2026-${month}-01`;
-      result.end = `2026-${month}-02`;
+      result.start = `${SELECTED_YEAR}-${month}-01`;
+      result.end = `${SELECTED_YEAR}-${month}-02`;
     }
   }
 
@@ -1957,6 +1967,8 @@ function showCalendarToast(eventTitle, status) {
 
   if (status === 'success') {
     toast.innerHTML = `<span style="font-size:20px">✅</span><span style="color:#FBF2E8;font-size:14px;font-weight:600">${eventTitle}</span>`;
+  } else if (status === 'info') {
+    toast.innerHTML = `<span style="font-size:20px">🗓</span><span style="color:#FBF2E8;font-size:14px;font-weight:600">${eventTitle}</span>`;
   } else if (status === 'loading') {
     toast.innerHTML = `<span style="font-size:20px;animation:spin 1s linear infinite;display:inline-block">⏳</span><span style="color:#FBF2E8;font-size:14px;font-weight:600">Добавляю ${eventTitle}...</span>`;
   }
@@ -2107,7 +2119,7 @@ function addMultipleToCalendar(events) {
   }));
   const icsData = generateMultiEventICS(conferences);
   if (icsData) {
-    downloadICSFile(icsData, 'secretroom-calendar-2026');
+    downloadICSFile(icsData, 'secretroom-calendar-' + SELECTED_YEAR);
   }
 }
 
@@ -2116,6 +2128,10 @@ function addMultipleToCalendar(events) {
 // =====================================================
 function addToCalendar(event) {
   if (!event || !event.title) return;
+  if (!event.startISO) {
+    showCalendarToast('Даты ещё не объявлены — добавим, когда появятся', 'info');
+    return;
+  }
 
   const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
   const isAndroid = /Android/i.test(navigator.userAgent);
@@ -2736,3 +2752,50 @@ function hideAuthOverlay() {
 document.addEventListener('DOMContentLoaded', () => {
   checkAuth();
 });
+
+
+// ------------------------------
+// Переключатель года в шапке (2026 / 2027)
+// Выбор года перезагружает страницу с ?year=…, поэтому все функции
+// календаря работают для выбранного года так же, как для 2026.
+// ------------------------------
+function initYearSwitcher() {
+  const year = SELECTED_YEAR;
+  document.querySelectorAll('[data-calendar-year]').forEach(el => { el.textContent = year; });
+  document.title = document.title.replace(/20\d\d/, year);
+  const meta = document.querySelector('meta[name="description"]');
+  if (meta) meta.setAttribute('content', meta.getAttribute('content').replace(/20\d\d/, year));
+
+  const wrap = document.getElementById('yearSwitcher');
+  if (!wrap) return;
+  const btn = wrap.querySelector('.year-switcher__btn');
+  const menu = wrap.querySelector('.year-switcher__menu');
+  if (!btn || !menu) return;
+
+  menu.querySelectorAll('[data-year]').forEach(opt => {
+    const y = Number(opt.getAttribute('data-year'));
+    const active = y === year;
+    opt.classList.toggle('is-active', active);
+    opt.setAttribute('aria-selected', String(active));
+    opt.addEventListener('click', () => {
+      if (y === year) { close(); return; }
+      const params = new URLSearchParams(location.search);
+      params.delete('event');
+      params.delete('tab');
+      if (y === (typeof DEFAULT_CALENDAR_YEAR !== 'undefined' ? DEFAULT_CALENDAR_YEAR : 2026)) params.delete('year');
+      else params.set('year', String(y));
+      const qsStr = params.toString();
+      if (typeof trackEvent === 'function') trackEvent('year_switch', { year: y });
+      location.href = location.pathname + (qsStr ? '?' + qsStr : '') + location.hash;
+    });
+  });
+
+  function open() { wrap.classList.add('is-open'); btn.setAttribute('aria-expanded', 'true'); }
+  function close() { wrap.classList.remove('is-open'); btn.setAttribute('aria-expanded', 'false'); }
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    wrap.classList.contains('is-open') ? close() : open();
+  });
+  document.addEventListener('click', (e) => { if (!wrap.contains(e.target)) close(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+}

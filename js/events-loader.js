@@ -24,6 +24,7 @@ function toModalEvent(ev) {
     attendees: attendeesStr,
     weather: ev.weather || null,
     heroImage: ev.heroImage || '',
+    heroPosition: getHeroPosition(ev),
     startISO: ev.startISO || (ev.startDate ? ev.startDate + 'T09:00:00Z' : null),
     endISO: ev.endISO || (ev.endDate ? ev.endDate + 'T18:00:00Z' : null),
     website: ev.website || '',
@@ -105,4 +106,72 @@ async function loadEventsData() {
   const res = await fetch('data/events.json?t=' + Date.now());
   if (!res.ok) throw new Error('Не удалось загрузить events.json');
   return normalizeEventsData(await res.json());
+}
+
+// ------------------------------
+// Выбор года (2026 / 2027)
+// Год берётся из адреса страницы: ?year=2027. По умолчанию 2026.
+// Ивенты 2027 лежат в data/events-2027.json; ивенты из CMS тоже
+// раскладываются по годам — по полю year, дате начала или окончанию id (_2027).
+// loadEventsData() не меняется — её же использует админка.
+// ------------------------------
+const CALENDAR_YEARS = [2026, 2027];
+const DEFAULT_CALENDAR_YEAR = 2026;
+
+function getSelectedYear() {
+  try {
+    const y = parseInt(new URLSearchParams(location.search).get('year'), 10);
+    if (CALENDAR_YEARS.includes(y)) return y;
+    // Ссылка на конкретный ивент (?event=sbc_rio_2027) сама открывает нужный год
+    const em = String(new URLSearchParams(location.search).get('event') || '').match(/_(\d{4})$/);
+    if (em && CALENDAR_YEARS.includes(Number(em[1]))) return Number(em[1]);
+  } catch (e) {}
+  return DEFAULT_CALENDAR_YEAR;
+}
+
+function getEventYear(ev) {
+  if (ev.year) return Number(ev.year);
+  const d = ev.startDate || ev.endDate || ev.startISO || '';
+  const m = String(d).match(/^(\d{4})-/);
+  if (m) return Number(m[1]);
+  const idm = String(ev.id || '').match(/_(\d{4})$/);
+  if (idm) return Number(idm[1]);
+  return DEFAULT_CALENDAR_YEAR;
+}
+
+async function loadExtraYearEvents(year) {
+  if (year === DEFAULT_CALENDAR_YEAR) return [];
+  try {
+    const res = await fetch('data/events-' + year + '.json?t=' + Date.now());
+    if (!res.ok) return [];
+    const data = normalizeEventsData(await res.json());
+    return (data && data.events) || [];
+  } catch (e) {
+    console.warn('Не удалось загрузить ивенты ' + year, e);
+    return [];
+  }
+}
+
+async function loadEventsForYear(year) {
+  let base = [];
+  try {
+    const data = await loadEventsData();
+    base = (data && data.events) || [];
+  } catch (e) {
+    console.warn('Основные ивенты недоступны', e);
+  }
+  const fromCms = base.filter(e => getEventYear(e) === year);
+  // Запасной файл data/events-YYYY.json нужен, только пока ивенты года
+  // не перенесены в Google Таблицу (кнопка «Перенести 2027 в таблицу» в админке)
+  if (fromCms.length || year === DEFAULT_CALENDAR_YEAR) return { events: fromCms };
+  return { events: await loadExtraYearEvents(year) };
+}
+
+// Какую часть картинки показывать в узкой карточке. Хранится прямо в ссылке
+// на картинку (…jpg#pos=center 85%), чтобы пережить сохранение через админку.
+function getHeroPosition(ev) {
+  if (ev && ev.heroPosition) return ev.heroPosition;
+  const m = String((ev && ev.heroImage) || '').match(/#pos=([^#]+)$/);
+  if (!m) return '';
+  try { return decodeURIComponent(m[1]); } catch (e) { return m[1]; }
 }

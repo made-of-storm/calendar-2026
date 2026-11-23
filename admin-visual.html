@@ -47,7 +47,7 @@
   <script src="./js/calendar-render.js"></script>
   <script>window.CMS_EDIT_MODE = true;</script>
   <script defer src="./app.js"></script>
-  <script defer src="./admin-visual.js?v=7"></script>
+  <script defer src="./admin-visual.js?v=8"></script>
 </head>
 
 <body class="antialiased pb-20 cms-pending">
@@ -75,6 +75,7 @@
   <button type="button" class="cms-btn" id="cmsPreviewBtn" disabled>Модалка</button>
   <button type="button" class="cms-btn" id="cmsNewBtn">+ Ивент</button>
   <button type="button" class="cms-btn" id="cmsHideBtn">Скрыть</button>
+  <button type="button" class="cms-btn cms-btn--primary hidden" id="cmsImportYearBtn">Перенести 2027 в таблицу</button>
   <a href="/" target="_blank" class="cms-btn">Сайт ↗</a>
   <a href="admin.html?legacy=visa" class="cms-btn">Визы</a>
   <button type="button" class="cms-btn cms-btn--ghost" id="cmsLogoutBtn">Выйти</button>
@@ -92,19 +93,31 @@
       <img src="images/secretroomlogo.svg" alt="Secret Room" class="h-11 w-auto" />
       <div>
         <h1 class="font-extrabold text-lg leading-none tracking-tight text-[#F5DA0F]">SECRET ROOM</h1>
-        <p class="text-[10px] text-[#FBF2E8]/50 font-bold tracking-widest uppercase mt-1"><span class="whitespace-nowrap">I&#8209;Gaming</span> Calendar 2026</p>
+        <p class="text-[10px] text-[#FBF2E8]/50 font-bold tracking-widest uppercase mt-1"><span class="whitespace-nowrap">I&#8209;Gaming</span> Calendar <span data-calendar-year>2026</span></p>
       </div>
     </div>
 
     <div class="flex items-center gap-6">
       <!-- Citizenship moved to controls panel -->
+      <!-- Переключатель года: логика в app.js (initYearSwitcher) -->
+      <div class="year-switcher" id="yearSwitcher">
+        <button type="button" class="year-switcher__btn" aria-haspopup="listbox" aria-expanded="false" aria-label="Выбрать год календаря">
+          <span class="year-switcher__label">Год</span>
+          <span class="year-switcher__value" data-calendar-year>2026</span>
+          <svg class="year-switcher__chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="year-switcher__menu" role="listbox" aria-label="Год календаря">
+          <button type="button" role="option" class="year-switcher__opt" data-year="2026">2026</button>
+          <button type="button" role="option" class="year-switcher__opt" data-year="2027">2027</button>
+        </div>
+      </div>
     </div>
   </div>
 </header>
 
 <div class="max-w-[1600px] mx-auto px-6 py-10">
   <h2 class="text-[26px] sm:text-3xl md:text-4xl font-extrabold mb-4 leading-tight">
-    Календарь iGaming аффилейт&#8209;ивентов&nbsp;<span class="text-[#F5DA0F]">2026</span>
+    Календарь iGaming аффилейт&#8209;ивентов&nbsp;<span class="text-[#F5DA0F]" data-calendar-year>2026</span>
   </h2>
 
   <p style="color: #FBF2E8; opacity: 0.65; font-size: 14px; max-width: 600px; font-weight: 400;">
