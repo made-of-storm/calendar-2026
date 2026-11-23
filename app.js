@@ -1182,7 +1182,10 @@ const SELECTED_YEAR = (typeof getSelectedYear === 'function') ? getSelectedYear(
 document.addEventListener("DOMContentLoaded", async () => {
   initYearSwitcher();
   try {
-    const eventsData = (typeof loadEventsForYear === 'function')
+    // В админке запасной файл не подмешиваем: там показываем только то, что есть в таблице
+    const eventsData = (window.CMS_EDIT_MODE && typeof getEventYear === 'function')
+      ? { events: ((await loadEventsData()).events || []).filter(e => getEventYear(e) === SELECTED_YEAR) }
+      : (typeof loadEventsForYear === 'function')
       ? await loadEventsForYear(SELECTED_YEAR)
       : await loadEventsData();
     const visibleEvents = (eventsData.events || []).filter(e => e.visible !== false);
@@ -2761,6 +2764,16 @@ document.addEventListener('DOMContentLoaded', () => {
 // ------------------------------
 function initYearSwitcher() {
   const year = SELECTED_YEAR;
+  // Старые ссылки вида /?year=2027 переводим на адрес /2027
+  if (!/admin/.test(location.pathname) && /^\/(index\.html)?$/.test(location.pathname)) {
+    const p = new URLSearchParams(location.search);
+    if (p.get('year') && Number(p.get('year')) === year && year !== DEFAULT_CALENDAR_YEAR) {
+      p.delete('year');
+      const q = p.toString();
+      location.replace('/' + year + '/' + (q ? '?' + q : '') + location.hash);
+      return;
+    }
+  }
   document.querySelectorAll('[data-calendar-year]').forEach(el => { el.textContent = year; });
   document.title = document.title.replace(/20\d\d/, year);
   const meta = document.querySelector('meta[name="description"]');
@@ -2782,11 +2795,19 @@ function initYearSwitcher() {
       const params = new URLSearchParams(location.search);
       params.delete('event');
       params.delete('tab');
-      if (y === (typeof DEFAULT_CALENDAR_YEAR !== 'undefined' ? DEFAULT_CALENDAR_YEAR : 2026)) params.delete('year');
-      else params.set('year', String(y));
-      const qsStr = params.toString();
+      const isDefault = y === (typeof DEFAULT_CALENDAR_YEAR !== 'undefined' ? DEFAULT_CALENDAR_YEAR : 2026);
       if (typeof trackEvent === 'function') trackEvent('year_switch', { year: y });
-      location.href = location.pathname + (qsStr ? '?' + qsStr : '') + location.hash;
+      if (/admin/.test(location.pathname)) {
+        // В админке год остаётся параметром: admin-visual.html?year=2027
+        if (isDefault) params.delete('year'); else params.set('year', String(y));
+        const q = params.toString();
+        location.href = location.pathname + (q ? '?' + q : '') + location.hash;
+        return;
+      }
+      // На сайте у каждого года свой адрес: / — 2026, /2027 — 2027
+      params.delete('year');
+      const q = params.toString();
+      location.href = (isDefault ? '/' : '/' + y + '/') + (q ? '?' + q : '') + location.hash;
     });
   });
 

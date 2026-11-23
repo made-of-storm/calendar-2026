@@ -120,6 +120,9 @@ const DEFAULT_CALENDAR_YEAR = 2026;
 
 function getSelectedYear() {
   try {
+    // Отдельная страница года: igaming-calendar.com/2027
+    const pm = location.pathname.match(/^\/(\d{4})\/?(?:index\.html)?$/);
+    if (pm && CALENDAR_YEARS.includes(Number(pm[1]))) return Number(pm[1]);
     const y = parseInt(new URLSearchParams(location.search).get('year'), 10);
     if (CALENDAR_YEARS.includes(y)) return y;
     // Ссылка на конкретный ивент (?event=sbc_rio_2027) сама открывает нужный год

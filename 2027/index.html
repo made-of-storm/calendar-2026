@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<!-- Страница 2027 года. Создаётся из index.html: при правке index.html пересоздать этот файл. -->
+<html lang="ru" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <base href="/" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Календарь iGaming конференций 2027: даты, визы, рестораны, сайд-ивенты и промокоды. Secretroom." />
+  <link rel="canonical" href="https://igaming-calendar.com/2027" />
+  <title>Secretroom I-Gaming Calendar 2027</title>
+  <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Telegram WebApp SDK -->
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        fontFamily: { sans: ['"Nunito"', 'sans-serif'] },
+        extend: {
+          colors: {
+            bg: '#1B1B1B',
+            surface: '#222222',
+            border: '#333333',
+            accent: '#F5DA0F',
+            accent2: '#C8E712',
+            darkbg: '#1B1B1B',
+            darksurface: '#222222',
+            srblue: '#2E39F7',
+            srpink: '#F6ADE5',
+            sryellow: '#F5DA0F',
+            srgreen: '#C8E712',
+          }
+        }
+      }
+    }
+  </script>
+
+  <link rel="stylesheet" href="./styles.css?v=2027-2" />
+  <script src="./data/cms-config.js?v=2027-2"></script>
+  <script src="./js/events-loader.js?v=2027-2"></script>
+  <script src="./js/calendar-render.js?v=2027-2"></script>
+  <script defer src="./app.js?v=2027-2"></script>
+
+  <script defer src="https://cloud.umami.is/script.js" data-website-id="f22bda07-4ac9-4a02-b0ec-db04942fa844"></script>
+</head>
+
+<body class="antialiased pb-20">
+
+<header class="sticky top-0 z-40 bg-[#1B1B1B]/92 backdrop-blur-md border-b border-[#333333]">
+  <div class="max-w-[1600px] mx-auto px-6 h-20 flex items-center justify-between">
+    <div class="flex items-center gap-4">
+      <img src="images/secretroomlogo.svg" alt="Secret Room" class="h-11 w-auto" />
+      <div>
+        <h1 class="font-extrabold text-lg leading-none tracking-tight text-[#F5DA0F]">SECRET ROOM</h1>
+        <p class="text-[10px] text-[#FBF2E8]/50 font-bold tracking-widest uppercase mt-1"><span class="whitespace-nowrap">I&#8209;Gaming</span> Calendar <span data-calendar-year>2026</span></p>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-6">
+      <!-- Citizenship moved to controls panel -->
+      <!-- Переключатель года: логика в app.js (initYearSwitcher) -->
+      <div class="year-switcher" id="yearSwitcher">
+        <button type="button" class="year-switcher__btn" aria-haspopup="listbox" aria-expanded="false" aria-label="Выбрать год календаря">
+          <span class="year-switcher__label">Год</span>
+          <span class="year-switcher__value" data-calendar-year>2026</span>
+          <svg class="year-switcher__chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="year-switcher__menu" role="listbox" aria-label="Год календаря">
+          <button type="button" role="option" class="year-switcher__opt" data-year="2026">2026</button>
+          <button type="button" role="option" class="year-switcher__opt" data-year="2027">2027</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="max-w-[1600px] mx-auto px-6 py-10">
+  <h2 class="text-[26px] sm:text-3xl md:text-4xl font-extrabold mb-4 leading-tight">
+    Календарь iGaming аффилейт&#8209;ивентов&nbsp;<span class="text-[#F5DA0F]" data-calendar-year>2026</span>
+  </h2>
+
+  <p style="color: #FBF2E8; opacity: 0.65; font-size: 14px; max-width: 600px; font-weight: 400;">
+    Мы собрали всё: от визовых требований и состава участников до лучших ресторанов для нетворкинга и закрытых сайд-ивентов.
+  </p>
+
+  <div class="controls-panel">
+    <div class="controls-row">
+      <div class="citizenship-wrapper">
+        <span class="text-[9px] uppercase font-bold text-gray-500 mb-1 block">Гражданство</span>
+        <div class="citizenship-select-box">
+          <select id="citizenshipSelect" class="citizenship-select">
+            <option value="" disabled selected>Выбрать страну</option>
+            <optgroup label="Европа">
+              <option value="EU">🇪🇺 Евросоюз</option>
+              <option value="TR">🇹🇷 Турция</option>
+            </optgroup>
+            <optgroup label="СНГ">
+              <option value="RU">🇷🇺 Россия</option>
+              <option value="UA">🇺🇦 Украина</option>
+              <option value="BY">🇧🇾 Беларусь</option>
+              <option value="KZ">🇰🇿 Казахстан</option>
+              <option value="UZ">🇺🇿 Узбекистан</option>
+              <option value="AZ">🇦🇿 Азербайджан</option>
+              <option value="AM">🇦🇲 Армения</option>
+              <option value="GE">🇬🇪 Грузия</option>
+              <option value="MD">🇲🇩 Молдова</option>
+              <option value="KG">🇰🇬 Кыргызстан</option>
+              <option value="TJ">🇹🇯 Таджикистан</option>
+            </optgroup>
+          </select>
+        </div>
+      </div>
+
+      <div class="filters-group">
+        <button id="filterSizeBtn" class="filter-btn" type="button">Размер: Все</button>
+        <div class="filter-divider"></div>
+        <button id="filterVisaBtn" class="filter-btn" type="button">Виза: Не важно</button>
+      </div>
+    </div>
+
+    <div class="calendar-action-group">
+      <button id="addToCalendarBtn" class="add-calendar-btn" type="button">
+        <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+        </svg>
+        <span class="font-bold">Добавить в календарь</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!--
+  ========== LOCAL_PARTNER_PROMO (главная страница) ==========
+  Локальный макет: большой баннер + тизер в карточке MAC ниже.
+  Чтобы включить: раскомментируй эту секцию и блок в карточке MAC,
+  плюс обработчик в app.js (поиск: LOCAL_PARTNER_PROMO).
+<section class="partner-side-hero max-w-[1600px] mx-auto px-6 mb-8" aria-label="Анонс сайд-ивента партнёров">
+  <div class="partner-side-hero__card">
+    <div class="partner-side-hero__badge">
+      <span>PARTNER</span>
+      <span class="partner-side-hero__dot">·</span>
+      <span>Riddick’s Partners · MAC Week</span>
+    </div>
+    <div class="partner-side-hero__grid">
+      <div class="partner-side-hero__copy">
+        <h3 class="partner-side-hero__title">Riddick’s Padel Cup</h3>
+        <p class="partner-side-hero__meta">Ереван · 24 мая · старт 14:00</p>
+        <p class="partner-side-hero__text">
+          Открытый турнир по паделу для топов iGaming — аффилиатов, операторов и C-level.
+          На корте группы по уровню и тренеры; за кортом — healthy-бар, кейтеринг и DJ. Места ограничены.
+        </p>
+        <a class="partner-side-hero__cta" href="https://riddickspartners.com/ru/meetup/riddicks-padel-cup/" target="_blank" rel="noopener">
+          Принять участие
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+        </a>
+      </div>
+      <div class="partner-side-hero__art" aria-hidden="true">
+        <img src="images/side-events/riddicks_partners_logo.svg" alt="Riddick’s Partners" width="159" height="37" loading="lazy" decoding="async">
+      </div>
+    </div>
+  </div>
+</section>
+-->
+
+<main class="max-w-[1600px] mx-auto px-6">
+  <div class="calendar-grid" id="calendarGrid"></div>
+</main>
+
+<!-- MODAL -->
+<div id="modalOverlay" class="fixed inset-0 z-50 hidden">
+  <div class="absolute inset-0 bg-black/80 backdrop-blur-sm transition-opacity opacity-0" id="modalBg"></div>
+  <div class="absolute inset-y-0 right-0 w-full md:w-[600px] bg-[#222222] shadow-2xl transform translate-x-full transition-transform duration-300 flex flex-col border-l border-[#333333]" id="modalPanel">
+
+    <!-- Hero с погодой -->
+    <div id="modalHero"></div>
+
+    <!-- Инфо: название, место, даты, описание -->
+    <div id="modalInfo" class="modal-info-section"></div>
+
+    <!-- Три карточки: участники, виза, промо -->
+    <div id="modalStats" class="modal-stats-grid"></div>
+
+    <!-- Табы -->
+    <div class="flex-1 overflow-y-auto">
+      <div class="modal-tabs">
+        <button data-tab-btn="guide" class="tab-btn active" type="button">Гид</button>
+        <button data-tab-btn="events" class="tab-btn" type="button">Сайд-ивенты</button>
+        <button data-tab-btn="awards" class="tab-btn" type="button">Awards</button>
+      </div>
+
+      <div class="px-8">
+        <div id="guide" class="tab-content active space-y-4 pb-8"></div>
+        <div id="events" class="tab-content space-y-4 pb-8"></div>
+        <div id="awards" class="tab-content space-y-4 pb-8"></div>
+      </div>
+    </div>
+
+    <!-- Кнопки -->
+    <div class="modal-footer">
+      <button id="modalAddToCalendarBtn" class="btn-calendar">
+        Добавить в календарь
+      </button>
+      <button id="modalPromoBtn" class="btn-promo">Получить промокод</button>
+    </div>
+  </div>
+</div>
+
+<!-- Promo Toast -->
+<div id="promoToast" class="promo-toast">
+  <div class="promo-toast-header">
+    <span class="promo-toast-title">🎉 Ваш промокод</span>
+    <button class="promo-toast-close" onclick="hidePromoToast()">×</button>
+  </div>
+  <div class="promo-code-display">
+    <div class="promo-code-value" id="promoCodeValue">—</div>
+    <div class="promo-note-display" id="promoNoteDisplay" style="display:none"></div>
+  </div>
+  <button class="promo-copy-btn" id="promoCopyBtn" onclick="copyPromoCode()">
+    📋 Скопировать
+  </button>
+</div>
+
+<!-- ACCESS MODAL (Lead Capture) -->
+<div id="accessModalOverlay" class="fixed inset-0 z-50 hidden">
+  <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" id="accessModalBg"></div>
+  <div class="absolute inset-0 flex items-center justify-center p-4">
+    <div id="accessModalPanel" class="access-modal-panel w-full max-w-md bg-white/10 backdrop-blur-xl rounded-3xl border border-white/20 shadow-2xl p-8 text-white">
+
+      <!-- Default Form View -->
+      <div id="accessFormView">
+        <div class="text-center mb-6">
+          <img src="images/secretroomlogo.svg" alt="Secret Room" class="w-16 h-16 mx-auto mb-4" />
+          <h2 class="text-2xl font-extrabold mb-2">Получить полный доступ</h2>
+          <p class="text-sm text-gray-300">Введите данные, чтобы открыть все функции календаря</p>
+        </div>
+
+        <form id="accessForm" action="https://script.google.com/macros/s/AKfycby_yjYFYP6Yphc_s1mb0l4leKZUUmt4h1gfrPEM8Ab8E4lytggfKkjfQlUTxC5sHaHJ/exec" method="POST" target="leads_sink" class="space-y-4">
+          <div>
+            <label class="block text-xs font-bold text-gray-300 mb-2">Ваше имя *</label>
+            <input
+              type="text"
+              name="name"
+              id="accessName"
+              required
+              class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#F5DA0F] transition"
+              placeholder="Иван Иванов">
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-gray-300 mb-2">Ник в Telegram *</label>
+            <input
+              type="text"
+              name="telegram"
+              id="accessTelegram"
+              required
+              class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#F5DA0F] transition"
+              placeholder="@username">
+            <p class="text-[10px] text-gray-400 mt-1">Если забудете, добавим @ автоматически</p>
+          </div>
+
+          <div>
+            <label for="accessProfession" class="block text-xs font-bold text-gray-300 mb-2">Профессия *</label>
+            <input
+              type="text"
+              id="accessProfession"
+              name="profession"
+              list="professionsList"
+              placeholder="Начните вводить..."
+              required
+              class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#F5DA0F] transition">
+            <datalist id="professionsList">
+              <option value="Affiliate Manager">
+              <option value="Медиабайер">
+              <option value="Тимлид (Affiliate)">
+              <option value="Арбитражник">
+              <option value="Вебмастер">
+              <option value="CEO / Основатель">
+              <option value="COO">
+              <option value="CMO">
+              <option value="Директор по партнёрским программам">
+              <option value="Директор по маркетингу">
+              <option value="Business Development Manager">
+              <option value="Partnership Manager">
+              <option value="Account Manager">
+              <option value="Sales Manager">
+              <option value="Product Manager">
+              <option value="Трафик-менеджер">
+              <option value="PPC-специалист">
+              <option value="SEO-специалист">
+              <option value="Контент-менеджер">
+              <option value="Разработчик">
+              <option value="Data Analyst">
+              <option value="Compliance Manager">
+              <option value="Юрист">
+              <option value="HR-менеджер">
+              <option value="Рекрутер">
+              <option value="Инвестор">
+              <option value="Журналист">
+              <option value="Фрилансер">
+              <option value="Студент">
+              <option value="Другое">
+            </datalist>
+          </div>
+
+          <input type="hidden" name="createdAtISO" id="accessCreatedAt">
+          <input type="hidden" name="source" value="calendar-2026">
+          <input type="hidden" name="userAgent" id="accessUserAgent">
+
+          <div class="flex items-start gap-3">
+            <input
+              type="checkbox"
+              id="accessConsent"
+              required
+              class="mt-1 w-4 h-4 accent-[#F5DA0F]">
+            <label for="accessConsent" class="text-xs text-gray-300">
+              Согласен(на) на обработку персональных данных для уведомлений о событиях и нетворкинга
+            </label>
+          </div>
+
+          <div id="accessError" class="hidden text-sm text-red-400 text-center p-3 bg-red-500/10 rounded-lg border border-[#F6ADE5]/20"></div>
+          <div id="accessSuccess" class="hidden text-sm text-green-400 text-center p-3 bg-green-500/10 rounded-lg border border-[#C8E712]/20">Отправлено!</div>
+
+          <button
+            type="submit"
+            id="accessSubmitBtn"
+            class="w-full py-4 rounded-xl bg-gradient-to-r from-[#F5DA0F] to-[#C8E712] text-[#1B1B1B] font-bold hover:opacity-90 transition flex items-center justify-center gap-2">
+            <span id="accessBtnText">Получить доступ</span>
+            <svg id="accessBtnSpinner" class="hidden animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+          </button>
+        </form>
+
+        <!-- Telegram Login Widget -->
+        <div class="mt-6 pt-6 border-t border-white/10">
+          <div class="text-center mb-3">
+            <p class="text-xs text-gray-400">Или войти через</p>
+          </div>
+          <div id="telegramLoginContainer" class="flex justify-center">
+            <div id="telegramWidgetPlaceholder" class="text-sm text-gray-400 text-center py-3">
+              Войти через Telegram скоро
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Multi-Event Calendar Modal (for mobile) -->
+<div id="multiEventModal">
+  <div class="modal-container">
+    <div class="modal-content">
+      <!-- Header -->
+      <div class="flex items-center justify-between p-5 border-b border-white/10">
+        <h3 class="text-lg font-bold text-white">Добавить в календарь</h3>
+        <button id="closeMultiEventModal" class="text-gray-400 hover:text-white text-2xl leading-none">&times;</button>
+      </div>
+
+      <!-- Select All -->
+      <div id="multiEventSelectAll" class="px-5 pt-3 pb-0">
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <span id="bulkAddCount" style="color:#666;font-size:12px;font-weight:600">Выберите события</span>
+          <button id="selectAllBtn" type="button" style="background:none;border:none;color:#F5DA0F;font-size:12px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;padding:4px 0">Выбрать все</button>
+        </div>
+      </div>
+
+      <!-- Event List -->
+      <div id="multiEventList" class="p-5" style="padding-top:12px">
+        <!-- Events will be populated here -->
+      </div>
+
+      <!-- Calendar Picker: Apple / Google -->
+      <div class="calendar-picker">
+        <button id="addAppleCalBtn" class="calendar-picker-btn btn-apple" type="button" disabled>
+          <svg width="16" height="16" viewBox="0 0 384 512" fill="currentColor"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+          Apple Calendar
+        </button>
+        <button id="addGoogleCalBtn" class="calendar-picker-btn btn-google" type="button" disabled>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/><path d="M16 2v4M8 2v4M3 10h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M8 14h2v2H8z" fill="currentColor"/></svg>
+          Google Calendar
+        </button>
+      </div>
+      <p class="calendar-picker-hint">Выберите события и нажмите куда добавить</p>
+    </div>
+  </div>
+</div>
+
+<!-- Hidden iframe for form submission -->
+<iframe name="leads_sink" style="display:none"></iframe>
+
+<!-- AUTH OVERLAY -->
+<div id="authOverlay" class="fixed inset-0 z-[9999] bg-[#1B1B1B]/95 backdrop-blur-lg flex items-center justify-center p-4" style="display: none;">
+  <div class="max-w-md w-full bg-[#222222] rounded-3xl border-2 border-[#F5DA0F] shadow-2xl p-8 text-center">
+    
+    <!-- Logo -->
+    <img src="images/secretroomlogo.svg" alt="Secret Room" class="w-20 h-20 mx-auto mb-4" />
+    
+    <!-- Title -->
+    <h2 class="text-2xl font-extrabold text-white mb-2">Добро пожаловать!</h2>
+    <p class="text-sm text-white/60 mb-6">Получите доступ к календарю через Telegram — это быстро и просто!</p>
+    
+    <!-- Auth Steps -->
+    <!-- Step 1: Go to Bot -->
+    <div id="authStep1" class="auth-step">
+      <div class="bg-[#1B1B1B] rounded-2xl p-6 mb-4">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-12 h-12 rounded-full bg-[#2E39F7] flex items-center justify-center">
+            <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
+            </svg>
+          </div>
+          <div class="text-left">
+            <h3 class="text-lg font-bold text-white">Всего 2 клика!</h3>
+            <p class="text-xs text-white/50">Откройте бота в Telegram</p>
+          </div>
+        </div>
+        
+        <a href="https://t.me/calendarreg_bot?start=calendar" target="_blank" class="block w-full py-4 rounded-xl bg-gradient-to-r from-[#2E39F7] to-[#5B6EF7] text-white font-bold text-center hover:opacity-90 transition shadow-lg">
+          🚀 Открыть в Telegram
+        </a>
+      </div>
+      
+      <div class="bg-[#333333]/50 rounded-xl p-4 text-left">
+        <p class="text-xs text-white/60 mb-2">✅ Бот проверит подписку на канал</p>
+        <p class="text-xs text-white/60 mb-2">✅ Вы получите персональную ссылку</p>
+        <p class="text-xs text-white/60">✅ Доступ откроется автоматически</p>
+      </div>
+    </div>
+
+
+  </div>
+</div>
+
+</body>
+</html>
